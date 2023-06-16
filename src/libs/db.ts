@@ -14,4 +14,3 @@ const getPrismaClient = () => {
 }
 
 export const db = getPrismaClient();
-
