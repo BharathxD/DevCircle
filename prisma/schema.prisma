@@ -44,14 +44,108 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?        @unique
   emailVerified DateTime?
+  createdforums Forum[]        @relation("CreatedBy")
+  subscriptions Subscription[]
+  votes         Vote[]
 
   username String? @unique
 
-  image    String?
-  accounts Account[]
-  sessions Session[]
+  image       String?
+  accounts    Account[]
+  sessions    Session[]
+  Post        Post[]
+  Comment     Comment[]
+  CommentVote CommentVote[]
+}
+
+model Forum {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  posts     Post[]
+
+  creatorId   String?
+  Creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id])
+  subscribers Subscription[]
+
+  @@index([name])
+  @@index([creatorId])
+}
+
+model Subscription {
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  forum   Forum  @relation(fields: [forumId], references: [id])
+  forumId String
+
+  @@id([userId, forumId])
+  @@index([userId])
+  @@index([forumId])
+}
+
+model Post {
+  id        String    @id @default(cuid())
+  title     String
+  content   Json?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  String
+  forum     Forum     @relation(fields: [forumId], references: [id])
+  forumId   String
+  comments  Comment[]
+  votes     Vote[]
+
+  @@index([authorId])
+  @@index([forumId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  text      String
+  createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+
+  replyToId String?
+  replyTo   Comment?  @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies   Comment[] @relation("ReplyTo")
+
+  votes     CommentVote[]
+  commentId String?
+
+  @@index([authorId])
+  @@index([postId])
+  @@index([replyToId])
+}
+
+model Vote {
+  user   User     @relation(fields: [userId], references: [id])
+  userId String
+  post   Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+  type   VoteType
+
+  @@id([userId, postId])
+  @@index([userId])
+  @@index([postId])
+}
+
+model CommentVote {
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String
+  type      VoteType
+
+  @@id([userId, commentId])
+  @@index([userId])
+  @@index([commentId])
 }
