@@ -30,7 +30,6 @@
     "@radix-ui/react-toast": "^1.1.4",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
-    "@tanstack/react-query": "^4.29.11",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
@@ -56,6 +55,7 @@
     "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.44.2",
     "react-icons": "^4.9.0",
+    "react-query": "^3.39.3",
     "react-textarea-autosize": "^8.4.1",
     "server-only": "^0.0.1",
     "sharp": "^0.32.1",
@@ -67,7 +67,9 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^4.29.9",
     "@types/editorjs__header": "^2.6.0",
-    "@types/lodash.debounce": "^4.0.7"
+    "@types/lodash.debounce": "^4.0.7",
+    "eslint-plugin-query": "^0.8.0"
   }
 }

@@ -2,11 +2,13 @@ import mergeClasses from "@/libs/mergeClasses";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
+import siteConfig from "@/config";
+import RtkProvider from "@/providers/RtkProvider";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "BCA Community",
+  title: siteConfig.siteName,
   description: "A community for all the BCA members, just like reddit!",
 };
 
@@ -26,7 +28,7 @@ export default function RootLayout({ children }: rootProps) {
       <body className="min-h-screen pt-[5rem] bg-slate-50 antialiased">
         <Navbar />
         <main className="container max-w-7xl mx-auto h-full pt-2">
-          {children}
+          <RtkProvider>{children}</RtkProvider>
         </main>
       </body>
     </html>

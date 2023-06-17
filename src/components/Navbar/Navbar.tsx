@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FiGlobe } from "react-icons/fi";
 import { buttonVariants } from "../UI/Button";
+import siteConfig from "@/config";
 
 interface NavbarProps {}
 
@@ -11,7 +12,7 @@ const Navbar = ({}: NavbarProps) => {
         <Link href="/" className="flex gap-2 items-center">
           <FiGlobe size={25} />
           <p className="hidden text-zinc-700 text-2xl font-bold md:block">
-            BCA Community
+            {siteConfig.siteName}
           </p>
         </Link>
         <div>
