@@ -23,17 +23,21 @@ const formatDistanceLocale = {
 
 /**
  * The function formats a distance in time with options for adding a suffix and comparison.
- * @param {string} token - The token is a string that represents the type of distance to be formatted,
+ * @param { string } token - The token is a string that represents the type of distance to be formatted,
  * such as "year", "month", "day", "hour", "minute", or "second".
- * @param {number} count - The number of units to format the distance to (e.g. 2 days, 3 hours, etc.).
- * @param {any} [options] - The `options` parameter is an optional object.
+ * @param { number } count - The number of units to format the distance to (e.g. 2 days, 3 hours, etc.).
+ * @param { { addSuffix?: boolean, comparison?: number } } [options] - The `options` parameter is an optional object.
  * @returns a string that represents the formatted distance based on the input parameters. The output
  * string can include the count of the distance and a suffix indicating whether the distance is in the
  * past or in the future. The specific output depends on the values of the input parameters and the
  * options object.
  */
-function formatDistance(token: keyof typeof formatDistanceLocale, count: number, options?: any): string {
-    const { addSuffix = false, comparison = 0 } = options;
+const formatDistance = (
+    token: keyof typeof formatDistanceLocale,
+    count: number,
+    options?: { addSuffix?: boolean, comparison?: number }
+): string => {
+    const { addSuffix = false, comparison = 0 } = options || {};
     // Get the format distance locale string and replace the count
     const result = formatDistanceLocale[token].replace('{{count}}', count.toString());
     if (!addSuffix) return result;
@@ -41,6 +45,7 @@ function formatDistance(token: keyof typeof formatDistanceLocale, count: number,
     if (comparison > 0) return 'in ' + result;
     return result === 'just now' ? result : result + ' ago';
 }
+
 
 /**
  * The function formats a given date to a string representing the time distance from now, using strict
