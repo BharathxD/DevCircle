@@ -12,6 +12,8 @@ import { FC } from "react";
 import UserAvatar from "../UI/UserAvatar";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { useMutation } from "react-query";
+import { MoonLoader } from "react-spinners";
 
 interface UserAccountNavProps {
   user: Pick<User, "image" | "name" | "email">;
@@ -27,7 +29,7 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
-        <div className="flex items-center justify-center border border-b-transparent border-t-transparent border-zinc-700 h-full p-2.5">
+        <div className="flex items-center justify-center border border-y-0 border-zinc-700 h-full p-2.5">
           <UserAvatar user={user} />
         </div>
       </DropdownMenuTrigger>
@@ -35,7 +37,7 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
         className=" border-t-0 border-zinc-700 -mt-1"
         align="end"
       >
-        <div className="flex items-center justify-start gap-2 p-2">
+        <div className="flex items-center justify-start gap-2 p-2 pt-3">
           <div className="flex flex-col space-y-1 leading-none">
             {user.name && <p className="font-medium">{user.name}</p>}
             {user.email && (

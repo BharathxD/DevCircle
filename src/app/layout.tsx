@@ -29,10 +29,12 @@ export default async function RootLayout({ children }: rootProps) {
       )}
     >
       <body className="min-h-screen pt-[5rem] bg-slate-50 antialiased">
-        <Navbar currentUser={currentUser} />
-        <main className="container max-w-7xl mx-auto h-full pt-2">
-          <RtkProvider>{children}</RtkProvider>
-        </main>
+        <RtkProvider>
+          <Navbar currentUser={currentUser} />
+          <main className="container max-w-7xl mx-auto h-full pt-2">
+            {children}
+          </main>
+        </RtkProvider>
         <Toaster />
       </body>
     </html>
