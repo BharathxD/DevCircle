@@ -10,12 +10,12 @@ export const authOptions: NextAuthOptions = {
         strategy: "jwt",
     },
     pages: {
-        signIn: "/siginin"
+        signIn: "/signin"
     },
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_SECRET_PASSWORD!
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!
         })
     ],
     callbacks: {
@@ -54,6 +54,6 @@ export const authOptions: NextAuthOptions = {
                 username: dbUser.username,
             }
         },
-        redirect: () => "/"
+        redirect() { return "/" }
     }
 };
