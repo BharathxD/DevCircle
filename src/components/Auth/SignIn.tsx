@@ -5,8 +5,8 @@ import UserAuthForm from "./UserAuthForm";
 
 const SignIn = () => {
   return (
-    <div className="container mx-auto w-full flex flex-col justify-center space-y-6 sm:w-[400px">
-      <div className="flex flex-col space-y-2 text-center">
+    <div className="md:container mx-auto w-full flex flex-col justify-center space-y-6">
+      <div className="flex flex-col space-y-2 text-center gap-2">
         <FiGlobe size={35} className="mx-auto" />
         <h1 className="text-4xl font-semibold tracking-tight">Welcome back!</h1>
         <p className="max-w-xs mx-auto">

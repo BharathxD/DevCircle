@@ -1,7 +1,7 @@
 "use client";
 
-import cn from "@/libs/cn";
-import { Button } from "../UI/Button";
+import cn from "@/libs/classNames";
+import { Button, buttonVariants } from "../UI/Button";
 import { FC, HTMLAttributes } from "react";
 import { signIn } from "next-auth/react";
 import { useMutation } from "react-query";
@@ -24,8 +24,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   return (
     <div className={cn("flex justify-center", className)} {...props}>
       <Button
-        size="sm"
-        className="w-full"
+        className={cn(buttonVariants({ variant: "default" }), "w-full")}
         onClick={() => mutate()}
         isLoading={isLoading}
         disabled={isLoading}

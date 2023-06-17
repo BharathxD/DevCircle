@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*::selection {
+  background-color: #ef4444a2;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
