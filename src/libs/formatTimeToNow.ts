@@ -1,24 +1,24 @@
-import locale from 'date-fns/locale/en-US';
-import { formatDistanceToNowStrict } from 'date-fns';
+import locale from "date-fns/locale/en-US";
+import { formatDistanceToNowStrict } from "date-fns";
 
 // Define the format distance locale
 const formatDistanceLocale = {
-    lessThanXSeconds: 'just now',
-    xSeconds: 'just now',
-    halfAMinute: 'just now',
-    lessThanXMinutes: '{{count}}m',
-    xMinutes: '{{count}}m',
-    aboutXHours: '{{count}}h',
-    xHours: '{{count}}h',
-    xDays: '{{count}}d',
-    aboutXWeeks: '{{count}}w',
-    xWeeks: '{{count}}w',
-    aboutXMonths: '{{count}}m',
-    xMonths: '{{count}}m',
-    aboutXYears: '{{count}}y',
-    xYears: '{{count}}y',
-    overXYears: '{{count}}y',
-    almostXYears: '{{count}}y',
+  lessThanXSeconds: "just now",
+  xSeconds: "just now",
+  halfAMinute: "just now",
+  lessThanXMinutes: "{{count}}m",
+  xMinutes: "{{count}}m",
+  aboutXHours: "{{count}}h",
+  xHours: "{{count}}h",
+  xDays: "{{count}}d",
+  aboutXWeeks: "{{count}}w",
+  xWeeks: "{{count}}w",
+  aboutXMonths: "{{count}}m",
+  xMonths: "{{count}}m",
+  aboutXYears: "{{count}}y",
+  xYears: "{{count}}y",
+  overXYears: "{{count}}y",
+  almostXYears: "{{count}}y",
 };
 
 /**
@@ -33,19 +33,21 @@ const formatDistanceLocale = {
  * options object.
  */
 const formatDistance = (
-    token: keyof typeof formatDistanceLocale,
-    count: number,
-    options?: { addSuffix?: boolean, comparison?: number }
+  token: keyof typeof formatDistanceLocale,
+  count: number,
+  options?: { addSuffix?: boolean; comparison?: number }
 ): string => {
-    const { addSuffix = false, comparison = 0 } = options || {};
-    // Get the format distance locale string and replace the count
-    const result = formatDistanceLocale[token].replace('{{count}}', count.toString());
-    if (!addSuffix) return result;
-    // Return the result with 'in' prefix
-    if (comparison > 0) return 'in ' + result;
-    return result === 'just now' ? result : result + ' ago';
-}
-
+  const { addSuffix = false, comparison = 0 } = options || {};
+  // Get the format distance locale string and replace the count
+  const result = formatDistanceLocale[token].replace(
+    "{{count}}",
+    count.toString()
+  );
+  if (!addSuffix) return result;
+  // Return the result with 'in' prefix
+  if (comparison > 0) return "in " + result;
+  return result === "just now" ? result : result + " ago";
+};
 
 /**
  * The function formats a given date to a string representing the time distance from now, using strict
@@ -57,6 +59,10 @@ const formatDistance = (
  * `formatDistanceToNowStrict` function is used to calculate the distance, and the `locale` object is
  * used to customize the formatting of the output string. The `addSuffix` option is set to `true`
  */
-const formatTimeToNow = (date: Date) => formatDistanceToNowStrict(date, { addSuffix: true, locale: { ...locale, formatDistance } });
+const formatTimeToNow = (date: Date) =>
+  formatDistanceToNowStrict(date, {
+    addSuffix: true,
+    locale: { ...locale, formatDistance },
+  });
 
 export default formatTimeToNow;
