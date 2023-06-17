@@ -14,7 +14,7 @@ const SignIn = () => {
           agree to our User Agreement and Privacy Policy
         </p>
         <UserAuthForm />
-        <p className="px-8 text-center text-zinc-700">
+        <p className="px-8 text-sm text-center text-zinc-700">
           New to {siteConfig.siteName}?{" "}
           <Link
             href="signup"

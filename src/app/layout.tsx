@@ -4,6 +4,7 @@ import { Montserrat } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import siteConfig from "@/config";
 import RtkProvider from "@/providers/RtkProvider";
+import { Toaster } from "@/providers/Toaster";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: rootProps) {
         <main className="container max-w-7xl mx-auto h-full pt-2">
           <RtkProvider>{children}</RtkProvider>
         </main>
+        <Toaster />
       </body>
     </html>
   );
