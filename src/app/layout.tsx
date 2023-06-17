@@ -1,7 +1,9 @@
+import mergeClasses from "@/libs/mergeClasses";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
+import Navbar from "@/components/Navbar/Navbar";
 
-const inter = Montserrat({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
   title: "BCA Community",
@@ -14,9 +16,20 @@ interface rootProps {
 
 export default function RootLayout({ children }: rootProps) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <main>{children}</main>
+    <html
+      lang="en"
+      className={mergeClasses(
+        "bg-white text-slate-900 antialiased light",
+        montserrat.className
+      )}
+    >
+      <body className="min-h-screen pt-12 bg-slate-50 antialiased">
+        <nav>
+          <Navbar />
+        </nav>
+        <main className="container max-w-7xl mx-auto h-full pt-2">
+          {children}
+        </main>
       </body>
     </html>
   );
