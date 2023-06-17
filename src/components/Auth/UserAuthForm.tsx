@@ -3,10 +3,17 @@
 import mergeClasses from "@/libs/mergeClasses";
 import { Button } from "../UI/Button";
 import { FC, HTMLAttributes, useState } from "react";
+import { signIn } from "next-auth/react";
+import { useMutation } from "react-query";
 
 interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {}
 
 const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
+  const { mutate, isLoading, error } = useMutation({
+    mutationFn: async () => {
+      signIn();
+    },
+  });
   return (
     <div className={mergeClasses("flex justify-center", className)} {...props}>
       <Button size="sm" className="w-full">
