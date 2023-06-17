@@ -1,6 +1,6 @@
 "use client";
 
-import mergeClasses from "@/libs/mergeClasses";
+import cn from "@/libs/cn";
 import { Button } from "../UI/Button";
 import { FC, HTMLAttributes } from "react";
 import { signIn } from "next-auth/react";
@@ -22,7 +22,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
       }),
   });
   return (
-    <div className={mergeClasses("flex justify-center", className)} {...props}>
+    <div className={cn("flex justify-center", className)} {...props}>
       <Button
         size="sm"
         className="w-full"

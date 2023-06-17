@@ -1,10 +1,11 @@
-import mergeClasses from "@/libs/mergeClasses";
 import "./globals.css";
 import { Montserrat } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import siteConfig from "@/config";
 import RtkProvider from "@/providers/RtkProvider";
+import cn from "@/libs/classNames";
 import { Toaster } from "@/providers/Toaster";
+import getCurrentUser from "@/actions/getCurrentUser";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -17,17 +18,18 @@ interface rootProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: rootProps) {
+export default async function RootLayout({ children }: rootProps) {
+  const currentUser = await getCurrentUser();
   return (
     <html
       lang="en"
-      className={mergeClasses(
+      className={cn(
         "bg-white text-slate-900 antialiased light",
         montserrat.className
       )}
     >
       <body className="min-h-screen pt-[5rem] bg-slate-50 antialiased">
-        <Navbar />
+        <Navbar currentUser={currentUser} />
         <main className="container max-w-7xl mx-auto h-full pt-2">
           <RtkProvider>{children}</RtkProvider>
         </main>

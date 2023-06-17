@@ -25,6 +25,6 @@ const getPrismaClient = () => {
  * @returns The `db` object is being returned, which is an instance of the `PrismaClient` class. This
  * object is used to interact with the database and perform CRUD operations.
  */
-const db = getPrismaClient();
+const database = getPrismaClient();
 
-export default db;
+export default database;

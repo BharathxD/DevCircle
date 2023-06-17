@@ -1,4 +1,4 @@
-import mergeClasses from "@/libs/mergeClasses";
+import cn from "@/libs/classNames";
 import { cva, VariantProps } from "class-variance-authority";
 import { Loader2 } from "lucide-react";
 import * as React from "react";
@@ -41,7 +41,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, children, variant, isLoading, size, ...props }, ref) => {
     return (
       <button
-        className={mergeClasses(buttonVariants({ variant, size, className }))}
+        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         disabled={isLoading}
         {...props}
