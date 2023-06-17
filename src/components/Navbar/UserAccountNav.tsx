@@ -12,8 +12,6 @@ import { FC } from "react";
 import UserAvatar from "../UI/UserAvatar";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import { useMutation } from "react-query";
-import { MoonLoader } from "react-spinners";
 
 interface UserAccountNavProps {
   user: Pick<User, "image" | "name" | "email">;
@@ -34,7 +32,7 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className=" border-t-0 border-zinc-700 -mt-1"
+        className="rounded-sm rounded-tr-none  border-zinc-700 mt-0.5"
         align="end"
       >
         <div className="flex items-center justify-start gap-2 p-2 pt-3">
@@ -50,6 +48,9 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Link href="/">Feed</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href="/r/create">Create Community</Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Link href="/settings">Settings</Link>

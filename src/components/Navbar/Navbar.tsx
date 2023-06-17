@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import { FiGlobe } from "react-icons/fi";
 import siteConfig from "@/config";
@@ -5,6 +6,17 @@ import UserAccountNav from "./UserAccountNav";
 import { User } from "@prisma/client";
 
 const Navbar = ({ currentUser }: { currentUser: User | null }) => {
+  const renderUserAccountNav = <UserAccountNav user={currentUser!} />;
+
+  const renderSignInLink = (
+    <Link
+      href="/signin"
+      className="flex items-center justify-center hover:bg-zinc-800 hover:text-zinc-100 transition-colors border border-y-0 md:border-zinc-700 border-zinc-700 h-full px-5 py-[1.125rem]"
+    >
+      SignIn
+    </Link>
+  );
+
   return (
     <nav className="fixed top-0 inset-x-0 border border-t-0 border-zinc-700 z-[10] border-x-0">
       <div className="px-8 md:container max-w-7xl h-fit mx-auto flex items-center justify-between gap-2">
@@ -14,20 +26,7 @@ const Navbar = ({ currentUser }: { currentUser: User | null }) => {
             {siteConfig.siteName}
           </p>
         </Link>
-        <div>
-          {currentUser ? (
-            <UserAccountNav user={currentUser} />
-          ) : (
-            <div>
-              <Link
-                className="flex items-center justify-center hover:bg-zinc-800 hover:text-zinc-100 transition-colors border border-y-0 md:border-zinc-700 border-zinc-700 h-full px-5 py-[1.125rem]"
-                href="/signin"
-              >
-                SignIn
-              </Link>
-            </div>
-          )}
-        </div>
+        {currentUser ? renderUserAccountNav : renderSignInLink}
       </div>
     </nav>
   );

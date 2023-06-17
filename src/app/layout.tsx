@@ -16,9 +16,10 @@ export const metadata = {
 
 interface rootProps {
   children: React.ReactNode;
+  authModal: React.ReactNode;
 }
 
-export default async function RootLayout({ children }: rootProps) {
+export default async function RootLayout({ children, authModal }: rootProps) {
   const currentUser = await getCurrentUser();
   return (
     <html
@@ -31,9 +32,8 @@ export default async function RootLayout({ children }: rootProps) {
       <body className="min-h-screen pt-[5rem] bg-slate-50 antialiased">
         <RtkProvider>
           <Navbar currentUser={currentUser} />
-          <main className="container max-w-7xl mx-auto h-full pt-2">
-            {children}
-          </main>
+          {authModal}
+          <main className="container h-full pt-2">{children}</main>
         </RtkProvider>
         <Toaster />
       </body>
