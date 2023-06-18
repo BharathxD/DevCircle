@@ -67,15 +67,15 @@ const CreatePage = () => {
   });
 
   return (
-    <div className="md:container flex items-center h-full w-full md:max-w-3xl mx-auto">
+    <div className="md:container flex items-center h-full w-full md:max-w-3xl md:mx-auto">
       <section className="bg-zinc-50 border border-zinc-800 w-full rounded-lg">
         <header className="flex justify-between items-center border-b border-b-zinc-800 p-5">
-          <h1 className="text-xl font-semibold">Create a Community</h1>
+          <h1 className="text-2xl font-semibold">Create a Community</h1>
         </header>
         <section className="p-5">
           <div className="flex flex-col gap-2">
-            <h2 className="text-lg font-medium">Name</h2>
-            <p className="text-xs pb-2">
+            <h2 className="text-xl font-medium">Name</h2>
+            <p className="text-md pb-2">
               Community names including capitalization cannot be changed.
             </p>
             <div className="relative">
@@ -91,7 +91,7 @@ const CreatePage = () => {
             </div>
           </div>
         </section>
-        <footer className="flex justify-end gap-4 p-5">
+        <footer className="flex justify-end text-lg gap-4 p-5">
           <Button
             disabled={isLoading}
             variant="skeleton"
