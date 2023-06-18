@@ -19,7 +19,7 @@ const CreatePage = () => {
   const { mutate: createCommunity, isLoading } = useMutation({
     mutationFn: async () => {
       const payload: CreateForumPayload = {
-        name: input,
+        forumName: input,
       };
       const { data }: { data: string } = await axios.post(
         "/api/forum",
@@ -51,15 +51,15 @@ const CreatePage = () => {
         const { status = 0 } = err.response || {};
         const errorToast = errorMap[status];
         if (errorToast) return toast(errorToast);
-        if (status === StatusCodes.UNAUTHORIZED) return router.push("/signin");
+        if (status === StatusCodes.UNAUTHORIZED)
+          return router.push("/signin?unauthorized=1");
       }
 
-      // return toast({
-      //   title: "There was an error",
-      //   description: "Could not create the Forum.",
-      //   variant: "destructive",
-      // });
-      return router.push("/signin?unauthorized=1");
+      return toast({
+        title: "There was an error",
+        description: "Could not create the Forum.",
+        variant: "destructive",
+      });
     },
     onSuccess: (data) => {
       router.push(`/r/${data}`);
