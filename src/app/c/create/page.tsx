@@ -8,13 +8,11 @@ import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { useMutation } from "react-query";
 import { CreateForumPayload } from "@/libs/validators/forum";
-import { useCustomToasts } from "@/hooks/useCustomToast";
 import { toast } from "@/hooks/useToast";
 
 const CreatePage = () => {
   const [input, setInput] = useState<string>("");
   const router = useRouter();
-  const { loginToast } = useCustomToasts();
 
   const { mutate: createCommunity, isLoading } = useMutation({
     mutationFn: async () => {
@@ -50,6 +48,7 @@ const CreatePage = () => {
       if (err instanceof AxiosError) {
         const { status = 0 } = err.response || {};
         const errorToast = errorMap[status];
+        setInput("");
         if (errorToast) return toast(errorToast);
         if (status === StatusCodes.UNAUTHORIZED)
           return router.push("/signin?unauthorized=1");
@@ -62,7 +61,7 @@ const CreatePage = () => {
       });
     },
     onSuccess: (data) => {
-      router.push(`/r/${data}`);
+      router.push(`/c/${data}`);
     },
   });
 
@@ -80,7 +79,7 @@ const CreatePage = () => {
             </p>
             <div className="relative">
               <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-600">
-                r/
+                c/
               </p>
               <Input
                 value={input}

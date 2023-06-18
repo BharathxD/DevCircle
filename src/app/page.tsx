@@ -29,7 +29,7 @@ export default function Home() {
                 variant: "body",
                 className: "w-full my-5 outline-none rounded-lg",
               })}
-              href="/r/create"
+              href="/c/create"
             >
               Create Community
             </Link>
