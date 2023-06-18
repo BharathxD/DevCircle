@@ -56,7 +56,10 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
           <Link href="/settings">Settings</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer" onSelect={handleSignOut}>
+        <DropdownMenuItem
+          className="cursor-pointer hover:text-red-50 hover:bg-red-500 transition-colors"
+          onSelect={handleSignOut}
+        >
           Sign Out
         </DropdownMenuItem>
       </DropdownMenuContent>

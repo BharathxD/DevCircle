@@ -17,7 +17,7 @@ const SignUp = () => {
         <p className="px-8 text-sm text-center text-zinc-700">
           Already a member of {siteConfig.siteName}?{" "}
           <Link
-            href="signup"
+            href="/signin"
             className="hover:text-zinc-800 underline underline-offset-4"
           >
             Sign In

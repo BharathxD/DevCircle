@@ -43,6 +43,7 @@
     "editorjs-react-renderer": "^3.5.1",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
+    "http-status-codes": "^2.2.0",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.221.0",
     "nanoid": "^4.0.2",

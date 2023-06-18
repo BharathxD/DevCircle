@@ -4,42 +4,94 @@ import { Button } from "@/components/UI/Button";
 import { Input } from "@/components/UI/Input";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
 import { useMutation } from "react-query";
+import { CreateForumPayload } from "@/libs/validators/forum";
+import { useCustomToasts } from "@/hooks/useCustomToast";
+import { toast } from "@/hooks/useToast";
 
 const CreatePage = () => {
   const [input, setInput] = useState<string>("");
   const router = useRouter();
-  const { mutate, isLoading, error } = useMutation({
+  const { loginToast } = useCustomToasts();
+
+  const { mutate: createCommunity, isLoading } = useMutation({
     mutationFn: async () => {
-      const payload = {};
-      const { data } = await axios.post("/api/forum", payload);
+      const payload: CreateForumPayload = {
+        name: input,
+      };
+      const { data }: { data: string } = await axios.post(
+        "/api/forum",
+        payload
+      );
+      return data;
+    },
+    onError: async (err: AxiosError | Error) => {
+      const errorMap: {
+        [key: number]: {
+          title: string;
+          description: string;
+          variant: "default" | "destructive" | null | undefined;
+        };
+      } = {
+        [StatusCodes.CONFLICT]: {
+          title: "Forum already exists",
+          description: "Please choose a different name.",
+          variant: "destructive",
+        },
+        [StatusCodes.UNPROCESSABLE_ENTITY]: {
+          title: "Invalid forum name",
+          description: "Please choose a name between 3 and 21 letters.",
+          variant: "destructive",
+        },
+      };
+
+      if (err instanceof AxiosError) {
+        const { status = 0 } = err.response || {};
+        const errorToast = errorMap[status];
+        if (errorToast) return toast(errorToast);
+        if (status === StatusCodes.UNAUTHORIZED) return router.push("/signin");
+      }
+
+      // return toast({
+      //   title: "There was an error",
+      //   description: "Could not create the Forum.",
+      //   variant: "destructive",
+      // });
+      return router.push("/signin?unauthorized=1");
+    },
+    onSuccess: (data) => {
+      router.push(`/r/${data}`);
     },
   });
-  return (
-    <div className="container flex items-center h-full max-w-3xl mx-auto">
-      <div className="relative bg-zinc-50 border border-zinc-800 w-full h-fit rounded-lg space-y-6">
-        <div className="flex justify-between items-center border-b border-b-zinc-800 p-5">
-          <h1 className="text-xl font-semibold">Create a Community</h1>
-        </div>
-        <div className="flex flex-col gap-2 px-5">
-          <p className="text-lg font-medium">Name</p>
-          <p className="text-xs pb-2">
-            Community names including capitalization cannot be changed.
-          </p>
-          <div className="relative">
-            <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-600">
-              r/
-            </p>
-            <Input
-              value={input}
-              onChange={(event) => setInput(event.target.value)}
-              className="pl-6"
-            />
-          </div>
-        </div>
 
-        <div className="flex justify-end gap-4 p-5">
+  return (
+    <div className="md:container flex items-center h-full w-full md:max-w-3xl mx-auto">
+      <section className="bg-zinc-50 border border-zinc-800 w-full rounded-lg">
+        <header className="flex justify-between items-center border-b border-b-zinc-800 p-5">
+          <h1 className="text-xl font-semibold">Create a Community</h1>
+        </header>
+        <section className="p-5">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-lg font-medium">Name</h2>
+            <p className="text-xs pb-2">
+              Community names including capitalization cannot be changed.
+            </p>
+            <div className="relative">
+              <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-600">
+                r/
+              </p>
+              <Input
+                value={input}
+                type="text"
+                onChange={(event) => setInput(event.target.value)}
+                className="pl-6"
+              />
+            </div>
+          </div>
+        </section>
+        <footer className="flex justify-end gap-4 p-5">
           <Button
             disabled={isLoading}
             variant="skeleton"
@@ -48,14 +100,15 @@ const CreatePage = () => {
             Cancel
           </Button>
           <Button
+            onClick={() => createCommunity()}
             isLoading={isLoading}
             variant="inverted"
             disabled={input.length === 0}
           >
-            Create Community
+            Create Forum
           </Button>
-        </div>
-      </div>
+        </footer>
+      </section>
     </div>
   );
 };
