@@ -3,24 +3,24 @@ import Link from "next/link";
 import { FiGlobe } from "react-icons/fi";
 import UserAuthForm from "./UserAuthForm";
 
-const SignIn = () => {
+const SignUp = () => {
   return (
     <div className="md:container mx-auto w-full flex flex-col justify-center space-y-6">
       <div className="flex flex-col space-y-2 text-center gap-2">
         <FiGlobe size={35} className="mx-auto" />
-        <h1 className="text-4xl font-semibold tracking-tight">Welcome back!</h1>
+        <h1 className="text-4xl font-semibold tracking-tight">Sign Up</h1>
         <p className="max-w-xs mx-auto">
           By continuing, you are setting up a {siteConfig.siteName} account and
           agree to our User Agreement and Privacy Policy
         </p>
         <UserAuthForm />
         <p className="px-8 text-sm text-center text-zinc-700">
-          New to {siteConfig.siteName}?{" "}
+          Already a member of {siteConfig.siteName}?{" "}
           <Link
             href="signup"
             className="hover:text-zinc-800 underline underline-offset-4"
           >
-            Sign Up
+            Sign In
           </Link>
         </p>
       </div>
@@ -28,4 +28,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
