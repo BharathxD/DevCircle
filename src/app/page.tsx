@@ -31,7 +31,7 @@ export default function Home() {
               })}
               href="/r/create"
             >
-              Home
+              Create Community
             </Link>
           </div>
         </div>

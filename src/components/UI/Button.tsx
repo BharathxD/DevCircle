@@ -10,6 +10,8 @@ const buttonVariants = cva(
       variant: {
         default:
           "text-zinc-900 hover:bg-zinc-800 hover:text-zinc-100 rounded-lg hover:rounded-sm outline outline-1 outline-zinc-700",
+        inverted:
+          "text-zinc-100 bg-zinc-800 hover:bg-zinc-50 hover:text-zinc-800 rounded-lg hover:rounded-sm outline outline-1 outline-zinc-700",
         destructive: "text-white hover:bg-red-600 dark:hover:bg-red-600",
         outline:
           "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 outline outline-1 outline-zinc-300",
