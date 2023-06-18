@@ -27,12 +27,12 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
-        <div className="flex items-center justify-center border border-y-0 border-zinc-800 h-full p-4">
+        <div className="flex items-center justify-center border border-y-0 border-zinc-800 hover:bg-zinc-800 transition-colors h-full p-4">
           <UserAvatar user={user} />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="rounded-sm rounded-tr-none  border-zinc-800 mt-0.5"
+        className="rounded-sm rounded-tr-none bg-zinc-50 border-zinc-800 mt-0.5"
         align="end"
       >
         <div className="flex items-center justify-start gap-2 p-2 pt-3">

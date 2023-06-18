@@ -13,7 +13,7 @@ const SignIn: FC<SignInProps> = ({ customTitle }) => {
     <div className="md:container mx-auto w-full flex flex-col justify-center space-y-6">
       <div className="flex flex-col space-y-2 text-center gap-2">
         <FiGlobe size={35} className="mx-auto" />
-        <h1 className="text-5xl font-semibold tracking-tight">
+        <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
           {customTitle ?? "Welcome back!"}
         </h1>
         <p className="max-w-xs text-lg mx-auto tracking-tighter">
@@ -21,7 +21,7 @@ const SignIn: FC<SignInProps> = ({ customTitle }) => {
           agree to our User Agreement and Privacy Policy
         </p>
         <UserAuthForm />
-        <p className="px-8 text-md text-center text-zinc-700">
+        <p className="px-8 text-sm md:text-md text-center text-zinc-700">
           New to {siteConfig.siteName}?{" "}
           <Link
             href="signup"
