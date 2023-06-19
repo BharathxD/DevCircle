@@ -37,8 +37,6 @@ const Layout = async ({
       })
     : undefined;
 
-  console.log(subscription);
-
   const isSubscribed = !!subscription;
 
   // Get the count of forum members
@@ -56,7 +54,7 @@ const Layout = async ({
           {forum && (
             <div className="hidden md:block overflow-hidden h-fit rounded-lg border border-zinc-800 order-first md:order-last">
               <div className="px-6 py-4 bg-green-100">
-                <p className="font-semibold py-3">About c/{forumName}</p>
+                <p className="font-semibold text-xl py-3">About c/{forumName}</p>
               </div>
               <div className="h-px w-full bg-zinc-800" />
               <dl className="text-md leading-6 bg-zinc-50">
@@ -89,7 +87,10 @@ const Layout = async ({
                   <Fragment>
                     <div className="h-px w-full bg-zinc-800" />
                     <div className="flex justify-between gap-x-4 px-6 py-4">
-                      <SubscribeLeaveToggle isSubscribed={isSubscribed} />
+                      <SubscribeLeaveToggle
+                        isSubscribed={isSubscribed}
+                        forum={{ id: forum.id, name: forum.name }}
+                      />
                     </div>
                   </Fragment>
                 )}

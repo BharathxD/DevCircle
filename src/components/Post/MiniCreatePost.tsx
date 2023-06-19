@@ -41,7 +41,7 @@ const MiniCreatePost: FC<MiniCreatePostPRops> = ({ currentUser }) => {
           <IoMdImage className="h-5 w-5 md:h-6 md:w-6" />
         </Button>
         <Button
-          onClick={() => router.push(pathname + "/submit")}
+          onClick={() => router.push(pathname + "/")}
           variant="skeleton"
           className="hover:bg-zinc-800 hover:text-zinc-100 text-zinc-600"
         >

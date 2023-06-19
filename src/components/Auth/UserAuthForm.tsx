@@ -10,10 +10,15 @@ import { useToast } from "@/hooks/useToast";
 
 interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {}
 
-const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
+const UserAuthForm: FC<UserAuthFormProps> = ({
+  className,
+  ...props
+}) => {
   const { toast } = useToast();
   const { mutate, isLoading, error } = useMutation({
-    mutationFn: async () => signIn("google"),
+    mutationFn: async () => {
+      return signIn("google");
+    },
     onError: async () =>
       toast({
         title: "Something went wrong...",

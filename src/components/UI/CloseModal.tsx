@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { AiOutlineClose } from "react-icons/ai";
-import { FC } from "react";
+import { FC, useCallback } from "react";
 
 interface CloseModalProps {}
 

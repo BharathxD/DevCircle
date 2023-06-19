@@ -22,7 +22,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ user, ...props }) => (
     ) : (
       <AvatarFallback>
         <span className="sr-only">{user?.name}</span>
-        <FaUserCircle size={30} />
+        <FaUserCircle size={40} />
       </AvatarFallback>
     )}
   </Avatar>

@@ -4,6 +4,7 @@ import CloseModal from "@/components/UI/CloseModal";
 interface SearchParams {
   searchParams: {
     unauthorized: boolean;
+    redirectTo: string;
   };
 }
 
