@@ -25,7 +25,7 @@ export default async function RootLayout({ children, authModal }: rootProps) {
     <html
       lang="en"
       className={cn(
-        "bg-white text-slate-900 antialiased light",
+        "bg-zinc-50 text-slate-900 antialiased light",
         montserrat.className
       )}
     >

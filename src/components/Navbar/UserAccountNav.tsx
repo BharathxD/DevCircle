@@ -12,12 +12,14 @@ import { FC } from "react";
 import UserAvatar from "../UI/UserAvatar";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface UserAccountNavProps {
   user: Pick<User, "image" | "name" | "email">;
 }
 
 const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
+  const router = useRouter();
   const handleSignOut = (event: Event) => {
     event.preventDefault();
     signOut({
@@ -27,33 +29,33 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
-        <div className="flex items-center justify-center border border-y-0 border-zinc-800 hover:bg-zinc-800 transition-colors h-full p-4">
+        <div className="flex items-center justify-center border-2  border-y-0 border-zinc-800 hover:bg-yellow-100 transition-colors h-full p-4">
           <UserAvatar user={user} />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="rounded-sm rounded-tr-none bg-zinc-50 border-zinc-800 mt-0.5"
+        className="rounded-sm rounded-tr-none bg-zinc-50 border-2 border-zinc-800 mt-0.5"
         align="end"
       >
         <div className="flex items-center justify-start gap-2 p-2 pt-3">
           <div className="flex flex-col space-y-1 leading-none">
-            {user.name && <p className="font-medium text-md">{user.name}</p>}
+            {user.name && <p className="font-bold text-md">{user.name}</p>}
             {user.email && (
-              <p className="w-[200px] truncate text-sm text-zinc-700">
+              <p className="w-[200px] font-medium truncate text-sm text-zinc-700">
                 {user.email}
               </p>
             )}
           </div>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href="/">Feed</Link>
+        <DropdownMenuItem onClick={() => router.push("/")}>
+          Feed
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/c/create">Create Community</Link>
+        <DropdownMenuItem onClick={() => router.push("/c/create")}>
+          Create Community
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/settings">Settings</Link>
+        <DropdownMenuItem onClick={() => router.push("/settings")}>
+          Settings
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem

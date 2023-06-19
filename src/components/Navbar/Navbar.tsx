@@ -11,14 +11,14 @@ const Navbar = ({ currentUser }: { currentUser: User | null }) => {
   const renderSignInLink = (
     <Link
       href="/signin"
-      className="flex items-center justify-center hover:bg-zinc-800 hover:text-zinc-100 transition-colors border border-y-0 md:border-zinc-800 border-zinc-800 h-full px-5 py-[1.125rem]"
+      className="flex items-center justify-center font-medium hover:bg-green-100 hover:text-zinc-800 transition-colors border-2 border-y-0 md:border-zinc-800 border-zinc-800 h-full px-5 py-[1.125rem]"
     >
       SignIn
     </Link>
   );
 
   return (
-    <nav className="fixed top-0 inset-x-0 border border-t-0 bg-zinc-50 border-zinc-800 z-[10] border-x-0">
+    <nav className="fixed top-0 inset-x-0 border-b-2 bg-zinc-50 border-zinc-800 z-[10]">
       <div className="px-4 md:container max-w-7xl h-fit mx-auto flex items-center justify-between gap-2">
         <Link href="/" className="flex gap-2 items-center">
           <FiGlobe size={30} />

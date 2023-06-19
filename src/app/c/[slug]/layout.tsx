@@ -45,21 +45,21 @@ const Layout = async ({
   });
 
   return (
-    <div className="h-full">
+    <div className="h-full font-medium">
       <div>
         {/* TODO: Create Feed Button */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6">
           <div className="flex flex-col col-span-2 space-y-6">{children}</div>
           {/* TODO: Info Side Bar */}
           {forum && (
-            <div className="hidden md:block overflow-hidden h-fit rounded-lg border border-zinc-800 order-first md:order-last">
+            <div className="hidden md:block overflow-hidden h-fit rounded-lg border-2 border-zinc-800 order-first md:order-last">
               <div className="px-6 py-4 bg-green-100">
-                <p className="font-semibold text-xl py-3">About c/{forumName}</p>
+                <p className="font-bold text-xl py-3">About c/{forumName}</p>
               </div>
-              <div className="h-px w-full bg-zinc-800" />
+              <div className="h-[2px] w-full bg-zinc-800" />
               <dl className="text-md leading-6 bg-zinc-50">
                 <div className="px-6 py-4 flex justify-between items-center gap-x-4">
-                  <dt className="text-zinc-600">Created</dt>
+                  <dt className="text-zinc-700">Created</dt>
                   <dd className="text-zinc-700">
                     <time dateTime={forum.createdAt.toDateString()}>
                       {format(forum.createdAt, "MMMM d, yyyy")}
@@ -67,7 +67,7 @@ const Layout = async ({
                   </dd>
                 </div>
 
-                <div className="h-px w-full bg-zinc-800" />
+                <div className="h-[2px] w-full bg-zinc-800" />
 
                 <div className="flex justify-between gap-x-4 px-6 py-4">
                   <dt className="text-zinc-600">Members</dt>
@@ -76,7 +76,7 @@ const Layout = async ({
 
                 {forum.creatorId === currentUser?.id ? (
                   <Fragment>
-                    <div className="h-px w-full bg-zinc-800" />
+                    <div className="h-[2px] w-full bg-zinc-800" />
                     <div className="flex justify-between gap-x-4 px-6 py-4">
                       <p className="text-zinc-500">
                         You created this community
@@ -85,7 +85,7 @@ const Layout = async ({
                   </Fragment>
                 ) : (
                   <Fragment>
-                    <div className="h-px w-full bg-zinc-800" />
+                    <div className="h-[2px] w-full bg-zinc-800" />
                     <div className="flex justify-between gap-x-4 px-6 py-4">
                       <SubscribeLeaveToggle
                         isSubscribed={isSubscribed}
