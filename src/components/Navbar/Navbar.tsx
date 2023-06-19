@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import { FiGlobe } from "react-icons/fi";
-import siteConfig from "@/config";
 import UserAccountNav from "./UserAccountNav";
 import { User } from "@prisma/client";
+import cn from "@/libs/classNames";
 
 const Navbar = ({ currentUser }: { currentUser: User | null }) => {
   const renderUserAccountNav = <UserAccountNav user={currentUser!} />;
@@ -22,8 +22,8 @@ const Navbar = ({ currentUser }: { currentUser: User | null }) => {
       <div className="px-4 md:container max-w-7xl h-fit mx-auto flex items-center justify-between gap-2">
         <Link href="/" className="flex gap-2 items-center">
           <FiGlobe size={30} />
-          <p className="hidden text-zinc-950 text-3xl font-bold md:block">
-            {siteConfig.siteName}
+          <p className={cn("hidden text-zinc-950 text-3xl font-bold md:block")}>
+            DevCircle
           </p>
         </Link>
         {currentUser ? renderUserAccountNav : renderSignInLink}
