@@ -1,3 +1,5 @@
+import getCurrentUser from "@/actions/getCurrentUser";
+import MiniCreatePost from "@/components/Post/MiniCreatePost";
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
 import database from "@/libs/database";
 import { notFound } from "next/navigation";
@@ -11,6 +13,7 @@ interface ForumPageProps {
 
 const ForumPage = async ({ params }: ForumPageProps) => {
   const { slug } = params;
+  const currentUser = await getCurrentUser();
   const forum = await database.forum.findFirst({
     where: {
       name: slug,
@@ -30,7 +33,9 @@ const ForumPage = async ({ params }: ForumPageProps) => {
   if (!forum) return notFound();
   return (
     <Fragment>
-      <h1 className="font-bold text-3xl md:text-4xl h-14">c/{forum.name}</h1>
+      <h1 className="font-bold text-3xl md:text-4xl pb-3">c/{forum.name}</h1>
+      <MiniCreatePost currentUser={currentUser} />
+      {/* TODO: Show User Feed */}
     </Fragment>
   );
 };
