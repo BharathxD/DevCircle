@@ -1,4 +1,3 @@
-import { buttonVariants } from "@/components/UI/Button";
 import siteConfig from "@/config";
 import Link from "next/link";
 import { TbSmartHome } from "react-icons/tb";
@@ -6,7 +5,7 @@ import { TbSmartHome } from "react-icons/tb";
 export default function Home() {
   return (
     <div>
-      <h1 className="font-bold text-3xl md:text-4xl py-4 pt-6">Your feed</h1>
+      <h1 className="font-bold text-3xl md:text-4xl md:mt-2">Your feed</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6">
         {/* Feed */}
         {/* Community Info */}

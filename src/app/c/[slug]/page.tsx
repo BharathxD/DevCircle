@@ -33,7 +33,7 @@ const ForumPage = async ({ params }: ForumPageProps) => {
   if (!forum) return notFound();
   return (
     <Fragment>
-      <h1 className="font-bold text-3xl md:text-4xl pb-3">c/{forum.name}</h1>
+      <h1 className="font-bold text-3xl md:text-4xl">c/{forum.name}</h1>
       <MiniCreatePost currentUser={currentUser} />
       {/* TODO: Show User Feed */}
     </Fragment>

@@ -66,48 +66,50 @@ const CreatePage = () => {
   });
 
   return (
-    <div className="md:container flex items-center h-full w-full md:max-w-3xl md:mx-auto">
-      <section className="bg-zinc-50 border-2 border-zinc-800 w-full rounded-lg">
-        <header className="flex justify-between items-center border-b-2 border-b-zinc-800 p-5">
-          <h1 className="text-2xl font-bold">Create a Community</h1>
-        </header>
-        <section className="p-5">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl font-semibold">Name</h2>
-            <p className="text-md pb-2 font-medium">
-              Community names including capitalization cannot be changed.
-            </p>
-            <div className="relative">
-              <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-600">
-                c/
+    <div className="md:flex md:items-center md:justify-center md:h-[80vh] md:w-full">
+      <div className="md:container flex items-center h-full w-full md:max-w-3xl md:mx-auto">
+        <section className="bg-zinc-50 border-2 border-zinc-800 w-full rounded-lg">
+          <header className="flex justify-between items-center border-b-2 border-b-zinc-800 p-5">
+            <h1 className="text-2xl font-bold">Create a Community</h1>
+          </header>
+          <section className="p-5">
+            <div className="flex flex-col gap-2">
+              <h2 className="text-xl font-semibold">Name</h2>
+              <p className="text-md pb-2 font-medium">
+                Community names including capitalization cannot be changed.
               </p>
-              <Input
-                value={input}
-                type="text"
-                onChange={(event) => setInput(event.target.value)}
-                className="pl-6"
-              />
+              <div className="relative">
+                <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-600">
+                  c/
+                </p>
+                <Input
+                  value={input}
+                  type="text"
+                  onChange={(event) => setInput(event.target.value)}
+                  className="pl-6"
+                />
+              </div>
             </div>
-          </div>
+          </section>
+          <footer className="flex justify-end text-lg gap-4 p-5">
+            <Button
+              disabled={isLoading}
+              variant="destructive"
+              onClick={() => router.back()}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => createCommunity()}
+              isLoading={isLoading}
+              variant="inverted"
+              disabled={input.length === 0}
+            >
+              Create Forum
+            </Button>
+          </footer>
         </section>
-        <footer className="flex justify-end text-lg gap-4 p-5">
-          <Button
-            disabled={isLoading}
-            variant="destructive"
-            onClick={() => router.back()}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={() => createCommunity()}
-            isLoading={isLoading}
-            variant="inverted"
-            disabled={input.length === 0}
-          >
-            Create Forum
-          </Button>
-        </footer>
-      </section>
+      </div>
     </div>
   );
 };
