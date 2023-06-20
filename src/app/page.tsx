@@ -7,7 +7,6 @@ export default function Home() {
     <div>
       <h1 className="font-bold text-3xl md:text-4xl">Your feed</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6">
-        {/* Feed */}
         {/* Community Info */}
         <div className="overflow-hidden h-fit rounded-md border-2  border-zinc-800 order-first md:order-last">
           <div className="bg-green-100 px-5 py-4 border-b-2  border-b-zinc-700">

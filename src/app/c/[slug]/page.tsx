@@ -1,5 +1,6 @@
 import getCurrentUser from "@/actions/getCurrentUser";
 import MiniCreatePost from "@/components/Post/MiniCreatePost";
+import PostFeed from "@/components/Post/PostFeed";
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
 import database from "@/libs/database";
 import { notFound } from "next/navigation";
@@ -35,7 +36,11 @@ const ForumPage = async ({ params }: ForumPageProps) => {
     <Fragment>
       <h1 className="font-bold text-3xl md:text-4xl">c/{forum.name}</h1>
       <MiniCreatePost currentUser={currentUser} />
-      {/* TODO: Show User Feed */}
+      <PostFeed
+        forumName={forum.name}
+        userId={currentUser?.id ?? undefined}
+        initialPosts={forum.posts}
+      />
     </Fragment>
   );
 };
