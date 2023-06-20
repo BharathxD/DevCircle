@@ -12,6 +12,7 @@ import { uploadFiles } from "@/libs/uploadThing";
 import { toast } from "@/hooks/useToast";
 import { useMutation } from "react-query";
 import axios, { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
 
 interface EditorProps {
   forumId: string;
@@ -127,6 +128,15 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
     },
     onError: async (error: unknown) => {
       if (error instanceof AxiosError) {
+        if (error.response?.status === StatusCodes.UNAUTHORIZED)
+          return router.push("/signin?unauthorized=1");
+        if (error.response?.status === StatusCodes.FORBIDDEN) {
+          return toast({
+            title: "You are not subscribed to this community",
+            description: "Please join the community and try again.",
+            variant: "destructive",
+          });
+        }
       }
       return toast({
         title: "Something went wrong",
