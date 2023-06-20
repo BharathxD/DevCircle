@@ -56,11 +56,15 @@ export async function handlePatchRequest(req: NextRequest): Promise<NextResponse
         });
 
         if (existingVote) {
+
+            // If an existing vote is found
             const updatePromise = (existingVote.type === voteType)
+                // If the existing vote is of the same type as the new vote, delete the vote and update vote count
                 ? Promise.all([
                     database.vote.delete({ where: { userId_postId: { userId, postId } } }),
                     updateVoteCount({ postId, voteType: null, post })
                 ])
+                // If the existing vote is of a different type, update the vote and update vote count
                 : Promise.all([
                     database.vote.update({ where: { userId_postId: { userId, postId }, }, data: { type: voteType } }),
                     updateVoteCount({ postId, voteType, post })
@@ -79,11 +83,11 @@ export async function handlePatchRequest(req: NextRequest): Promise<NextResponse
             database.vote.create({ data: { type: voteType, userId, postId } }),
             updateVoteCount({ postId, voteType, post }),
         ]);
-
         return NextResponse.json(
             { message: "Vote created successfully." },
             { status: StatusCodes.OK }
         );
+
     } catch (error: any) {
         if (error instanceof ZodError) {
             // If there's a validation error, return a bad request response
