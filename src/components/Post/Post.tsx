@@ -4,23 +4,39 @@ import Link from "next/link";
 import formatTimeToNow from "@/libs/formatTimeToNow";
 import { Post, User, Vote } from "@prisma/client";
 import EditorOutput from "../UI/EditorOutput";
+import PostVoteClient from "./PostVoteClient";
+
+type PartialVote = Pick<Vote, "type">;
 
 interface PostProps {
   post: Post & {
     author: User;
     votes: Vote[];
   };
+  votesAmount: number;
   forumName: string;
   commentAmount: number;
+  currentVote?: PartialVote;
 }
 
-const Post: FC<PostProps> = ({ post, forumName, commentAmount }) => {
+const Post: FC<PostProps> = ({
+  post,
+  forumName,
+  commentAmount,
+  votesAmount: _votesAmount,
+  currentVote: _currentVote,
+}) => {
   const postRef = useRef<HTMLParagraphElement>(null);
   const isPostOverflowed = postRef.current?.clientHeight === 160;
 
   return (
     <div className="rounded-md bg-zinc-50 border-2 border-zinc-800">
       <div className="px-6 py-4 flex justify-between">
+        <PostVoteClient
+          postId={post.id}
+          initialVoteAmount={_votesAmount}
+          initialVote={_currentVote?.type}
+        />
         <div className=" w-full flex flex-col gap-1">
           <div className="max-h-40 mt-1 flex flex-row gap-1 text-sm text-zinc-500">
             {forumName && (

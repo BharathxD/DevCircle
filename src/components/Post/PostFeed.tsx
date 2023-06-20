@@ -59,6 +59,8 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
           <li key={index} ref={isLastPost ? ref : null}>
             <Post
               post={post}
+              currentVote={currentVote}
+              votesAmount={voteCount}
               forumName={forumName}
               commentAmount={post.comments.length}
             />
