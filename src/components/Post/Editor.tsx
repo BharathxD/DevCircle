@@ -4,11 +4,14 @@ import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PostValidator } from "@/libs/validators/post";
+import { PostCreationRequest, PostValidator } from "@/libs/validators/post";
 import { infer as zodInfer } from "zod";
 import EditorJS from "@editorjs/editorjs";
 import { usePathname, useRouter } from "next/navigation";
 import { uploadFiles } from "@/libs/uploadThing";
+import { toast } from "@/hooks/useToast";
+import { useMutation } from "react-query";
+import axios, { AxiosError } from "axios";
 
 interface EditorProps {
   forumId: string;
@@ -26,11 +29,13 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
     defaultValues: { title: "", forumId, content: null },
   });
 
-  const editorRef = useRef<EditorJS>();
-  const titleRef = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
-  const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
+
+  const editorRef = useRef<EditorJS>();
+  const _titleRef = useRef<HTMLTextAreaElement>(null);
+
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -86,22 +91,67 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
   }, []);
 
   useEffect(() => {
+    if (Object.keys(errors).length) {
+      for (const [_key, value] of Object.entries(errors)) {
+        toast({
+          title: "Something went wrong",
+          description: (value as { message: string }).message,
+          variant: "destructive",
+        });
+      }
+    }
+  }, [errors]);
+
+  useEffect(() => {
     const init = async () => {
       await initializeEditor();
       setTimeout(() => {
-        if (titleRef.current) {
-          titleRef.current.focus();
-        }
-      });
+        if (_titleRef.current) _titleRef.current.focus();
+      }, 0);
     };
     if (isMounted) {
       init();
-      return () => {};
+      return () => {
+        editorRef.current?.destroy();
+        editorRef.current = undefined;
+      };
     }
   }, [isMounted, initializeEditor]);
 
-  const handleSubmitForm = () => {
-    // TODO: Implement form submission logic
+  const { ref: titleRef, ...rest } = register("title");
+
+  const { mutate, isLoading, error } = useMutation({
+    mutationFn: async (payload: PostCreationRequest) => {
+      const { data } = await axios.post("/api/forum/post/create", payload);
+      return data;
+    },
+    onError: async (error: unknown) => {
+      if (error instanceof AxiosError) {
+      }
+      return toast({
+        title: "Something went wrong",
+        description: "Your post is not published, please try again later",
+        variant: "destructive",
+      });
+    },
+    onSuccess: (data) => {
+      const redirectPath = pathname.split("/").slice(0, -1).join("/");
+      router.push(redirectPath);
+      router.refresh();
+      toast({
+        description: "Your post is published",
+      });
+    },
+  });
+
+  const handleSubmitForm = async (data: PostCreationRequest) => {
+    const blocks = await editorRef.current?.save();
+    const payload: PostCreationRequest = {
+      forumId,
+      title: data.title,
+      content: blocks,
+    };
+    mutate(payload);
   };
 
   return (
@@ -113,11 +163,16 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
       >
         <div className="prose prose-stone dark:prose-invert">
           <TextareaAutosize
+            ref={titleRef}
+            {...rest}
             placeholder="Title"
             className="w-full h-fit resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none p-0"
-            {...register("title")}
           />
-          <div id="editor" className="min-h-[40vh] p-0 mb-4" />
+          <div
+            {...register("content")}
+            id="editor"
+            className="min-h-[40vh] p-0 mb-4"
+          />
         </div>
       </form>
     </div>

@@ -3,7 +3,7 @@ import { Button, buttonVariants } from "@/components/UI/Button";
 import cn from "@/libs/classNames";
 import database from "@/libs/database";
 import Link from "next/link";
-import { notFound, useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 
 interface PageProps {
