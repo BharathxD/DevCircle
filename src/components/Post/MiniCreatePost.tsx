@@ -29,7 +29,10 @@ const MiniCreatePost: FC<MiniCreatePostPRops> = ({ currentUser }) => {
           <span className="absolute bottom-0 right-0 rounded-full w-3 h-3 bg-green-100 outline outline-2 outline-zinc-800" />
         </div>
         <Input
-          onClick={() => router.push(pathname + "/submit")}
+          onClick={() => {
+            if (!currentUser) return router.push("/signin/?unauthorized=1");
+            return router.push(pathname + "/submit");
+          }}
           placeholder={"Create post"}
           readOnly
         />

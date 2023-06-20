@@ -22,17 +22,15 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         // Fetch the content of the provided URL
         const response = await axios.get(href);
         // Extract the page title from the response
-        const titleMatch = response.data.match(/<title>(.*?)<\/title>/);
+        const titleMatch = response.data.match(/<title>(.*?)<\/title>/)
         const title = titleMatch?.[1] || "";
         // Extract the meta description from the response
         const descriptionMatch = response.data.match(
-            /<meta name="description" content="(.*?)">/
-        );
+            /<meta name="description" content="(.*?)"/
+        )
         const description = descriptionMatch?.[1] || "";
         // Extract the og:image URL from the response
-        const imageMatch = response.data.match(
-            /<meta property="og:image" content="(.*?)"/
-        );
+        const imageMatch = response.data.match(/<meta property="og:image" content="(.*?)"/)
         const image = imageMatch?.[1] || "";
         // Build the metadata object
         const metadata = {

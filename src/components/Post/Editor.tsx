@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useCallback, useRef, useState } from "react";
+import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,11 +26,17 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
     defaultValues: { title: "", forumId, content: null },
   });
 
-  const ref = useRef<EditorJS>();
-  const _titleRef = useRef<HTMLTextAreaElement>(null);
+  const editorRef = useRef<EditorJS>();
+  const titleRef = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
-  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsMounted(true);
+    }
+  }, []);
 
   const initializeEditor = useCallback(async () => {
     const EditorJS = (await import("@editorjs/editorjs")).default;
@@ -43,17 +49,17 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
     const InlineCode = (await import("@editorjs/inline-code")).default;
     const ImageTool = (await import("@editorjs/image")).default;
 
-    if (!ref.current) {
+    if (!editorRef.current) {
       const editor = new EditorJS({
         holder: "editor",
         onReady() {
-          ref.current = editor;
+          editorRef.current = editor;
         },
         placeholder: "Type here to write your post...",
         inlineToolbar: true,
         data: { blocks: [] },
         tools: {
-          Header: Header,
+          Header,
           LinkTool: {
             class: LinkTool,
             config: { endpoint: "/api/link" },
@@ -71,7 +77,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
           },
           list: List,
           code: Code,
-          InlineCode: InlineCode,
+          InlineCode,
           table: Table,
           embed: Embed,
         },
@@ -79,14 +85,39 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const init = async () => {
+      await initializeEditor();
+      setTimeout(() => {
+        if (titleRef.current) {
+          titleRef.current.focus();
+        }
+      });
+    };
+    if (isMounted) {
+      init();
+      return () => {};
+    }
+  }, [isMounted, initializeEditor]);
+
+  const handleSubmitForm = () => {
+    // TODO: Implement form submission logic
+  };
+
   return (
     <div className="w-full p-5 pb-1 bg-zinc-50 rounded-lg border-2 border-zinc-800">
-      <form id="subreddit-post-form" className="w-fit" onSubmit={() => {}}>
+      <form
+        id="subreddit-post-form"
+        className="w-fit"
+        onSubmit={handleSubmit(handleSubmitForm)}
+      >
         <div className="prose prose-stone dark:prose-invert">
           <TextareaAutosize
             placeholder="Title"
             className="w-full h-fit resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none p-0"
+            {...register("title")}
           />
+          <div id="editor" className="min-h-[40vh] p-0 mb-4" />
         </div>
       </form>
     </div>
