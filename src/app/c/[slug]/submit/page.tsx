@@ -1,3 +1,4 @@
+import Editor from "@/components/Post/Editor";
 import { Button, buttonVariants } from "@/components/UI/Button";
 import cn from "@/libs/classNames";
 import database from "@/libs/database";
@@ -40,7 +41,7 @@ const SubmitPage = async ({ params }: PageProps) => {
       </div>
 
       {/* form */}
-      {/* <Editor forumId={forum.id} /> */}
+      <Editor forumId={forum.id} />
 
       <div className="w-full flex justify-end">
         <Button
