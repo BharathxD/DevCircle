@@ -4,8 +4,11 @@ import { usePrevious } from "@mantine/hooks";
 import { VoteType } from "@prisma/client";
 import { FC, useEffect, useState } from "react";
 import { Button } from "../UI/Button";
-import { BsArrowUpSquareFill, BsArrowDownSquareFill } from "react-icons/bs";
+import { BsArrowUpShort, BsArrowDownShort } from "react-icons/bs";
 import cn from "@/libs/classNames";
+import { useMutation } from "react-query";
+import { PostVoteRequest } from "@/libs/validators/vote";
+import axios from "axios";
 
 interface PostVoteClientProps {
   postId: string;
@@ -26,11 +29,20 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
   useEffect(() => {
     setCurrentVote(initialVote);
   }, [initialVote]);
+  const {} = useMutation({
+    mutationFn: async (type: VoteType) => {
+      const payload: PostVoteRequest = {
+        postId,
+        voteType: type,
+      };
+      await axios.patch("/api/forum/post/vote", payload);
+    },
+  });
   return (
-    <div className="flex sm:flex-col gap-4 sm:gap-0 pr-6 sm:w-20 pb-4 sm:pb-0">
+    <div className="flex sm:flex-col gap-4 sm:gap-0 py-2 pr-5 sm:w-20 pb-2 sm:pb-0">
       <Button size="sm" aria-label="upvote">
-        <BsArrowUpSquareFill
-          className={cn("h-5 w-5 text-zinc-700", {
+        <BsArrowUpShort
+          className={cn("h-5 w-5", {
             "text-emerald-500 fill-emerald-500": currentVote === "UP",
           })}
         />
@@ -39,8 +51,8 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
         {votesAmount}
       </p>
       <Button size="sm" aria-label="upvote">
-        <BsArrowDownSquareFill
-          className={cn("h-5 w-5 text-zinc-700", {
+        <BsArrowDownShort
+          className={cn("h-5 w-5", {
             "text-red-500 fill-red-500": currentVote === "DOWN",
           })}
         />

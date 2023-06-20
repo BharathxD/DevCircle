@@ -31,7 +31,7 @@ const Post: FC<PostProps> = ({
 
   return (
     <div className="rounded-md bg-zinc-50 border-2 border-zinc-800">
-      <div className="px-6 py-4 flex justify-between">
+      <div className="px-6 py-4 flex justify-between flex-col md:flex-row">
         <PostVoteClient
           postId={post.id}
           initialVoteAmount={_votesAmount}
