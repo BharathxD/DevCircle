@@ -8,6 +8,7 @@ import { PostValidator } from "@/libs/validators/post";
 import { infer as zodInfer } from "zod";
 import EditorJS from "@editorjs/editorjs";
 import { usePathname, useRouter } from "next/navigation";
+import { uploadFiles } from "@/libs/uploadThing";
 
 interface EditorProps {
   forumId: string;
@@ -57,6 +58,22 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
             class: LinkTool,
             config: { endpoint: "/api/link" },
           },
+          ImageTool: {
+            class: ImageTool,
+            config: {
+              uploader: {
+                async uploadByFile(file: File) {
+                  const [res] = await uploadFiles([file], "imageUploader");
+                  return { success: 1, file: { url: res.fileUrl } };
+                },
+              },
+            },
+          },
+          list: List,
+          code: Code,
+          InlineCode: InlineCode,
+          table: Table,
+          embed: Embed,
         },
       });
     }
