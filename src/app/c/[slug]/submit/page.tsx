@@ -3,7 +3,7 @@ import { Button, buttonVariants } from "@/components/UI/Button";
 import cn from "@/libs/classNames";
 import database from "@/libs/database";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 
 interface PageProps {
@@ -19,6 +19,7 @@ const SubmitPage = async ({ params }: PageProps) => {
       name: forumName,
     },
   });
+  if (!forum) return notFound();
   return (
     <div className="flex flex-col items-start gap-6">
       {/* heading */}
