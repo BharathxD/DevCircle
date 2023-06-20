@@ -3,6 +3,7 @@ import { BiMessageAltDetail } from "react-icons/bi";
 import Link from "next/link";
 import formatTimeToNow from "@/libs/formatTimeToNow";
 import { Post, User, Vote } from "@prisma/client";
+import EditorOutput from "../UI/EditorOutput";
 
 interface PostProps {
   post: Post & {
@@ -23,9 +24,9 @@ const Post: FC<PostProps> = ({ post, forumName }) => {
           <div className="max-h-40 mt-1 flex flex-row gap-1 text-sm text-zinc-500">
             {forumName && (
               <Fragment>
-                <Link href={`/r/${forumName}`}>
+                <Link href={`/c/${forumName}`}>
                   <p className="underline text-zinc-900 text-md underline-offset-2">
-                    r/{forumName}
+                    c/{forumName}
                   </p>
                 </Link>
                 <span className="px-1">•</span>
@@ -34,8 +35,8 @@ const Post: FC<PostProps> = ({ post, forumName }) => {
             <span>Posted by u/{post.author.name}</span>
             {" " + formatTimeToNow(new Date(post.createdAt))}
           </div>
-          <Link href={`/r/${forumName}/post/${post.id}`}>
-            <h1 className="text-lg font-semibold py-2 leading-6 text-zinc-900">
+          <Link href={`/c/${forumName}/post/${post.id}`}>
+            <h1 className="text-lg font-semibold pt-2 leading-6 text-zinc-900">
               {post.title}
             </h1>
           </Link>
@@ -43,15 +44,16 @@ const Post: FC<PostProps> = ({ post, forumName }) => {
             className="relative text-sm max-h-40 w-full overflow-clip"
             ref={postRef}
           >
+            <EditorOutput content={post.content} />
             {isPostOverflowed && (
-              <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 h-20 w-full bg-gradient-to-t from-zinc-50 to-transparent"></div>
             )}
           </div>
         </div>
       </div>
-      <div className="bg-zinc-50 rounded-md z-20 text-sm px-4 py-4 sm:px-6">
-        <Link href={`/r/${forumName}/post/${post.id}`} passHref>
-          <p className="w-fit flex items-center gap-2">
+      <div className="bg-zinc-50 border-t-2 border-t-zinc-800 z-20 text-sm rounded-b-md">
+        <Link href={`/c/${forumName}/post/${post.id}`}>
+          <p className="py-3 px-6 w-fit flex items-center gap-2 border-r-2 border-r-zinc-800 hover:bg-yellow-100 rounded-bl-md">
             <BiMessageAltDetail size={25} /> 3 comments
           </p>
         </Link>
