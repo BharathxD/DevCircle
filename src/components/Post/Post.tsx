@@ -11,9 +11,10 @@ interface PostProps {
     votes: Vote[];
   };
   forumName: string;
+  commentAmount: number;
 }
 
-const Post: FC<PostProps> = ({ post, forumName }) => {
+const Post: FC<PostProps> = ({ post, forumName, commentAmount }) => {
   const postRef = useRef<HTMLParagraphElement>(null);
   const isPostOverflowed = postRef.current?.clientHeight === 160;
 
@@ -46,7 +47,7 @@ const Post: FC<PostProps> = ({ post, forumName }) => {
           >
             <EditorOutput content={post.content} />
             {isPostOverflowed && (
-              <div className="absolute bottom-0 left-0 h-20 w-full bg-gradient-to-t from-zinc-50 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent"></div>
             )}
           </div>
         </div>
@@ -54,7 +55,7 @@ const Post: FC<PostProps> = ({ post, forumName }) => {
       <div className="bg-zinc-50 border-t-2 border-t-zinc-800 z-20 text-sm rounded-b-md">
         <Link href={`/c/${forumName}/post/${post.id}`}>
           <p className="py-3 px-6 w-fit flex items-center gap-2 border-r-2 border-r-zinc-800 hover:bg-yellow-100 rounded-bl-md">
-            <BiMessageAltDetail size={25} /> 3 comments
+            <BiMessageAltDetail size={25} /> {commentAmount} comments
           </p>
         </Link>
       </div>

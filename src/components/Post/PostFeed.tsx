@@ -21,21 +21,27 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
     root: lastPostRef.current,
     threshold: 1,
   });
+
+  const fetchPosts = async ({ pageParam = 1 }) => {
+    const query =
+      `/api/posts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
+      (forumName ? `&forum=${forumName}` : "");
+
+    const response = await axios.get(query);
+    return response.data as ExtendedPost[];
+  };
+
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
-    ["infinite-query"],
-    async ({ pageParam = 1 }) => {
-      const query =
-        `/api/posts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page${pageParam}` +
-        (!!forumName ? `&forum=${forumName}` : "");
-      const { data } = await axios.get(query);
-      return data as ExtendedPost[];
-    },
+    "infinite-query",
+    fetchPosts,
     {
       getNextPageParam: (_, pages) => pages.length + 1,
       initialData: { pages: [initialPosts], pageParams: [1] },
     }
   );
+
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
+
   return (
     <ul className="flex flex-col gap-2 col-span-2 space-y-6">
       {posts.map((post, index) => {
@@ -44,16 +50,20 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
           if (vote.type === "DOWN") return acc - 1;
           return acc;
         }, 0);
+
         const currentVote = post.votes.find((vote) => vote.userId === userId);
-        if (index === posts.length - 1) {
-          return (
-            <li key={index} ref={ref}>
-              <Post post={post} forumName={forumName} />
-            </li>
-          );
-        } else {
-          return <Post key={index} post={post} forumName={forumName} />;
-        }
+
+        const isLastPost = index === posts.length - 1;
+
+        return (
+          <li key={index} ref={isLastPost ? ref : null}>
+            <Post
+              post={post}
+              forumName={forumName}
+              commentAmount={post.comments.length}
+            />
+          </li>
+        );
       })}
     </ul>
   );

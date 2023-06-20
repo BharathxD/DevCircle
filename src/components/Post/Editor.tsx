@@ -13,6 +13,7 @@ import { toast } from "@/hooks/useToast";
 import { useMutation } from "react-query";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
+import { Button } from "../UI/Button";
 
 interface EditorProps {
   forumId: string;
@@ -165,7 +166,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
   };
 
   return (
-    <div className="w-full p-5 pb-1 bg-zinc-50 rounded-lg border-2 border-zinc-800">
+    <div className="w-full p-5 pb-1 bg-zinc-50 rounded-lg border-2 border-zinc-800 relative">
       <form
         id="subreddit-post-form"
         className="w-fit"
@@ -178,13 +179,20 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
             placeholder="Title"
             className="w-full h-fit resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none p-0"
           />
-          <div
-            {...register("content")}
-            id="editor"
-            className="min-h-[40vh] p-0 mb-4"
-          />
+          <div {...register("content")} id="editor" className="min-h-[40vh]" />
         </div>
       </form>
+      <div className="w-full mb-3 flex justify-end absolute -bottom-[4.5rem] left-0 right-0">
+        <Button
+          type="submit"
+          className="w-full text-lg font-bold bg-zinc-800 hover:bg-zinc-50 text-zinc-50 hover:text-zinc-800"
+          form="subreddit-post-form"
+          isLoading={isLoading}
+          disabled={isLoading}
+        >
+          POST
+        </Button>
+      </div>
     </div>
   );
 };

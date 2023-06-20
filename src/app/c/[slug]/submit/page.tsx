@@ -22,7 +22,6 @@ const SubmitPage = async ({ params }: PageProps) => {
   if (!forum) return notFound();
   return (
     <div className="flex flex-col items-start gap-4">
-      {/* heading */}
       <div className="flex flex-row gap-4 items-center">
         <Link
           className={cn(buttonVariants({ variant: "skeleton" }), "w-max")}
@@ -41,18 +40,7 @@ const SubmitPage = async ({ params }: PageProps) => {
         </div>
       </div>
 
-      {/* form */}
       <Editor forumId={forum.id} />
-
-      <div className="w-full flex justify-end">
-        <Button
-          type="submit"
-          className="w-full text-lg font-bold bg-zinc-800 hover:bg-zinc-50 text-zinc-50 hover:text-zinc-800"
-          form="subreddit-post-form"
-        >
-          POST
-        </Button>
-      </div>
     </div>
   );
 };
