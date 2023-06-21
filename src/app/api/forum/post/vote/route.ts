@@ -84,8 +84,6 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
         }
 
         // If an error occurs, return an internal server error response
-        return NextResponse.json(
-            { message: "Internal server error. Please try again later." },
-        );
+        return NextResponse.json({ message: "Internal server error. Please try again later." }, { status: StatusCodes.INTERNAL_SERVER_ERROR });
     }
 }

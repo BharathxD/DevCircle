@@ -4,7 +4,7 @@ import { usePrevious } from "@mantine/hooks";
 import { VoteType } from "@prisma/client";
 import { FC, useCallback, useEffect, useState } from "react";
 import { Button } from "../UI/Button";
-import { BsArrowUpShort, BsArrowDownShort } from "react-icons/bs";
+import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import cn from "@/libs/classNames";
 import { useMutation } from "react-query";
 import { PostVoteRequest } from "@/libs/validators/vote";
@@ -94,7 +94,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
         })}
         disabled={isLoading && currentVote === "UP"}
       >
-        <BsArrowUpShort className={"h-5 w-5"} />
+        <AiOutlineArrowUp className={"h-5 w-5"} />
       </Button>
       <p className="text-center py-2 font-medium text-sm text-zinc-900">
         {votesAmount}
@@ -103,12 +103,12 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
         size="sm"
         aria-label="downvote"
         onClick={() => vote("DOWN")}
-        className={cn("hover:bg-red-200 hover:text-zinc-800",{
+        className={cn("hover:bg-red-200 hover:text-zinc-800", {
           "bg-red-200": currentVote === "DOWN",
         })}
         disabled={isLoading && currentVote === "DOWN"}
       >
-        <BsArrowDownShort className={"h-5 w-5"} />
+        <AiOutlineArrowDown className={"h-5 w-5"} />
       </Button>
     </div>
   );

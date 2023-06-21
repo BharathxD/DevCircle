@@ -33,7 +33,7 @@ export default async function RootLayout({ children, authModal }: rootProps) {
         <RtkProvider>
           <Navbar currentUser={currentUser} />
           {authModal}
-          <main className="container h-full pt-2">{children}</main>
+          <main className="container h-full py-4 md:py-2">{children}</main>
         </RtkProvider>
         <Toaster />
       </body>
