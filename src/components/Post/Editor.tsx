@@ -66,25 +66,32 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
         inlineToolbar: true,
         data: { blocks: [] },
         tools: {
-          Header,
-          LinkTool: {
+          header: Header,
+          linkTool: {
             class: LinkTool,
-            config: { endpoint: "/api/link" },
+            config: {
+              endpoint: "/api/link",
+            },
           },
-          ImageTool: {
+          image: {
             class: ImageTool,
             config: {
               uploader: {
                 async uploadByFile(file: File) {
                   const [res] = await uploadFiles([file], "imageUploader");
-                  return { success: 1, file: { url: res.fileUrl } };
+                  return {
+                    success: 1,
+                    file: {
+                      url: res.fileUrl,
+                    },
+                  };
                 },
               },
             },
           },
           list: List,
           code: Code,
-          InlineCode,
+          inlineCode: InlineCode,
           table: Table,
           embed: Embed,
         },
