@@ -14,7 +14,6 @@ import updateVoteCount from "@/helpers/voteCountUpdater";
  */
 export async function PATCH(req: NextRequest): Promise<NextResponse> {
     try {
-        console.log("TRIGGERED")
         // Get the current user
         const currentUser = await getCurrentUser();
 

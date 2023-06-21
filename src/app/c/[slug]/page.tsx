@@ -27,6 +27,9 @@ const ForumPage = async ({ params }: ForumPageProps) => {
           comments: true,
           forum: true,
         },
+        orderBy: {
+          createdAt: "desc",
+        },
         take: INFINITE_SCROLLING_PAGINATION_RESULTS,
       },
     },

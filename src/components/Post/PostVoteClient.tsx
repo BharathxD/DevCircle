@@ -54,7 +54,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
 
       if (error instanceof AxiosError) {
         if (error.response?.status === StatusCodes.UNAUTHORIZED)
-          return router.push("/sigin?unauthorized=1");
+          return router.push("/signin?unauthorized=1");
       }
 
       return toast({

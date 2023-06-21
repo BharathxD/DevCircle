@@ -1,3 +1,5 @@
+"use server";
+
 import { authOptions } from "@/libs/auth";
 import database from "@/libs/database";
 import { User } from "@prisma/client";
