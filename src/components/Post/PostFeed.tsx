@@ -11,7 +11,7 @@ import Post from "./Post";
 
 interface PostFeedProps {
   initialPosts: ExtendedPost[];
-  forumName: Forum["name"];
+  forumName?: Forum["name"];
   userId?: User["id"];
 }
 
@@ -65,7 +65,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
               post={post}
               currentVote={currentVote}
               votesAmount={voteCount}
-              forumName={forumName}
+              forumName={forumName ?? post.forum.name}
               commentAmount={post.comments.length}
             />
           </li>

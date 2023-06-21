@@ -14,7 +14,7 @@ interface PostProps {
     votes: Vote[];
   };
   votesAmount: number;
-  forumName: string;
+  forumName?: string;
   commentAmount: number;
   currentVote?: PartialVote;
 }

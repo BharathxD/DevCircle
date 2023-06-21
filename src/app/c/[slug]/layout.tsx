@@ -52,7 +52,7 @@ const Layout = async ({
           <div className="flex flex-col col-span-2 space-y-6">{children}</div>
           {/* TODO: Info Side Bar */}
           {forum && (
-            <div className="hidden md:block overflow-hidden h-fit rounded-lg border-2 border-zinc-800 order-first md:order-last">
+            <div className="hidden md:block overflow-hidden h-fit rounded-lg border-2 border-zinc-800 order-first md:order-last mt-[4rem]">
               <div className="px-6 py-4 bg-green-100">
                 <p className="font-bold text-xl py-3">About c/{forumName}</p>
               </div>
