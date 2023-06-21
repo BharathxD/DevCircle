@@ -37,7 +37,7 @@ const Post: FC<PostProps> = ({
           initialVoteAmount={_votesAmount}
           initialVote={_currentVote?.type}
         />
-        <div className=" w-full flex flex-col gap-1">
+        <div className=" w-full flex flex-col gap-2">
           <div className="max-h-40 mt-1 flex flex-row gap-1 text-sm text-zinc-500">
             {forumName && (
               <Fragment>
@@ -63,7 +63,7 @@ const Post: FC<PostProps> = ({
           >
             <EditorOutput content={post.content} />
             {isPostOverflowed && (
-              <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent"></div>
+              <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent"></div>
             )}
           </div>
         </div>

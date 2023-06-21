@@ -7,6 +7,7 @@ import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "react-query";
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
 import axios from "axios";
+import { BiLoaderAlt } from "react-icons/bi";
 import Post from "./Post";
 
 interface PostFeedProps {
@@ -47,7 +48,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
   return (
-    <ul className="flex flex-col gap-2 col-span-2 space-y-6">
+    <ul className="flex flex-col col-span-2 space-y-6  md:mb-10">
       {posts.map((post, index) => {
         const voteCount = post.votes.reduce((acc, vote) => {
           if (vote.type === "UP") return acc + 1;
@@ -71,6 +72,11 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
           </li>
         );
       })}
+      {!isFetchingNextPage && (
+        <li className="flex justify-center">
+          <BiLoaderAlt className="w-6 h-6 text-zinc-500 animate-spin" />
+        </li>
+      )}
     </ul>
   );
 };
