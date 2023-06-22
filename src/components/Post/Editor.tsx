@@ -173,7 +173,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
   };
 
   return (
-    <div className="w-full p-5 pb-1 bg-zinc-50 rounded-lg border-2 border-zinc-800 relative">
+    <div className="w-full p-5 pb-1 bg-zinc-50 dark:bg-zinc-800 dark:border-zinc-800 rounded-lg border-2 border-zinc-800 relative">
       <form
         id="subreddit-post-form"
         className="w-fit"
@@ -192,7 +192,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
       <div className="w-full mb-3 flex justify-end absolute -bottom-[4.5rem] left-0 right-0">
         <Button
           type="submit"
-          className="w-full text-lg font-bold bg-zinc-800 hover:bg-zinc-50 text-zinc-50 hover:text-zinc-800"
+          className="w-full text-lg font-bold bg-zinc-800 hover:bg-zinc-50 text-zinc-50 dark:hover:bg-zinc-700 dark:hover:text-zinc-50 hover:text-zinc-800"
           form="subreddit-post-form"
           isLoading={isLoading}
           disabled={isLoading}

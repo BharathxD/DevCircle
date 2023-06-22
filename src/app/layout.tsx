@@ -6,6 +6,8 @@ import RtkProvider from "@/providers/RtkProvider";
 import cn from "@/libs/classNames";
 import { Toaster } from "@/providers/Toaster";
 import getCurrentUser from "@/actions/getCurrentUser";
+import ThemeProvider from "@/providers/ThemeProvider";
+import ThemeSwitchers from "@/components/UI/ThemeSwitchers";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -22,20 +24,16 @@ interface rootProps {
 export default async function RootLayout({ children, authModal }: rootProps) {
   const currentUser = await getCurrentUser();
   return (
-    <html
-      lang="en"
-      className={cn(
-        "bg-zinc-50 text-slate-900 antialiased light",
-        montserrat.className
-      )}
-    >
-      <body className="min-h-screen pt-[5rem] bg-slate-50 antialiased">
-        <RtkProvider>
-          <Navbar currentUser={currentUser} />
-          {authModal}
-          <main className="container h-full py-4 md:py-2">{children}</main>
-        </RtkProvider>
-        <Toaster />
+    <html lang="en" className={cn("antialiased", montserrat.className)}>
+      <body className="min-h-screen pt-[5rem] dark:bg-zinc-950 bg-zinc-50 text-zinc-800 dark:text-zinc-50">
+        <ThemeProvider>
+          <RtkProvider>
+            <Navbar currentUser={currentUser} />
+            {authModal}
+            <main className="container h-full py-4 md:py-2">{children}</main>
+          </RtkProvider>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

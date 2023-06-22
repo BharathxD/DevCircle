@@ -29,19 +29,19 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
-        <div className="flex items-center justify-center border-2  border-y-0 border-zinc-800 hover:bg-yellow-100 transition-colors h-full p-4">
+        <div className="flex items-center justify-center border-2  border-y-0 border-zinc-800 hover:bg-yellow-300 dark:hover:bg-zinc-800 transition-colors h-full p-4">
           <UserAvatar user={user} />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="rounded-sm rounded-tr-none bg-zinc-50 border-2 border-zinc-800 mt-0.5"
+        className="rounded-sm rounded-tr-none bg-zinc-50 dark:bg-zinc-900 border-2 border-zinc-800 mt-0.5"
         align="end"
       >
         <div className="flex items-center justify-start gap-2 p-2 pt-3">
           <div className="flex flex-col space-y-1 leading-none">
             {user.name && <p className="font-bold text-md">{user.name}</p>}
             {user.email && (
-              <p className="w-[200px] font-medium truncate text-sm text-zinc-700">
+              <p className="w-[200px] font-medium truncate text-sm text-zinc-700 dark:text-zinc-300">
                 {user.email}
               </p>
             )}

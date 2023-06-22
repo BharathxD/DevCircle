@@ -13,7 +13,7 @@ import Post from "./Post";
 interface PostFeedProps {
   initialPosts: ExtendedPost[];
   forumName?: Forum["name"];
-  userId?: User["id"];
+  userId: User["id"];
 }
 
 const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
@@ -64,7 +64,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
           <li key={index} ref={isLastPost ? ref : null}>
             <Post
               post={post}
-              currentVote={currentVote}
+              currentVote={currentVote?.type}
               votesAmount={voteCount}
               forumName={forumName ?? post.forum.name}
               commentAmount={post.comments.length}

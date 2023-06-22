@@ -53,14 +53,14 @@ const Layout = async ({
           {/* TODO: Info Side Bar */}
           {forum && (
             <div className="hidden md:block overflow-hidden h-fit rounded-lg border-2 border-zinc-800 order-first md:order-last mt-[4rem]">
-              <div className="px-6 py-4 bg-green-100">
+              <div className="px-6 py-4 bg-green-100 dark:bg-zinc-800">
                 <p className="font-bold text-xl py-3">About c/{forumName}</p>
               </div>
               <div className="h-[2px] w-full bg-zinc-800" />
-              <dl className="text-md leading-6 bg-zinc-50">
+              <dl className="text-md leading-6 dark:bg-zinc-900 bg-zinc-50">
                 <div className="px-6 py-4 flex justify-between items-center gap-x-4">
-                  <dt className="text-zinc-700">Created</dt>
-                  <dd className="text-zinc-700">
+                  <dt className="text-zinc-700 dark:text-zinc-100">Created</dt>
+                  <dd className="text-zinc-700 dark:text-zinc-50">
                     <time dateTime={forum.createdAt.toDateString()}>
                       {format(forum.createdAt, "MMMM d, yyyy")}
                     </time>
@@ -70,8 +70,10 @@ const Layout = async ({
                 <div className="h-[2px] w-full bg-zinc-800" />
 
                 <div className="flex justify-between gap-x-4 px-6 py-4">
-                  <dt className="text-zinc-600">Members</dt>
-                  <dd className="text-zinc-900">{memberCount}</dd>
+                  <dt className="text-zinc-700 dark:text-zinc-100">Members</dt>
+                  <dd className="text-zinc-700 dark:text-zinc-50">
+                    {memberCount}
+                  </dd>
                 </div>
 
                 {forum.creatorId === currentUser?.id ? (

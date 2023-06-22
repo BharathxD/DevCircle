@@ -26,10 +26,8 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
   initialVote,
 }) => {
   const router = useRouter();
-  const [votesAmount, setVotesAmount] =
-    useState<typeof initialVoteAmount>(initialVoteAmount);
-  const [currentVote, setCurrentVote] =
-    useState<typeof initialVote>(initialVote);
+  const [votesAmount, setVotesAmount] = useState<number>(initialVoteAmount);
+  const [currentVote, setCurrentVote] = useState(initialVote);
   const prevVote = usePrevious(currentVote);
   useEffect(() => {
     setCurrentVote(initialVote);
@@ -63,23 +61,19 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
         variant: "destructive",
       });
     },
-    onMutate: (type) => {
+    onMutate: (type: VoteType) => {
       if (currentVote === type) {
         // User is voting the same way again, so remove their vote
         setCurrentVote(undefined);
-        setVotesAmount((prev) => {
-          if (type === "UP") return prev - 1;
-          if (type === "DOWN") return prev + 1;
-          return prev;
-        });
+        if (type === "UP") setVotesAmount((prev) => prev - 1);
+        else if (type === "DOWN") setVotesAmount((prev) => prev + 1);
       } else {
         // User is voting in the opposite direction, so subtract 2
         setCurrentVote(type);
-        setVotesAmount((prev) => {
-          if (type === "UP") return prev + (currentVote ? 2 : 1);
-          if (type === "DOWN") return prev - (currentVote ? 2 : 1);
-          return prev;
-        });
+        if (type === "UP")
+          setVotesAmount((prev) => prev + (currentVote ? 2 : 1));
+        else if (type === "DOWN")
+          setVotesAmount((prev) => prev - (currentVote ? 2 : 1));
       }
     },
   });
@@ -89,23 +83,29 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
         size="sm"
         aria-label="upvote"
         onClick={() => vote("UP")}
-        className={cn("hover:bg-green-200 hover:text-zinc-800", {
-          "bg-green-200": currentVote === "UP",
-        })}
+        className={cn(
+          "hover:bg-green-200 dark:hover:bg-green-500 hover:text-zinc-800 dark:hover:text-zinc-50 text-zinc-800 dark:text-zinc-50",
+          {
+            "bg-green-200 dark:bg-green-500": currentVote === "UP",
+          }
+        )}
         disabled={isLoading && currentVote === "UP"}
       >
         <AiOutlineArrowUp className={"h-5 w-5"} />
       </Button>
-      <p className="text-center py-2 font-medium text-sm text-zinc-900">
+      <p className="text-center py-2 font-medium text-sm text-zinc-900 dark:text-zinc-50">
         {votesAmount}
       </p>
       <Button
         size="sm"
         aria-label="downvote"
         onClick={() => vote("DOWN")}
-        className={cn("hover:bg-red-200 hover:text-zinc-800", {
-          "bg-red-200": currentVote === "DOWN",
-        })}
+        className={cn(
+          "hover:bg-red-200 dark:hover:bg-red-500 hover:text-zinc-800 dark:hover:text-zinc-50 text-zinc-800 dark:text-zinc-50",
+          {
+            "bg-red-200 dark:bg-red-500": currentVote === "DOWN",
+          }
+        )}
         disabled={isLoading && currentVote === "DOWN"}
       >
         <AiOutlineArrowDown className={"h-5 w-5"} />

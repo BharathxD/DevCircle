@@ -6,7 +6,7 @@ import { Post, User, Vote } from "@prisma/client";
 import EditorOutput from "../UI/EditorOutput";
 import PostVoteClient from "./PostVoteClient";
 
-type PartialVote = Pick<Vote, "type">;
+type PartialVote = Pick<Vote, "type">["type"];
 
 interface PostProps {
   post: Post & {
@@ -23,34 +23,33 @@ const Post: FC<PostProps> = ({
   post,
   forumName,
   commentAmount,
-  votesAmount: _votesAmount,
-  currentVote: _currentVote,
+  votesAmount,
+  currentVote,
 }) => {
   const postRef = useRef<HTMLParagraphElement>(null);
   const isPostOverflowed = postRef.current?.clientHeight === 160;
-
   return (
-    <div className="rounded-md bg-zinc-50 border-2 border-zinc-800">
+    <div className="rounded-md dark:bg-zinc-900 bg-zinc-50 border-2 border-zinc-800">
       <div className="px-6 py-4 flex justify-between flex-col md:flex-row">
         <PostVoteClient
           postId={post.id}
-          initialVoteAmount={_votesAmount}
-          initialVote={_currentVote?.type}
+          initialVoteAmount={votesAmount}
+          initialVote={currentVote}
         />
-        <div className=" w-full flex flex-col gap-2">
-          <div className="max-h-40 mt-1 flex flex-row gap-1 text-sm text-zinc-500">
-            {forumName && (
-              <Fragment>
-                <Link href={`/c/${forumName}`}>
-                  <p className="underline text-zinc-900 text-md underline-offset-2">
-                    c/{forumName}
-                  </p>
-                </Link>
-                <span className="px-1">•</span>
-              </Fragment>
-            )}
-            <span>Posted by u/{post.author.name}</span>
-            {" " + formatTimeToNow(new Date(post.createdAt))}
+        <div className="w-full flex flex-col gap-2">
+          <div className="max-h-40 mt-1 flex flex-row justify-between gap-1 text-sm text-zinc-500">
+            <div className="inline-flex">
+              <Link href={`/c/${forumName}`}>
+                <p className="underline text-zinc-800 dark:text-zinc-50 text-md underline-offset-2">
+                  c/{forumName}
+                </p>
+              </Link>
+              <span className="px-1 text-zinc-800 dark:text-zinc-50">•</span>
+              <span className="text-zinc-800 dark:text-zinc-50">
+                Posted by u/{post.author.name}
+              </span>
+            </div>
+            <time>{" " + formatTimeToNow(new Date(post.createdAt))}</time>
           </div>
           <Link href={`/c/${forumName}/post/${post.id}`}>
             <h1 className="text-lg font-semibold pt-2 leading-6 text-zinc-900">
@@ -63,16 +62,16 @@ const Post: FC<PostProps> = ({
           >
             <EditorOutput content={post.content} />
             {isPostOverflowed && (
-              <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 dark:from-zinc-900 to-transparent"></div>
             )}
           </div>
         </div>
       </div>
-      <div className="bg-zinc-50 border-t-2 border-t-zinc-800 z-20 text-sm rounded-b-md">
+      <div className="border-t-2 border-t-zinc-800 z-20 text-sm rounded-b-md">
         <Link href={`/c/${forumName}/post/${post.id}`}>
-          <p className="py-3 px-6 w-fit flex items-center gap-2 border-r-2 border-r-zinc-800 hover:bg-yellow-100 rounded-bl-md">
-            <BiMessageAltDetail size={25} /> {commentAmount} comments
-          </p>
+          <div className="py-3 px-6 w-fit flex items-center gap-2 border-r-2 font-medium border-r-zinc-800 hover:bg-yellow-100 dark:hover:bg-zinc-800 rounded-bl-md">
+            <BiMessageAltDetail size={25} /> {commentAmount} <p>comments</p>
+          </div>
         </Link>
       </div>
     </div>

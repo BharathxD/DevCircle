@@ -17,7 +17,7 @@ const MiniCreatePost: FC<MiniCreatePostPRops> = ({ currentUser }) => {
   const router = useRouter();
   const pathname = usePathname();
   return (
-    <li className="overflow-hidden rounded-md list-none border-2  border-zinc-800 bg-zinc-100/50">
+    <li className="overflow-hidden rounded-md list-none border-2  border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
       <div className="h-full p-2.5 md:p-4 flex justify-between gap-2.5 md:gap-4">
         <div className="relative">
           <UserAvatar

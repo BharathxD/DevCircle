@@ -2,7 +2,6 @@ import database from "@/libs/database";
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
 import PostFeed from "./PostFeed";
 import { User } from "@prisma/client";
-import { FC } from "react";
 
 interface customFeedProps {
   currentUser: User;
@@ -36,7 +35,7 @@ const CustomFeed = async ({ currentUser }: customFeedProps) => {
     },
     take: INFINITE_SCROLLING_PAGINATION_RESULTS,
   });
-  return <PostFeed initialPosts={posts} />;
+  return <PostFeed initialPosts={posts} userId={currentUser.id} />;
 };
 
 export default CustomFeed;
