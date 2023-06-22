@@ -1,6 +1,5 @@
 import getTopCommunities from "@/actions/getTopCommunities";
 import getCurrentUser from "@/actions/getCurrentUser";
-import CustomFeed from "@/components/Post/CustomFeed";
 import GeneralFeed from "@/components/Post/GeneralFeed";
 import siteConfig from "@/config";
 import Link from "next/link";
@@ -17,8 +16,8 @@ export default async function Home() {
         Your feed
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6">
-        {/* @ts-expect-error server component */} 
-        {currentUser ? (<CustomFeed currentUser={currentUser} />) : (<GeneralFeed />)}
+        {/* @ts-expect-error server component */}
+        <GeneralFeed />
         {/* Community Info */}
         <div className="flex flex-col gap-5">
           <div className="overflow-hidden h-fit rounded-md border-2  border-zinc-800 order-first md:order-last">

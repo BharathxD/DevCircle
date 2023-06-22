@@ -21,10 +21,9 @@ export async function GET(req: NextRequest) {
             limit: string(),
             page: string(),
             forumName: string().nullish().optional()
-        }).parse({ forumName: url.searchParams.get("forum"), limit: url.searchParams.get("limit"), page: url.searchParams.get("page") })
+        }).parse({ forumName: url.searchParams.get("forumName"), limit: url.searchParams.get("limit"), page: url.searchParams.get("page") })
         let whereClause = {};
         if (forumName) whereClause = { forum: { name: forumName } };
-        else if (currentUser) whereClause = { forum: { id: { in: followedCommunitiesIds } } }
         const posts = await database.post.findMany({
             take: +limit,
             // Only giving back the posts that are not already shown
@@ -33,6 +32,7 @@ export async function GET(req: NextRequest) {
             include: { forum: true, votes: true, author: true, comments: true },
             where: whereClause
         });
+        if (!posts || posts.length === 0) return NextResponse.json({ message: "No posts found with the given forum name" }, { status: StatusCodes.NOT_FOUND });
         return NextResponse.json(posts, { status: StatusCodes.OK });
     } catch (error: any) {
         // If there's a validation error, return a bad request response

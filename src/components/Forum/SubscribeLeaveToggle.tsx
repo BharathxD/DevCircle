@@ -73,7 +73,7 @@ const SubscribeLeaveToggle: FC<SubscribeLeaveToggleProps> = ({
   if (!subscribed) {
     return (
       <Button
-        className="hover:bg-green-500 w-full"
+        className="hover:bg-green-500 dark:text-zinc-50 w-full"
         onClick={() => patchSubscription()}
         disabled={isLoading}
         isLoading={isLoading}

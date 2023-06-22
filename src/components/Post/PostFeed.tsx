@@ -26,7 +26,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
   const fetchPosts = async ({ pageParam = 1 }) => {
     const query =
       `/api/posts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
-      (forumName ? `&forum=${forumName}` : "");
+      (forumName ? `&forumName=${forumName}` : "");
 
     const response = await axios.get(query);
     return response.data as ExtendedPost[];
@@ -48,7 +48,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
   return (
-    <ul className="flex flex-col col-span-2 space-y-6  md:mb-10">
+    <ul className="flex flex-col col-span-2 space-y-6 md:mb-10">
       {posts.map((post, index) => {
         const voteCount = post.votes.reduce((acc, vote) => {
           if (vote.type === "UP") return acc + 1;
@@ -72,7 +72,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
           </li>
         );
       })}
-      {!isFetchingNextPage && (
+      {isFetchingNextPage && (
         <li className="flex justify-center">
           <BiLoaderAlt className="w-6 h-6 text-zinc-500 animate-spin" />
         </li>

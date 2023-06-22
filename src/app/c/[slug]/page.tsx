@@ -26,23 +26,29 @@ const ForumPage = async ({ params }: ForumPageProps) => {
           forum: true,
         },
         orderBy: {
-          createdAt: 'desc'
+          createdAt: "desc",
         },
         take: INFINITE_SCROLLING_PAGINATION_RESULTS,
       },
     },
-  })
-  console.log(forum);
+  });
   if (!forum) return notFound();
   return (
     <Fragment>
       <h1 className="font-bold text-3xl md:text-4xl">c/{forum.name}</h1>
       <MiniCreatePost currentUser={currentUser} />
-      <PostFeed
-        forumName={forum.name}
-        userId={currentUser?.id}
-        initialPosts={forum.posts}
-      />
+      {forum.posts.length === 0 ? (
+        <div className="w-full text-center font-medium p-2 border-2 rounded-md text-zinc-800 border-zinc-800 dark:bg-red-300 bg-yellow-300">
+          Be the first to post! No posts found. Why not be the first one to
+          share your thoughts?
+        </div>
+      ) : (
+        <PostFeed
+          forumName={forum.name}
+          userId={currentUser?.id}
+          initialPosts={forum.posts}
+        />
+      )}
     </Fragment>
   );
 };

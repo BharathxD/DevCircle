@@ -21,17 +21,17 @@ const SubmitPage = async ({ params }: PageProps) => {
   });
   if (!forum) return notFound();
   return (
-    <div className="flex flex-col items-start gap-4">
+    <div className="flex flex-col items-start pt-2 gap-4">
       <div className="flex flex-row gap-4 items-center">
         <Link
           className={cn(buttonVariants({ variant: "skeleton" }), "w-max")}
           href={`/c/${forumName}`}
         >
-          <IoIosArrowBack />
-          <p className="ml-2">Back</p>
+          <IoIosArrowBack className="dark:text-zinc-50" />
+          <p className="ml-2 dark:text-zinc-50">Back</p>
         </Link>
         <div className="-ml-2 -mt-2 flex flex-wrap items-baseline">
-          <h3 className="ml-2 mt-2 text-lg leading-6 text-zinc-900">
+          <h3 className="ml-2 mt-2 text-lg leading-6 text-zinc-900 dark:text-zinc-300">
             Create Post
           </h3>
           <p className="ml-2 mt-1 truncate text-md text-zinc-500">
