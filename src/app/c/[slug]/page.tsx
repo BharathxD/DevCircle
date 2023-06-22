@@ -16,9 +16,7 @@ const ForumPage = async ({ params }: ForumPageProps) => {
   const { slug } = params;
   const currentUser = await getCurrentUser();
   const forum = await database.forum.findFirst({
-    where: {
-      name: slug,
-    },
+    where: { name: slug },
     include: {
       posts: {
         include: {
@@ -28,12 +26,13 @@ const ForumPage = async ({ params }: ForumPageProps) => {
           forum: true,
         },
         orderBy: {
-          createdAt: "desc",
+          createdAt: 'desc'
         },
         take: INFINITE_SCROLLING_PAGINATION_RESULTS,
       },
     },
-  });
+  })
+  console.log(forum);
   if (!forum) return notFound();
   return (
     <Fragment>
@@ -41,7 +40,7 @@ const ForumPage = async ({ params }: ForumPageProps) => {
       <MiniCreatePost currentUser={currentUser} />
       <PostFeed
         forumName={forum.name}
-        userId={currentUser?.id ?? undefined}
+        userId={currentUser?.id}
         initialPosts={forum.posts}
       />
     </Fragment>

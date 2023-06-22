@@ -68,7 +68,7 @@ const CreatePage = () => {
   return (
     <div className="md:flex md:items-center md:justify-center md:h-[70vh] md:w-full">
       <div className="md:container flex items-center h-full w-full md:max-w-3xl md:mx-auto">
-        <section className="bg-zinc-50 border-2 border-zinc-800 w-full rounded-lg">
+        <section className="bg-zinc-50 dark:bg-zinc-900 border-2 border-zinc-800 w-full rounded-lg">
           <header className="flex justify-between items-center border-b-2 border-b-zinc-800 p-5">
             <h1 className="text-2xl font-bold">Create a Community</h1>
           </header>

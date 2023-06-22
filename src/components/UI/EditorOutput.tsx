@@ -24,6 +24,7 @@ const style = {
     fontSize: "0.875rem",
     lineHeight: "1.25rem",
   },
+  linkTool: { siteName: { container: "#F6F667" } },
 };
 
 const EditorOutput: FC<EditorOutputProps> = ({ content }) => {

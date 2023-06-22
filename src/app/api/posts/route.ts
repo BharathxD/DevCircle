@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
             limit: string(),
             page: string(),
             forumName: string().nullish().optional()
-        }).parse({ forumName: url.searchParams.get("forumName"), limit: url.searchParams.get("limit"), page: url.searchParams.get("page") })
+        }).parse({ forumName: url.searchParams.get("forum"), limit: url.searchParams.get("limit"), page: url.searchParams.get("page") })
         let whereClause = {};
         if (forumName) whereClause = { forum: { name: forumName } };
         else if (currentUser) whereClause = { forum: { id: { in: followedCommunitiesIds } } }

@@ -10,7 +10,6 @@ import {
 } from "../UI/DropdownMenu";
 import { FC } from "react";
 import UserAvatar from "../UI/UserAvatar";
-import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -28,7 +27,7 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
   };
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="outline-none">
+      <DropdownMenuTrigger>
         <div className="flex items-center justify-center border-2  border-y-0 border-zinc-800 hover:bg-yellow-300 dark:hover:bg-zinc-800 transition-colors h-full p-4">
           <UserAvatar user={user} />
         </div>

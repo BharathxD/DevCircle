@@ -13,7 +13,7 @@ import Post from "./Post";
 interface PostFeedProps {
   initialPosts: ExtendedPost[];
   forumName?: Forum["name"];
-  userId: User["id"];
+  userId?: User["id"];
 }
 
 const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {

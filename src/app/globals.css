@@ -79,7 +79,7 @@
 }
 
 .codex-editor__redactor {
-  padding-bottom: 0 !important;
+  padding-bottom: 25px !important;
 }
 
 @layer base {
