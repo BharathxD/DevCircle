@@ -3,7 +3,7 @@ import { BiMessageAltDetail } from "react-icons/bi";
 import Link from "next/link";
 import formatTimeToNow from "@/libs/formatTimeToNow";
 import { Post, User, Vote } from "@prisma/client";
-import EditorOutput from "../UI/EditorOutput";
+import EditorOutput from "./EditorOutput";
 import PostVoteClient from "./PostVoteClient";
 
 type PartialVote = Pick<Vote, "type">["type"];

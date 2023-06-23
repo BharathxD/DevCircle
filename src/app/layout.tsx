@@ -27,7 +27,6 @@ export default async function RootLayout({ children, authModal }: rootProps) {
       <body className="dark:bg-zinc-950 bg-zinc-50 text-zinc-800 dark:text-zinc-50">
         <ThemeProvider>
           <RtkProvider>
-            {/* @ts-expect-error Server Component */}
             <Navbar />
             {authModal}
             <main className="container h-full">{children}</main>

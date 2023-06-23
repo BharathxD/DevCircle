@@ -1,7 +1,7 @@
 import siteConfig from "@/config";
 import Link from "next/link";
 import { FiGlobe } from "react-icons/fi";
-import UserAuthForm from "./UserAuthForm";
+import OAuthSignIn from "./OAuthSignIn";
 
 const SignUp = () => {
   return (
@@ -13,7 +13,7 @@ const SignUp = () => {
           By continuing, you are setting up a {siteConfig.siteName} account and
           agree to our User Agreement and Privacy Policy
         </p>
-        <UserAuthForm />
+        <OAuthSignIn />
         <p className="px-8 text-sm text-center text-zinc-700">
           Already a member of {siteConfig.siteName}?{" "}
           <Link

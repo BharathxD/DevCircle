@@ -1,31 +1,45 @@
-import getTopCommunities from "@/actions/getTopCommunities";
-import GeneralFeed from "@/components/Post/GeneralFeed";
+import database from "@/libs/database";
+import PostFeed from "@/components/Post/PostFeed";
+import SearchBar from "@/components/UI/SearchBar";
 import getCurrentUser from "@/actions/getCurrentUser";
 import HomepageLayout from "@/components/Layout/HomepageLayout";
-import SearchBar from "@/components/UI/SearchBar";
+import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
+import CreateCommunity from "@/components/Widgets/CreateCommunity";
 import JoinedCommunities from "@/components/Widgets/JoinedCommunities";
 import CommunityLeaderboard from "@/components/Widgets/CommunityLeaderboard";
-import CreateCommunity from "@/components/Widgets/CreateCommunity";
 
-export default async function Home() {
-  const topCommunities = await getTopCommunities();
+const Home = async () => {
   const currentUser = await getCurrentUser();
+  const posts = await database.post.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      votes: true,
+      author: true,
+      comments: true,
+      forum: true,
+    },
+    take: INFINITE_SCROLLING_PAGINATION_RESULTS,
+  });
   return (
     <HomepageLayout>
-      <div className="py-4 hidden md:block">
-        <div className="flex flex-col gap-5">
-          <SearchBar />
-          <JoinedCommunities />
-        </div>
+      {/* Left */}
+      <div className="py-4 hidden md:flex md:flex-col md:gap-5">
+        <SearchBar />
+        <JoinedCommunities />
       </div>
-      <div className="overflow-y-scroll md:border-x-2 md:border-zinc-800 h-[91vh] p-4 overflow-hidden w-full md:col-span-2 no-scrollbar">
-        {/* @ts-expect-error server component */}
-        <GeneralFeed userId={currentUser?.id} />
+      {/* Middle */}
+      <div className="p-4 h-[91vh] w-full md:border-x-2 md:border-zinc-800 md:col-span-2 overflow-hidden overflow-y-scroll no-scrollbar">
+        <PostFeed initialPosts={posts} userId={currentUser?.id} />;
       </div>
+      {/* Right */}
       <div className="py-4 hidden md:flex md:flex-col md:gap-5">
         <CreateCommunity />
-        <CommunityLeaderboard topCommunities={topCommunities} />
+        <CommunityLeaderboard />
       </div>
     </HomepageLayout>
   );
-}
+};
+
+export default Home;

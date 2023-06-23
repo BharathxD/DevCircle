@@ -8,9 +8,9 @@ import { useMutation } from "react-query";
 import { FcGoogle } from "react-icons/fc";
 import { useToast } from "@/hooks/useToast";
 
-interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {}
+interface OAuthSignInProps extends HTMLAttributes<HTMLDivElement> {}
 
-const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
+const OAuthSignIn: FC<OAuthSignInProps> = ({ className, ...props }) => {
   const { toast } = useToast();
   const { mutate, isLoading, error } = useMutation({
     mutationFn: async () => {
@@ -38,4 +38,4 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   );
 };
 
-export default UserAuthForm;
+export default OAuthSignIn;
