@@ -1,4 +1,4 @@
-export const INFINITE_SCROLLING_PAGINATION_RESULTS = 2;
+export const INFINITE_SCROLLING_PAGINATION_RESULTS = 4;
 
 const siteConfig = {
     siteName: "DevCircle"

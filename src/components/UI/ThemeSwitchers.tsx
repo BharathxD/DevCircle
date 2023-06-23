@@ -24,12 +24,12 @@ const ThemeSwitcher: FC = ({}) => {
   }
 
   return (
-    <div
+    <button
       className="px-5 py-5 border-l-2 border-zinc-800 hover:bg-pink-300 dark:hover:bg-zinc-800 flex justify-center items-center hover:cursor-pointer"
       onClick={toggleMode}
     >
       {theme === "dark" ? <MdLightMode size={25} className="text-yellow-500" /> : <MdDarkMode size={25} />}
-    </div>
+    </button>
   );
 };
 

@@ -1,8 +1,13 @@
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
 import database from "@/libs/database";
 import PostFeed from "./PostFeed";
+import { User } from "@prisma/client";
 
-const GeneralFeed = async () => {
+interface GeneralFeedProps {
+  userId?: User["id"];
+}
+
+const GeneralFeed = async ({ userId }: GeneralFeedProps) => {
   const posts = await database.post.findMany({
     orderBy: {
       createdAt: "desc",
@@ -15,7 +20,7 @@ const GeneralFeed = async () => {
     },
     take: INFINITE_SCROLLING_PAGINATION_RESULTS,
   });
-  return <PostFeed initialPosts={posts} />;
+  return <PostFeed initialPosts={posts} userId={userId} />;
 };
 
 export default GeneralFeed;

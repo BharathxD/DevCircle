@@ -21,7 +21,7 @@ const Navbar = ({ currentUser }: { currentUser: User | null }) => {
   );
 
   return (
-    <nav className="fixed top-0 inset-x-0 border-b-2 text-zinc-800 dark:text-zinc-50 dark:bg-zinc-950 bg-zinc-50  border-zinc-800 z-[10]">
+    <nav className="inset-x-0 border-b-2 text-zinc-800 dark:text-zinc-50 dark:bg-zinc-950 bg-zinc-50  border-zinc-800 z-[10]">
       <div className="px-4 md:container max-w-7xl h-fit mx-auto flex items-center justify-between gap-2">
         <Link href="/" className="flex gap-2 items-center">
           <FiGlobe size={30} />

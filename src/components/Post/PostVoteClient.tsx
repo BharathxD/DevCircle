@@ -77,12 +77,19 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
       }
     },
   });
+  const handleVote = useCallback(
+    (voteType: "UP" | "DOWN") => {
+      if (!initialVote) return router.push("/signin/?unauthorized=1");
+      vote(voteType);
+    },
+    [initialVote, router, vote]
+  );
   return (
     <div className="flex sm:flex-col gap-4 sm:gap-0 py-2 pr-5 sm:w-20 pb-2 sm:pb-0">
       <Button
         size="sm"
         aria-label="upvote"
-        onClick={() => vote("UP")}
+        onClick={() => handleVote("UP")}
         className={cn(
           "hover:bg-green-200 dark:hover:bg-green-500 hover:text-zinc-800 dark:hover:text-zinc-50 text-zinc-800 dark:text-zinc-50",
           {
@@ -99,7 +106,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
       <Button
         size="sm"
         aria-label="downvote"
-        onClick={() => vote("DOWN")}
+        onClick={() => handleVote("DOWN")}
         className={cn(
           "hover:bg-red-200 dark:hover:bg-red-500 hover:text-zinc-800 dark:hover:text-zinc-50 text-zinc-800 dark:text-zinc-50",
           {

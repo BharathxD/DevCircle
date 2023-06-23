@@ -25,12 +25,12 @@ export default async function RootLayout({ children, authModal }: rootProps) {
   const currentUser = await getCurrentUser();
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
-      <body className="min-h-screen pt-[5rem] dark:bg-zinc-950 bg-zinc-50 text-zinc-800 dark:text-zinc-50">
+      <body className="dark:bg-zinc-950 bg-zinc-50 text-zinc-800 dark:text-zinc-50">
         <ThemeProvider>
           <RtkProvider>
             <Navbar currentUser={currentUser} />
             {authModal}
-            <main className="container h-full py-4 md:py-2">{children}</main>
+            <main className="container h-full">{children}</main>
           </RtkProvider>
           <Toaster />
         </ThemeProvider>

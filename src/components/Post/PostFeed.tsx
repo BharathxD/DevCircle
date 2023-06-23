@@ -73,7 +73,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
         );
       })}
       {isFetchingNextPage && (
-        <li className="flex justify-center">
+        <li className="flex justify-center pb-4 md:pb-0">
           <BiLoaderAlt className="w-6 h-6 text-zinc-500 animate-spin" />
         </li>
       )}
