@@ -27,7 +27,8 @@ const toastVariants = cva(
     variants: {
       variant: {
         default: "bg-green-100 dark:bg-green-300 dark:text-green-800 border-2",
-        destructive: "group bg-red-100 dark:bg-red-300 text-red-950 border-2 border-red-950",
+        destructive:
+          "group bg-red-100 dark:bg-red-300 text-red-950 border-2 border-red-950",
       },
     },
     defaultVariants: {

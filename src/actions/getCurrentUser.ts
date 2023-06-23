@@ -16,17 +16,17 @@ const getSession = (): Promise<Session | null> => getServerSession(authOptions);
  * @returns A Promise that resolves to either a User object or null.
  */
 const getCurrentUser = async (): Promise<User | null> => {
-    try {
-        const session: Session | null = await getSession();
-        if (!session?.user?.email) return null;
-        const currentUser = await database.user.findUnique({
-            where: { email: session.user.email }
-        });
-        if (!currentUser) return null;
-        return currentUser;
-    } catch (error: any) {
-        throw new Error(error);
-    }
+  try {
+    const session: Session | null = await getSession();
+    if (!session?.user?.email) return null;
+    const currentUser = await database.user.findUnique({
+      where: { email: session.user.email },
+    });
+    if (!currentUser) return null;
+    return currentUser;
+  } catch (error: any) {
+    throw new Error(error);
+  }
 };
 
 export default getCurrentUser;

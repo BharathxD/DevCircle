@@ -1,8 +1,5 @@
 import getTopCommunities from "@/actions/getTopCommunities";
 import GeneralFeed from "@/components/Post/GeneralFeed";
-import siteConfig from "@/config";
-import Link from "next/link";
-import { TbSmartHome } from "react-icons/tb";
 import getCurrentUser from "@/actions/getCurrentUser";
 import HomepageLayout from "@/components/Layout/HomepageLayout";
 import SearchBar from "@/components/UI/SearchBar";
@@ -21,7 +18,7 @@ export default async function Home() {
           <JoinedCommunities />
         </div>
       </div>
-      <div className="overflow-y-scroll px-4 border-x-2 border-zinc-800 h-[91vh] pt-4 overflow-hidden w-full md:col-span-2 no-scrollbar">
+      <div className="overflow-y-scroll md:border-x-2 md:border-zinc-800 h-[91vh] p-4 overflow-hidden w-full md:col-span-2 no-scrollbar">
         {/* @ts-expect-error server component */}
         <GeneralFeed userId={currentUser?.id} />
       </div>

@@ -9,7 +9,9 @@ import database from "@/libs/database";
  * The array is sorted in descending order based on the number of subscribers/members.
  * @throws An error if there is any issue retrieving the top communities.
  */
-const getTopCommunities = async (): Promise<{ forumName: string; memberCount: number }[]> => {
+const getTopCommunities = async (): Promise<
+  { forumName: string; memberCount: number }[]
+> => {
   try {
     const forums = await database.forum.findMany({
       include: {
@@ -22,7 +24,9 @@ const getTopCommunities = async (): Promise<{ forumName: string; memberCount: nu
       memberCount: forum.subscribers.length,
     }));
 
-    const sortedForums = updatedForums.sort((a, b) => b.memberCount - a.memberCount);
+    const sortedForums = updatedForums.sort(
+      (a, b) => b.memberCount - a.memberCount
+    );
 
     const topFiveForums = sortedForums.slice(0, 5);
 
