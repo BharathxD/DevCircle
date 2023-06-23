@@ -78,8 +78,11 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
             class: ImageTool,
             config: {
               uploader: {
-                async uploadByFile(file: File) {
-                  const [res] = await uploadFiles([file], "imageUploader");
+                async uploadByFile(file: File[]) {
+                  const [res] = await uploadFiles({
+                    endpoint: "imageUploader",
+                    files: file,
+                  });
                   return {
                     success: 1,
                     file: {
