@@ -14,6 +14,7 @@ import { useMutation } from "react-query";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { Button } from "../UI/Button";
+import "@/styles/editor.css";
 
 interface EditorProps {
   forumId: string;

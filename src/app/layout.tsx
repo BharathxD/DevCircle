@@ -5,9 +5,7 @@ import siteConfig from "@/config";
 import RtkProvider from "@/providers/RtkProvider";
 import cn from "@/libs/classNames";
 import { Toaster } from "@/providers/Toaster";
-import getCurrentUser from "@/actions/getCurrentUser";
 import ThemeProvider from "@/providers/ThemeProvider";
-import ThemeSwitchers from "@/components/UI/ThemeSwitchers";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
