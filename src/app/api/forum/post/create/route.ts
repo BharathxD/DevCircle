@@ -27,6 +27,10 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
         const { title, content, forumId } = PostValidator.parse(body);
 
+        if (content.blocks.length === 0) {
+            return NextResponse.json({ message: "Post can't be empty" }, { status: StatusCodes.BAD_REQUEST });
+        }
+
         // Check if the user is subscribed to the forum
         const subscription = await database.subscription.findFirst({
             where: {

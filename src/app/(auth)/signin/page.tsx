@@ -9,7 +9,7 @@ const SignInPage = () => {
     <div className="absolute inset-0">
       <div className="h-full max-w-2xl mx-auto flex flex-col items-center justify-center p-2">
         <div className="h-max border-2 border-zinc-800 p-3 md:p-5 rounded-md flex flex-col gap-4">
-          <div className="w-full p-1">
+          <div className="w-full p-1 hover:text-zinc-500">
             <Link
               className={cn(
                 buttonVariants({ variant: "skeleton" }),
@@ -18,7 +18,7 @@ const SignInPage = () => {
               href="/"
             >
               <IoIosArrowBack className="mr-2" />
-              <p>Home</p>
+              <p className="dark:text-zinc-300">Home</p>
             </Link>
           </div>
           <SignIn />

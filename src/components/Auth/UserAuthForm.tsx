@@ -10,10 +10,7 @@ import { useToast } from "@/hooks/useToast";
 
 interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {}
 
-const UserAuthForm: FC<UserAuthFormProps> = ({
-  className,
-  ...props
-}) => {
+const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   const { toast } = useToast();
   const { mutate, isLoading, error } = useMutation({
     mutationFn: async () => {
@@ -29,7 +26,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({
   return (
     <div className={cn("flex justify-center", className)} {...props}>
       <Button
-        className={cn(buttonVariants({ variant: "default" }), "w-full")}
+        className={"w-full"}
         onClick={() => mutate()}
         isLoading={isLoading}
         disabled={isLoading}

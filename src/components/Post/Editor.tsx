@@ -131,19 +131,32 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
 
   const { mutate, isLoading, error } = useMutation({
     mutationFn: async (payload: PostCreationRequest) => {
-      const { data } = await axios.post("/api/forum/post/create", payload);
+      const { data } = await axios.post("/api/forum/post/create", {});
       return data;
     },
     onError: async (error: unknown) => {
       if (error instanceof AxiosError) {
-        if (error.response?.status === StatusCodes.UNAUTHORIZED)
-          return router.push("/signin?unauthorized=1");
-        if (error.response?.status === StatusCodes.FORBIDDEN) {
-          return toast({
-            title: "You are not subscribed to this community",
-            description: "Please join the community and try again.",
-            variant: "destructive",
-          });
+        switch (error.response?.status) {
+          case StatusCodes.UNAUTHORIZED:
+            return router.push("/signin?unauthorized=1");
+          case StatusCodes.FORBIDDEN:
+            return toast({
+              title: "You are not subscribed to this community",
+              description: "Please join the community and try again.",
+              variant: "destructive",
+            });
+          case StatusCodes.BAD_REQUEST:
+            return toast({
+              title: "Post can't be empty",
+              description: "Please make sure to provide content for the post.",
+              variant: "destructive",
+            });
+          default:
+            return toast({
+              title: "Something went wrong",
+              description: "Your post is not published, please try again later",
+              variant: "destructive",
+            });
         }
       }
       return toast({

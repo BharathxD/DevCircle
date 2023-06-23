@@ -13,7 +13,7 @@ const Navbar = ({ currentUser }: { currentUser: User | null }) => {
     <>
       <Link
         href="/signin"
-        className="flex items-center justify-center font-medium hover:bg-yellow-300 dark:hover:bg-zinc-800 hover:text-zinc-800 transition-colors border-2 border-y-0 md:border-zinc-800 border-zinc-800 h-full px-5 py-[1.125rem]"
+        className="flex items-center justify-center font-medium hover:bg-yellow-300 dark:hover:bg-zinc-800 hover:text-zinc-800 dark:hover:text-zinc-50 transition-colors border-2 border-y-0 md:border-zinc-800 border-zinc-800 h-full px-5 py-[1.5rem]"
       >
         SignIn
       </Link>

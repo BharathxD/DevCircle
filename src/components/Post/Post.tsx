@@ -52,7 +52,7 @@ const Post: FC<PostProps> = ({
             <time>{" " + formatTimeToNow(new Date(post.createdAt))}</time>
           </div>
           <Link href={`/c/${forumName}/post/${post.id}`}>
-            <h1 className="text-lg font-semibold pt-2 leading-6 text-zinc-900">
+            <h1 className="text-lg font-semibold pt-2 leading-6 text-zinc-900 dark:text-zinc-50">
               {post.title}
             </h1>
           </Link>

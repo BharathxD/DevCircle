@@ -21,11 +21,11 @@ const SignIn: FC<SignInProps> = ({ customTitle }) => {
           agree to our User Agreement and Privacy Policy
         </p>
         <UserAuthForm />
-        <p className="px-8 text-sm md:text-md text-center text-zinc-700">
+        <p className="px-8 text-sm md:text-md text-center text-zinc-700 dark:text-zinc-300">
           New to {siteConfig.siteName}?{" "}
           <Link
             href="signup"
-            className="hover:text-zinc-800 underline underline-offset-4"
+            className="hover:text-zinc-800 dark:hover:text-zinc-500 underline underline-offset-4"
           >
             Sign Up
           </Link>
