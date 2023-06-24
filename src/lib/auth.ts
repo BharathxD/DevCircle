@@ -6,6 +6,7 @@ import database from "./database";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(database),
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },

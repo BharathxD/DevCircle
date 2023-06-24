@@ -25,7 +25,8 @@ const getCurrentUser = async (): Promise<User | null> => {
     if (!currentUser) return null;
     return currentUser;
   } catch (error: any) {
-    throw new Error(error);
+    console.log(error);
+    return null;
   }
 };
 

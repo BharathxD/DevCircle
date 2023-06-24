@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-
 import AspectRatio from "@/components/UI/AspectRatio";
 import { FiGlobe } from "react-icons/fi";
 import siteConfig from "@/config";

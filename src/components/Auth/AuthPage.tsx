@@ -10,7 +10,7 @@ interface AuthPageProps {
 
 const AuthPage: React.FC<AuthPageProps> = ({ children }) => {
   return (
-    <div className="bg-zinc-50 dark:bg-zinc-950 h-max border-2 border-zinc-800 p-5 rounded-md flex flex-col gap-4">
+    <div className="bg-zinc-50 dark:bg-zinc-950 h-max border-2 border-zinc-800 p-5 rounded-md flex flex-col gap-4 transition-colors duration-300">
       <div className="w-full p-1 hover:text-zinc-500">
         <Link
           className={cn(
