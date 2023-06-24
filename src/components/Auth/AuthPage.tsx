@@ -10,22 +10,20 @@ interface AuthPageProps {
 
 const AuthPage: React.FC<AuthPageProps> = ({ children }) => {
   return (
-    <div className="h-full max-w-xl mx-auto flex flex-col items-center justify-center p-2">
-      <div className="bg-zinc-50 dark:bg-zinc-950 h-max border-2 border-zinc-800 p-5 rounded-md flex flex-col gap-4">
-        <div className="w-full p-1 hover:text-zinc-500">
-          <Link
-            className={cn(
-              buttonVariants({ variant: "skeleton" }),
-              "self-start -mt-2 -ml-2"
-            )}
-            href="/"
-          >
-            <IoIosArrowBack className="mr-2" />
-            <p className="dark:text-zinc-300">Home</p>
-          </Link>
-        </div>
-        {children}
+    <div className="bg-zinc-50 dark:bg-zinc-950 h-max border-2 border-zinc-800 p-5 rounded-md flex flex-col gap-4">
+      <div className="w-full p-1 hover:text-zinc-500">
+        <Link
+          className={cn(
+            buttonVariants({ variant: "skeleton" }),
+            "self-start -mt-2 -ml-2"
+          )}
+          href="/"
+        >
+          <IoIosArrowBack className="mr-2" />
+          <p className="dark:text-zinc-300">Home</p>
+        </Link>
       </div>
+      {children}
     </div>
   );
 };

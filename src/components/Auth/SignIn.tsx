@@ -13,9 +13,9 @@ interface SignInProps {
 const SignIn: FC<SignInProps> = ({ customTitle }) => {
   const title = customTitle ?? "Welcome back!";
   return (
-    <div className="mx-auto w-full flex flex-col justify-center space-y-6 md:px-8 text-center">
+    <div className="mx-auto w-auto flex flex-col justify-center pt-2 pb-6 gap-4 md:px-8 text-center">
       <FiGlobe size={40} className="mx-auto" />
-      <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
+      <h1 className="text-4xl md:text-5xl -mb-2 font-semibold tracking-tight">
         {title}
       </h1>
       <p className="max-w-xs text-lg mx-auto tracking-tighter">
