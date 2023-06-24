@@ -33,12 +33,8 @@ const OAuthSignIn: FC<OAuthSignInProps> = ({ className, ...props }) => {
         isLoading={isLoading}
         disabled={isLoading}
       >
-        {!isLoading && (
-          <Fragment>
-            <FcGoogle className="h-4 w-4 mr-2" />
-            Google
-          </Fragment>
-        )}
+        {!isLoading && <FcGoogle className="h-4 w-4 mr-2" />}
+        Google
       </Button>
     </div>
   );

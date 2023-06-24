@@ -1,39 +1,21 @@
-"use client";
+import CloseModal from "@/components/UI/CloseModal";
 
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import useAuthModal from "@/hooks/useAuthModal";
-import Modal from "../UI/Modal";
-import getCurrentUser from "@/actions/getCurrentUser";
-import OAuthSignIn from "../Auth/OAuthSignIn";
+interface AuthModalProps {
+  children: React.ReactNode;
+}
 
-const AuthModal = async () => {
-  const currentUser = await getCurrentUser();
-  const router = useRouter();
-  const { onClose, isOpen } = useAuthModal();
-
-  useEffect(() => {
-    if (currentUser) {
-      router.refresh();
-      onClose();
-    }
-  }, [currentUser, router, onClose]);
-
-  const onChange = (open: boolean) => {
-    if (!open) {
-      onClose();
-    }
-  };
-
+const AuthModal: React.FC<AuthModalProps> = ({ children }) => {
   return (
-    <Modal
-      title="Welcome back"
-      description="Login to your account."
-      isOpen={isOpen}
-      onChange={onChange}
-    >
-      <OAuthSignIn />
-    </Modal>
+    <div className="fixed inset-0 bg-zinc-900/20 z-10 backdrop-blur-md">
+      <div className="flex w-full items-center justify-center h-full mx-auto">
+        <div className="relative bg-zinc-50 dark:bg-zinc-950 w-auto px-5 pt-16 pb-8 m-2 md:px-10 rounded-lg border-2 border-zinc-800 overflow-hidden">
+          <div className="absolute w-full md:w-auto top-0 right-0 left-0 flex h-10 items-center justify-end border-b-2 border-zinc-800">
+            <CloseModal />
+          </div>
+          {children}
+        </div>
+      </div>
+    </div>
   );
 };
 

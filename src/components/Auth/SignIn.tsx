@@ -11,12 +11,12 @@ interface SignInProps {
 }
 
 const SignIn: FC<SignInProps> = ({ customTitle }) => {
-  const renderCustomTitle = customTitle ?? "Welcome back!";
+  const title = customTitle ?? "Welcome back!";
   return (
     <div className="mx-auto w-full flex flex-col justify-center space-y-6 md:px-8 text-center">
       <FiGlobe size={40} className="mx-auto" />
       <h1 className="text-4xl md:text-5xl font-semibold tracking-tight">
-        {renderCustomTitle}
+        {title}
       </h1>
       <p className="max-w-xs text-lg mx-auto tracking-tighter">
         By continuing, you are setting up a {siteConfig.siteName} account and

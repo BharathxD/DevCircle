@@ -94,6 +94,7 @@ const CreatePage = () => {
           <footer className="flex justify-end text-lg gap-4 p-5">
             <Button
               disabled={isLoading}
+              className="dark:bg-red-400"
               variant="destructive"
               onClick={() => router.back()}
             >

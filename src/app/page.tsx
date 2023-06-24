@@ -30,8 +30,8 @@ const Home = async () => {
         <JoinedCommunities />
       </section>
       {/* Middle */}
-      <section className="p-4 h-[91vh] w-full md:border-x-2 md:border-zinc-800 md:col-span-2 overflow-hidden overflow-y-scroll no-scrollbar">
-        <PostFeed initialPosts={posts} userId={currentUser?.id} />;
+      <section className="py-4 px-0 md:p-4 h-[91vh] w-full md:border-x-2 md:border-zinc-800 md:col-span-2 overflow-hidden overflow-y-scroll no-scrollbar">
+        <PostFeed initialPosts={posts} userId={currentUser?.id} />
       </section>
       {/* Right */}
       <section className="py-4 hidden md:flex md:flex-col md:gap-5">

@@ -6,7 +6,6 @@ import RtkProvider from "@/providers/RtkProvider";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/providers/Toaster";
 import ThemeProvider from "@/providers/ThemeProvider";
-import AuthModal from "@/components/Modal/AuthModal";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -27,7 +26,6 @@ export default async function RootLayout({ children }: rootProps) {
         <ThemeProvider>
           <RtkProvider>
             <Navbar />
-            <AuthModal />
             <main className="container h-full">{children}</main>
           </RtkProvider>
           <Toaster />
