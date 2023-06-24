@@ -79,5 +79,17 @@
     "@types/node": "20.3.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6"
-  }
+  },
+  "description": "- This is the only project name I have come up with so far! :D - Kind of a Redit Clone?",
+  "main": "next.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BharathxD/BCA-Community.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BharathxD/BCA-Community/issues"
+  },
+  "homepage": "https://github.com/BharathxD/BCA-Community#readme"
 }

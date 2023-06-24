@@ -7,11 +7,13 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
   DropdownMenuItem,
+  DropdownMenuShortcut,
 } from "../UI/DropdownMenu";
 import { FC } from "react";
 import UserAvatar from "../UI/UserAvatar";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { LogOut, PlusCircle, Settings, StretchHorizontal } from "lucide-react";
 
 interface UserAccountNavProps {
   user: Pick<User, "image" | "name" | "email">;
@@ -48,12 +50,15 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => router.push("/")}>
+          <StretchHorizontal className="mr-2 h-4 w-4" />
           Feed
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => router.push("/c/create")}>
+          <PlusCircle className="mr-2 h-4 w-4" />
           Create Community
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => router.push("/settings")}>
+          <Settings className="mr-2 h-4 w-4" />
           Settings
         </DropdownMenuItem>
         <DropdownMenuSeparator />
@@ -61,7 +66,9 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
           className="cursor-pointer hover:text-red-50 hover:bg-red-500 transition-colors"
           onSelect={handleSignOut}
         >
+          <LogOut className="mr-2 h-4 w-4" />
           Sign Out
+          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
