@@ -1,18 +1,18 @@
 "use client";
 
-import React, { FC, useCallback, useEffect, useRef, useState } from "react";
-import TextareaAutosize from "react-textarea-autosize";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { PostCreationRequest, PostValidator } from "@/lib/validators/post";
-import { infer as zodInfer } from "zod";
-import EditorJS from "@editorjs/editorjs";
 import { usePathname, useRouter } from "next/navigation";
-import { uploadFiles } from "@/lib/utils";
-import { toast } from "@/hooks/useToast";
-import { useMutation } from "react-query";
-import axios, { AxiosError } from "axios";
+import TextareaAutosize from "react-textarea-autosize";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { uploadFiles } from "@/lib/uploadFiles";
 import { StatusCodes } from "http-status-codes";
+import EditorJS from "@editorjs/editorjs";
+import { useMutation } from "react-query";
+import { useForm } from "react-hook-form";
+import axios, { AxiosError } from "axios";
+import { toast } from "@/hooks/useToast";
+import { infer as zodInfer } from "zod";
 import { Button } from "../UI/Button";
 import "@/styles/editor.css";
 
