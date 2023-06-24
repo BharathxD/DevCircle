@@ -1,6 +1,6 @@
 import getCurrentUser from "@/actions/getCurrentUser";
-import database from "@/libs/database";
-import { PostValidator } from "@/libs/validators/post";
+import database from "@/lib/database";
+import { PostValidator } from "@/lib/validators/post";
 import { StatusCodes } from "http-status-codes";
 import { NextRequest, NextResponse } from "next/server";
 import { ZodError } from "zod";

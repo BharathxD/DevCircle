@@ -2,7 +2,7 @@ import getCurrentUser from "@/actions/getCurrentUser";
 import MiniCreatePost from "@/components/Post/MiniCreatePost";
 import PostFeed from "@/components/Post/PostFeed";
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
-import database from "@/libs/database";
+import database from "@/lib/database";
 import { notFound } from "next/navigation";
 import { Fragment } from "react";
 

@@ -7,7 +7,7 @@ import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { useMutation } from "react-query";
-import { CreateForumPayload } from "@/libs/validators/forum";
+import { CreateForumPayload } from "@/lib/validators/forum";
 import { toast } from "@/hooks/useToast";
 
 const CreatePage = () => {

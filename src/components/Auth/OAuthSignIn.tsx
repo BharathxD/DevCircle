@@ -1,4 +1,4 @@
-import cn from "@/libs/classNames";
+import { cn } from "@/lib/utils";
 import { Button } from "../UI/Button";
 import { signIn } from "next-auth/react";
 import { useMutation } from "react-query";

@@ -3,8 +3,8 @@ import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
 import getCurrentUser from "@/actions/getCurrentUser";
-import { forumValidator } from "@/libs/validators/forum";
-import database from "@/libs/database";
+import { forumValidator } from "@/lib/validators/forum";
+import database from "@/lib/database";
 
 export async function POST(req: NextRequest) {
   try {

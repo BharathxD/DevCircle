@@ -1,4 +1,4 @@
-import redis from "@/libs/redis";
+import redis from "@/lib/redis";
 import { CachedPost } from "@/types/redis";
 import { Post, User, Vote, VoteType } from "@prisma/client";
 

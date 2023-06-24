@@ -1,5 +1,5 @@
 import { FiGlobe } from "react-icons/fi";
-import cn from "@/libs/classNames";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 interface LogoProps {
@@ -8,7 +8,10 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ className }) => {
   return (
-    <Link href="/" className={cn("flex items-center hover:cursor-pointer gap-2", className)}>
+    <Link
+      href="/"
+      className={cn("flex items-center hover:cursor-pointer gap-2", className)}
+    >
       <FiGlobe size={30} />
       <p
         className={cn(

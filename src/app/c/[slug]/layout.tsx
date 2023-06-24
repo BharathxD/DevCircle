@@ -1,6 +1,6 @@
 import getCurrentUser from "@/actions/getCurrentUser";
 import SubscribeLeaveToggle from "@/components/Forum/SubscribeLeaveToggle";
-import database from "@/libs/database";
+import database from "@/lib/database";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
 import { Fragment, ReactNode } from "react";

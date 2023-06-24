@@ -1,4 +1,4 @@
-import database from "@/libs/database";
+import database from "@/lib/database";
 import PostFeed from "@/components/Post/PostFeed";
 import SearchBar from "@/components/UI/SearchBar";
 import getCurrentUser from "@/actions/getCurrentUser";

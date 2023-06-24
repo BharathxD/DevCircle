@@ -1,7 +1,7 @@
 import { FC, Fragment, useRef } from "react";
 import { BiMessageAltDetail } from "react-icons/bi";
 import Link from "next/link";
-import formatTimeToNow from "@/libs/formatTimeToNow";
+import formatTimeToNow from "@/lib/formatTimeToNow";
 import { Post, User, Vote } from "@prisma/client";
 import EditorOutput from "./EditorOutput";
 import PostVoteClient from "./PostVoteClient";

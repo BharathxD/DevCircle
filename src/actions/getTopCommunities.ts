@@ -1,6 +1,6 @@
 "use server";
 
-import database from "@/libs/database";
+import database from "@/lib/database";
 
 /**
  * Retrieves the top five forums with the highest number of subscribers from a database.

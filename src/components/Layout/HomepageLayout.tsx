@@ -1,4 +1,4 @@
-import cn from "@/libs/classNames";
+import { cn } from "@/lib/utils";
 import { HTMLAttributes } from "react";
 
 interface HomepageLayoutProps extends HTMLAttributes<HTMLDivElement> {

@@ -1,5 +1,5 @@
 import getCurrentUser from "@/actions/getCurrentUser";
-import database from "@/libs/database";
+import database from "@/lib/database";
 import { StatusCodes } from "http-status-codes";
 import { NextRequest, NextResponse } from "next/server";
 

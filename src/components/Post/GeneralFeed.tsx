@@ -1,5 +1,5 @@
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
-import database from "@/libs/database";
+import database from "@/lib/database";
 import PostFeed from "./PostFeed";
 import { User } from "@prisma/client";
 

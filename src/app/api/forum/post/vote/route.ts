@@ -3,8 +3,8 @@ import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
 import getCurrentUser from "@/actions/getCurrentUser";
-import { PostVoteValidator } from "@/libs/validators/vote";
-import database from "@/libs/database";
+import { PostVoteValidator } from "@/lib/validators/vote";
+import database from "@/lib/database";
 import updateVoteCount from "@/helpers/voteCountUpdater";
 
 /**

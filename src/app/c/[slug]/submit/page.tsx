@@ -1,7 +1,7 @@
 import Editor from "@/components/Post/Editor";
 import { Button, buttonVariants } from "@/components/UI/Button";
-import cn from "@/libs/classNames";
-import database from "@/libs/database";
+import { cn } from "@/lib/utils";
+import database from "@/lib/database";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";

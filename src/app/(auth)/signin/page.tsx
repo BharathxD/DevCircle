@@ -1,6 +1,6 @@
 import SignIn from "@/components/Auth/SignIn";
 import { buttonVariants } from "@/components/UI/Button";
-import cn from "@/libs/classNames";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { IoIosArrowBack } from "react-icons/io";
 

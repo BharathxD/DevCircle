@@ -3,7 +3,7 @@ import { Montserrat } from "next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
 import siteConfig from "@/config";
 import RtkProvider from "@/providers/RtkProvider";
-import cn from "@/libs/classNames";
+import { cn } from "@/lib/utils";
 import { Toaster } from "@/providers/Toaster";
 import ThemeProvider from "@/providers/ThemeProvider";
 
