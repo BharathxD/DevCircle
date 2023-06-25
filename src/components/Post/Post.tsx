@@ -17,6 +17,7 @@ interface PostProps {
   forumName?: string;
   commentAmount: number;
   currentVote?: PartialVote;
+  isLoggedIn?: boolean;
 }
 
 const Post: FC<PostProps> = ({
@@ -25,6 +26,7 @@ const Post: FC<PostProps> = ({
   commentAmount,
   votesAmount,
   currentVote,
+  isLoggedIn,
 }) => {
   const postRef = useRef<HTMLParagraphElement>(null);
   const isPostOverflowed = postRef.current?.clientHeight === 160;
@@ -35,13 +37,14 @@ const Post: FC<PostProps> = ({
           postId={post.id}
           initialVoteAmount={votesAmount}
           initialVote={currentVote}
+          isLoggedIn={isLoggedIn}
         />
         <div className="w-full flex flex-col gap-2">
           <div className="max-h-40 mt-1 flex flex-row justify-between gap-1 text-sm text-zinc-500">
             <div className="inline-flex">
-              <Link href={`/c/${forumName}`}>
+              <Link href={`/d/${forumName}`}>
                 <p className="underline text-zinc-800 dark:text-zinc-50 text-md underline-offset-2">
-                  c/{forumName}
+                  d/{forumName}
                 </p>
               </Link>
               <span className="px-1 text-zinc-800 dark:text-zinc-50">•</span>
@@ -51,7 +54,7 @@ const Post: FC<PostProps> = ({
             </div>
             <time>{" " + formatTimeToNow(new Date(post.createdAt))}</time>
           </div>
-          <Link href={`/c/${forumName}/post/${post.id}`}>
+          <Link href={`/d/${forumName}/post/${post.id}`}>
             <h1 className="text-lg font-semibold pt-2 leading-6 text-zinc-900 dark:text-zinc-50">
               {post.title}
             </h1>
@@ -68,7 +71,7 @@ const Post: FC<PostProps> = ({
         </div>
       </div>
       <div className="border-t-2 border-t-zinc-800 z-20 text-sm rounded-b-md">
-        <Link href={`/c/${forumName}/post/${post.id}`}>
+        <Link href={`/d/${forumName}/post/${post.id}`}>
           <div className="py-3 px-6 w-fit flex items-center gap-2 border-r-2 font-medium border-r-zinc-800 hover:bg-yellow-100 dark:hover:bg-zinc-800 rounded-bl-md">
             <BiMessageAltDetail size={25} /> {commentAmount} <p>comments</p>
           </div>

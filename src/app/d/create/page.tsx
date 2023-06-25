@@ -61,7 +61,7 @@ const CreatePage = () => {
       });
     },
     onSuccess: (data) => {
-      router.push(`/c/${data}`);
+      router.push(`/d/${data}`);
     },
   });
 
@@ -80,7 +80,7 @@ const CreatePage = () => {
               </p>
               <div className="relative">
                 <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-600">
-                  c/
+                  d/
                 </p>
                 <Input
                   value={input}

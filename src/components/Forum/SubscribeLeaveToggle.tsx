@@ -59,13 +59,13 @@ const SubscribeLeaveToggle: FC<SubscribeLeaveToggleProps> = ({
         setSubscribed(true);
         return toast({
           title: "Subscription Successful",
-          description: `You are now subscribed to c/${name}.`,
+          description: `You are now subscribed to d/${name}.`,
         });
       } else if (status === StatusCodes.ACCEPTED) {
         setSubscribed(false);
         return toast({
           title: "Unsubscription Successful",
-          description: `You are now unsubscribed from c/${name}.`,
+          description: `You are now unsubscribed from d/${name}.`,
         });
       }
     },

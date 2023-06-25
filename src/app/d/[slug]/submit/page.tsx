@@ -25,7 +25,7 @@ const SubmitPage = async ({ params }: PageProps) => {
       <div className="flex flex-row gap-4 items-center">
         <Link
           className={cn(buttonVariants({ variant: "skeleton" }), "w-max")}
-          href={`/c/${forumName}`}
+          href={`/d/${forumName}`}
         >
           <IoIosArrowBack className="dark:text-zinc-50" />
           <p className="ml-2 dark:text-zinc-50">Back</p>
@@ -35,7 +35,7 @@ const SubmitPage = async ({ params }: PageProps) => {
             Create Post
           </h3>
           <p className="ml-2 mt-1 truncate text-md text-zinc-500">
-            in c/{forumName}
+            in d/{forumName}
           </p>
         </div>
       </div>

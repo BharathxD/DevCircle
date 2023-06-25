@@ -1,27 +1,24 @@
-import database from "@/lib/database";
+import { notFound } from "next/navigation";
+
+import { ExtendedPost } from "@/types/database";
+import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
+
+import fetchPosts from "@/actions/getPosts";
+import getCurrentUser from "@/actions/getCurrentUser";
+
 import PostFeed from "@/components/Post/PostFeed";
 import SearchBar from "@/components/UI/SearchBar";
-import getCurrentUser from "@/actions/getCurrentUser";
 import HomepageLayout from "@/components/Layout/HomepageLayout";
-import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
 import CreateCommunity from "@/components/Widgets/CreateCommunity";
 import JoinedCommunities from "@/components/Widgets/JoinedCommunities";
 import CommunityLeaderboard from "@/components/Widgets/CommunityLeaderboard";
 
 const Home = async () => {
   const currentUser = await getCurrentUser();
-  const posts = await database.post.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    include: {
-      votes: true,
-      author: true,
-      comments: true,
-      forum: true,
-    },
-    take: INFINITE_SCROLLING_PAGINATION_RESULTS,
-  });
+  const posts: ExtendedPost[] | null = await fetchPosts(
+    INFINITE_SCROLLING_PAGINATION_RESULTS
+  );
+  if (!posts) return notFound();
   return (
     <HomepageLayout>
       {/* Left */}

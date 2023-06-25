@@ -6,3 +6,11 @@ export type ExtendedPost = Post & {
   author: User;
   comments: Comment[];
 };
+
+export type ExtendedForum = Forum & {
+  posts: ExtendedPost[];
+  author?: User;
+  comments?: Comment[];
+  votes?: Vote[];
+};
+

@@ -53,7 +53,7 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
           <StretchHorizontal className="mr-2 h-4 w-4" />
           Feed
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => router.push("/c/create")}>
+        <DropdownMenuItem onClick={() => router.push("/d/create")}>
           <PlusCircle className="mr-2 h-4 w-4" />
           Create Community
         </DropdownMenuItem>

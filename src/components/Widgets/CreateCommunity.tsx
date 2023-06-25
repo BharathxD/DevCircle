@@ -17,7 +17,7 @@ const CreateCommunity = () => {
           with your favorite communities.
         </p>
         <Link
-          href="/c/create"
+          href="/d/create"
           className="w-full p-3 font-bold text-md text-zinc-700 dark:text-zinc-50 hover:text-zinc-50 border-2 border-zinc-800 hover:bg-zinc-800 rounded-lg hover:rounded-md transition-colors text-center"
           passHref
         >

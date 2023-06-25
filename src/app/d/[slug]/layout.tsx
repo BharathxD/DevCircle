@@ -54,7 +54,7 @@ const Layout = async ({
           {forum && (
             <div className="hidden md:block overflow-hidden h-fit rounded-lg border-2 border-zinc-800 order-first md:order-last mt-[4rem]">
               <div className="px-6 py-4 bg-green-100 dark:bg-zinc-800">
-                <p className="font-bold text-xl py-3">About c/{forumName}</p>
+                <p className="font-bold text-xl py-3">About d/{forumName}</p>
               </div>
               <div className="h-[2px] w-full bg-zinc-800" />
               <dl className="text-md leading-6 dark:bg-zinc-900 bg-zinc-50">

@@ -68,6 +68,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
               votesAmount={voteCount}
               forumName={forumName ?? post.forum.name}
               commentAmount={post.comments.length}
+              isLoggedIn={!!userId}
             />
           </li>
         );

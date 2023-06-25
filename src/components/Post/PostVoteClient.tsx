@@ -10,7 +10,6 @@ import { useMutation } from "react-query";
 import { PostVoteRequest } from "@/lib/validators/vote";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import { error } from "console";
 import { StatusCodes } from "http-status-codes";
 import { toast } from "@/hooks/useToast";
 
@@ -18,12 +17,14 @@ interface PostVoteClientProps {
   postId: string;
   initialVote?: VoteType | null;
   initialVoteAmount: number;
+  isLoggedIn?: boolean;
 }
 
 const PostVoteClient: FC<PostVoteClientProps> = ({
   postId,
   initialVoteAmount,
   initialVote,
+  isLoggedIn,
 }) => {
   const router = useRouter();
   const [votesAmount, setVotesAmount] = useState<number>(initialVoteAmount);
@@ -79,10 +80,10 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
   });
   const handleVote = useCallback(
     (voteType: "UP" | "DOWN") => {
-      if (!initialVote) return router.push("/signin/?unauthorized=1");
+      if (!isLoggedIn) return router.push("/signin/?unauthorized=1");
       vote(voteType);
     },
-    [initialVote, router, vote]
+    [isLoggedIn, router, vote]
   );
   return (
     <div className="flex sm:flex-col gap-4 sm:gap-0 py-2 pr-5 sm:w-20 pb-2 sm:pb-0">

@@ -18,7 +18,7 @@ const CommunityLeaderboard = async () => {
             className="flex flex-row items-center justify-between font-medium border-b-2 last:border-b-0 border-zinc-800 w-full"
           >
             <div className="px-5 py-3 font-bold text-lg">
-              c/{community.forumName}
+              d/{community.forumName}
             </div>
             <div className="flex flex-row gap-2">
               <span className="text-md px-5 py-3 border-zinc-800 p-auto min-w-[175px] text-center">
