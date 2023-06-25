@@ -28,7 +28,9 @@ const SignIn: FC<SignInProps> = ({ customTitle }) => {
           <span className="w-full border-t" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="backdrop-blur-sm rounded-md px-2 text-muted-foreground">Or</span>
+          <span className="backdrop-blur-sm rounded-md px-2 text-muted-foreground">
+            Or
+          </span>
         </div>
       </div>
       <div className="flex items-center justify-center text-sm w-full md:text-md text-center text-zinc-700 dark:text-zinc-300">

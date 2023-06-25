@@ -13,4 +13,3 @@ export type ExtendedForum = Forum & {
   comments?: Comment[];
   votes?: Vote[];
 };
-
