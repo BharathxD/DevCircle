@@ -4,11 +4,11 @@ import { signIn } from "next-auth/react";
 import { useMutation } from "react-query";
 import { FcGoogle } from "react-icons/fc";
 import { useToast } from "@/hooks/useToast";
-import { FC, Fragment, HTMLAttributes } from "react";
+import { HTMLAttributes } from "react";
 
 interface OAuthSignInProps extends HTMLAttributes<HTMLDivElement> {}
 
-const OAuthSignIn: FC<OAuthSignInProps> = ({ className, ...props }) => {
+const OAuthSignIn: React.FC<OAuthSignInProps> = ({ className, ...props }) => {
   const { toast } = useToast();
 
   const { mutate: SignIn, isLoading } = useMutation({

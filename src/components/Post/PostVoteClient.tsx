@@ -8,7 +8,7 @@ import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import { useMutation } from "react-query";
 import { PostVoteRequest } from "@/lib/validators/vote";
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError  } from "axios";
 import { useRouter } from "next/navigation";
 import { StatusCodes } from "http-status-codes";
 import { toast } from "@/hooks/useToast";

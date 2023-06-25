@@ -5,7 +5,6 @@ import Link from "next/link";
 import { FiGlobe } from "react-icons/fi";
 import OAuthSignIn from "./OAuthSignIn";
 import { FC } from "react";
-import { MoonLoader } from "react-spinners";
 import {
   Card,
   CardContent,
