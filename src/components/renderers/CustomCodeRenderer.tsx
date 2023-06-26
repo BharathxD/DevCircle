@@ -2,8 +2,8 @@
 
 function CustomCodeRenderer({ data }: any) {
   return (
-    <pre className="dark:bg-zinc-950 bg-gray-800 rounded-md p-4">
-      <code className="text-gray-100 text-sm">{data.code}</code>
+    <pre className="bg-zinc-800 border-2 border-zinc-700 rounded-md p-4">
+      <code className="text-zinc-100 text-sm">{data.code}</code>
     </pre>
   );
 }

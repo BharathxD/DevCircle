@@ -1,11 +1,7 @@
-"use client";
-
-import dynamic from "next/dynamic";
 import { FC } from "react";
-
-import CustomCodeRenderer from "@/renderers/CodeRenderer";
-import CustomImageRenderer from "@/renderers/ImageRenderer";
-
+import dynamic from "next/dynamic";
+import CustomImageRenderer from "../Renderers/CustomImageRenderer";
+import CustomCodeRenderer from "../Renderers/CustomCodeRenderer";
 
 const Output = dynamic(
   async () => (await import("editorjs-react-renderer")).default,
@@ -16,26 +12,34 @@ interface EditorOutputProps {
   content: any;
 }
 
-const renderers = {
-  image: CustomImageRenderer,
-  code: CustomCodeRenderer,
-};
-
-const style = {
-  paragraph: {
-    fontSize: "0.875rem",
-    lineHeight: "1.25rem",
-  },
-  linkTool: { name: { container: "#F6F667" } },
-};
-
 const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
+  const renderers = {
+    image: CustomImageRenderer,
+    code: CustomCodeRenderer,
+  };
+  const style = {
+    paragraph: {
+      fontSize: "0.875rem",
+      lineHeight: "1.25rem",
+    },
+    linkTool: {
+      container: {
+        backgroundColor: "red",
+      },
+    },
+  };
+  const config = {
+    linkTool: {
+      disableDefaultStyle: true,
+    },
+  };
   return (
     <Output
       style={style}
       className="text-sm"
-      renderers={renderers}
       data={content}
+      renderers={renderers}
+      config={config}
     />
   );
 };

@@ -4,15 +4,14 @@ import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 import { useIntersection } from "@mantine/hooks";
 import { ExtendedPost } from "@/types/database";
 import { useInfiniteQuery } from "react-query";
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { PulseLoader } from "react-spinners";
 import { Forum, User } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import PostCard from "./PostCard";
+import { StatusCodes } from "http-status-codes";
+import { cn } from "@/lib/utils";
 
-/**
- * Props for the PostFeed component.
- */
 interface PostFeedProps {
   initialPosts: ExtendedPost[];
   forumName?: Forum["name"];
@@ -23,18 +22,15 @@ interface PostFeedProps {
  * Component for displaying a feed of posts.
  */
 const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
+  const [endOfThePosts, setEndOfThePosts] = useState<boolean>(false);
   const lastPostRef = useRef<HTMLElement>(null);
   const { ref, entry } = useIntersection({
     root: lastPostRef.current,
     threshold: 1,
   });
 
-  /**
-   * Fetches posts from the server.
-   * @param pageParam The page number for pagination.
-   * @returns An array of ExtendedPost objects.
-   */
   const fetchPosts = async ({ pageParam = 1 }): Promise<ExtendedPost[]> => {
+    setEndOfThePosts(false);
     const query =
       `/api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
       (forumName ? `&forumName=${forumName}` : "");
@@ -42,17 +38,16 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
     return response.data as ExtendedPost[];
   };
 
-  const { data, fetchNextPage, isFetchingNextPage, error } = useInfiniteQuery(
+  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     "infinite-query",
     fetchPosts,
     {
       getNextPageParam: (_, pages) => pages.length + 1,
       initialData: { pages: [initialPosts], pageParams: [1] },
-      retry: (failureCount, error: AxiosError) => {
-        if (failureCount > 5 || error.response?.status === 200) {
-          return false;
-        }
-        return true;
+      retry: (_, error: AxiosError) => {
+        if (error.response?.status === StatusCodes.NOT_FOUND)
+          setEndOfThePosts(true);
+        return false;
       },
     }
   );
@@ -62,10 +57,6 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
       fetchNextPage();
     }
   }, [entry, fetchNextPage]);
-
-  useEffect(() => {
-    console.log(error);
-  }, [error]);
 
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
@@ -99,23 +90,19 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
           </li>
         );
       })}
-      {isFetchingNextPage && posts.length !== 0 && (
+      {isFetchingNextPage && !endOfThePosts && (
         <>
           <li className="hidden dark:flex dark:justify-center py-2">
             <PulseLoader color="#d4d4d8" size={10} />
           </li>
-          <li className="dark:hidden flex justify-center pb-4">
-            <PulseLoader
-              className="block dark:hidden"
-              color="#09090b"
-              size={10}
-            />
+          <li className="dark:hidden flex justify-center">
+            <PulseLoader color="#09090b" size={10} />
           </li>
         </>
       )}
-      {posts.length === 0 && (
-        <li className="text-center text-gray-500">
-          Looks like you&apos;ve caught up
+      {endOfThePosts && (
+        <li className={cn("text-center text-gray-500")}>
+          Impressive, it looks like you&apos;ve caught up.
         </li>
       )}
     </ul>

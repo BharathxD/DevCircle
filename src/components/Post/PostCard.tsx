@@ -66,7 +66,7 @@ const PostCard: FC<PostCardProps> = ({
 
   return (
     <article className="rounded-md dark:bg-zinc-900 bg-zinc-50 border-2 border-zinc-800">
-      <div className="px-6 pt-4 flex justify-between flex-col md:flex-row">
+      <div className="px-6 py-4 flex justify-between flex-col md:flex-row">
         <PostVoteClient
           postId={post.id}
           initialVoteAmount={votesAmount}
@@ -75,13 +75,12 @@ const PostCard: FC<PostCardProps> = ({
         />
         <div className="w-full flex flex-col gap-2">
           {postMetaInfo}
-          <Link href={`/d/${forumName}/post/${post.id}`}>
-            <h1
-              className="text-lg font-semibold pt-2 leading-6 text-zinc-900 dark:text-zinc-50"
-              aria-label={post.title}
-            >
-              {post.title}
-            </h1>
+          <Link
+            href={`/d/${forumName}/post/${post.id}`}
+            className="text-lg font-semibold pt-2 leading-6 text-zinc-900 dark:text-zinc-50"
+            aria-label={post.title}
+          >
+            {post.title}
           </Link>
           {postContent}
         </div>
