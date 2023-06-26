@@ -20,7 +20,7 @@ interface SignInProps {
 
 const SignUp: FC<SignInProps> = () => {
   return (
-    <Card className="flex flex-col justify-center text-center border-2 dark:border-1 border-zinc-800">
+    <Card className="flex flex-col justify-center text-center border-2 dark:border-1 border-zinc-800 dark:bg-zinc-950/80 backdrop-blur-sm">
       <CardHeader className="flex flex-col gap-2">
         <FiGlobe size={75} className="mx-auto dark:text-zinc-300" />
         <CardTitle className="text-4xl md:text-4xl h-full font-semibold tracking-tight dark:text-transparent bg-clip-text text-zinc-800 dark:bg-gradient-to-br dark:from-zinc-200 dark:to-zinc-400">
@@ -37,10 +37,10 @@ const SignUp: FC<SignInProps> = () => {
       <CardContent>
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
+            <span className="w-full border-t border-zinc-900" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">
+            <span className="backdrop-blur-lg md:bg-background rounded-lg px-1 text-muted-foreground">
               Or continue with
             </span>
           </div>

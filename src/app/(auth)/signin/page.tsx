@@ -1,10 +1,16 @@
 import SignIn from "@/components/Auth/SignIn";
+import siteConfig from "@/config";
 
 interface SignInPageProps {
   searchParams: {
     unauthorized: number;
   };
 }
+
+export const metadata = {
+  title: `${siteConfig.siteName} - Sign In`,
+  description: "Sign in to your account",
+};
 
 const SignInPage: React.FC<SignInPageProps> = ({
   searchParams: { unauthorized },
