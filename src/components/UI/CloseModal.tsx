@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
-import { AiOutlineClose } from "react-icons/ai";
-import { useRouter } from "next/navigation";
-import { FC } from "react";
+import { FC } from "react"
+import { useRouter } from "next/navigation"
+import { AiOutlineClose } from "react-icons/ai"
 
 interface CloseModalProps {}
 
 const CloseModal: FC<CloseModalProps> = ({}) => {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <button
-      className="h-full w-10 rounded-none rounded-tr-lg hover:rounded-none border-l-2 border-zinc-800 flex items-center justify-center hover:bg-zinc-800 hover:text-zinc-300 transition-colors"
+      className="flex h-full w-10 items-center justify-center rounded-none rounded-tr-lg border-l-2 border-zinc-800 transition-colors hover:rounded-none hover:bg-zinc-800 hover:text-zinc-300"
       onClick={() => router.back()}
     >
       <AiOutlineClose aria-label="close modal" size={20} />
     </button>
-  );
-};
+  )
+}
 
-export default CloseModal;
+export default CloseModal

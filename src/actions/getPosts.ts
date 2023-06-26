@@ -1,8 +1,9 @@
-"use server";
+"use server"
 
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
-import database from "@/lib/database";
-import { ExtendedPost } from "@/types/database";
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
+
+import { ExtendedPost } from "@/types/database"
+import database from "@/lib/database"
 
 /**
  * Retrieves posts from the database
@@ -23,10 +24,10 @@ const getPosts = async (limit?: number): Promise<ExtendedPost[] | null> => {
         createdAt: "desc",
       },
       take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
-    });
-    return allPosts;
+    })
+    return allPosts
   } catch (error: unknown) {
-    return null;
+    return null
   }
-};
-export default getPosts;
+}
+export default getPosts

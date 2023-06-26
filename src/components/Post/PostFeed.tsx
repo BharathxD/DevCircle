@@ -1,42 +1,44 @@
-"use client";
+"use client"
 
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
-import { useIntersection } from "@mantine/hooks";
-import { ExtendedPost } from "@/types/database";
-import { useInfiniteQuery } from "react-query";
-import { FC, useEffect, useRef, useState } from "react";
-import { PulseLoader } from "react-spinners";
-import { Forum, User } from "@prisma/client";
-import axios, { AxiosError } from "axios";
-import PostCard from "./PostCard";
-import { StatusCodes } from "http-status-codes";
-import { cn } from "@/lib/utils";
+import { FC, useEffect, useRef, useState } from "react"
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
+import { useIntersection } from "@mantine/hooks"
+import { Forum, User } from "@prisma/client"
+import axios, { AxiosError } from "axios"
+import { StatusCodes } from "http-status-codes"
+import { useInfiniteQuery } from "react-query"
+import { PulseLoader } from "react-spinners"
+
+import { ExtendedPost } from "@/types/database"
+import { cn } from "@/lib/utils"
+
+import PostCard from "./PostCard"
 
 interface PostFeedProps {
-  initialPosts: ExtendedPost[];
-  forumName?: Forum["name"];
-  userId?: User["id"];
+  initialPosts: ExtendedPost[]
+  forumName?: Forum["name"]
+  userId?: User["id"]
 }
 
 /**
  * Component for displaying a feed of posts.
  */
 const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
-  const [endOfThePosts, setEndOfThePosts] = useState<boolean>(false);
-  const lastPostRef = useRef<HTMLElement>(null);
+  const [endOfThePosts, setEndOfThePosts] = useState<boolean>(false)
+  const lastPostRef = useRef<HTMLElement>(null)
   const { ref, entry } = useIntersection({
     root: lastPostRef.current,
     threshold: 1,
-  });
+  })
 
   const fetchPosts = async ({ pageParam = 1 }): Promise<ExtendedPost[]> => {
-    setEndOfThePosts(false);
+    setEndOfThePosts(false)
     const query =
       `/api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
-      (forumName ? `&forumName=${forumName}` : "");
-    const response = await axios.get(query);
-    return response.data as ExtendedPost[];
-  };
+      (forumName ? `&forumName=${forumName}` : "")
+    const response = await axios.get(query)
+    return response.data as ExtendedPost[]
+  }
 
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     "infinite-query",
@@ -46,36 +48,36 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
       initialData: { pages: [initialPosts], pageParams: [1] },
       retry: (_, error: AxiosError) => {
         if (error.response?.status === StatusCodes.NOT_FOUND)
-          setEndOfThePosts(true);
-        return false;
+          setEndOfThePosts(true)
+        return false
       },
     }
-  );
+  )
 
   useEffect(() => {
     if (entry?.isIntersecting) {
-      fetchNextPage();
+      fetchNextPage()
     }
-  }, [entry, fetchNextPage]);
+  }, [entry, fetchNextPage])
 
-  const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
+  const posts = data?.pages.flatMap((page) => page) ?? initialPosts
 
   return (
-    <ul className="flex flex-col col-span-2 space-y-4">
+    <ul className="col-span-2 flex flex-col space-y-4">
       {posts.map((post, index) => {
         const voteCount = post.votes.reduce((acc, vote) => {
           if (vote.type === "UP") {
-            return acc + 1;
+            return acc + 1
           }
           if (vote.type === "DOWN") {
-            return acc - 1;
+            return acc - 1
           }
-          return acc;
-        }, 0);
+          return acc
+        }, 0)
 
-        const currentVote = post.votes.find((vote) => vote.userId === userId);
+        const currentVote = post.votes.find((vote) => vote.userId === userId)
 
-        const isLastPost = index === posts.length - 1;
+        const isLastPost = index === posts.length - 1
 
         return (
           <li key={index} ref={isLastPost ? ref : null}>
@@ -88,14 +90,14 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
               isLoggedIn={!!userId}
             />
           </li>
-        );
+        )
       })}
       {isFetchingNextPage && !endOfThePosts && (
         <>
-          <li className="hidden dark:flex dark:justify-center py-2">
+          <li className="hidden py-2 dark:flex dark:justify-center">
             <PulseLoader color="#d4d4d8" size={10} />
           </li>
-          <li className="dark:hidden flex justify-center">
+          <li className="flex justify-center dark:hidden">
             <PulseLoader color="#09090b" size={10} />
           </li>
         </>
@@ -106,7 +108,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
         </li>
       )}
     </ul>
-  );
-};
+  )
+}
 
-export default PostFeed;
+export default PostFeed

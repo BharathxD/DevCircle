@@ -1,22 +1,22 @@
-import CloseModal from "@/components/UI/CloseModal";
+import CloseModal from "@/components/UI/CloseModal"
 
 interface AuthModalProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const AuthModal: React.FC<AuthModalProps> = ({ children }) => {
   return (
-    <div className="fixed inset-0 bg-zinc-900/20 z-10 backdrop-blur-md">
-      <div className="flex w-full items-center justify-center h-full mx-auto">
-        <div className="relative bg-zinc-50 dark:bg-zinc-950 w-auto px-5 pt-16 pb-8 m-2 md:px-10 rounded-lg border-2 border-zinc-800 overflow-hidden">
-          <div className="absolute w-full md:w-auto top-0 right-0 left-0 flex h-10 items-center justify-end border-b-2 border-zinc-800">
+    <div className="fixed inset-0 z-10 bg-zinc-900/20 backdrop-blur-md">
+      <div className="mx-auto flex h-full w-full items-center justify-center">
+        <div className="relative m-2 w-auto overflow-hidden rounded-lg border-2 border-zinc-800 bg-zinc-50 px-5 pb-8 pt-16 dark:bg-zinc-950 md:px-10">
+          <div className="absolute left-0 right-0 top-0 flex h-10 w-full items-center justify-end border-b-2 border-zinc-800 md:w-auto">
             <CloseModal />
           </div>
           {children}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AuthModal;
+export default AuthModal

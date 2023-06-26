@@ -1,8 +1,9 @@
-import getCurrentUser from "@/actions/getCurrentUser";
-import database from "@/lib/database";
-import { StatusCodes } from "http-status-codes";
-import { NextRequest, NextResponse } from "next/server";
-import { ZodError, object, string } from "zod";
+import { NextRequest, NextResponse } from "next/server"
+import getCurrentUser from "@/actions/getCurrentUser"
+import { StatusCodes } from "http-status-codes"
+import { object, string, ZodError } from "zod"
+
+import database from "@/lib/database"
 
 /**
  * Handles the GET request for retrieving posts.
@@ -11,12 +12,12 @@ import { ZodError, object, string } from "zod";
  */
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
-    const url = new URL(req.url);
+    const url = new URL(req.url)
 
     // Retrieve the current user
-    const currentUser = await getCurrentUser();
+    const currentUser = await getCurrentUser()
 
-    let followedCommunitiesIds: string[] = [];
+    let followedCommunitiesIds: string[] = []
 
     // Fetch the ids of communities followed by the current user
     if (currentUser) {
@@ -24,9 +25,9 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         where: {
           userId: currentUser.id,
         },
-      });
+      })
 
-      followedCommunitiesIds = followedCommunities.map(({ forumId }) => forumId);
+      followedCommunitiesIds = followedCommunities.map(({ forumId }) => forumId)
     }
 
     // Parse and validate query parameters
@@ -38,13 +39,13 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       forumName: url.searchParams.get("forumName"),
       limit: url.searchParams.get("limit"),
       page: url.searchParams.get("page"),
-    });
+    })
 
-    let whereClause = {};
+    let whereClause = {}
 
     // Filter posts by forum name if provided
     if (forumName) {
-      whereClause = { forum: { name: forumName } };
+      whereClause = { forum: { name: forumName } }
     }
 
     // Fetch posts from the database
@@ -54,31 +55,31 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       orderBy: { createdAt: "desc" },
       include: { forum: true, votes: true, author: true, comments: true },
       where: whereClause,
-    });
+    })
 
     // Return a not found response if no posts are found
     if (!posts || posts.length === 0) {
       return NextResponse.json(
         { message: "No posts found with the given forum name" },
         { status: StatusCodes.NOT_FOUND }
-      );
+      )
     }
 
     // Return the retrieved posts
-    return NextResponse.json(posts, { status: StatusCodes.OK });
+    return NextResponse.json(posts, { status: StatusCodes.OK })
   } catch (error: any) {
     // Handle validation errors
     if (error instanceof ZodError) {
       return NextResponse.json(
         { message: error.message },
         { status: StatusCodes.BAD_REQUEST }
-      );
+      )
     }
 
     // Handle other errors
     return NextResponse.json(
       { message: "Internal server error. Please try again later." },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
-    );
+    )
   }
 }

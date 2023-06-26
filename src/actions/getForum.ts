@@ -1,9 +1,10 @@
-"use server";
+"use server"
 
-import database from "@/lib/database";
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
-import type { ExtendedForum } from "@/types/database";
-import { PrismaClientValidationError } from "@prisma/client/runtime";
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
+import { PrismaClientValidationError } from "@prisma/client/runtime"
+
+import type { ExtendedForum } from "@/types/database"
+import database from "@/lib/database"
 
 /**
  * This function retrieves a forum and its associated posts from a database, with an optional limit on
@@ -16,7 +17,10 @@ import { PrismaClientValidationError } from "@prisma/client/runtime";
  * @returns The `getForum` function is returning a Promise that resolves to a forum object with the
  * specified `forumName`, or a `null`
  */
-const getForum = async (forumName: string, limit?: number): Promise<ExtendedForum | null> => {
+const getForum = async (
+  forumName: string,
+  limit?: number
+): Promise<ExtendedForum | null> => {
   try {
     const forum = await database.forum.findFirst({
       where: { name: forumName },
@@ -34,11 +38,11 @@ const getForum = async (forumName: string, limit?: number): Promise<ExtendedForu
           take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
         },
       },
-    });
+    })
 
-    return forum;
+    return forum
   } catch (error: unknown) {
-    return null;
+    return null
   }
-};
-export default getForum;
+}
+export default getForum

@@ -1,18 +1,19 @@
-"use client";
+"use client"
 
-import { FC, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useMutation } from "react-query";
-import axios, { AxiosError } from "axios";
-import { StatusCodes } from "http-status-codes";
-import { toast } from "@/hooks/useToast";
-import { Button } from "@/components/UI/Button";
-import { Input } from "@/components/UI/Input";
-import { CreateForumPayload } from "@/lib/validators/forum";
+import { FC, useState } from "react"
+import { useRouter } from "next/navigation"
+import axios, { AxiosError } from "axios"
+import { StatusCodes } from "http-status-codes"
+import { useMutation } from "react-query"
+
+import { CreateForumPayload } from "@/lib/validators/forum"
+import { toast } from "@/hooks/useToast"
+import { Button } from "@/components/UI/Button"
+import { Input } from "@/components/UI/Input"
 
 const PostCreationPage: FC = () => {
-  const [input, setInput] = useState<string>("");
-  const router = useRouter();
+  const [input, setInput] = useState<string>("")
+  const router = useRouter()
 
   const { mutate: createCommunity, isLoading } = useMutation<
     string,
@@ -21,17 +22,17 @@ const PostCreationPage: FC = () => {
     mutationFn: async () => {
       const payload: CreateForumPayload = {
         forumName: input,
-      };
-      const { data } = await axios.post<string>("/api/forum", payload);
-      return data;
+      }
+      const { data } = await axios.post<string>("/api/forum", payload)
+      return data
     },
     onError: async (err: AxiosError | Error) => {
       const errorMap: {
         [key: number]: {
-          title: string;
-          description: string;
-          variant: "default" | "destructive" | null | undefined;
-        };
+          title: string
+          description: string
+          variant: "default" | "destructive" | null | undefined
+        }
       } = {
         [StatusCodes.CONFLICT]: {
           title: "Forum already exists",
@@ -43,37 +44,37 @@ const PostCreationPage: FC = () => {
           description: "Please choose a name between 3 and 21 letters.",
           variant: "destructive",
         },
-      };
+      }
 
       if (err instanceof AxiosError) {
-        const { status = 0 } = err.response || {};
-        const errorToast = errorMap[status];
-        setInput("");
-        if (errorToast) return toast(errorToast);
+        const { status = 0 } = err.response || {}
+        const errorToast = errorMap[status]
+        setInput("")
+        if (errorToast) return toast(errorToast)
         if (status === StatusCodes.UNAUTHORIZED)
-          return router.push("/signin?unauthorized=1");
+          return router.push("/signin?unauthorized=1")
       }
 
       return toast({
         title: "There was an error",
         description: "Could not create the Forum.",
         variant: "destructive",
-      });
+      })
     },
     onSuccess: (data) => {
-      router.push(`/d/${data}`);
+      router.push(`/d/${data}`)
     },
-  });
+  })
 
-  const handleCancelClick = () => router.back();
-  const handleCreateForumClick = () => createCommunity();
-  const isInputValid = input.length > 0;
+  const handleCancelClick = () => router.back()
+  const handleCreateForumClick = () => createCommunity()
+  const isInputValid = input.length > 0
 
   return (
-    <div className="md:flex md:items-center md:justify-center md:h-[70vh] md:w-full">
-      <div className="md:container flex items-center h-full w-full md:max-w-3xl md:mx-auto">
-        <section className="bg-zinc-50 dark:bg-zinc-900 border-2 border-zinc-800 w-full rounded-lg">
-          <header className="flex justify-between items-center border-b-2 border-b-zinc-800 p-5">
+    <div className="md:flex md:h-[70vh] md:w-full md:items-center md:justify-center">
+      <div className="flex h-full w-full items-center md:container md:mx-auto md:max-w-3xl">
+        <section className="w-full rounded-lg border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
+          <header className="flex items-center justify-between border-b-2 border-b-zinc-800 p-5">
             <h1 className="text-2xl font-bold">Create a Community</h1>
           </header>
           <section className="p-5">
@@ -83,7 +84,7 @@ const PostCreationPage: FC = () => {
                 Community names including capitalization cannot be changed.
               </p>
               <div className="relative">
-                <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-600">
+                <p className="absolute inset-y-0 left-0 grid w-8 place-items-center text-sm text-zinc-600">
                   d/
                 </p>
                 <Input
@@ -95,7 +96,7 @@ const PostCreationPage: FC = () => {
               </div>
             </div>
           </section>
-          <footer className="flex justify-end text-lg gap-4 p-5">
+          <footer className="flex justify-end gap-4 p-5 text-lg">
             <Button
               disabled={isLoading}
               className="dark:bg-red-400"
@@ -116,7 +117,7 @@ const PostCreationPage: FC = () => {
         </section>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PostCreationPage;
+export default PostCreationPage

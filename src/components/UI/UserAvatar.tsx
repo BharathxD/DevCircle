@@ -1,11 +1,12 @@
-import { AvatarProps } from "@radix-ui/react-avatar";
-import { Avatar, AvatarFallback } from "./Avatar";
-import { FaUserCircle } from "react-icons/fa";
-import { User } from "@prisma/client";
-import Image from "next/image";
+import Image from "next/image"
+import { User } from "@prisma/client"
+import { AvatarProps } from "@radix-ui/react-avatar"
+import { FaUserCircle } from "react-icons/fa"
+
+import { Avatar, AvatarFallback } from "./Avatar"
 
 interface UserAvatarProps extends AvatarProps {
-  user: Pick<User, "image" | "name">;
+  user: Pick<User, "image" | "name">
 }
 
 const UserAvatar: React.FC<UserAvatarProps> = ({ user, ...props }) => (
@@ -16,7 +17,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ user, ...props }) => (
           fill
           src={user.image}
           alt={`${user.name}'s profile picture`}
-          className="border-2 border-zinc-800 rounded-full selection:bg-transparent"
+          className="rounded-full border-2 border-zinc-800 selection:bg-transparent"
           referrerPolicy="no-referrer"
         />
       </div>
@@ -27,6 +28,6 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ user, ...props }) => (
       </AvatarFallback>
     )}
   </Avatar>
-);
+)
 
-export default UserAvatar;
+export default UserAvatar

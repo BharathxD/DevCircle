@@ -1,12 +1,14 @@
-"use client";
+"use client"
 
-import UserAccountNav from "../Navbar/UserAccountNav";
-import { User } from "@prisma/client";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+import Link from "next/link"
+import { User } from "@prisma/client"
+
+import { cn } from "@/lib/utils"
+
+import UserAccountNav from "../Navbar/UserAccountNav"
 
 interface SignInButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
-  user: User | null;
+  user: User | null
 }
 
 const SignInButton: React.FC<SignInButtonProps> = ({
@@ -14,19 +16,19 @@ const SignInButton: React.FC<SignInButtonProps> = ({
   className,
   ...props
 }) => {
-  if (user) return <UserAccountNav user={user} />;
+  if (user) return <UserAccountNav user={user} />
   return (
     <Link
       href="/signin"
       className={cn(
-        "h-full px-5 py-6 flex items-center justify-center font-medium transition-colors hover:bg-yellow-300 dark:hover:bg-zinc-800 hover:text-zinc-800 dark:hover:text-zinc-50 border-2 rounded-md md:border-zinc-800 border-zinc-800",
+        "flex h-full items-center justify-center rounded-md border-2 border-zinc-800 px-5 py-6 font-medium transition-colors hover:bg-yellow-300 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 md:border-zinc-800",
         className
       )}
       {...props}
     >
       Sign In
     </Link>
-  );
-};
+  )
+}
 
-export default SignInButton;
+export default SignInButton

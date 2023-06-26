@@ -1,18 +1,20 @@
-import "./globals.css";
-import { Montserrat } from "next/font/google";
-import Navbar from "@/components/Navbar/Navbar";
-import siteConfig from "@/config";
-import RtkProvider from "@/providers/RtkProvider";
-import { cn } from "@/lib/utils";
-import { Toaster } from "@/providers/Toaster";
-import ThemeProvider from "@/providers/ThemeProvider";
-import { Metadata } from "next";
+import "./globals.css"
 
-const montserrat = Montserrat({ subsets: ["latin"] });
+import { Metadata } from "next"
+import { Montserrat } from "next/font/google"
+import siteConfig from "@/config"
+
+import RtkProvider from "@/providers/RtkProvider"
+import ThemeProvider from "@/providers/ThemeProvider"
+import { Toaster } from "@/providers/Toaster"
+import { cn } from "@/lib/utils"
+import Navbar from "@/components/Navbar/Navbar"
+
+const montserrat = Montserrat({ subsets: ["latin"] })
 
 interface rootProps {
-  children: React.ReactNode;
-  authModal: React.ReactNode;
+  children: React.ReactNode
+  authModal: React.ReactNode
 }
 
 export const metadata: Metadata = {
@@ -61,12 +63,12 @@ export const metadata: Metadata = {
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-};
+}
 
 export default async function RootLayout({ children }: rootProps) {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
-      <body className="dark:bg-zinc-950 bg-zinc-50 text-zinc-800 dark:text-zinc-50">
+      <body className="bg-zinc-50 text-zinc-800 dark:bg-zinc-950 dark:text-zinc-50">
         <RtkProvider>
           <ThemeProvider>
             <Navbar />
@@ -76,5 +78,5 @@ export default async function RootLayout({ children }: rootProps) {
         </RtkProvider>
       </body>
     </html>
-  );
+  )
 }

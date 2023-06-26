@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
-import { StatusCodes } from "http-status-codes";
-import { ZodError } from "zod";
+import { NextRequest, NextResponse } from "next/server"
+import getCurrentUser from "@/actions/getCurrentUser"
+import { StatusCodes } from "http-status-codes"
+import { ZodError } from "zod"
 
-import getCurrentUser from "@/actions/getCurrentUser";
-import { PostVoteValidator } from "@/lib/validators/vote";
-import database from "@/lib/database";
-import updateVoteCount from "@/helpers/voteCountUpdater";
+import updateVoteCount from "@/helpers/voteCountUpdater"
+import database from "@/lib/database"
+import { PostVoteValidator } from "@/lib/validators/vote"
 
 /**
  * Handles the PATCH request to update a vote on a post.
@@ -15,17 +15,17 @@ import updateVoteCount from "@/helpers/voteCountUpdater";
 export async function PATCH(req: NextRequest): Promise<NextResponse> {
   try {
     // Get the current user
-    const currentUser = await getCurrentUser();
+    const currentUser = await getCurrentUser()
 
     // If no user is found, return unauthorized response
     if (!currentUser)
       return NextResponse.json(
         { message: "Authentication required. Please log in." },
         { status: StatusCodes.UNAUTHORIZED }
-      );
+      )
 
-    const { id: userId } = currentUser;
-    const { postId, voteType } = PostVoteValidator.parse(await req.json());
+    const { id: userId } = currentUser
+    const { postId, voteType } = PostVoteValidator.parse(await req.json())
 
     // Retrieve the post with author and votes details
     const post = await database.post.findUnique({
@@ -36,14 +36,14 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
         author: true,
         votes: true,
       },
-    });
+    })
 
     // If the post doesn't exist, return not found response
     if (!post)
       return NextResponse.json(
         { message: "Post not found." },
         { status: StatusCodes.NOT_FOUND }
-      );
+      )
 
     // Check if the user has already voted on the post
     const existingVote = await database.vote.findFirst({
@@ -51,18 +51,18 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
         userId,
         postId,
       },
-    });
+    })
 
     if (!existingVote) {
       // If no existing vote, create a new vote and update the vote count concurrently
       await Promise.all([
         database.vote.create({ data: { type: voteType, userId, postId } }),
         updateVoteCount({ postId, voteType, post }),
-      ]);
+      ])
       return NextResponse.json(
         { message: "Vote created successfully." },
         { status: StatusCodes.OK }
-      );
+      )
     }
 
     // If an existing vote is found
@@ -82,9 +82,9 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
               data: { type: voteType },
             }),
             updateVoteCount({ postId, voteType, post }),
-          ]);
+          ])
 
-    await updatePromise;
+    await updatePromise
 
     return NextResponse.json(
       {
@@ -94,20 +94,20 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
             : "Vote updated successfully.",
       },
       { status: StatusCodes.OK }
-    );
+    )
   } catch (error: any) {
     if (error instanceof ZodError) {
       // If there's a validation error, return a bad request response
       return NextResponse.json(
         { message: "Invalid request. Please provide valid data." },
         { status: StatusCodes.BAD_REQUEST }
-      );
+      )
     }
 
     // If an error occurs, return an internal server error response
     return NextResponse.json(
       { message: "Internal server error. Please try again later." },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
-    );
+    )
   }
 }

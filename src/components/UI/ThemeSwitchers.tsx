@@ -1,31 +1,29 @@
-"use client";
+"use client"
 
-import { FC, useCallback, useEffect, useState } from "react";
-import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { useTheme } from "next-themes";
+import { FC, useCallback, useEffect, useState } from "react"
+import { useTheme } from "next-themes"
+import { MdDarkMode, MdLightMode } from "react-icons/md"
 
 const ThemeSwitcher: FC = ({}) => {
-  const [isMounted, setIsMounted] = useState(false);
-  const [currentMode, setCurrentMode] = useState<"dark" | "light">("light");
-  const { theme, setTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false)
+  const { theme, setTheme } = useTheme()
 
   const toggleMode = useCallback(() => {
-    const updatedTheme = theme === "dark" ? "light" : "dark";
-    setCurrentMode(updatedTheme);
-    setTheme(updatedTheme);
-  }, [setTheme, theme]);
+    const updatedTheme = theme === "dark" ? "light" : "dark"
+    setTheme(updatedTheme)
+  }, [setTheme, theme])
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    setIsMounted(true)
+  }, [])
 
   if (!isMounted) {
-    return null;
+    return null
   }
 
   return (
     <button
-      className="px-5 py-5 border-l-2 border-zinc-800 hover:bg-pink-300 dark:hover:bg-zinc-800 flex justify-center items-center hover:cursor-pointer"
+      className="flex items-center justify-center border-l-2 border-zinc-800 px-5 py-5 hover:cursor-pointer hover:bg-pink-300 dark:hover:bg-zinc-800"
       onClick={toggleMode}
     >
       {theme === "dark" ? (
@@ -34,7 +32,7 @@ const ThemeSwitcher: FC = ({}) => {
         <MdDarkMode size={25} />
       )}
     </button>
-  );
-};
+  )
+}
 
-export default ThemeSwitcher;
+export default ThemeSwitcher

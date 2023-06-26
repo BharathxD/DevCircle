@@ -1,9 +1,10 @@
-import getCurrentUser from "@/actions/getCurrentUser";
-import database from "@/lib/database";
-import { PostValidator } from "@/lib/validators/post";
-import { StatusCodes } from "http-status-codes";
-import { NextRequest, NextResponse } from "next/server";
-import { ZodError } from "zod";
+import { NextRequest, NextResponse } from "next/server"
+import getCurrentUser from "@/actions/getCurrentUser"
+import { StatusCodes } from "http-status-codes"
+import { ZodError } from "zod"
+
+import database from "@/lib/database"
+import { PostValidator } from "@/lib/validators/post"
 
 /**
  * Handles the HTTP GET request for creating a new post.
@@ -13,25 +14,25 @@ import { ZodError } from "zod";
 export async function POST(req: NextRequest) {
   try {
     // Retrieve the current user
-    const currentUser = await getCurrentUser();
+    const currentUser = await getCurrentUser()
 
     // Check if the user is authenticated
     if (!currentUser) {
       return NextResponse.json(
         { message: "This action requires authentication" },
         { status: StatusCodes.UNAUTHORIZED }
-      );
+      )
     }
 
     // Parse the request body
-    const body = await req.json();
-    const { title, content, forumId } = PostValidator.parse(body);
+    const body = await req.json()
+    const { title, content, forumId } = PostValidator.parse(body)
 
     if (content.blocks.length === 0) {
       return NextResponse.json(
         { message: "Post can't be empty" },
         { status: StatusCodes.BAD_REQUEST }
-      );
+      )
     }
 
     // Check if the user is subscribed to the forum
@@ -40,12 +41,12 @@ export async function POST(req: NextRequest) {
         forumId,
         userId: currentUser.id,
       },
-    });
+    })
     if (!subscription) {
       return NextResponse.json(
         { message: "You are not subscribed to this forum" },
         { status: StatusCodes.FORBIDDEN }
-      );
+      )
     }
 
     // Create the new post
@@ -56,18 +57,18 @@ export async function POST(req: NextRequest) {
         title,
         content,
       },
-    });
+    })
 
-    return NextResponse.json(post, { status: StatusCodes.CREATED });
+    return NextResponse.json(post, { status: StatusCodes.CREATED })
   } catch (error: any) {
     if (error instanceof ZodError) {
       // Handle validation errors
-      return new Response(error.message, { status: StatusCodes.BAD_REQUEST });
+      return new Response(error.message, { status: StatusCodes.BAD_REQUEST })
     }
     // Handle other errors
     return NextResponse.json(
       { message: "Cannot create the post" },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
-    );
+    )
   }
 }

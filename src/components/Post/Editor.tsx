@@ -1,44 +1,46 @@
-"use client";
+"use client"
 
-import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
-import axios, { AxiosError } from "axios";
-import { toast } from "@/hooks/useToast";
-import { Button } from "../UI/Button";
-import "@/styles/editor.css";
+import { FC, useCallback, useEffect, useRef, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import axios, { AxiosError } from "axios"
+import { useForm } from "react-hook-form"
+import { useMutation } from "react-query"
 
-import EditorJS from "@editorjs/editorjs";
-import Header from "@editorjs/header";
-import Embed from "@editorjs/embed";
-import Table from "@editorjs/table";
-import List from "@editorjs/list";
-import Code from "@editorjs/code";
-import LinkTool from "@editorjs/link";
-import InlineCode from "@editorjs/inline-code";
-import ImageTool from "@editorjs/image";
+import { toast } from "@/hooks/useToast"
 
-import TextareaAutosize from "react-textarea-autosize";
+import { Button } from "../UI/Button"
 
-import { PostCreationRequest, PostValidator } from "@/lib/validators/post";
-import { uploadFiles } from "@/lib/uploadFiles";
-import { StatusCodes } from "http-status-codes";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { infer as zodInfer } from "zod";
+import "@/styles/editor.css"
+
+import Code from "@editorjs/code"
+import EditorJS from "@editorjs/editorjs"
+import Embed from "@editorjs/embed"
+import Header from "@editorjs/header"
+import ImageTool from "@editorjs/image"
+import InlineCode from "@editorjs/inline-code"
+import LinkTool from "@editorjs/link"
+import List from "@editorjs/list"
+import Table from "@editorjs/table"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { StatusCodes } from "http-status-codes"
+import TextareaAutosize from "react-textarea-autosize"
+import { infer as zodInfer } from "zod"
+
+import { uploadFiles } from "@/lib/uploadFiles"
+import { PostCreationRequest, PostValidator } from "@/lib/validators/post"
 
 interface EditorProps {
-  forumId: string;
+  forumId: string
 }
 
-type FormData = zodInfer<typeof PostValidator>;
+type FormData = zodInfer<typeof PostValidator>
 
 const Editor: FC<EditorProps> = ({ forumId }) => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const editorRef = useRef<EditorJS | null>(null);
-  const _titleRef = useRef<HTMLTextAreaElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter()
+  const pathname = usePathname()
+  const editorRef = useRef<EditorJS | null>(null)
+  const _titleRef = useRef<HTMLTextAreaElement>(null)
+  const [isMounted, setIsMounted] = useState(false)
 
   const {
     register,
@@ -47,18 +49,18 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
   } = useForm<FormData>({
     resolver: zodResolver(PostValidator),
     defaultValues: { title: "", forumId, content: null },
-  });
+  })
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    setIsMounted(true)
+  }, [])
 
   const initializeEditor = useCallback(async () => {
     if (!editorRef.current) {
       const editor = new EditorJS({
         holder: "editor",
         onReady() {
-          editorRef.current = editor;
+          editorRef.current = editor
         },
         placeholder: "Type here to write your post...",
         inlineToolbar: true,
@@ -79,13 +81,13 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
                   const [res] = await uploadFiles({
                     endpoint: "imageUploader",
                     files: file,
-                  });
+                  })
                   return {
                     success: 1,
                     file: {
                       url: res?.fileUrl,
                     },
-                  };
+                  }
                 },
               },
             },
@@ -96,25 +98,25 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
           table: Table,
           embed: Embed,
         },
-      });
+      })
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     const init = async () => {
-      await initializeEditor();
+      await initializeEditor()
       setTimeout(() => {
-        if (_titleRef.current) _titleRef.current.focus();
-      }, 0);
-    };
-    if (isMounted) {
-      init();
-      return () => {
-        editorRef.current?.destroy();
-        editorRef.current = null;
-      };
+        if (_titleRef.current) _titleRef.current.focus()
+      }, 0)
     }
-  }, [isMounted, initializeEditor]);
+    if (isMounted) {
+      init()
+      return () => {
+        editorRef.current?.destroy()
+        editorRef.current = null
+      }
+    }
+  }, [isMounted, initializeEditor])
 
   useEffect(() => {
     if (Object.keys(errors).length) {
@@ -123,71 +125,71 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
           title: "Something went wrong",
           description: (value as { message: string }).message,
           variant: "destructive",
-        });
+        })
       }
     }
-  }, [errors]);
+  }, [errors])
 
-  const { ref: titleRef, ...rest } = register("title");
+  const { ref: titleRef, ...rest } = register("title")
 
   const { mutate, isLoading } = useMutation({
     mutationFn: async (payload: PostCreationRequest) => {
-      const { data } = await axios.post("/api/forum/post/create", payload);
-      return data;
+      const { data } = await axios.post("/api/forum/post/create", payload)
+      return data
     },
     onError: async (error: unknown) => {
       if (error instanceof AxiosError) {
         switch (error.response?.status) {
           case StatusCodes.UNAUTHORIZED:
-            return router.push("/signin?unauthorized=1");
+            return router.push("/signin?unauthorized=1")
           case StatusCodes.FORBIDDEN:
             return toast({
               title: "You are not subscribed to this community",
               description: "Please join the community and try again.",
               variant: "destructive",
-            });
+            })
           case StatusCodes.BAD_REQUEST:
             return toast({
               title: "Post can't be empty",
               description: "Please make sure to provide content for the post.",
               variant: "destructive",
-            });
+            })
           default:
             return toast({
               title: "Something went wrong",
               description: "Your post is not published, please try again later",
               variant: "destructive",
-            });
+            })
         }
       }
       return toast({
         title: "Something went wrong",
         description: "Your post is not published, please try again later",
         variant: "destructive",
-      });
+      })
     },
     onSuccess: () => {
-      const redirectPath = pathname.split("/").slice(0, -1).join("/");
-      router.push(redirectPath);
-      router.refresh();
+      const redirectPath = pathname.split("/").slice(0, -1).join("/")
+      router.push(redirectPath)
+      router.refresh()
       toast({
         description: "Your post is published",
-      });
+      })
     },
-  });
+  })
 
   const handleSubmitForm = async (data: PostCreationRequest) => {
-    const blocks = await editorRef.current?.save();
+    const blocks = await editorRef.current?.save()
     const payload: PostCreationRequest = {
       forumId,
       title: data.title,
       content: blocks,
-    };
-    mutate(payload);
-  };
+    }
+    mutate(payload)
+  }
 
   return (
-    <div className="w-full p-5 pb-1 bg-zinc-50 dark:bg-zinc-800 dark:border-zinc-800 rounded-lg border-2 border-zinc-800 relative">
+    <div className="relative w-full rounded-lg border-2 border-zinc-800 bg-zinc-50 p-5 pb-1 dark:border-zinc-800 dark:bg-zinc-800">
       <form
         id="subreddit-post-form"
         className="w-fit"
@@ -198,15 +200,15 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
             ref={titleRef}
             {...rest}
             placeholder="Title"
-            className="w-full h-fit resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none p-0"
+            className="h-fit w-full resize-none appearance-none overflow-hidden bg-transparent p-0 text-5xl font-bold focus:outline-none"
           />
           <div {...register("content")} id="editor" className="min-h-[40vh]" />
         </div>
       </form>
-      <div className="w-full mb-3 flex justify-end absolute -bottom-[4.5rem] left-0 right-0">
+      <div className="absolute -bottom-[4.5rem] left-0 right-0 mb-3 flex w-full justify-end">
         <Button
           type="submit"
-          className="w-full text-lg font-bold bg-zinc-800 hover:bg-zinc-50 text-zinc-50 dark:hover:bg-zinc-700 dark:hover:text-zinc-50 hover:text-zinc-800"
+          className="w-full bg-zinc-800 text-lg font-bold text-zinc-50 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-700 dark:hover:text-zinc-50"
           form="subreddit-post-form"
           isLoading={isLoading}
           disabled={isLoading}
@@ -215,7 +217,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Editor;
+export default Editor
