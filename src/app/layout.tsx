@@ -10,7 +10,7 @@ import ThemeProvider from "@/providers/ThemeProvider";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
-  title: siteConfig.siteName,
+  title: siteConfig.name,
   description: "A community for all the BCA members, just like reddit!",
 };
 

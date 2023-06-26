@@ -1,20 +1,31 @@
 "use client";
 
 import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { PostCreationRequest, PostValidator } from "@/lib/validators/post";
 import { usePathname, useRouter } from "next/navigation";
-import TextareaAutosize from "react-textarea-autosize";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { uploadFiles } from "@/lib/uploadFiles";
-import { StatusCodes } from "http-status-codes";
-import EditorJS from "@editorjs/editorjs";
-import { useMutation } from "react-query";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
 import axios, { AxiosError } from "axios";
 import { toast } from "@/hooks/useToast";
-import { infer as zodInfer } from "zod";
 import { Button } from "../UI/Button";
 import "@/styles/editor.css";
+
+import EditorJS from "@editorjs/editorjs";
+import Header from "@editorjs/header";
+import Embed from "@editorjs/embed";
+import Table from "@editorjs/table";
+import List from "@editorjs/list";
+import Code from "@editorjs/code";
+import LinkTool from "@editorjs/link";
+import InlineCode from "@editorjs/inline-code";
+import ImageTool from "@editorjs/image";
+
+import TextareaAutosize from "react-textarea-autosize";
+
+import { PostCreationRequest, PostValidator } from "@/lib/validators/post";
+import { uploadFiles } from "@/lib/uploadFiles";
+import { StatusCodes } from "http-status-codes";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { infer as zodInfer } from "zod";
 
 interface EditorProps {
   forumId: string;
@@ -23,6 +34,12 @@ interface EditorProps {
 type FormData = zodInfer<typeof PostValidator>;
 
 const Editor: FC<EditorProps> = ({ forumId }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const editorRef = useRef<EditorJS | null>(null);
+  const _titleRef = useRef<HTMLTextAreaElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -32,31 +49,11 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
     defaultValues: { title: "", forumId, content: null },
   });
 
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const editorRef = useRef<EditorJS>();
-  const _titleRef = useRef<HTMLTextAreaElement>(null);
-
-  const [isMounted, setIsMounted] = useState(false);
-
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsMounted(true);
-    }
+    setIsMounted(true);
   }, []);
 
   const initializeEditor = useCallback(async () => {
-    const EditorJS = (await import("@editorjs/editorjs")).default;
-    const Header = (await import("@editorjs/header")).default;
-    const Embed = (await import("@editorjs/embed")).default;
-    const Table = (await import("@editorjs/table")).default;
-    const List = (await import("@editorjs/list")).default;
-    const Code = (await import("@editorjs/code")).default;
-    const LinkTool = (await import("@editorjs/link")).default;
-    const InlineCode = (await import("@editorjs/inline-code")).default;
-    const ImageTool = (await import("@editorjs/image")).default;
-
     if (!editorRef.current) {
       const editor = new EditorJS({
         holder: "editor",
@@ -104,18 +101,6 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
   }, []);
 
   useEffect(() => {
-    if (Object.keys(errors).length) {
-      for (const [_key, value] of Object.entries(errors)) {
-        toast({
-          title: "Something went wrong",
-          description: (value as { message: string }).message,
-          variant: "destructive",
-        });
-      }
-    }
-  }, [errors]);
-
-  useEffect(() => {
     const init = async () => {
       await initializeEditor();
       setTimeout(() => {
@@ -126,16 +111,28 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
       init();
       return () => {
         editorRef.current?.destroy();
-        editorRef.current = undefined;
+        editorRef.current = null;
       };
     }
   }, [isMounted, initializeEditor]);
 
+  useEffect(() => {
+    if (Object.keys(errors).length) {
+      for (const [, value] of Object.entries(errors)) {
+        toast({
+          title: "Something went wrong",
+          description: (value as { message: string }).message,
+          variant: "destructive",
+        });
+      }
+    }
+  }, [errors]);
+
   const { ref: titleRef, ...rest } = register("title");
 
-  const { mutate, isLoading, error } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: async (payload: PostCreationRequest) => {
-      const { data } = await axios.post("/api/forum/post/create", {});
+      const { data } = await axios.post("/api/forum/post/create", payload);
       return data;
     },
     onError: async (error: unknown) => {
@@ -169,7 +166,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
         variant: "destructive",
       });
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       const redirectPath = pathname.split("/").slice(0, -1).join("/");
       router.push(redirectPath);
       router.refresh();

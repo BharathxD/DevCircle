@@ -8,7 +8,7 @@ interface SignInPageProps {
 }
 
 export const metadata = {
-  title: `${siteConfig.siteName} - Sign In`,
+  title: `${siteConfig.name} - Sign In`,
   description: "Sign in to your account",
 };
 

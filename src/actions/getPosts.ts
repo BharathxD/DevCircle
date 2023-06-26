@@ -1,6 +1,6 @@
 "use server";
 
-import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 import database from "@/lib/database";
 import { ExtendedPost } from "@/types/database";
 
@@ -22,7 +22,7 @@ const getPosts = async (limit?: number): Promise<ExtendedPost[] | null> => {
       orderBy: {
         createdAt: "desc",
       },
-      take: limit ?? INFINITE_SCROLLING_PAGINATION_RESULTS,
+      take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
     });
     return allPosts;
   } catch (error: any) {

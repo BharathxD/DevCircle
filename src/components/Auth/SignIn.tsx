@@ -28,7 +28,7 @@ const SignIn: FC<SignInProps> = ({ customTitle }) => {
           {title}
         </CardTitle>
         <CardDescription className="max-w-xs text-lg mx-auto tracking-tighter">
-          By continuing, you are setting up a {siteConfig.siteName} account and
+          By continuing, you are setting up a {siteConfig.name} account and
           agree to our User Agreement and Privacy Policy.
         </CardDescription>
       </CardHeader>
@@ -48,7 +48,7 @@ const SignIn: FC<SignInProps> = ({ customTitle }) => {
         </div>
       </CardContent>
       <CardFooter className="flex items-center justify-center text-sm w-full md:text-md text-center text-zinc-700 dark:text-zinc-300">
-        <p className="mr-2">New to {siteConfig.siteName}?</p>
+        <p className="mr-2">New to {siteConfig.name}?</p>
         <Link
           href="/signup"
           className="hover:text-zinc-800 dark:hover:text-zinc-500 underline underline-offset-4"

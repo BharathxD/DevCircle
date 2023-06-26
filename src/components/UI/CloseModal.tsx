@@ -1,8 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { AiOutlineClose } from "react-icons/ai";
-import { FC, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { FC } from "react";
 
 interface CloseModalProps {}
 

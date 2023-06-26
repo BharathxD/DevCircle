@@ -1,6 +1,6 @@
 "use server";
 
-import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 import database from "@/lib/database";
 
 const getForum = async (forumName: string, limit?: number) => {
@@ -18,7 +18,7 @@ const getForum = async (forumName: string, limit?: number) => {
           orderBy: {
             createdAt: "desc",
           },
-          take: limit ?? INFINITE_SCROLLING_PAGINATION_RESULTS,
+          take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
         },
       },
     });

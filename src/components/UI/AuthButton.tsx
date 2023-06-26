@@ -1,7 +1,7 @@
 "use client";
 
-import { User } from "@prisma/client";
 import UserAccountNav from "../Navbar/UserAccountNav";
+import { User } from "@prisma/client";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 

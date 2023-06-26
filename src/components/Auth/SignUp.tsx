@@ -27,7 +27,7 @@ const SignUp: FC<SignInProps> = () => {
           Register Now
         </CardTitle>
         <CardDescription className="max-w-xs text-lg mx-auto tracking-tighter">
-          By continuing, you are setting up a {siteConfig.siteName} account and
+          By continuing, you are setting up a {siteConfig.name} account and
           agree to our User Agreement and Privacy Policy.
         </CardDescription>
       </CardHeader>

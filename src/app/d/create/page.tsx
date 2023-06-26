@@ -1,28 +1,28 @@
 "use client";
 
-import { Button } from "@/components/UI/Button";
-import { Input } from "@/components/UI/Input";
+import { FC, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useMutation } from "react-query";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
-import { useMutation } from "react-query";
-import { CreateForumPayload } from "@/lib/validators/forum";
 import { toast } from "@/hooks/useToast";
+import { Button } from "@/components/UI/Button";
+import { Input } from "@/components/UI/Input";
+import { CreateForumPayload } from "@/lib/validators/forum";
 
-const CreatePage = () => {
+const PostCreationPage: FC = () => {
   const [input, setInput] = useState<string>("");
   const router = useRouter();
 
-  const { mutate: createCommunity, isLoading } = useMutation({
+  const { mutate: createCommunity, isLoading } = useMutation<
+    string,
+    AxiosError | Error
+  >({
     mutationFn: async () => {
       const payload: CreateForumPayload = {
         forumName: input,
       };
-      const { data }: { data: string } = await axios.post(
-        "/api/forum",
-        payload
-      );
+      const { data } = await axios.post<string>("/api/forum", payload);
       return data;
     },
     onError: async (err: AxiosError | Error) => {
@@ -65,6 +65,10 @@ const CreatePage = () => {
     },
   });
 
+  const handleCancelClick = () => router.back();
+  const handleCreateForumClick = () => createCommunity();
+  const isInputValid = input.length > 0;
+
   return (
     <div className="md:flex md:items-center md:justify-center md:h-[70vh] md:w-full">
       <div className="md:container flex items-center h-full w-full md:max-w-3xl md:mx-auto">
@@ -96,15 +100,15 @@ const CreatePage = () => {
               disabled={isLoading}
               className="dark:bg-red-400"
               variant="destructive"
-              onClick={() => router.back()}
+              onClick={handleCancelClick}
             >
               Cancel
             </Button>
             <Button
-              onClick={() => createCommunity()}
+              onClick={handleCreateForumClick}
               isLoading={isLoading}
               variant="inverted"
-              disabled={input.length === 0}
+              disabled={!isInputValid}
             >
               Create Forum
             </Button>
@@ -115,4 +119,4 @@ const CreatePage = () => {
   );
 };
 
-export default CreatePage;
+export default PostCreationPage;

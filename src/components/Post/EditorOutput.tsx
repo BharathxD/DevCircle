@@ -1,9 +1,11 @@
 "use client";
 
-import CustomCodeRenderer from "@/renderers/CodeRenderer";
-import CustomImageRenderer from "@/renderers/ImageRenderer";
 import dynamic from "next/dynamic";
 import { FC } from "react";
+
+import CustomCodeRenderer from "@/renderers/CodeRenderer";
+import CustomImageRenderer from "@/renderers/ImageRenderer";
+
 
 const Output = dynamic(
   async () => (await import("editorjs-react-renderer")).default,
@@ -24,7 +26,7 @@ const style = {
     fontSize: "0.875rem",
     lineHeight: "1.25rem",
   },
-  linkTool: { siteName: { container: "#F6F667" } },
+  linkTool: { name: { container: "#F6F667" } },
 };
 
 const EditorOutput: FC<EditorOutputProps> = ({ content }) => {

@@ -1,5 +1,5 @@
-import { BsPeople } from "react-icons/bs";
 import { Button } from "@/components/UI/Button";
+import { BsPeople } from "react-icons/bs";
 
 const JoinedCommunities = () => {
   return (

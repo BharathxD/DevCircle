@@ -1,17 +1,17 @@
 "use client";
 
-import { usePrevious } from "@mantine/hooks";
-import { VoteType } from "@prisma/client";
-import { FC, useCallback, useEffect, useState } from "react";
-import { Button } from "../UI/Button";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
-import { cn } from "@/lib/utils";
-import { useMutation } from "react-query";
+import { FC, useCallback, useEffect, useState } from "react";
 import { PostVoteRequest } from "@/lib/validators/vote";
-import axios, { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
 import { StatusCodes } from "http-status-codes";
+import { usePrevious } from "@mantine/hooks";
+import { useRouter } from "next/navigation";
+import { VoteType } from "@prisma/client";
+import { useMutation } from "react-query";
+import axios, { AxiosError } from "axios";
 import { toast } from "@/hooks/useToast";
+import { Button } from "../UI/Button";
+import { cn } from "@/lib/utils";
 
 interface PostVoteClientProps {
   postId: string;
@@ -36,7 +36,6 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
   const {
     mutate: vote,
     isLoading,
-    error,
   } = useMutation({
     mutationFn: async (type: VoteType) => {
       const payload: PostVoteRequest = {

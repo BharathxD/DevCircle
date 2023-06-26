@@ -1,22 +1,27 @@
 "use client";
 
-import { ExtendedPost } from "@/types/database";
-import { Forum, User } from "@prisma/client";
-import { FC, useEffect, useRef } from "react";
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 import { useIntersection } from "@mantine/hooks";
+import { ExtendedPost } from "@/types/database";
 import { useInfiniteQuery } from "react-query";
-import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
+import { FC, useEffect, useRef } from "react";
+import { PulseLoader } from "react-spinners";
+import { Forum, User } from "@prisma/client";
 import axios, { AxiosError } from "axios";
-import { BiLoaderAlt } from "react-icons/bi";
-import Post from "./Post";
-import { BeatLoader, PulseLoader } from "react-spinners";
+import PostCard from "./PostCard";
 
+/**
+ * Props for the PostFeed component.
+ */
 interface PostFeedProps {
   initialPosts: ExtendedPost[];
   forumName?: Forum["name"];
   userId?: User["id"];
 }
 
+/**
+ * Component for displaying a feed of posts.
+ */
 const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
   const lastPostRef = useRef<HTMLElement>(null);
   const { ref, entry } = useIntersection({
@@ -24,9 +29,14 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
     threshold: 1,
   });
 
-  const fetchPosts = async ({ pageParam = 1 }) => {
+  /**
+   * Fetches posts from the server.
+   * @param pageParam The page number for pagination.
+   * @returns An array of ExtendedPost objects.
+   */
+  const fetchPosts = async ({ pageParam = 1 }): Promise<ExtendedPost[]> => {
     const query =
-      `/api/posts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
+      `/api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
       (forumName ? `&forumName=${forumName}` : "");
     const response = await axios.get(query);
     return response.data as ExtendedPost[];
@@ -48,7 +58,9 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
   );
 
   useEffect(() => {
-    if (entry?.isIntersecting) fetchNextPage();
+    if (entry?.isIntersecting) {
+      fetchNextPage();
+    }
   }, [entry, fetchNextPage]);
 
   useEffect(() => {
@@ -58,11 +70,15 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
   return (
-    <ul className="flex flex-col col-span-2 space-y-4 md:mb-10">
+    <ul className="flex flex-col col-span-2 space-y-4">
       {posts.map((post, index) => {
         const voteCount = post.votes.reduce((acc, vote) => {
-          if (vote.type === "UP") return acc + 1;
-          if (vote.type === "DOWN") return acc - 1;
+          if (vote.type === "UP") {
+            return acc + 1;
+          }
+          if (vote.type === "DOWN") {
+            return acc - 1;
+          }
           return acc;
         }, 0);
 
@@ -72,7 +88,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
 
         return (
           <li key={index} ref={isLastPost ? ref : null}>
-            <Post
+            <PostCard
               post={post}
               currentVote={currentVote?.type}
               votesAmount={voteCount}
@@ -85,10 +101,10 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
       })}
       {isFetchingNextPage && posts.length !== 0 && (
         <>
-          <li className="hidden dark:flex dark:justify-center py-2 md:pb-0">
+          <li className="hidden dark:flex dark:justify-center py-2">
             <PulseLoader color="#d4d4d8" size={10} />
           </li>
-          <li className="dark:hidden flex justify-center pb-4 md:pb-0">
+          <li className="dark:hidden flex justify-center pb-4">
             <PulseLoader
               className="block dark:hidden"
               color="#09090b"

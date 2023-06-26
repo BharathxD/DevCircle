@@ -1,6 +1,6 @@
 import { TbSmartHome } from "react-icons/tb";
-import Link from "next/link";
 import siteConfig from "@/config";
+import Link from "next/link";
 
 const CreateCommunity = () => {
   return (
@@ -13,7 +13,7 @@ const CreateCommunity = () => {
       </div>
       <div className="flex flex-col gap-4 p-5 text-sm leading-6">
         <p className="text-zinc-800 dark:text-zinc-50 font-medium">
-          Your personal {siteConfig.siteName} homepage. Come here to check in
+          Your personal {siteConfig.name} homepage. Come here to check in
           with your favorite communities.
         </p>
         <Link

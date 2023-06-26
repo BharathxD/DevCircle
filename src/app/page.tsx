@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { ExtendedPost } from "@/types/database";
-import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 
 import fetchPosts from "@/actions/getPosts";
 import getCurrentUser from "@/actions/getCurrentUser";
@@ -16,7 +16,7 @@ import CommunityLeaderboard from "@/components/Widgets/CommunityLeaderboard";
 const Home = async () => {
   const currentUser = await getCurrentUser();
   const posts: ExtendedPost[] | null = await fetchPosts(
-    INFINITE_SCROLLING_PAGINATION_RESULTS
+    INFINITE_SCROLL_PAGINATION_RESULTS
   );
   if (!posts) return notFound();
   return (
@@ -27,7 +27,7 @@ const Home = async () => {
         <JoinedCommunities />
       </section>
       {/* Middle */}
-      <section className="py-4 px-0 md:p-4 h-[91vh] w-full md:border-x-2 md:border-zinc-800 md:col-span-2 overflow-hidden overflow-y-scroll no-scrollbar">
+      <section className="py-4 md:px-4 h-[91vh] w-full md:border-x-2 md:border-zinc-800 md:col-span-2 overflow-hidden overflow-y-scroll no-scrollbar">
         <PostFeed initialPosts={posts} userId={currentUser?.id} />
       </section>
       {/* Right */}
