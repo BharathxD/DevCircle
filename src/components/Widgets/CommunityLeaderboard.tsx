@@ -3,6 +3,7 @@ import { MdOutlineLeaderboard } from "react-icons/md";
 
 const CommunityLeaderboard = async () => {
   const topCommunities = await getTopCommunities();
+  if (!topCommunities) return null;
   return (
     <div className="overflow-hidden h-fit rounded-md border-2 border-zinc-800 order-first md:order-last">
       <div className="bg-zinc-800 px-5 py-4 border-b-2 text-zinc-50 border-b-zinc-800">

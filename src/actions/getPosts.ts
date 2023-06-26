@@ -25,8 +25,8 @@ const getPosts = async (limit?: number): Promise<ExtendedPost[] | null> => {
       take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
     });
     return allPosts;
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error: unknown) {
+    return null;
   }
 };
 export default getPosts;

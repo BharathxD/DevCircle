@@ -11,7 +11,7 @@ import database from "@/lib/database";
  */
 const getTopCommunities = async (): Promise<
   { forumName: string; memberCount: number }[]
-> => {
+  | null> => {
   try {
     const forums = await database.forum.findMany({
       include: {
@@ -31,8 +31,8 @@ const getTopCommunities = async (): Promise<
     const topFiveForums = sortedForums.slice(0, 5);
 
     return topFiveForums;
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error: unknown) {
+    return null;
   }
 };
 

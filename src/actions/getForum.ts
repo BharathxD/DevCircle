@@ -1,8 +1,9 @@
 "use server";
 
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 import database from "@/lib/database";
-import { ExtendedForum } from "@/types/database";
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
+import type { ExtendedForum } from "@/types/database";
+import { PrismaClientValidationError } from "@prisma/client/runtime";
 
 /**
  * This function retrieves a forum and its associated posts from a database, with an optional limit on
@@ -36,8 +37,8 @@ const getForum = async (forumName: string, limit?: number): Promise<ExtendedForu
     });
 
     return forum;
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error: unknown) {
+    return null;
   }
 };
 export default getForum;

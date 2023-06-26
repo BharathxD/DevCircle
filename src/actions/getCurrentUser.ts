@@ -2,8 +2,9 @@
 
 import { authOptions } from "@/lib/auth";
 import database from "@/lib/database";
-import { User } from "@prisma/client";
-import { Session, getServerSession } from "next-auth";
+import type { User } from "@prisma/client";
+import { getServerSession } from "next-auth";
+import type { Session } from "next-auth";
 
 /**
  * Retrieves a server session using authentication options.
@@ -24,8 +25,7 @@ const getCurrentUser = async (): Promise<User | null> => {
     });
     if (!currentUser) return null;
     return currentUser;
-  } catch (error: any) {
-    console.log(error);
+  } catch (error: unknown) {
     return null;
   }
 };

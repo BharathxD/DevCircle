@@ -1,4 +1,5 @@
-import { infer as zodInfer, object, string, ZodEnum } from "zod";
+import { object, string, ZodEnum } from "zod";
+import type { infer as zodInfer } from "zod";
 
 const PostVoteValidator = object({
   postId: string({}),
