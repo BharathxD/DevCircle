@@ -23,13 +23,13 @@ export default async function RootLayout({ children }: rootProps) {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
       <body className="dark:bg-zinc-950 bg-zinc-50 text-zinc-800 dark:text-zinc-50">
-        <ThemeProvider>
-          <RtkProvider>
+        <RtkProvider>
+          <ThemeProvider>
             <Navbar />
             <main className="container h-full">{children}</main>
-          </RtkProvider>
-          <Toaster />
-        </ThemeProvider>
+            <Toaster />
+          </ThemeProvider>
+        </RtkProvider>
       </body>
     </html>
   );

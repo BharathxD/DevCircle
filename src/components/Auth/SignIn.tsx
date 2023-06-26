@@ -5,6 +5,14 @@ import Link from "next/link";
 import { FiGlobe } from "react-icons/fi";
 import OAuthSignIn from "./OAuthSignIn";
 import { FC } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../UI/Card";
 
 interface SignInProps {
   customTitle?: string;
@@ -13,27 +21,33 @@ interface SignInProps {
 const SignIn: FC<SignInProps> = ({ customTitle }) => {
   const title = customTitle ?? "Welcome back!";
   return (
-    <div className="mx-auto w-full h-full flex flex-col justify-center pt-2 pb-6 gap-4 md:px-8 text-center">
-      <FiGlobe size={75} className="mx-auto" />
-      <h1 className="text-4xl md:text-4xl -mb-1 h-full font-semibold tracking-tight dark:text-transparent text-zinc-800 dark:bg-clip-text dark:bg-gradient-to-br dark:from-zinc-200 dark:to-zinc-400">
-        {title}
-      </h1>
-      <p className="max-w-xs text-lg mx-auto tracking-tighter">
-        By continuing, you are setting up a {siteConfig.siteName} account and
-        agree to our User Agreement and Privacy Policy.
-      </p>
-      <OAuthSignIn />
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
+    <Card className="flex flex-col justify-center text-center border-2 dark:border-1 border-zinc-800 bg-zinc-950/80 backdrop-blur-sm">
+      <CardHeader className="flex flex-col gap-2">
+        <FiGlobe size={75} className="mx-auto dark:text-zinc-300" />
+        <CardTitle className="text-4xl md:text-4xl h-full font-semibold tracking-tight dark:text-transparent bg-clip-text text-zinc-800 dark:bg-gradient-to-br dark:from-zinc-200 dark:to-zinc-400">
+          {title}
+        </CardTitle>
+        <CardDescription className="max-w-xs text-lg mx-auto tracking-tighter">
+          By continuing, you are setting up a {siteConfig.siteName} account and
+          agree to our User Agreement and Privacy Policy.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <OAuthSignIn />
+      </CardContent>
+      <CardContent>
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="backdrop-blur-lg bg-zinc-800/50 md:bg-background rounded-md px-2 text-muted-foreground">
+              Or continue with
+            </span>
+          </div>
         </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="backdrop-blur-sm rounded-md px-2 text-muted-foreground">
-            Or
-          </span>
-        </div>
-      </div>
-      <div className="flex items-center justify-center text-sm w-full md:text-md text-center text-zinc-700 dark:text-zinc-300">
+      </CardContent>
+      <CardFooter className="flex items-center justify-center text-sm w-full md:text-md text-center text-zinc-700 dark:text-zinc-300">
         <p className="mr-2">New to {siteConfig.siteName}?</p>
         <Link
           href="/signup"
@@ -41,8 +55,8 @@ const SignIn: FC<SignInProps> = ({ customTitle }) => {
         >
           Sign Up
         </Link>
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 };
 

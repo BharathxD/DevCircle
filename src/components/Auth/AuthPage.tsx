@@ -3,6 +3,7 @@ import { buttonVariants } from "@/components/UI/Button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { IoIosArrowBack } from "react-icons/io";
+import { Card, CardContent, CardHeader } from "../UI/Card";
 
 interface AuthPageProps {
   children: React.ReactNode;
@@ -10,8 +11,8 @@ interface AuthPageProps {
 
 const AuthPage: React.FC<AuthPageProps> = ({ children }) => {
   return (
-    <div className="bg-zinc-50 dark:bg-zinc-950 h-max border-2 border-zinc-800 p-5 rounded-md flex flex-col gap-4 transition-colors duration-300">
-      <div className="w-full p-1 hover:text-zinc-500">
+    <Card className="bg-zinc-50 dark:bg-zinc-950 h-max border-2 border-zinc-800 p-5 rounded-md flex flex-col gap-4 transition-colors duration-300">
+      <CardHeader className="w-full p-1 hover:text-zinc-500">
         <Link
           className={cn(
             buttonVariants({ variant: "skeleton" }),
@@ -22,9 +23,9 @@ const AuthPage: React.FC<AuthPageProps> = ({ children }) => {
           <IoIosArrowBack className="mr-2" />
           <p className="dark:text-zinc-300">Home</p>
         </Link>
-      </div>
+      </CardHeader>
       {children}
-    </div>
+    </Card>
   );
 };
 

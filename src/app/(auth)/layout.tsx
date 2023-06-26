@@ -3,7 +3,6 @@ import Link from "next/link";
 import AspectRatio from "@/components/UI/AspectRatio";
 import { FiGlobe } from "react-icons/fi";
 import siteConfig from "@/config";
-import AuthPage from "@/components/Auth/AuthPage";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -29,8 +28,8 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
           <span>{siteConfig.siteName}</span>
         </Link>
       </AspectRatio>
-      <main className="bg-transparent md:bg-zinc-50 md:dark:bg-zinc-950 w-full absolute top-1/2 col-span-1 flex -translate-y-1/2 items-center justify-center md:static md:top-0 md:col-span-1 md:flex md:translate-y-0 p-2">
-        <AuthPage>{children}</AuthPage>
+      <main className="bg-transparent md:bg-zinc-50 md:dark:bg-zinc-950 w-full absolute top-1/2 col-span-1 flex -translate-y-1/2 items-center justify-center md:static md:top-0 md:col-span-1 md:flex md:translate-y-0">
+        {children}
       </main>
     </div>
   );
