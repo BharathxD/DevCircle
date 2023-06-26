@@ -1,5 +1,6 @@
 import "server-only";
 import { PrismaClient } from "@prisma/client";
+import { env } from "@/env.mjs";
 
 declare global {
   var cachedPrisma: PrismaClient;
@@ -14,7 +15,7 @@ declare global {
  * stored in `global.cachedPrisma`. finally returns that instance.
  */
 const getPrismaClient = () => {
-  if (process.env.NODE_ENV === "production") return new PrismaClient();
+  if (env["NODE_ENV"] === "production") return new PrismaClient();
   if (!global.cachedPrisma) global.cachedPrisma = new PrismaClient();
   return global.cachedPrisma;
 };

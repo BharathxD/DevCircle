@@ -6,18 +6,62 @@ import RtkProvider from "@/providers/RtkProvider";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/providers/Toaster";
 import ThemeProvider from "@/providers/ThemeProvider";
+import { Metadata } from "next";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
-
-export const metadata = {
-  title: siteConfig.name,
-  description: "A community for all the BCA members, just like reddit!",
-};
 
 interface rootProps {
   children: React.ReactNode;
   authModal: React.ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [
+    "Next.js",
+    "Server Actions",
+    "React",
+    "Tailwind CSS",
+    "Server Components",
+    "Community for Developers",
+    "Community",
+  ],
+  authors: [
+    {
+      name: "BharathxD",
+      url: "https://github.com/BharathxD",
+    },
+  ],
+  creator: "BharathxD",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [`${siteConfig.url}/seo/og-image.jpg`],
+    creator: "@BharathxD",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+};
 
 export default async function RootLayout({ children }: rootProps) {
   return (

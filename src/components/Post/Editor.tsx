@@ -83,7 +83,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
                   return {
                     success: 1,
                     file: {
-                      url: res.fileUrl,
+                      url: res?.fileUrl,
                     },
                   };
                 },
