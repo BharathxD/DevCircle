@@ -45,61 +45,62 @@ const Layout = async ({
   });
 
   return (
-    <div className="h-full font-medium md:py-1">
-      <div>
-        {/* TODO: Create Feed Button */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4">
-          <div className="flex flex-col col-span-2 space-y-6">{children}</div>
-          {/* TODO: Info Side Bar */}
-          {forum && (
-            <div className="hidden md:block overflow-hidden h-fit rounded-lg border-2 border-zinc-800 order-first md:order-last mt-[4rem]">
-              <div className="px-6 py-4 bg-green-100 dark:bg-zinc-800">
-                <p className="font-bold text-xl py-3">About d/{forumName}</p>
-              </div>
-              <div className="h-[2px] w-full bg-zinc-800" />
-              <dl className="text-md leading-6 dark:bg-zinc-900 bg-zinc-50">
-                <div className="px-6 py-4 flex justify-between items-center gap-x-4">
-                  <dt className="text-zinc-700 dark:text-zinc-100">Created</dt>
-                  <dd className="text-zinc-700 dark:text-zinc-50">
-                    <time dateTime={forum.createdAt.toDateString()}>
-                      {format(forum.createdAt, "MMMM d, yyyy")}
-                    </time>
-                  </dd>
-                </div>
-
-                <div className="h-[2px] w-full bg-zinc-800" />
-
-                <div className="flex justify-between gap-x-4 px-6 py-4">
-                  <dt className="text-zinc-700 dark:text-zinc-100">Members</dt>
-                  <dd className="text-zinc-700 dark:text-zinc-50">
-                    {memberCount}
-                  </dd>
-                </div>
-
-                {forum.creatorId === currentUser?.id ? (
-                  <Fragment>
-                    <div className="h-[2px] w-full bg-zinc-800" />
-                    <div className="flex justify-between gap-x-4 px-6 py-4">
-                      <p className="text-zinc-500">
-                        You created this community
-                      </p>
-                    </div>
-                  </Fragment>
-                ) : (
-                  <Fragment>
-                    <div className="h-[2px] w-full bg-zinc-800" />
-                    <div className="flex justify-between gap-x-4 px-6 py-4">
-                      <SubscribeLeaveToggle
-                        isSubscribed={isSubscribed}
-                        forum={{ id: forum.id, name: forum.name }}
-                      />
-                    </div>
-                  </Fragment>
-                )}
-              </dl>
-            </div>
-          )}
+    <div className="h-full font-medium py-6">
+      {/* TODO: Create Feed Button */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4">
+        <div className="col-span-2">
+          <h1 className="font-bold text-3xl md:text-4xl">d/{forumName}</h1>
+          <div className="flex flex-col py-6 gap-4">
+            {children}
+          </div>
         </div>
+        {/* TODO: Info Side Bar */}
+        {forum && (
+          <div className="hidden md:block overflow-hidden h-fit rounded-lg border-2 border-zinc-800 order-first md:order-last mt-[4rem]">
+            <div className="px-6 py-4 bg-green-100 dark:bg-zinc-800">
+              <p className="font-bold text-xl py-3">About d/{forumName}</p>
+            </div>
+            <div className="h-[2px] w-full bg-zinc-800" />
+            <dl className="text-md leading-6 dark:bg-zinc-900 bg-zinc-50">
+              <div className="px-6 py-4 flex justify-between items-center gap-x-4">
+                <dt className="text-zinc-700 dark:text-zinc-100">Created</dt>
+                <dd className="text-zinc-700 dark:text-zinc-50">
+                  <time dateTime={forum.createdAt.toDateString()}>
+                    {format(forum.createdAt, "MMMM d, yyyy")}
+                  </time>
+                </dd>
+              </div>
+
+              <div className="h-[2px] w-full bg-zinc-800" />
+
+              <div className="flex justify-between gap-x-4 px-6 py-4">
+                <dt className="text-zinc-700 dark:text-zinc-100">Members</dt>
+                <dd className="text-zinc-700 dark:text-zinc-50">
+                  {memberCount}
+                </dd>
+              </div>
+
+              {forum.creatorId === currentUser?.id ? (
+                <Fragment>
+                  <div className="h-[2px] w-full bg-zinc-800" />
+                  <div className="flex justify-between gap-x-4 px-6 py-4">
+                    <p className="text-zinc-500">You created this community</p>
+                  </div>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <div className="h-[2px] w-full bg-zinc-800" />
+                  <div className="flex justify-between gap-x-4 px-6 py-4">
+                    <SubscribeLeaveToggle
+                      isSubscribed={isSubscribed}
+                      forum={{ id: forum.id, name: forum.name }}
+                    />
+                  </div>
+                </Fragment>
+              )}
+            </dl>
+          </div>
+        )}
       </div>
     </div>
   );

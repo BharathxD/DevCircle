@@ -6,9 +6,10 @@ import { FC, useEffect, useRef } from "react";
 import { useIntersection } from "@mantine/hooks";
 import { useInfiniteQuery } from "react-query";
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from "@/config";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { BiLoaderAlt } from "react-icons/bi";
 import Post from "./Post";
+import { BeatLoader, PulseLoader } from "react-spinners";
 
 interface PostFeedProps {
   initialPosts: ExtendedPost[];
@@ -27,23 +28,32 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
     const query =
       `/api/posts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
       (forumName ? `&forumName=${forumName}` : "");
-
     const response = await axios.get(query);
     return response.data as ExtendedPost[];
   };
 
-  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
+  const { data, fetchNextPage, isFetchingNextPage, error } = useInfiniteQuery(
     "infinite-query",
     fetchPosts,
     {
       getNextPageParam: (_, pages) => pages.length + 1,
       initialData: { pages: [initialPosts], pageParams: [1] },
+      retry: (failureCount, error: AxiosError) => {
+        if (failureCount > 5 || error.response?.status === 200) {
+          return false;
+        }
+        return true;
+      },
     }
   );
 
   useEffect(() => {
     if (entry?.isIntersecting) fetchNextPage();
   }, [entry, fetchNextPage]);
+
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
 
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
@@ -73,9 +83,23 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
           </li>
         );
       })}
-      {isFetchingNextPage && (
-        <li className="flex justify-center pb-4 md:pb-0">
-          <BiLoaderAlt className="w-6 h-6 text-zinc-500 animate-spin" />
+      {isFetchingNextPage && posts.length !== 0 && (
+        <>
+          <li className="hidden dark:flex dark:justify-center py-2 md:pb-0">
+            <PulseLoader color="#d4d4d8" size={10} />
+          </li>
+          <li className="dark:hidden flex justify-center pb-4 md:pb-0">
+            <PulseLoader
+              className="block dark:hidden"
+              color="#09090b"
+              size={10}
+            />
+          </li>
+        </>
+      )}
+      {posts.length === 0 && (
+        <li className="text-center text-gray-500">
+          Looks like you&apos;ve caught up
         </li>
       )}
     </ul>

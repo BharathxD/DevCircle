@@ -19,7 +19,6 @@ const ForumPage = async ({ params }: ForumPageProps) => {
   if (!forum) return notFound();
   return (
     <Fragment>
-      <h1 className="font-bold text-3xl md:text-4xl">d/{forum.name}</h1>
       <MiniCreatePost currentUser={currentUser} />
       {forum.posts.length === 0 ? (
         <div className="w-full text-center font-medium p-2 border-2 rounded-md text-zinc-800 border-zinc-800 dark:bg-red-300 bg-yellow-300">
