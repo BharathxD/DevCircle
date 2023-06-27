@@ -19,12 +19,13 @@ const getPosts = async (limit?: number): Promise<ExtendedPost[] | null> => {
         author: true,
         comments: true,
         forum: true,
+        tags: true,
       },
       orderBy: {
         createdAt: "desc",
       },
       take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
-    });
+    })
     return allPosts
   } catch (error: unknown) {
     return null

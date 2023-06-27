@@ -16,12 +16,14 @@
 .dark .ce-toolbox__button,
 .dark .cdx-settings-button,
 .dark .ce-toolbar__plus {
-  color: inherit;
+  background-color: #18181b;
+  color: #fafafa;
+  border-color: #27272a;
 }
 
 .dark .ce-popover__item-icon,
 .dark .ce-conversion-tool__icon {
-  background-color: theme("colors.muted.DEFAULT");
+  background-color: #18181b;
   color: #fafafa;
   box-shadow: none;
 }
@@ -41,8 +43,28 @@
 .dark .ce-popover__item:hover,
 .dark .ce-conversion-tool:hover,
 .dark .ce-toolbar__settings-btn:hover {
-  background-color: theme("colors.accent.DEFAULT");
-  color: theme("colors.accent.foreground");
+  background-color: #18181b;
+  color: #fafafa;
+}
+
+.dark .ce-popover__item {
+  background-color: #18181b;
+  color: #fafafa;
+  border-color: #27272a;
+}
+
+.dark .ce-popover-item:hover {
+  background-color: #27272a;
+}
+
+.dark .ce-popover-item__title {
+  color: #fafafa;
+}
+
+.dark .ce-popover {
+  background-color: #09090b;
+  color: #fafafa;
+  border-color: #27272a;
 }
 
 .dark .cdx-notify--error {
@@ -52,8 +74,4 @@
 .dark .cdx-notify__cross::after,
 .dark .cdx-notify__cross::before {
   background: white;
-}
-
-.codex-editor__redactor {
-  padding: 0 !important;
 }

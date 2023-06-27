@@ -7,7 +7,7 @@ const PostValidator = object({
     .max(128, { message: "Title must be less than 128 characters long" }),
   forumId: string(),
   content: any(),
-  tags: array(string())
+  tags: array(string()),
 })
 
 type PostCreationRequest = zodInfer<typeof PostValidator>

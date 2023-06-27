@@ -7,7 +7,7 @@ interface SubscribedCommunitiesProps {
   forums: string[] | null
 }
 
-const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = async ({
+const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
   forums,
 }) => {
   if (!forums) return null
@@ -20,19 +20,17 @@ const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = async ({
         </div>
       </div>
       <div>
-        {forums?.map((forumName) => {
-          return (
-            <Link
-              className="flex w-full items-center justify-between border-b-2 border-zinc-800 p-2 px-3 py-4 last:border-b-0 hover:bg-zinc-300 hover:text-zinc-300 hover:dark:bg-zinc-900"
-              href={`/d/${forumName}`}
-            >
-              <h2>{forumName}</h2>
-              <span>
-                <BsArrowUpRightSquare size={25} />
-              </span>
-            </Link>
-          )
-        })}
+        {forums.map((forumName: string) => (
+          <Link
+            className="flex w-full items-center justify-between border-b-2 border-zinc-800 p-2 px-3 py-4 last:border-b-0 hover:bg-zinc-300 hover:text-zinc-300 hover:dark:bg-zinc-900"
+            href={`/d/${forumName}`}
+          >
+            <h2>{forumName}</h2>
+            <span>
+              <BsArrowUpRightSquare size={25} />
+            </span>
+          </Link>
+        ))}
       </div>
     </div>
   )

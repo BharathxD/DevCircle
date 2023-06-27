@@ -36,7 +36,13 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       take: +limit,
       skip: (+page - 1) * +limit,
       orderBy: { createdAt: "desc" },
-      include: { forum: true, votes: true, author: true, comments: true },
+      include: {
+        forum: true,
+        votes: true,
+        author: true,
+        comments: true,
+        tags: true,
+      },
       where: whereClause,
     })
 

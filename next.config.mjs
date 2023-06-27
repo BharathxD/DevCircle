@@ -2,7 +2,7 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
-await import("./src/env.mjs");
+await import("./src/env.mjs")
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -17,6 +17,6 @@ const nextConfig = {
     appDir: true,
     serverActions: true,
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig

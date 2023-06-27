@@ -30,7 +30,7 @@ const getForum = async (
             votes: true,
             comments: true,
             forum: true,
-            tags: true
+            tags: true,
           },
           orderBy: {
             createdAt: "desc",
@@ -40,9 +40,9 @@ const getForum = async (
       },
     })
 
-    return forum;
+    return forum
   } catch (error: unknown) {
-    console.log(error);
+    console.log(error)
     return null
   }
 }

@@ -66,7 +66,7 @@ const Tags: React.FC<TagProps> = ({ tags, setTags }) => {
           />
           <Button
             size={"sm"}
-            className="rounded-r-md bg-zinc-950 px-4 hover:bg-zinc-800"
+            className="rounded-r-md bg-transparent px-4 hover:bg-zinc-800 dark:bg-zinc-950"
             onClick={handleKeyAddition}
             disabled={tags.length === 5}
           >
@@ -78,7 +78,7 @@ const Tags: React.FC<TagProps> = ({ tags, setTags }) => {
         <div className="no-scrollbar flex flex-row gap-2 overflow-hidden overflow-x-scroll rounded-md">
           {tags.map((tag, index) => (
             <div
-              className="flex flex-row items-center justify-between gap-1 rounded-md border-2 border-zinc-800 bg-zinc-800 px-4 py-1.5 hover:cursor-pointer hover:border-red-500 hover:bg-red-500"
+              className="flex flex-row items-center justify-between gap-1 rounded-md border-2 border-zinc-800 bg-zinc-800 px-4 py-1.5 text-zinc-50 hover:cursor-pointer hover:border-red-500 hover:bg-red-500 dark:text-zinc-300"
               key={index}
               onClick={() =>
                 setTags((prevTags) =>

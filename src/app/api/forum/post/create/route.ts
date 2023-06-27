@@ -58,12 +58,10 @@ export async function POST(req: NextRequest) {
         title,
         content,
         tags: {
-          create: tags.map(name => ({ name })),
+          create: tags.map((name) => ({ name })),
         },
       },
-    });
-
-
+    })
 
     return NextResponse.json(post, { status: StatusCodes.CREATED })
   } catch (error: unknown) {

@@ -3,11 +3,12 @@
 import { useRef } from "react"
 import type { FC } from "react"
 import Link from "next/link"
-import type { Post, User, Vote } from "@prisma/client"
+import type { Post, Tag, User, Vote } from "@prisma/client"
 import { BiMessageAltDetail } from "react-icons/bi"
 
 import formatTimeToNow from "@/lib/formatTimeToNow"
 
+import { Button } from "../UI/Button"
 import EditorOutput from "./EditorOutput"
 import PostVoteClient from "./PostVoteClient"
 
@@ -15,6 +16,7 @@ interface PostCardProps {
   post: Post & {
     author: User
     votes: Vote[]
+    tags: Tag[]
   }
   votesAmount: number
   forumName?: string
@@ -38,7 +40,10 @@ const PostCard: FC<PostCardProps> = ({
   const isPostOverflowed = postRef.current?.clientHeight === 160
 
   const postContent = (
-    <div className="relative max-h-40 w-full overflow-hidden text-sm" ref={postRef}>
+    <div
+      className="relative max-h-40 w-full overflow-hidden text-sm"
+      ref={postRef}
+    >
       <EditorOutput content={post.content} />
       {isPostOverflowed && (
         <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent dark:from-zinc-900"></div>
@@ -84,12 +89,21 @@ const PostCard: FC<PostCardProps> = ({
           {postContent}
         </div>
       </div>
-      <div className="z-20 rounded-b-md border-t-2 border-t-zinc-800 text-sm">
+      <div className="z-20 flex w-full flex-row items-center justify-between rounded-b-md border-t-2 border-t-zinc-800 text-sm">
         <Link href={`/d/${forumName}/post/${post.id}`}>
           <div className="flex w-fit items-center gap-2 rounded-bl-md border-r-2 border-r-zinc-800 px-6 py-3 font-medium hover:bg-yellow-100 dark:hover:bg-zinc-800">
             <BiMessageAltDetail size={25} /> {commentAmount} <p>comments</p>
           </div>
         </Link>
+        {post.tags && (
+          <div className="flex h-full max-w-full flex-row gap-2 overflow-hidden overflow-x-scroll px-2 py-1">
+            {post.tags.map((tag) => (
+              <button className="rounded-md border-2 border-zinc-800 px-5 py-1 font-medium hover:bg-zinc-800">
+                {tag.name}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </article>
   )
