@@ -24,7 +24,7 @@ const getCurrentUser = async (): Promise<User | null> => {
     const currentUser = await database.user.findUnique({
       where: { email: session.user.email },
     })
-    if (!currentUser) return null
+    if (!currentUser) return null;
     return currentUser
   } catch (error: unknown) {
     return null

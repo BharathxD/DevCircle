@@ -93,6 +93,7 @@ model Post {
   forumId   String
   comments  Comment[]
   votes     Vote[]
+  tags      Tag[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
@@ -101,6 +102,15 @@ model Post {
 
   @@index([authorId])
   @@index([forumId])
+}
+
+model Tag {
+  id     String @id @default(cuid())
+  postId String
+  name   String
+  post   Post   @relation(fields: [postId], references: [id])
+
+  @@index([postId])
 }
 
 model Comment {

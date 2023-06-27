@@ -1,4 +1,4 @@
-import { any, object, string } from "zod"
+import { any, array, object, string } from "zod"
 import type { infer as zodInfer } from "zod"
 
 const PostValidator = object({
@@ -7,6 +7,7 @@ const PostValidator = object({
     .max(128, { message: "Title must be less than 128 characters long" }),
   forumId: string(),
   content: any(),
+  tags: array(string())
 })
 
 type PostCreationRequest = zodInfer<typeof PostValidator>

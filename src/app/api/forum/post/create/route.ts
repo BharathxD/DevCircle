@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     // Parse the request body
     const body = await req.json()
-    const { title, content, forumId } = PostValidator.parse(body)
+    const { title, content, forumId, tags } = PostValidator.parse(body)
 
     if (content.blocks.length === 0) {
       return NextResponse.json(
@@ -57,8 +57,13 @@ export async function POST(req: NextRequest) {
         authorId: currentUser.id,
         title,
         content,
+        tags: {
+          create: tags.map(name => ({ name })),
+        },
       },
-    })
+    });
+
+
 
     return NextResponse.json(post, { status: StatusCodes.CREATED })
   } catch (error: unknown) {

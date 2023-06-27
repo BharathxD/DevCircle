@@ -1,10 +1,11 @@
-import type { Comment, Forum, Post, User, Vote } from "@prisma/client"
+import type { Comment, Forum, Post, User, Vote, Tag } from "@prisma/client"
 
 export type ExtendedPost = Post & {
   forum: Forum
   votes: Vote[]
   author: User
   comments: Comment[]
+  tags: Tag[]
 }
 
 export type ExtendedForum = Forum & {

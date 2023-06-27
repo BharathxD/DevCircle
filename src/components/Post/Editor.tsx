@@ -9,8 +9,6 @@ import { useMutation } from "react-query"
 
 import { toast } from "@/hooks/useToast"
 
-import { Button } from "../UI/Button"
-
 import "@/styles/editor.css"
 
 import type EditorJS from "@editorjs/editorjs"
@@ -24,6 +22,9 @@ import { uploadFiles } from "@/lib/uploadFiles"
 import { PostValidator } from "@/lib/validators/post"
 import type { PostCreationRequest } from "@/lib/validators/post"
 
+import { ScrollArea } from "../UI/ScrollArea"
+import Tags from "./Tags"
+
 interface EditorProps {
   forumId: string
 }
@@ -36,6 +37,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
   const editorRef = useRef<EditorJS | null>(null)
   const _titleRef = useRef<HTMLTextAreaElement>(null)
   const [isMounted, setIsMounted] = useState(false)
+  const [tags, setTags] = useState<string[]>([])
 
   const {
     register,
@@ -43,7 +45,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(PostValidator),
-    defaultValues: { title: "", forumId, content: null },
+    defaultValues: { title: "", forumId, content: null, tags: [] },
   })
 
   useEffect(() => {
@@ -66,7 +68,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
         onReady() {
           editorRef.current = editor
         },
-        placeholder: "Type here to write your post...",
+        placeholder: "Click here to write your post...",
         inlineToolbar: true,
         data: { blocks: [] },
         tools: {
@@ -191,13 +193,15 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
       forumId,
       title: data.title,
       content: blocks,
+      tags: tags,
     }
     mutate(payload)
   }
 
   return (
-    <div className="h-full w-full">
-      <div className="relative rounded-lg border-2 bg-zinc-50 p-5 dark:border-zinc-700 dark:bg-zinc-800">
+    <div className="flex h-full w-full flex-col gap-3">
+      <Tags tags={tags} setTags={setTags} />
+      <ScrollArea className="relative h-[60vh] w-full rounded-lg border-2 border-zinc-800 bg-zinc-50 p-5 dark:bg-zinc-900">
         <form
           id="subreddit-post-form"
           className="w-fit rounded-md"
@@ -213,20 +217,20 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
             <div
               {...register("content")}
               id="editor"
-              className="min-h-[40vh] p-0"
+              className="h-[40vh] p-0 hover:cursor-text"
             />
           </div>
         </form>
-      </div>
-      <Button
+        {/* </div> */}
+      </ScrollArea>
+      <button
         type="submit"
-        className="mt-4 w-full bg-zinc-800 text-lg font-bold text-zinc-50 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-700 dark:hover:text-zinc-50"
+        className="w-full rounded-md border-2 border-zinc-800 bg-zinc-900 px-3 py-1 text-lg font-bold text-zinc-50 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
         form="subreddit-post-form"
-        isLoading={isLoading}
         disabled={isLoading}
       >
         POST
-      </Button>
+      </button>
     </div>
   )
 }
