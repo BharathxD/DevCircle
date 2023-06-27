@@ -5,10 +5,8 @@
 .dark .ce-settings,
 .dark .ce-settings__button,
 .dark .ce-toolbar__settings-btn,
-.dark .cdx-button,
-.dark .ce-popover,
 .dark .ce-toolbar__plus:hover {
-  background: theme("colors.popover.DEFAULT");
+  background: #09090b;
   color: inherit;
   border-color: theme("colors.border");
 }
@@ -24,6 +22,7 @@
 .dark .ce-popover__item-icon,
 .dark .ce-conversion-tool__icon {
   background-color: theme("colors.muted.DEFAULT");
+  color: #fafafa;
   box-shadow: none;
 }
 
@@ -32,11 +31,6 @@
   background: theme("colors.input");
   color: inherit;
 }
-
-.dark ::selection {
-  background: theme("colors.accent.DEFAULT");
-}
-
 .dark .cdx-settings-button:hover,
 .dark .ce-settings__button:hover,
 .dark .ce-toolbox__button--active,
@@ -61,5 +55,5 @@
 }
 
 .codex-editor__redactor {
-  padding-bottom: 0 !important;
+  padding: 0 !important;
 }

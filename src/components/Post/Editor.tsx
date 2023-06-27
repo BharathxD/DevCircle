@@ -13,15 +13,7 @@ import { Button } from "../UI/Button"
 
 import "@/styles/editor.css"
 
-import Code from "@editorjs/code"
-import EditorJS from "@editorjs/editorjs"
-import Embed from "@editorjs/embed"
-import Header from "@editorjs/header"
-import ImageTool from "@editorjs/image"
-import InlineCode from "@editorjs/inline-code"
-import LinkTool from "@editorjs/link"
-import List from "@editorjs/list"
-import Table from "@editorjs/table"
+import type EditorJS from "@editorjs/editorjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import type { Post } from "@prisma/client"
 import { StatusCodes } from "http-status-codes"
@@ -58,7 +50,16 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
     setIsMounted(true)
   }, [])
 
-  const initializeEditor = useCallback(() => {
+  const initializeEditor = useCallback(async () => {
+    const EditorJS = (await import("@editorjs/editorjs")).default
+    const Header = (await import("@editorjs/header")).default
+    const Embed = (await import("@editorjs/embed")).default
+    const Table = (await import("@editorjs/table")).default
+    const List = (await import("@editorjs/list")).default
+    const Code = (await import("@editorjs/code")).default
+    const LinkTool = (await import("@editorjs/link")).default
+    const InlineCode = (await import("@editorjs/inline-code")).default
+    const ImageTool = (await import("@editorjs/image")).default
     if (!editorRef.current) {
       const editor = new EditorJS({
         holder: "editor",
@@ -195,33 +196,37 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
   }
 
   return (
-    <div className="relative w-full rounded-lg border-2 border-zinc-800 bg-zinc-50 p-5 pb-1 dark:border-zinc-800 dark:bg-zinc-800">
-      <form
-        id="subreddit-post-form"
-        className="w-fit"
-        onSubmit={() => handleSubmit(handleSubmitForm)}
-      >
-        <div className="prose prose-stone dark:prose-invert">
-          <TextareaAutosize
-            ref={titleRef}
-            {...rest}
-            placeholder="Title"
-            className="h-fit w-full resize-none appearance-none overflow-hidden bg-transparent p-0 text-5xl font-bold focus:outline-none"
-          />
-          <div {...register("content")} id="editor" className="min-h-[40vh]" />
-        </div>
-      </form>
-      <div className="absolute inset-x-0 bottom-[4.5rem] mb-3 flex w-full justify-end">
-        <Button
-          type="submit"
-          className="w-full bg-zinc-800 text-lg font-bold text-zinc-50 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-700 dark:hover:text-zinc-50"
-          form="subreddit-post-form"
-          isLoading={isLoading}
-          disabled={isLoading}
+    <div className="h-full w-full">
+      <div className="relative rounded-lg border-2 bg-zinc-50 p-5 dark:border-zinc-700 dark:bg-zinc-800">
+        <form
+          id="subreddit-post-form"
+          className="w-fit rounded-md"
+          onSubmit={handleSubmit(handleSubmitForm)}
         >
-          POST
-        </Button>
+          <div className="prose prose-stone dark:prose-invert">
+            <TextareaAutosize
+              ref={titleRef}
+              {...rest}
+              placeholder="Title"
+              className="h-fit w-full resize-none appearance-none overflow-hidden bg-transparent p-0 text-5xl font-bold focus:outline-none"
+            />
+            <div
+              {...register("content")}
+              id="editor"
+              className="min-h-[40vh] p-0"
+            />
+          </div>
+        </form>
       </div>
+      <Button
+        type="submit"
+        className="mt-4 w-full bg-zinc-800 text-lg font-bold text-zinc-50 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-700 dark:hover:text-zinc-50"
+        form="subreddit-post-form"
+        isLoading={isLoading}
+        disabled={isLoading}
+      >
+        POST
+      </Button>
     </div>
   )
 }

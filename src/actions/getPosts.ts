@@ -24,7 +24,7 @@ const getPosts = async (limit?: number): Promise<ExtendedPost[] | null> => {
         createdAt: "desc",
       },
       take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
-    })
+    });
     return allPosts
   } catch (error: unknown) {
     return null

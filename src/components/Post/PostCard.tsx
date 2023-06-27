@@ -38,7 +38,7 @@ const PostCard: FC<PostCardProps> = ({
   const isPostOverflowed = postRef.current?.clientHeight === 160
 
   const postContent = (
-    <div className="relative max-h-40 w-full text-clip text-sm" ref={postRef}>
+    <div className="relative max-h-40 w-full overflow-hidden text-sm" ref={postRef}>
       <EditorOutput content={post.content} />
       {isPostOverflowed && (
         <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent dark:from-zinc-900"></div>

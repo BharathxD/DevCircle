@@ -21,7 +21,7 @@ const SignInButton: React.FC<SignInButtonProps> = ({
     <Link
       href="/signin"
       className={cn(
-        "flex h-full items-center justify-center rounded-md border-2 border-zinc-800 px-5 py-6 font-medium transition-colors hover:bg-yellow-300 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 md:border-zinc-800",
+        "flex h-full items-center justify-center rounded-md border-2 border-zinc-800 px-6 font-semibold transition-colors hover:bg-yellow-300 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 md:border-zinc-800",
         className
       )}
       {...props}

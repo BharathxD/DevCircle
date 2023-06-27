@@ -47,7 +47,7 @@ const Layout = async ({
   })
 
   return (
-    <div className="h-full py-6 font-medium">
+    <div className="h-full pb-0 pt-6 font-medium">
       {/* TODO: Create Feed Button */}
       <div className="grid grid-cols-1 gap-y-4 md:grid-cols-3 md:gap-x-4">
         <div className="col-span-2">

@@ -25,7 +25,7 @@ const Home = async () => {
         <JoinedCommunities />
       </section>
       {/* Middle */}
-      <section className="no-scrollbar h-[91vh] w-full overflow-hidden overflow-y-scroll py-4 md:col-span-2 md:border-x-2 md:border-zinc-800 md:px-4">
+      <section className="no-scrollbar w-full overflow-hidden overflow-y-scroll py-4 md:col-span-2 md:border-x-2 md:border-zinc-800 md:px-4">
         <PostFeed initialPosts={posts} userId={currentUser?.id} />
       </section>
       {/* Right */}

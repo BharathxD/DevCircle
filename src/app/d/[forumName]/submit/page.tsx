@@ -38,7 +38,6 @@ const SubmitPage = async ({ params }: PageProps) => {
           <p className="ml-2 mt-1 truncate text-zinc-500">in d/{forumName}</p>
         </div>
       </div>
-
       <Editor forumId={forum.id} />
     </div>
   )
