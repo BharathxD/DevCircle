@@ -1,4 +1,4 @@
-import { FC } from "react"
+import type { FC } from "react"
 import dynamic from "next/dynamic"
 
 import CustomCodeRenderer from "../Renderers/CustomCodeRenderer"
@@ -10,7 +10,7 @@ const Output = dynamic(
 )
 
 interface EditorOutputProps {
-  content: any
+  content: unknown
 }
 
 const EditorOutput: FC<EditorOutputProps> = ({ content }) => {

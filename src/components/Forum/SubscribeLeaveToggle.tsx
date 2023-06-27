@@ -1,8 +1,9 @@
 "use client"
 
-import { FC, startTransition, useState } from "react"
+import { startTransition, useState } from "react"
+import type { FC } from "react"
 import { useRouter } from "next/navigation"
-import { Forum } from "@prisma/client"
+import type { Forum } from "@prisma/client"
 import axios, { AxiosError } from "axios"
 import { StatusCodes } from "http-status-codes"
 import qs from "query-string"
@@ -30,6 +31,7 @@ const SubscribeLeaveToggle: FC<SubscribeLeaveToggleProps> = ({
       const { status } = await axios.patch(`/api/forum/${id}/subscription`)
       return status
     },
+
     onError: async (error: unknown) => {
       if (error instanceof AxiosError) {
         if (error.response?.status === StatusCodes.UNAUTHORIZED) {
@@ -55,6 +57,7 @@ const SubscribeLeaveToggle: FC<SubscribeLeaveToggleProps> = ({
         variant: "destructive",
       })
     },
+
     onSuccess: async (status) => {
       startTransition(() => router.refresh())
       if (status === StatusCodes.OK) {

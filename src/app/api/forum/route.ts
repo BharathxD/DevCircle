@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 import getCurrentUser from "@/actions/getCurrentUser"
 import { StatusCodes } from "http-status-codes"
 import { ZodError } from "zod"
@@ -36,7 +37,7 @@ export async function POST(req: NextRequest) {
       data: { userId: currentUser.id, forumId: forum.id },
     })
     return NextResponse.json(forum.name, { status: StatusCodes.CREATED })
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Handle specific error instance
     if (error instanceof ZodError)
       return NextResponse.json(

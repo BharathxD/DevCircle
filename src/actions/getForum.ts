@@ -1,7 +1,6 @@
 "use server"
 
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
-import { PrismaClientValidationError } from "@prisma/client/runtime"
 
 import type { ExtendedForum } from "@/types/database"
 import database from "@/lib/database"

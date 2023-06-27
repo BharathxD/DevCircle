@@ -3,7 +3,7 @@ import getCurrentUser from "@/actions/getCurrentUser"
 import fetchPosts from "@/actions/getPosts"
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
 
-import { ExtendedPost } from "@/types/database"
+import type { ExtendedPost } from "@/types/database"
 import HomepageLayout from "@/components/Layout/HomepageLayout"
 import PostFeed from "@/components/Post/PostFeed"
 import SearchBar from "@/components/UI/SearchBar"

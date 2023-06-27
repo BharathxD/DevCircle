@@ -1,8 +1,8 @@
 "use client"
 
-import { FC } from "react"
+import type { FC } from "react"
 import { usePathname, useRouter } from "next/navigation"
-import { User } from "@prisma/client"
+import type { User } from "@prisma/client"
 import { FiLink2 } from "react-icons/fi"
 import { IoMdImage } from "react-icons/io"
 

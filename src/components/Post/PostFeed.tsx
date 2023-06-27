@@ -1,15 +1,16 @@
 "use client"
 
-import { FC, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
 import { useIntersection } from "@mantine/hooks"
-import { Forum, User } from "@prisma/client"
-import axios, { AxiosError } from "axios"
+import type { Forum, User } from "@prisma/client"
+import axios from "axios"
+import type { AxiosError } from "axios"
 import { StatusCodes } from "http-status-codes"
 import { useInfiniteQuery } from "react-query"
 import { PulseLoader } from "react-spinners"
 
-import { ExtendedPost } from "@/types/database"
+import type { ExtendedPost } from "@/types/database"
 import { cn } from "@/lib/utils"
 
 import PostCard from "./PostCard"
@@ -23,7 +24,11 @@ interface PostFeedProps {
 /**
  * Component for displaying a feed of posts.
  */
-const PostFeed: FC<PostFeedProps> = ({ initialPosts, forumName, userId }) => {
+const PostFeed: React.FC<PostFeedProps> = ({
+  initialPosts,
+  forumName,
+  userId,
+}) => {
   const [endOfThePosts, setEndOfThePosts] = useState<boolean>(false)
   const lastPostRef = useRef<HTMLElement>(null)
   const { ref, entry } = useIntersection({

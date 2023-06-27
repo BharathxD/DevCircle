@@ -1,6 +1,7 @@
 "use client"
 
-import { FC, useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
+import type { FC } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import axios, { AxiosError } from "axios"
 import { useForm } from "react-hook-form"
@@ -22,12 +23,14 @@ import LinkTool from "@editorjs/link"
 import List from "@editorjs/list"
 import Table from "@editorjs/table"
 import { zodResolver } from "@hookform/resolvers/zod"
+import type { Post } from "@prisma/client"
 import { StatusCodes } from "http-status-codes"
 import TextareaAutosize from "react-textarea-autosize"
-import { infer as zodInfer } from "zod"
+import type { infer as zodInfer } from "zod"
 
 import { uploadFiles } from "@/lib/uploadFiles"
-import { PostCreationRequest, PostValidator } from "@/lib/validators/post"
+import { PostValidator } from "@/lib/validators/post"
+import type { PostCreationRequest } from "@/lib/validators/post"
 
 interface EditorProps {
   forumId: string
@@ -55,7 +58,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
     setIsMounted(true)
   }, [])
 
-  const initializeEditor = useCallback(async () => {
+  const initializeEditor = useCallback(() => {
     if (!editorRef.current) {
       const editor = new EditorJS({
         holder: "editor",
@@ -103,8 +106,8 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
   }, [])
 
   useEffect(() => {
-    const init = async () => {
-      await initializeEditor()
+    const init = () => {
+      initializeEditor()
       setTimeout(() => {
         if (_titleRef.current) _titleRef.current.focus()
       }, 0)
@@ -134,7 +137,10 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
 
   const { mutate, isLoading } = useMutation({
     mutationFn: async (payload: PostCreationRequest) => {
-      const { data } = await axios.post("/api/forum/post/create", payload)
+      const { data }: { data: Post } = await axios.post(
+        "/api/forum/post/create",
+        payload
+      )
       return data
     },
     onError: async (error: unknown) => {
@@ -193,7 +199,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
       <form
         id="subreddit-post-form"
         className="w-fit"
-        onSubmit={handleSubmit(handleSubmitForm)}
+        onSubmit={() => handleSubmit(handleSubmitForm)}
       >
         <div className="prose prose-stone dark:prose-invert">
           <TextareaAutosize
@@ -205,7 +211,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
           <div {...register("content")} id="editor" className="min-h-[40vh]" />
         </div>
       </form>
-      <div className="absolute -bottom-[4.5rem] left-0 right-0 mb-3 flex w-full justify-end">
+      <div className="absolute inset-x-0 bottom-[4.5rem] mb-3 flex w-full justify-end">
         <Button
           type="submit"
           className="w-full bg-zinc-800 text-lg font-bold text-zinc-50 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-700 dark:hover:text-zinc-50"

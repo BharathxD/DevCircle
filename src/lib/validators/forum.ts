@@ -1,4 +1,5 @@
-import { object, string, infer as zodInfer } from "zod"
+import { object, string } from "zod"
+import type { infer as zodInfer } from "zod"
 
 const forumValidator = object({
   forumName: string({ required_error: "Name is required" }).min(3).max(21),

@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server"
-import getCurrentUser from "@/actions/getCurrentUser"
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 import { StatusCodes } from "http-status-codes"
 import { object, string, ZodError } from "zod"
 
@@ -12,24 +12,7 @@ import database from "@/lib/database"
  */
 export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
-    const url = new URL(req.url)
-
-    // Retrieve the current user
-    const currentUser = await getCurrentUser()
-
-    let followedCommunitiesIds: string[] = []
-
-    // Fetch the ids of communities followed by the current user
-    if (currentUser) {
-      const followedCommunities = await database.subscription.findMany({
-        where: {
-          userId: currentUser.id,
-        },
-      })
-
-      followedCommunitiesIds = followedCommunities.map(({ forumId }) => forumId)
-    }
-
+    const url: URL = new URL(req.url)
     // Parse and validate query parameters
     const { forumName, limit, page } = object({
       limit: string(),
@@ -67,7 +50,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
 
     // Return the retrieved posts
     return NextResponse.json(posts, { status: StatusCodes.OK })
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Handle validation errors
     if (error instanceof ZodError) {
       return NextResponse.json(

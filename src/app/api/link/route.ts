@@ -1,6 +1,15 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 import axios from "axios"
 import { StatusCodes } from "http-status-codes"
+
+interface SiteMetadata {
+  title: string
+  description: string
+  image: {
+    url: string
+  }
+}
 
 /**
  * Retrieves metadata from a given URL and returns it as a JSON response.
@@ -20,22 +29,20 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       )
     }
     // Fetch the content of the provided URL
-    const response = await axios.get(href)
+    const { data: data }: { data: string } = await axios.get(href)
     // Extract the page title from the response
-    const titleMatch = response.data.match(/<title>(.*?)<\/title>/)
-    const title = titleMatch?.[1] || ""
+    const titleMatch = data.match(/<title>(.*?)<\/title>/)
+    const title: string = titleMatch?.[1] || ""
     // Extract the meta description from the response
-    const descriptionMatch = response.data.match(
+    const descriptionMatch = data.match(
       /<meta name="description" content="(.*?)"/
     )
     const description = descriptionMatch?.[1] || ""
     // Extract the og:image URL from the response
-    const imageMatch = response.data.match(
-      /<meta property="og:image" content="(.*?)"/
-    )
-    const image = imageMatch?.[1] || ""
+    const imageMatch = data.match(/<meta property="og:image" content="(.*?)"/)
+    const image: string = imageMatch?.[1] || ""
     // Build the metadata object
-    const metadata = {
+    const metadata: SiteMetadata = {
       title,
       description,
       image: {
@@ -47,7 +54,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       { success: 1, meta: metadata },
       { status: StatusCodes.OK }
     )
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Handle any errors that occur during the process
     return NextResponse.json(
       { message: "Cannot generate the metadata" },

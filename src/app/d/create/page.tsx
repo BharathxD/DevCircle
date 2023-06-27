@@ -1,12 +1,13 @@
 "use client"
 
-import { FC, useState } from "react"
+import { useState } from "react"
+import type { FC } from "react"
 import { useRouter } from "next/navigation"
 import axios, { AxiosError } from "axios"
 import { StatusCodes } from "http-status-codes"
 import { useMutation } from "react-query"
 
-import { CreateForumPayload } from "@/lib/validators/forum"
+import type { CreateForumPayload } from "@/lib/validators/forum"
 import { toast } from "@/hooks/useToast"
 import { Button } from "@/components/UI/Button"
 import { Input } from "@/components/UI/Input"
@@ -26,6 +27,7 @@ const PostCreationPage: FC = () => {
       const { data } = await axios.post<string>("/api/forum", payload)
       return data
     },
+
     onError: async (err: AxiosError | Error) => {
       const errorMap: {
         [key: number]: {
@@ -80,7 +82,7 @@ const PostCreationPage: FC = () => {
           <section className="p-5">
             <div className="flex flex-col gap-2">
               <h2 className="text-xl font-semibold">Name</h2>
-              <p className="text-md pb-2 font-medium">
+              <p className="pb-2 font-medium">
                 Community names including capitalization cannot be changed.
               </p>
               <div className="relative">

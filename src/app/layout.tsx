@@ -1,6 +1,6 @@
 import "./globals.css"
 
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import { Montserrat } from "next/font/google"
 import siteConfig from "@/config"
 
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({ children }: rootProps) {
+export default function RootLayout({ children }: rootProps) {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
       <body className="bg-zinc-50 text-zinc-800 dark:bg-zinc-950 dark:text-zinc-50">

@@ -1,4 +1,5 @@
-import { Fragment, ReactNode } from "react"
+import { Fragment } from "react"
+import type { ReactNode } from "react"
 import { notFound } from "next/navigation"
 import getCurrentUser from "@/actions/getCurrentUser"
 import { format } from "date-fns"
@@ -9,13 +10,13 @@ import SubscribeLeaveToggle from "@/components/Forum/SubscribeLeaveToggle"
 interface LayoutProps {
   children: ReactNode
   params: {
-    slug: string
+    forumName: string
   }
 }
 
 const Layout = async ({
   children,
-  params: { slug: forumName },
+  params: { forumName: forumName },
 }: LayoutProps) => {
   // Fetch the current user and the forum data in parallel
   const [currentUser, forum] = await Promise.all([
@@ -60,7 +61,7 @@ const Layout = async ({
               <p className="py-3 text-xl font-bold">About d/{forumName}</p>
             </div>
             <div className="h-[2px] w-full bg-zinc-800" />
-            <dl className="text-md bg-zinc-50 leading-6 dark:bg-zinc-900">
+            <dl className="bg-zinc-50 leading-6 dark:bg-zinc-900">
               <div className="flex items-center justify-between gap-x-4 px-6 py-4">
                 <dt className="text-zinc-700 dark:text-zinc-100">Created</dt>
                 <dd className="text-zinc-700 dark:text-zinc-50">

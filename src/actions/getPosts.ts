@@ -2,7 +2,7 @@
 
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
 
-import { ExtendedPost } from "@/types/database"
+import type { ExtendedPost } from "@/types/database"
 import database from "@/lib/database"
 
 /**

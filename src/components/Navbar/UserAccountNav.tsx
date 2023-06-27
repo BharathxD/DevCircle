@@ -1,8 +1,8 @@
 "use client"
 
-import { FC } from "react"
+import type { FC } from "react"
 import { useRouter } from "next/navigation"
-import { User } from "@prisma/client"
+import type { User } from "@prisma/client"
 import { LogOut, PlusCircle, Settings, StretchHorizontal } from "lucide-react"
 import { signOut } from "next-auth/react"
 
@@ -41,7 +41,7 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
       >
         <div className="flex items-center justify-start gap-2 p-2 pt-3">
           <div className="flex flex-col space-y-1 leading-none">
-            {user.name && <p className="text-md font-bold">{user.name}</p>}
+            {user.name && <p className="font-bold">{user.name}</p>}
             {user.email && (
               <p className="w-[200px] truncate text-sm font-medium text-zinc-700 dark:text-zinc-300">
                 {user.email}

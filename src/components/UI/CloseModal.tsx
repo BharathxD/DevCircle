@@ -1,12 +1,9 @@
 "use client"
 
-import { FC } from "react"
 import { useRouter } from "next/navigation"
 import { AiOutlineClose } from "react-icons/ai"
 
-interface CloseModalProps {}
-
-const CloseModal: FC<CloseModalProps> = ({}) => {
+const CloseModal: React.FC = ({}) => {
   const router = useRouter()
   return (
     <button

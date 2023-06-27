@@ -1,6 +1,6 @@
 "use client"
 
-import { FC } from "react"
+import type { FC } from "react"
 import Link from "next/link"
 import siteConfig from "@/config"
 import { FiGlobe } from "react-icons/fi"
@@ -22,7 +22,7 @@ interface SignInProps {
 const SignIn: FC<SignInProps> = ({ customTitle }) => {
   const title = customTitle ?? "Welcome back!"
   return (
-    <Card className="dark:border-1 flex flex-col justify-center border-2 border-zinc-800 text-center backdrop-blur-sm dark:bg-zinc-950/80">
+    <Card className="flex flex-col justify-center border-2 border-zinc-800 text-center backdrop-blur-sm dark:border dark:bg-zinc-950/80">
       <CardHeader className="flex flex-col gap-2">
         <FiGlobe size={75} className="mx-auto dark:text-zinc-300" />
         <CardTitle className="h-full bg-clip-text text-4xl font-semibold tracking-tight text-zinc-800 dark:bg-gradient-to-br dark:from-zinc-200 dark:to-zinc-400 dark:text-transparent md:text-4xl">
@@ -48,7 +48,7 @@ const SignIn: FC<SignInProps> = ({ customTitle }) => {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="md:text-md flex w-full items-center justify-center text-center text-sm text-zinc-700 dark:text-zinc-300">
+      <CardFooter className="flex w-full items-center justify-center text-center text-sm text-zinc-700 dark:text-zinc-300">
         <p className="mr-2">New to {siteConfig.name}?</p>
         <Link
           href="/signup"

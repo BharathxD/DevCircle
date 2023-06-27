@@ -1,7 +1,8 @@
 import { env } from "@/env.mjs"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { nanoid } from "nanoid"
-import { getServerSession, NextAuthOptions } from "next-auth"
+import { getServerSession } from "next-auth"
+import type { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 
 import database from "./database"
@@ -17,12 +18,12 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: env["GOOGLE_CLIENT_ID"]!,
-      clientSecret: env["GOOGLE_CLIENT_SECRET"]!,
+      clientId: env["GOOGLE_CLIENT_ID"],
+      clientSecret: env["GOOGLE_CLIENT_SECRET"],
     }),
   ],
   callbacks: {
-    async session({ token, session }) {
+    session({ token, session }) {
       if (token) {
         session.user.id = token.id
         session.user.name = token.name

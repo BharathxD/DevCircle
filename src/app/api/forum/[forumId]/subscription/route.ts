@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 import getCurrentUser from "@/actions/getCurrentUser"
 import { StatusCodes } from "http-status-codes"
 
@@ -10,7 +11,7 @@ interface searchParams {
   }
 }
 
-export async function PATCH(req: NextRequest, searchParams: searchParams) {
+export async function PATCH(_: NextRequest, searchParams: searchParams) {
   try {
     // Check if the request comes from authenticated source
     const currentUser = await getCurrentUser()
@@ -45,7 +46,7 @@ export async function PATCH(req: NextRequest, searchParams: searchParams) {
       where: { userId_forumId: { forumId, userId: currentUser.id } },
     })
     return NextResponse.json("Unsubscribed", { status: StatusCodes.ACCEPTED })
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
       { message: "Cannot proccess the subscription" },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }

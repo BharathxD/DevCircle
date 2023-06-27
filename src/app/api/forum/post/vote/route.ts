@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 import getCurrentUser from "@/actions/getCurrentUser"
 import { StatusCodes } from "http-status-codes"
 import { ZodError } from "zod"
@@ -95,7 +96,7 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
       },
       { status: StatusCodes.OK }
     )
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (error instanceof ZodError) {
       // If there's a validation error, return a bad request response
       return NextResponse.json(

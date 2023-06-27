@@ -3,20 +3,20 @@ import { notFound } from "next/navigation"
 import getCurrentUser from "@/actions/getCurrentUser"
 import getForum from "@/actions/getForum"
 
-import { ExtendedForum } from "@/types/database"
+import type { ExtendedForum } from "@/types/database"
 import MiniCreatePost from "@/components/Post/MiniCreatePost"
 import PostFeed from "@/components/Post/PostFeed"
 
 interface ForumPageProps {
   params: {
-    slug: string
+    forumName: string
   }
 }
 
 const ForumPage = async ({ params }: ForumPageProps) => {
-  const { slug } = params
+  const { forumName } = params
   const currentUser = await getCurrentUser()
-  const forum: ExtendedForum | null = await getForum(slug)
+  const forum: ExtendedForum | null = await getForum(forumName)
   if (!forum) return notFound()
   return (
     <Fragment>

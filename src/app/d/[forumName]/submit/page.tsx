@@ -5,16 +5,16 @@ import { IoIosArrowBack } from "react-icons/io"
 import database from "@/lib/database"
 import { cn } from "@/lib/utils"
 import Editor from "@/components/Post/Editor"
-import { Button, buttonVariants } from "@/components/UI/Button"
+import { buttonVariants } from "@/components/UI/Button"
 
 interface PageProps {
   params: {
-    slug: string
+    forumName: string
   }
 }
 
 const SubmitPage = async ({ params }: PageProps) => {
-  const { slug: forumName } = params
+  const { forumName: forumName } = params
   const forum = await database.forum.findFirst({
     where: {
       name: forumName,
@@ -35,9 +35,7 @@ const SubmitPage = async ({ params }: PageProps) => {
           <h3 className="ml-2 mt-2 text-lg leading-6 text-zinc-900 dark:text-zinc-300">
             Create Post
           </h3>
-          <p className="text-md ml-2 mt-1 truncate text-zinc-500">
-            in d/{forumName}
-          </p>
+          <p className="ml-2 mt-1 truncate text-zinc-500">in d/{forumName}</p>
         </div>
       </div>
 

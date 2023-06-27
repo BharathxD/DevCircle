@@ -1,16 +1,16 @@
 "use client"
 
-import { FC, useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { usePrevious } from "@mantine/hooks"
-import { VoteType } from "@prisma/client"
+import type { VoteType } from "@prisma/client"
 import axios, { AxiosError } from "axios"
 import { StatusCodes } from "http-status-codes"
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai"
 import { useMutation } from "react-query"
 
 import { cn } from "@/lib/utils"
-import { PostVoteRequest } from "@/lib/validators/vote"
+import type { PostVoteRequest } from "@/lib/validators/vote"
 import { toast } from "@/hooks/useToast"
 
 import { Button } from "../UI/Button"
@@ -22,7 +22,7 @@ interface PostVoteClientProps {
   isLoggedIn?: boolean
 }
 
-const PostVoteClient: FC<PostVoteClientProps> = ({
+const PostVoteClient: React.FC<PostVoteClientProps> = ({
   postId,
   initialVoteAmount,
   initialVote,
@@ -43,6 +43,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
       }
       await axios.patch("/api/forum/post/vote", payload)
     },
+
     onError: async (error, voteType) => {
       if (voteType === "UP") setVotesAmount((prev) => prev - 1)
       else setVotesAmount((prev) => prev + 1)
@@ -84,7 +85,7 @@ const PostVoteClient: FC<PostVoteClientProps> = ({
     [isLoggedIn, router, vote]
   )
   return (
-    <div className="flex gap-4 py-2 pb-2 pr-5 sm:w-20 sm:flex-col sm:gap-0 sm:pb-0">
+    <div className="flex gap-4 py-2 pr-5 sm:w-20 sm:flex-col sm:gap-0 sm:pb-0">
       <Button
         size="sm"
         aria-label="upvote"

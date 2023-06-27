@@ -10,7 +10,9 @@ export const ourFileRouter = {
       if (!user) throw new Error("Unauthorized")
       return { userId: user.id }
     })
-    .onUploadComplete(async ({ metadata, file }) => {}),
+    .onUploadComplete(() => {
+      return
+    }),
 } satisfies FileRouter
 
 export type OurFileRouter = typeof ourFileRouter

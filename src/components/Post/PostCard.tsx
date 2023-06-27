@@ -1,8 +1,9 @@
 "use client"
 
-import { FC, useRef } from "react"
+import { useRef } from "react"
+import type { FC } from "react"
 import Link from "next/link"
-import { Post, User, Vote } from "@prisma/client"
+import type { Post, User, Vote } from "@prisma/client"
 import { BiMessageAltDetail } from "react-icons/bi"
 
 import formatTimeToNow from "@/lib/formatTimeToNow"
@@ -37,10 +38,7 @@ const PostCard: FC<PostCardProps> = ({
   const isPostOverflowed = postRef.current?.clientHeight === 160
 
   const postContent = (
-    <div
-      className="relative max-h-40 w-full overflow-clip text-sm"
-      ref={postRef}
-    >
+    <div className="relative max-h-40 w-full text-clip text-sm" ref={postRef}>
       <EditorOutput content={post.content} />
       {isPostOverflowed && (
         <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent dark:from-zinc-900"></div>
@@ -52,7 +50,7 @@ const PostCard: FC<PostCardProps> = ({
     <div className="mt-1 flex max-h-40 flex-row justify-between gap-1 text-sm text-zinc-500">
       <div className="inline-flex">
         <Link href={`/d/${forumName}`}>
-          <p className="text-md text-zinc-800 underline underline-offset-2 dark:text-zinc-50">
+          <p className="text-zinc-800 underline underline-offset-2 dark:text-zinc-50">
             d/{forumName}
           </p>
         </Link>

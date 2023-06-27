@@ -1,6 +1,6 @@
-import { Post, User, Vote, VoteType } from "@prisma/client"
+import type { Post, User, Vote, VoteType } from "@prisma/client"
 
-import { CachedPost } from "@/types/redis"
+import type { CachedPost } from "@/types/redis"
 import redis from "@/lib/redis"
 
 const CACHE_AFTER_UPVOTES = 1

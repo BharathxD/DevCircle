@@ -1,4 +1,5 @@
-import { any, object, string, infer as zodInfer } from "zod"
+import { any, object, string } from "zod"
+import type { infer as zodInfer } from "zod"
 
 const PostValidator = object({
   title: string()

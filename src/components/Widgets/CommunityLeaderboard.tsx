@@ -22,7 +22,7 @@ const CommunityLeaderboard = async () => {
               d/{community.forumName}
             </div>
             <div className="flex flex-row gap-2">
-              <span className="text-md p-auto min-w-[175px] border-zinc-800 px-5 py-3 text-center">
+              <span className="min-w-[175px] border-zinc-800 p-[auto] px-5 py-3 text-center">
                 <div className="rounded-md border-2 border-zinc-800 p-1 text-zinc-800 dark:text-zinc-50">
                   {community.memberCount}{" "}
                   {community.memberCount === 1 ? "Member" : "Members"}

@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react"
+import type { HTMLAttributes } from "react"
 import { signIn } from "next-auth/react"
 import { FcGoogle } from "react-icons/fc"
 import { useMutation } from "react-query"
@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/useToast"
 
 import { Button } from "../UI/Button"
 
-interface OAuthSignInProps extends HTMLAttributes<HTMLDivElement> {}
+type OAuthSignInProps = HTMLAttributes<HTMLDivElement>
 
 const OAuthSignIn: React.FC<OAuthSignInProps> = ({ className, ...props }) => {
   const { toast } = useToast()
