@@ -2,6 +2,7 @@ import { Fragment } from "react"
 import type { ReactNode } from "react"
 import { notFound } from "next/navigation"
 import getCurrentUser from "@/actions/getCurrentUser"
+import getForum from "@/actions/getForum"
 import { format } from "date-fns"
 
 import database from "@/lib/database"
@@ -21,12 +22,7 @@ const Layout = async ({
   // Fetch the current user and the forum data in parallel
   const [currentUser, forum] = await Promise.all([
     getCurrentUser(),
-    database.forum.findFirst({
-      where: {
-        name: forumName,
-      },
-      include: { posts: { include: { author: true, votes: true } } },
-    }),
+    getForum(forumName),
   ])
 
   // If the forum is not found, return a 404 page

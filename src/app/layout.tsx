@@ -24,13 +24,14 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: [
+    "Developer Circle",
+    "Community for Developers",
+    "Community",
     "Next.js",
     "Server Actions",
     "React",
     "Tailwind CSS",
     "Server Components",
-    "Community for Developers",
-    "Community",
   ],
   authors: [
     {
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [`${siteConfig.url}/seo/og-image.jpg`],
-    creator: "@BharathxD",
+    creator: "@Bharath_uwu",
   },
   icons: {
     icon: "/favicon.ico",
