@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 
+import { cn } from "@/lib/utils"
 import { toast } from "@/hooks/useToast"
 
 import { Button } from "../UI/Button"
@@ -59,7 +60,7 @@ const Tags: React.FC<TagProps> = ({ tags, setTags }) => {
       {tags.length !== 5 && (
         <>
           <Input
-            className="w-[100px] py-1"
+            className={cn("w-[100px] py-1")}
             ref={tagRef}
             disabled={tags.length === 5}
             placeholder="Add Tags..."

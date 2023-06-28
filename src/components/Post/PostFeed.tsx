@@ -7,6 +7,7 @@ import type { Forum, User } from "@prisma/client"
 import axios from "axios"
 import type { AxiosError } from "axios"
 import { StatusCodes } from "http-status-codes"
+import queryString from "query-string"
 import { useInfiniteQuery } from "react-query"
 import { PulseLoader } from "react-spinners"
 
@@ -19,6 +20,9 @@ interface PostFeedProps {
   initialPosts: ExtendedPost[]
   forumName?: Forum["name"]
   userId?: User["id"]
+  filters?: {
+    tag: string
+  }
 }
 
 /**
@@ -28,6 +32,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
   initialPosts,
   forumName,
   userId,
+  filters,
 }) => {
   const [endOfThePosts, setEndOfThePosts] = useState<boolean>(false)
   const lastPostRef = useRef<HTMLElement>(null)
@@ -38,9 +43,13 @@ const PostFeed: React.FC<PostFeedProps> = ({
 
   const fetchPosts = async ({ pageParam = 1 }): Promise<ExtendedPost[]> => {
     setEndOfThePosts(false)
-    const query =
-      `/api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
-      (forumName ? `&forumName=${forumName}` : "")
+    const queryParams = queryString.stringify({
+      limit: INFINITE_SCROLL_PAGINATION_RESULTS,
+      page: pageParam,
+      forumName,
+      ...filters,
+    })
+    const query = `/api/posts?${queryParams}`
     const response = await axios.get(query)
     return response.data as ExtendedPost[]
   }
@@ -107,7 +116,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
           </li>
         </>
       )}
-      {endOfThePosts && (
+      {endOfThePosts && !filters && (
         <li className={cn("text-center text-gray-500")}>
           Impressive, it looks like you&apos;ve caught up.
         </li>

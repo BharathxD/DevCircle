@@ -3,12 +3,12 @@
 import { useRef } from "react"
 import type { FC } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import type { Post, Tag, User, Vote } from "@prisma/client"
 import { BiMessageAltDetail } from "react-icons/bi"
 
 import formatTimeToNow from "@/lib/formatTimeToNow"
 
-import { Button } from "../UI/Button"
 import EditorOutput from "./EditorOutput"
 import PostVoteClient from "./PostVoteClient"
 
@@ -38,6 +38,7 @@ const PostCard: FC<PostCardProps> = ({
 }) => {
   const postRef = useRef<HTMLParagraphElement>(null)
   const isPostOverflowed = postRef.current?.clientHeight === 160
+  const pathName = usePathname()
 
   const postContent = (
     <div
@@ -71,12 +72,14 @@ const PostCard: FC<PostCardProps> = ({
   return (
     <article className="rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
       <div className="flex flex-col justify-between px-6 py-4 md:flex-row">
-        <PostVoteClient
-          postId={post.id}
-          initialVoteAmount={votesAmount}
-          initialVote={currentVote}
-          isLoggedIn={isLoggedIn}
-        />
+        <div className="py-2 pr-4">
+          <PostVoteClient
+            postId={post.id}
+            initialVoteAmount={votesAmount}
+            initialVote={currentVote}
+            isLoggedIn={isLoggedIn}
+          />
+        </div>
         <div className="flex w-full flex-col gap-2">
           {postMetaInfo}
           <Link
@@ -98,9 +101,12 @@ const PostCard: FC<PostCardProps> = ({
         {post.tags && (
           <div className="flex h-full max-w-full flex-row gap-2 overflow-hidden overflow-x-scroll px-2 py-1">
             {post.tags.map((tag) => (
-              <button className="rounded-md border-2 border-zinc-800 px-5 py-1 font-medium hover:bg-zinc-800">
+              <Link
+                className="rounded-md border-2 border-zinc-800 px-5 py-1 font-medium hover:bg-zinc-800"
+                href={`${pathName}?tag=${tag.name}`}
+              >
                 {tag.name}
-              </button>
+              </Link>
             ))}
           </div>
         )}

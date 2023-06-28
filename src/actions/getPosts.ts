@@ -11,9 +11,14 @@ import database from "@/lib/database"
  * @returns {Promise<ExtendedPost[] | null>} A promise that resolves to an array of fetched posts.
  * @throws {Error} If an error occurs during the database operation.
  */
-const getPosts = async (limit?: number): Promise<ExtendedPost[] | null> => {
+const getPosts = async (tag?: string, limit?: number): Promise<ExtendedPost[] | null> => {
   try {
+    let whereClause = {};
+    if (tag) {
+      whereClause = { tags: { some: { name: tag } } }
+    }
     const allPosts = await database.post.findMany({
+      where: whereClause,
       include: {
         votes: true,
         author: true,
@@ -28,6 +33,7 @@ const getPosts = async (limit?: number): Promise<ExtendedPost[] | null> => {
     })
     return allPosts
   } catch (error: unknown) {
+    console.log(error);
     return null
   }
 }

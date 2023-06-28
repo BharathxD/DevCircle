@@ -85,7 +85,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
     [isLoggedIn, router, vote]
   )
   return (
-    <div className="flex gap-4 py-2 pr-5 sm:w-20 sm:flex-col sm:gap-0 sm:pb-0">
+    <div className="flex gap-4 sm:w-16 sm:flex-col sm:gap-0 sm:pb-0">
       <Button
         size="sm"
         aria-label="upvote"

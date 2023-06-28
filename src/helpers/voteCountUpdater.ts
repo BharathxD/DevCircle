@@ -1,4 +1,4 @@
-import type { Post, User, Vote, VoteType } from "@prisma/client"
+import type { Post, Tag, User, Vote, VoteType } from "@prisma/client"
 
 import type { CachedPost } from "@/types/redis"
 import redis from "@/lib/redis"
@@ -11,6 +11,7 @@ interface updateVoteCountParams {
   post: Post & {
     votes: Vote[]
     author: User
+    tags: Tag[]
   }
 }
 
@@ -30,6 +31,7 @@ async function updateVoteCount({
       title: post.title,
       authorUsername: post.author.name ?? "",
       content: JSON.stringify(post.content),
+      tags: post.tags,
       currentVote: voteType,
       createdAt: post.createdAt,
     }

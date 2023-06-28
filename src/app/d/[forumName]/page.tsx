@@ -11,10 +11,14 @@ interface ForumPageProps {
   params: {
     forumName: string
   }
+  searchParams: {
+    tag: string
+  }
 }
 
-const ForumPage = async ({ params }: ForumPageProps) => {
+const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
   const { forumName } = params
+  const { tag } = searchParams
   const currentUser = await getCurrentUser()
   const forum: ExtendedForum | null = await getForum(forumName)
   if (!forum) return notFound()
@@ -31,6 +35,7 @@ const ForumPage = async ({ params }: ForumPageProps) => {
           forumName={forum.name}
           userId={currentUser?.id}
           initialPosts={forum.posts}
+          filters={{ tag }}
         />
       )}
     </Fragment>

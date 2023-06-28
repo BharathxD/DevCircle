@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { StatusCodes } from "http-status-codes"
-import { object, string, ZodError } from "zod"
+import { array, object, string, ZodError } from "zod"
 
 import database from "@/lib/database"
 
@@ -14,14 +14,16 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   try {
     const url: URL = new URL(req.url)
     // Parse and validate query parameters
-    const { forumName, limit, page } = object({
+    const { forumName, limit, page, tag } = object({
       limit: string(),
       page: string(),
       forumName: string().nullish().optional(),
+      tag: array(string()).nullish().optional(),
     }).parse({
       forumName: url.searchParams.get("forumName"),
       limit: url.searchParams.get("limit"),
       page: url.searchParams.get("page"),
+      tag: url.searchParams.get("tag")
     })
 
     let whereClause = {}
@@ -29,6 +31,12 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     // Filter posts by forum name if provided
     if (forumName) {
       whereClause = { forum: { name: forumName } }
+    }
+
+    if (tag) {
+      whereClause = {
+        ...whereClause, tags: { some: { name: tag } }
+      }
     }
 
     // Fetch posts from the database
