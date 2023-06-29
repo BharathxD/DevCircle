@@ -4,11 +4,13 @@ import { notFound } from "next/navigation"
 import getPost from "@/actions/getPost"
 import siteConfig from "@/config"
 import type { Post, Tag, User, Vote } from "@prisma/client"
+import { Loader2 } from "lucide-react"
 
 import type { CachedPost } from "@/types/redis"
 import database from "@/lib/database"
 import formatTimeToNow from "@/lib/formatTimeToNow"
 import redis from "@/lib/redis"
+import CommentsSection from "@/components/Post/CommentsSection"
 import EditorOutput from "@/components/Post/EditorOutput"
 import PostVoteServer from "@/components/Post/PostVoteServer"
 import PostVoteShell from "@/components/UI/PostVoteShell"
@@ -83,6 +85,13 @@ const PostPage = async ({ params }: PageProps) => {
                 {post?.title ?? cachedPost.title}
               </h1>
               <EditorOutput content={post?.content ?? cachedPost.content} />
+              <Suspense
+                fallback={
+                  <Loader2 className="h-5 w-5 animate-spin text-zinc-500" />
+                }
+              >
+                <CommentsSection postId={post?.id ?? cachedPost.id} />
+              </Suspense>
             </div>
           </div>
         </div>
