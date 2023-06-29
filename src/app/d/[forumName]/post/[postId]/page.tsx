@@ -2,6 +2,7 @@ import { Suspense } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import getPost from "@/actions/getPost"
+import siteConfig from "@/config"
 import type { Post, Tag, User, Vote } from "@prisma/client"
 
 import type { CachedPost } from "@/types/redis"
@@ -11,6 +12,7 @@ import redis from "@/lib/redis"
 import EditorOutput from "@/components/Post/EditorOutput"
 import PostVoteServer from "@/components/Post/PostVoteServer"
 import PostVoteShell from "@/components/UI/PostVoteShell"
+import ShareButton from "@/components/UI/ShareButton"
 
 interface PageProps {
   params: {
@@ -50,6 +52,7 @@ const PostPage = async ({ params }: PageProps) => {
               postId={post?.id ?? cachedPost.id}
               getData={() => getPost(params.postId)}
             />
+            <ShareButton className="mt-4 flex w-16 items-center justify-center rounded-xl border-2 border-zinc-700 px-3 py-4" />
           </Suspense>
         </div>
         <div className="flex w-full flex-col gap-4">

@@ -1,14 +1,16 @@
-"use client"
-
 import { useRef } from "react"
 import type { FC } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import siteConfig from "@/config"
 import type { Post, Tag, User, Vote } from "@prisma/client"
 import { BiMessageAltDetail } from "react-icons/bi"
+import { FiShare2 } from "react-icons/fi"
 
 import formatTimeToNow from "@/lib/formatTimeToNow"
+import { toast } from "@/hooks/useToast"
 
+import ShareButton from "../UI/ShareButton"
 import EditorOutput from "./EditorOutput"
 import PostVoteClient from "./PostVoteClient"
 
@@ -38,7 +40,7 @@ const PostCard: FC<PostCardProps> = ({
 }) => {
   const postRef = useRef<HTMLParagraphElement>(null)
   const isPostOverflowed = postRef.current?.clientHeight === 160
-  const pathName = usePathname()
+  const postUrl = `${siteConfig.url}/d/${forumName}/post/${post.id}`
 
   const postContent = (
     <div
@@ -70,7 +72,7 @@ const PostCard: FC<PostCardProps> = ({
   )
 
   return (
-    <article className="rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
+    <article className="overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
       <div className="flex flex-col justify-between px-6 py-4 md:flex-row">
         <div className="py-2 pr-4">
           <PostVoteClient
@@ -83,7 +85,7 @@ const PostCard: FC<PostCardProps> = ({
         <div className="flex w-full flex-col gap-2">
           {postMetaInfo}
           <Link
-            href={`/d/${forumName}/post/${post.id}`}
+            href={postUrl}
             className="pt-2 text-lg font-semibold leading-6 text-zinc-900 dark:text-zinc-50"
             aria-label={post.title}
           >
@@ -92,24 +94,29 @@ const PostCard: FC<PostCardProps> = ({
           {postContent}
         </div>
       </div>
-      <div className="z-20 flex w-full flex-row items-center justify-between rounded-b-md border-t-2 border-t-zinc-800 text-sm">
-        <Link href={`/d/${forumName}/post/${post.id}`}>
-          <div className="flex w-fit items-center gap-2 rounded-bl-md border-r-2 border-r-zinc-800 px-6 py-3 font-medium hover:bg-yellow-100 dark:hover:bg-zinc-800">
-            <BiMessageAltDetail size={25} /> {commentAmount} <p>comments</p>
-          </div>
+      <div className="z-20 flex h-12 w-full flex-row items-center justify-between rounded-b-md border-t-2 border-t-zinc-800 text-sm">
+        <Link
+          href={`/d/${forumName}/post/${post.id}`}
+          className="flex h-full w-fit items-center gap-2 border-r-2 border-r-zinc-800 px-6 font-medium hover:bg-yellow-300 dark:hover:bg-zinc-800"
+        >
+          <BiMessageAltDetail size={25} /> {commentAmount}{" "}
+          <p className="hidden md:inline-block">comments</p>
         </Link>
-        {post.tags && (
-          <div className="flex h-full max-w-full flex-row gap-2 overflow-hidden overflow-x-scroll px-2 py-1">
-            {post.tags.map((tag) => (
-              <Link
-                className="rounded-md border-2 border-zinc-800 px-5 py-1 font-medium hover:bg-zinc-800 hover:text-zinc-50"
-                href={`/?tag=${tag.name}`}
-              >
-                {tag.name}
-              </Link>
-            ))}
-          </div>
-        )}
+        <div className="flex h-full w-full flex-row items-center justify-end">
+          {post.tags && (
+            <div className="flex h-fit max-w-full flex-row gap-2 overflow-hidden overflow-x-scroll px-2 py-1">
+              {post.tags.map((tag) => (
+                <Link
+                  className="rounded-md border-2 border-zinc-800 px-5 py-1 font-medium hover:bg-zinc-800 hover:text-zinc-50"
+                  href={`/?tag=${tag.name}`}
+                >
+                  {tag.name}
+                </Link>
+              ))}
+            </div>
+          )}
+          <ShareButton url={postUrl} className="border-0 border-l-2" />
+        </div>
       </div>
     </article>
   )
