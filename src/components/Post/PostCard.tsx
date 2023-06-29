@@ -70,7 +70,7 @@ const PostCard: FC<PostCardProps> = ({
   )
 
   return (
-    <article className="rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
+    <article className="rounded-md border-2 border-zinc-800 bg-zinc-50 dark:border dark:bg-zinc-900">
       <div className="flex flex-col justify-between px-6 py-4 md:flex-row">
         <div className="py-2 pr-4">
           <PostVoteClient

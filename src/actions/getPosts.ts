@@ -14,9 +14,7 @@ import database from "@/lib/database"
 const getPosts = async (tag?: string, limit?: number): Promise<ExtendedPost[] | null> => {
   try {
     let whereClause = {};
-    if (tag) {
-      whereClause = { tags: { some: { name: tag } } }
-    }
+    if (tag) whereClause = { tags: { some: { name: tag } } }
     const allPosts = await database.post.findMany({
       where: whereClause,
       include: {

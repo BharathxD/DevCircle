@@ -116,7 +116,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
           </li>
         </>
       )}
-      {endOfThePosts && !filters && (
+      {endOfThePosts && (
         <li className={cn("text-center text-gray-500")}>
           Impressive, it looks like you&apos;ve caught up.
         </li>
