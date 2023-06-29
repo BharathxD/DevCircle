@@ -15,11 +15,11 @@ const buttonVariants = cva(
         inverted:
           "text-zinc-100 bg-zinc-800 hover:bg-zinc-50 hover:text-zinc-800 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700 dark:disabled:text-zinc-600",
         destructive:
-          "text-zinc-800 dark:bg-red-300 hover:text-zinc-50 hover:bg-red-500 dark:hover:bg-red-500 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700",
+          "text-zinc-50 dark:bg-red-400 hover:text-zinc-50 hover:bg-red-500 dark:hover:bg-red-500 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700",
         outline:
-          "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 outline outline-2 outline-zinc-300",
+          "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 hover:dark:bg-zinc-700 dark:text-zinc-50 outline outline-2 outline-zinc-300 dark:outline-zinc-700 hover:cursor-pointer",
         skeleton:
-          "text-zinc-700 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700",
+          "text-zinc-800 hover:bg-zinc-700 hover:text-zinc-50 dark:text-zinc-50 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700",
         body: "text-zinc-700 hover:text-zinc-100 hover:bg-zinc-800 rounded-lg hover:rounded-sm",
         subtle: "hover:bg-zinc-200 bg-zinc-100 text-zinc-900",
         ghost:

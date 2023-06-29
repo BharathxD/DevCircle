@@ -1,14 +1,11 @@
 import { useRef } from "react"
 import type { FC } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import siteConfig from "@/config"
 import type { Post, Tag, User, Vote } from "@prisma/client"
 import { BiMessageAltDetail } from "react-icons/bi"
-import { FiShare2 } from "react-icons/fi"
 
 import formatTimeToNow from "@/lib/formatTimeToNow"
-import { toast } from "@/hooks/useToast"
 
 import ShareButton from "../UI/ShareButton"
 import EditorOutput from "./EditorOutput"

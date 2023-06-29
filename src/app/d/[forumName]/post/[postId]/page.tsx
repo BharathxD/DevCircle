@@ -2,7 +2,6 @@ import { Suspense } from "react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import getPost from "@/actions/getPost"
-import siteConfig from "@/config"
 import type { Post, Tag, User, Vote } from "@prisma/client"
 import { Loader2 } from "lucide-react"
 
@@ -85,14 +84,16 @@ const PostPage = async ({ params }: PageProps) => {
                 {post?.title ?? cachedPost.title}
               </h1>
               <EditorOutput content={post?.content ?? cachedPost.content} />
-              <Suspense
-                fallback={
-                  <Loader2 className="h-5 w-5 animate-spin text-zinc-500" />
-                }
-              >
-                <CommentsSection postId={post?.id ?? cachedPost.id} />
-              </Suspense>
             </div>
+          </div>
+          <div className="flex flex-col gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-4 dark:bg-zinc-900">
+            <Suspense
+              fallback={
+                <Loader2 className="h-5 w-5 animate-spin text-zinc-500" />
+              }
+            >
+              <CommentsSection postId={post?.id ?? cachedPost.id} />
+            </Suspense>
           </div>
         </div>
       </div>

@@ -58,7 +58,9 @@ const CreateComment: React.FC<CreateCommentProps> = ({ postId, replyToId }) => {
   })
   return (
     <div className="grid w-full gap-1.5">
-      <Label htmlFor="comment">Your comment</Label>
+      <Label htmlFor="comment" className="text-lg font-semibold">
+        Your comment
+      </Label>
       <div className="mt-2">
         <Textarea
           id="comment"
@@ -76,7 +78,7 @@ const CreateComment: React.FC<CreateCommentProps> = ({ postId, replyToId }) => {
               return comment({ postId, text: input, replyToId })
             }}
           >
-            Post
+            Comment
           </Button>
         </div>
       </div>

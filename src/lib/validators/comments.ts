@@ -1,13 +1,13 @@
-import { string, object } from "zod";
-import type { infer as ZodInfer } from "zod";
+import { object, string } from "zod"
+import type { infer as ZodInfer } from "zod"
 
 const CommentValidator = object({
-    postId: string({}),
-    text: string(),
-    replyToId: string().optional()
+  postId: string({}),
+  text: string(),
+  replyToId: string().optional(),
 })
 
-type CommentPayload = ZodInfer<typeof CommentValidator>;
+type CommentPayload = ZodInfer<typeof CommentValidator>
 
-export { CommentValidator };
-export type { CommentPayload };
+export { CommentValidator }
+export type { CommentPayload }

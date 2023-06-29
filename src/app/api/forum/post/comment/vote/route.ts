@@ -4,12 +4,11 @@ import getCurrentUser from "@/actions/getCurrentUser"
 import { StatusCodes } from "http-status-codes"
 import { ZodError } from "zod"
 
-import updateVoteCount from "@/helpers/voteCountUpdater"
 import database from "@/lib/database"
-import { PostVoteValidator } from "@/lib/validators/vote"
+import { CommentVoteValidator } from "@/lib/validators/vote"
 
 /**
- * Handles the PATCH request to update a vote on a post.
+ * Handles the PATCH request to update a vote on a comment.
  * @param {NextRequest} req - The Next.js request object.
  * @returns {Promise<NextResponse>} The Next.js response.
  */
@@ -26,12 +25,12 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
       )
 
     const { id: userId } = currentUser
-    const { postId, voteType } = PostVoteValidator.parse(await req.json())
+    const { commentId, voteType } = CommentVoteValidator.parse(await req.json())
 
     // Retrieve the post with author and votes details
     const post = await database.post.findUnique({
       where: {
-        id: postId,
+        id: commentId,
       },
       include: {
         author: true,
@@ -47,19 +46,20 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
         { status: StatusCodes.NOT_FOUND }
       )
 
-    // Check if the user has already voted on the post
-    const existingVote = await database.vote.findFirst({
+    // Check if the user has already voted on the comment
+    const existingVote = await database.commentVote.findFirst({
       where: {
         userId,
-        postId,
+        commentId,
       },
     })
 
     if (!existingVote) {
       // If no existing vote, create a new vote and update the vote count concurrently
       await Promise.all([
-        database.vote.create({ data: { type: voteType, userId, postId } }),
-        updateVoteCount({ id: postId, voteType, post }),
+        database.commentVote.create({
+          data: { type: voteType, userId, commentId },
+        }),
       ])
       return NextResponse.json(
         { message: "Vote created successfully." },
@@ -72,18 +72,16 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
       existingVote.type === voteType
         ? // If the existing vote is of the same type as the new vote, delete the vote and update vote count
           Promise.all([
-            database.vote.delete({
-              where: { userId_postId: { userId, postId } },
+            database.commentVote.delete({
+              where: { userId_commentId: { userId, commentId } },
             }),
-            updateVoteCount({ id: postId, voteType: null, post }),
           ])
         : // If the existing vote is of a different type, update the vote and update vote count
           Promise.all([
-            database.vote.update({
-              where: { userId_postId: { userId, postId } },
+            database.commentVote.update({
+              where: { userId_commentId: { userId, commentId } },
               data: { type: voteType },
             }),
-            updateVoteCount({ id: postId, voteType, post }),
           ])
 
     await updatePromise

@@ -9,7 +9,7 @@ const PostVoteValidator = object({
 type PostVoteRequest = zodInfer<typeof PostVoteValidator>
 
 const CommentVoteValidator = object({
-  postId: string({}),
+  commentId: string({}),
   voteType: ZodEnum.create(["UP", "DOWN"]),
 })
 

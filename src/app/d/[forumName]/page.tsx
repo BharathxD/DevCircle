@@ -1,13 +1,10 @@
-import { Fragment } from "react"
 import { notFound } from "next/navigation"
 import getCurrentUser from "@/actions/getCurrentUser"
 import getForum from "@/actions/getForum"
-import { Separator } from "@radix-ui/react-dropdown-menu"
 
 import type { ExtendedForum } from "@/types/database"
 import MiniCreatePost from "@/components/Post/MiniCreatePost"
 import PostFeed from "@/components/Post/PostFeed"
-import { ScrollArea } from "@/components/UI/ScrollArea"
 
 interface ForumPageProps {
   params: {

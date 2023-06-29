@@ -6,7 +6,7 @@ import redis from "@/lib/redis"
 const CACHE_AFTER_UPVOTES = 1
 
 interface updateVoteCountParams {
-  postId: string
+  id: string
   voteType: VoteType | null
   post: Post & {
     votes: Vote[]
@@ -15,11 +15,7 @@ interface updateVoteCountParams {
   }
 }
 
-async function updateVoteCount({
-  postId,
-  voteType,
-  post,
-}: updateVoteCountParams) {
+async function updateVoteCount({ id, voteType, post }: updateVoteCountParams) {
   const voteAmount = post.votes.reduce((acc, vote) => {
     if (vote.type === "UP") return acc + 1
     if (vote.type === "DOWN") return acc - 1
@@ -35,7 +31,7 @@ async function updateVoteCount({
       currentVote: voteType,
       createdAt: post.createdAt,
     }
-    await redis.hset(`post:${postId}`, cachedPayload)
+    await redis.hset(`post:${id}`, cachedPayload)
   }
   return voteAmount
 }
