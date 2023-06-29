@@ -45,9 +45,9 @@ const Layout = async ({
   return (
     <div className="h-full pb-0 pt-3 font-medium">
       <div className="grid grid-cols-1 gap-y-4 md:grid-cols-3 md:gap-x-4">
-        <div className="col-span-2">
-          <h1 className="text-3xl font-bold md:text-4xl ">d/{forumName}</h1>
-          <div className="flex flex-col gap-4 pt-2">{children}</div>
+        <div className="col-span-2 flex flex-col gap-2">
+          <h1 className="text-3xl font-bold md:text-4xl">d/{forumName}</h1>
+          <div className="flex flex-col gap-4">{children}</div>
         </div>
         <div className="order-first mt-14 hidden h-fit overflow-hidden rounded-lg border-2 border-zinc-800 md:order-last md:block">
           <div className="bg-green-100 px-6 py-4 dark:bg-zinc-800">

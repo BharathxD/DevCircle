@@ -6,7 +6,7 @@ import { Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "active:scale-95 inline-flex items-center justify-center rounded-md text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:ring-offset-2 disabled:bg-opacity-50 dark:focus:ring-zinc-800 disabled:cursor-not-allowed disabled:pointer-events-none dark:focus:ring-offset-slate-900",
+  "flex flex-row items-center justify-between active:scale-95 inline-flex items-center justify-center rounded-md text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:ring-offset-2 disabled:bg-opacity-50 dark:focus:ring-zinc-800 disabled:cursor-not-allowed disabled:pointer-events-none dark:focus:ring-offset-slate-900",
   {
     variants: {
       variant: {
@@ -15,9 +15,9 @@ const buttonVariants = cva(
         inverted:
           "text-zinc-100 bg-zinc-800 hover:bg-zinc-50 hover:text-zinc-800 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700 dark:disabled:text-zinc-600",
         destructive:
-          "text-zinc-50 dark:bg-red-400 hover:text-zinc-50 hover:bg-red-500 dark:hover:bg-red-500 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700",
+          "text-zinc-800 dark:text-zinc-50 dark:bg-red-400 hover:text-zinc-50 hover:bg-red-500 dark:hover:bg-red-500 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700",
         outline:
-          "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 dark:bg-zinc-800 hover:dark:bg-zinc-700 dark:text-zinc-50 outline outline-2 outline-zinc-300 dark:outline-zinc-700 hover:cursor-pointer",
+          "bg-zinc-100 text-zinc-900 hover:text-zinc-50 hover:bg-zinc-800 dark:bg-zinc-800 hover:dark:bg-zinc-700 dark:text-zinc-50 outline outline-2 outline-zinc-800 hover:cursor-pointer disabled:dark:text-zinc-600 disabled:bg-zinc-500",
         skeleton:
           "text-zinc-800 hover:bg-zinc-700 hover:text-zinc-50 dark:text-zinc-50 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700",
         body: "text-zinc-700 hover:text-zinc-100 hover:bg-zinc-800 rounded-lg hover:rounded-sm",
@@ -55,7 +55,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={isLoading}
         {...props}
       >
-        {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+        {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
         {children}
       </button>
     )

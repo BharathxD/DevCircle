@@ -45,15 +45,15 @@ const PostPage = async ({ params }: PageProps) => {
   const tags = post?.tags ?? cachedPost.tags
   if (!post && !cachedPost) return notFound()
   return (
-    <div className="pt-2">
-      <div className="flex h-full flex-col items-start gap-2 md:flex-row md:gap-4">
-        <div className="px-0.5 py-4 md:px-0 md:py-0.5">
+    <div className="pb-4">
+      <div className="flex h-full flex-col items-start gap-0 md:flex-row md:gap-4">
+        <div className="flex w-full flex-row items-center justify-between gap-4 md:w-fit md:flex-col md:pt-5">
           <Suspense fallback={<PostVoteShell />}>
             <PostVoteServer
               postId={post?.id ?? cachedPost.id}
               getData={() => getPost(params.postId)}
             />
-            <ShareButton className="mt-4 flex w-16 items-center justify-center rounded-xl border-2 border-zinc-700 px-3 py-4" />
+            <ShareButton className="flex items-center justify-center rounded-xl border-2 border-zinc-700 p-3" />
           </Suspense>
         </div>
         <div className="flex w-full flex-col gap-4">

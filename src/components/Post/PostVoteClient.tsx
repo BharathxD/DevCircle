@@ -20,6 +20,7 @@ interface PostVoteClientProps {
   initialVote?: VoteType | null
   initialVoteAmount: number
   isLoggedIn?: boolean
+  className?: string
 }
 
 const PostVoteClient: React.FC<PostVoteClientProps> = ({
@@ -27,6 +28,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
   initialVoteAmount,
   initialVote,
   isLoggedIn,
+  className,
 }) => {
   const router = useRouter()
   const [votesAmount, setVotesAmount] = useState<number>(initialVoteAmount)
@@ -85,7 +87,12 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
     [isLoggedIn, router, vote]
   )
   return (
-    <div className="flex gap-4 sm:w-16 sm:flex-col sm:gap-0 sm:pb-0">
+    <div
+      className={cn(
+        "flex h-full w-auto flex-row gap-4 md:w-12 md:flex-col md:gap-0",
+        className
+      )}
+    >
       <Button
         size="sm"
         aria-label="upvote"

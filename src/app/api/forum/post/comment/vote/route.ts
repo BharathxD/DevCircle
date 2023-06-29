@@ -27,25 +27,6 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
     const { id: userId } = currentUser
     const { commentId, voteType } = CommentVoteValidator.parse(await req.json())
 
-    // Retrieve the post with author and votes details
-    const post = await database.post.findUnique({
-      where: {
-        id: commentId,
-      },
-      include: {
-        author: true,
-        votes: true,
-        tags: true,
-      },
-    })
-
-    // If the post doesn't exist, return not found response
-    if (!post)
-      return NextResponse.json(
-        { message: "Post not found." },
-        { status: StatusCodes.NOT_FOUND }
-      )
-
     // Check if the user has already voted on the comment
     const existingVote = await database.commentVote.findFirst({
       where: {
@@ -71,18 +52,14 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
     const updatePromise =
       existingVote.type === voteType
         ? // If the existing vote is of the same type as the new vote, delete the vote and update vote count
-          Promise.all([
-            database.commentVote.delete({
-              where: { userId_commentId: { userId, commentId } },
-            }),
-          ])
+        database.commentVote.delete({
+          where: { userId_commentId: { userId, commentId } },
+        })
         : // If the existing vote is of a different type, update the vote and update vote count
-          Promise.all([
-            database.commentVote.update({
-              where: { userId_commentId: { userId, commentId } },
-              data: { type: voteType },
-            }),
-          ])
+        database.commentVote.update({
+          where: { userId_commentId: { userId, commentId } },
+          data: { type: voteType },
+        });
 
     await updatePromise
 

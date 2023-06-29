@@ -9,6 +9,7 @@ interface PostVoteServerProps {
   initialVote?: VoteType
   initialVotesAmount?: number
   getData?: () => Promise<(Post & { votes: Vote[] }) | null>
+  className?: string
 }
 
 const PostVoteServer = async ({
@@ -16,6 +17,7 @@ const PostVoteServer = async ({
   initialVotesAmount,
   initialVote,
   getData,
+  className,
 }: PostVoteServerProps) => {
   const currentUser = await getCurrentUser()
   let votesAmount = 0
@@ -43,6 +45,7 @@ const PostVoteServer = async ({
       initialVote={currentVote}
       initialVoteAmount={votesAmount}
       isLoggedIn={!!currentUser}
+      className={className}
     />
   )
 }

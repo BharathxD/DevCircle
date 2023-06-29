@@ -17,8 +17,8 @@ import { Button } from "../UI/Button"
 
 interface CommentVotesProps {
   commentId: string
-  initialCommentVote?: VoteType | null
   initialVoteAmount: number
+  initialCommentVote?: VoteType | null
   isLoggedIn?: boolean
   classNames?: string
 }
