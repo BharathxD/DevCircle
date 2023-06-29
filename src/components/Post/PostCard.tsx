@@ -47,7 +47,7 @@ const PostCard: FC<PostCardProps> = ({
       className="relative max-h-40 w-full overflow-hidden text-sm"
       ref={postRef}
     >
-      <EditorOutput content={post.content} />
+      <EditorOutput content={post.content} sm />
       {isPostOverflowed && (
         <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent dark:from-zinc-900"></div>
       )}

@@ -13,9 +13,10 @@ const Output = dynamic(
 
 interface EditorOutputProps {
   content: unknown
+  sm?: boolean
 }
 
-const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
+const EditorOutput: FC<EditorOutputProps> = ({ content, sm }) => {
   const renderers = {
     image: CustomImageRenderer,
     code: CustomCodeRenderer,
@@ -25,11 +26,6 @@ const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
       fontSize: "0.875rem",
       lineHeight: "1.25rem",
     },
-    linkTool: {
-      container: {
-        backgroundColor: "red",
-      },
-    },
   }
   const config = {
     linkTool: {
@@ -38,7 +34,7 @@ const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
   }
   return (
     <Output
-      style={style}
+      style={sm && style}
       className="text-sm"
       data={content}
       renderers={renderers}

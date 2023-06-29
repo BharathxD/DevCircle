@@ -22,6 +22,7 @@ import { uploadFiles } from "@/lib/uploadFiles"
 import { PostValidator } from "@/lib/validators/post"
 import type { PostCreationRequest } from "@/lib/validators/post"
 
+import { Button } from "../UI/Button"
 import { ScrollArea } from "../UI/ScrollArea"
 import Tags from "./Tags"
 
@@ -203,7 +204,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
       <Tags tags={tags} setTags={setTags} />
       <ScrollArea className="relative h-[60vh] w-full rounded-lg border-2 border-zinc-800 bg-zinc-50 p-5 dark:bg-zinc-900">
         <form
-          id="subreddit-post-form"
+          id="devcircle-post-form"
           className="w-fit rounded-md"
           onSubmit={handleSubmit(handleSubmitForm)}
         >
@@ -221,16 +222,16 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
             />
           </div>
         </form>
-        {/* </div> */}
       </ScrollArea>
-      <button
+      <Button
         type="submit"
-        className="w-full rounded-md border-2 border-zinc-800 bg-zinc-900 px-3 py-1 text-lg font-bold text-zinc-50 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
-        form="subreddit-post-form"
+        className="w-full rounded-md bg-zinc-900 px-3 py-1 text-lg font-bold text-zinc-50 outline-2 outline-zinc-800 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+        form="devcircle-post-form"
         disabled={isLoading}
+        isLoading={isLoading}
       >
         POST
-      </button>
+      </Button>
     </div>
   )
 }

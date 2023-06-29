@@ -36,8 +36,10 @@ const fetchTopCommunities = async (): Promise<
       forumName: string
       memberCount: number
     }[]
-    const sortedCommunities = topCommunities.sort((a, b) => b.memberCount - a.memberCount);
-    return sortedCommunities;
+    const sortedCommunities = topCommunities.sort(
+      (a, b) => b.memberCount - a.memberCount
+    )
+    return sortedCommunities
   } catch (error) {
     throw new Error("An error occurred while retrieving the top communities.")
   }
