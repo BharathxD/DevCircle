@@ -5,7 +5,7 @@ import { TbSmartHome } from "react-icons/tb"
 const CreateCommunity = () => {
   return (
     <div className="order-first h-fit overflow-hidden rounded-md border-2 border-zinc-800 md:order-last ">
-      <div className="border-b-2 border-zinc-800 bg-zinc-800 px-5 py-4 text-zinc-50 dark:bg-zinc-800 ">
+      <div className="border-b-2 border-zinc-800 bg-zinc-800 px-5 py-4 text-zinc-50 dark:bg-zinc-900">
         <div className="flex items-center gap-1.5 text-xl font-bold">
           <TbSmartHome size={25} />
           <p className="ml-2">Home</p>

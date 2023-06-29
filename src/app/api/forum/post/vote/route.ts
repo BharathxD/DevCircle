@@ -36,7 +36,7 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
       include: {
         author: true,
         votes: true,
-        tags: true
+        tags: true,
       },
     })
 
@@ -71,20 +71,20 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
     const updatePromise =
       existingVote.type === voteType
         ? // If the existing vote is of the same type as the new vote, delete the vote and update vote count
-        Promise.all([
-          database.vote.delete({
-            where: { userId_postId: { userId, postId } },
-          }),
-          updateVoteCount({ postId, voteType: null, post }),
-        ])
+          Promise.all([
+            database.vote.delete({
+              where: { userId_postId: { userId, postId } },
+            }),
+            updateVoteCount({ postId, voteType: null, post }),
+          ])
         : // If the existing vote is of a different type, update the vote and update vote count
-        Promise.all([
-          database.vote.update({
-            where: { userId_postId: { userId, postId } },
-            data: { type: voteType },
-          }),
-          updateVoteCount({ postId, voteType, post }),
-        ])
+          Promise.all([
+            database.vote.update({
+              where: { userId_postId: { userId, postId } },
+              data: { type: voteType },
+            }),
+            updateVoteCount({ postId, voteType, post }),
+          ])
 
     await updatePromise
 

@@ -14,7 +14,7 @@ const CommunityLeaderboard = async () => {
   if (!topCommunities) return null
   return (
     <div className="order-first h-fit overflow-hidden rounded-md border-2 border-zinc-800 md:order-last">
-      <div className="flex flex-row items-center justify-between border-b-2  border-b-zinc-800 bg-zinc-800 px-5 py-4 text-zinc-50 dark:border-b">
+      <div className="flex flex-row items-center justify-between border-b-2 border-b-zinc-800 bg-zinc-900 px-5 py-4 text-zinc-50 ">
         <div className="flex items-center gap-1.5 text-xl font-bold">
           <MdOutlineLeaderboard size={25} />
           <p className="ml-2">Top Communities</p>
@@ -23,7 +23,7 @@ const CommunityLeaderboard = async () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <AiOutlineInfoCircle size={20} />
+                <AiOutlineInfoCircle size={20} className="text-zinc-400" />
               </TooltipTrigger>
               <TooltipContent sideOffset={10}>
                 <p>Leaderboard gets updated every 12h</p>
@@ -36,7 +36,7 @@ const CommunityLeaderboard = async () => {
         {topCommunities.map((community, index) => (
           <div
             key={index}
-            className="flex w-full flex-row items-center justify-between border-b-2 border-zinc-800 font-medium last:border-b-0 dark:border-b"
+            className="flex w-full flex-row items-center justify-between border-b-2 border-zinc-800 font-medium last:border-b-0"
           >
             <div className="px-5 py-3 text-lg font-bold">
               d/{community.forumName}

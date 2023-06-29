@@ -49,7 +49,7 @@ const Layout = async ({
           <h1 className="text-3xl font-bold md:text-4xl">d/{forumName}</h1>
           <div className="flex flex-col gap-4 pt-4">{children}</div>
         </div>
-        <div className="order-first mt-[4rem] hidden h-fit overflow-hidden rounded-lg border-2 border-zinc-800 md:order-last md:block">
+        <div className="order-first mt-14 hidden h-fit overflow-hidden rounded-lg border-2 border-zinc-800 md:order-last md:block">
           <div className="bg-green-100 px-6 py-4 dark:bg-zinc-800">
             <p className="py-3 text-xl font-bold">About d/{forumName}</p>
           </div>

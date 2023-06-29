@@ -70,7 +70,7 @@ const PostCard: FC<PostCardProps> = ({
   )
 
   return (
-    <article className="rounded-md border-2 border-zinc-800 bg-zinc-50 dark:border dark:bg-zinc-900">
+    <article className="rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
       <div className="flex flex-col justify-between px-6 py-4 md:flex-row">
         <div className="py-2 pr-4">
           <PostVoteClient
@@ -102,8 +102,8 @@ const PostCard: FC<PostCardProps> = ({
           <div className="flex h-full max-w-full flex-row gap-2 overflow-hidden overflow-x-scroll px-2 py-1">
             {post.tags.map((tag) => (
               <Link
-                className="rounded-md border-2 border-zinc-800 px-5 py-1 font-medium hover:bg-zinc-800"
-                href={`${pathName}?tag=${tag.name}`}
+                className="rounded-md border-2 border-zinc-800 px-5 py-1 font-medium hover:bg-zinc-800 hover:text-zinc-50"
+                href={`/?tag=${tag.name}`}
               >
                 {tag.name}
               </Link>

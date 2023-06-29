@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { usePathname, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { Check, ChevronsUpDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -22,7 +22,6 @@ const TagFilter = ({ initialTags }: { initialTags: string[] }) => {
   const [open, setOpen] = useState(false)
   const [selectedTag, setValue] = useState("")
   const router = useRouter()
-  const pathname = usePathname()
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
