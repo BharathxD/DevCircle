@@ -2,24 +2,23 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import type { FC } from "react"
-import { usePathname, useRouter } from "next/navigation"
-import axios, { AxiosError } from "axios"
 import { useForm } from "react-hook-form"
-import { useMutation } from "react-query"
 
 import { toast } from "@/hooks/useToast"
 
 import "@/styles/editor.css"
 
 import type EditorJS from "@editorjs/editorjs"
+import type { OutputBlockData, OutputData } from "@editorjs/editorjs"
 import { zodResolver } from "@hookform/resolvers/zod"
-import type { Post } from "@prisma/client"
-import { StatusCodes } from "http-status-codes"
+import { Tag, type Post } from "@prisma/client"
+import { type AxiosError } from "axios"
+import type { UseMutateFunction } from "react-query"
 import TextareaAutosize from "react-textarea-autosize"
 import type { infer as zodInfer } from "zod"
 
 import { uploadFiles } from "@/lib/uploadFiles"
-import { PostValidator } from "@/lib/validators/post"
+import { CreatePostValidator } from "@/lib/validators/post"
 import type { PostCreationRequest } from "@/lib/validators/post"
 
 import { Button } from "../UI/Button"
@@ -27,26 +26,32 @@ import { ScrollArea } from "../UI/ScrollArea"
 import Tags from "./Tags"
 
 interface EditorProps {
-  forumId: string
+  submit: UseMutateFunction<
+    Post,
+    AxiosError<unknown, unknown>,
+    Omit<PostCreationRequest, "forumId">
+  >
+  isLoading: boolean
+  blocks?: OutputBlockData[]
+  title?: string
+  tags?: string[]
 }
 
-type FormData = zodInfer<typeof PostValidator>
+type FormData = zodInfer<typeof CreatePostValidator>
 
-const Editor: FC<EditorProps> = ({ forumId }) => {
-  const router = useRouter()
-  const pathname = usePathname()
+const Editor: FC<EditorProps> = ({ submit, blocks, title, tags: _tags }) => {
   const editorRef = useRef<EditorJS | null>(null)
   const _titleRef = useRef<HTMLTextAreaElement>(null)
   const [isMounted, setIsMounted] = useState(false)
-  const [tags, setTags] = useState<string[]>([])
+  const [tags, setTags] = useState<string[]>(_tags ?? [])
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(PostValidator),
-    defaultValues: { title: "", forumId, content: null, tags: [] },
+    resolver: zodResolver(CreatePostValidator.omit({ forumId: true })),
+    defaultValues: { title: title ?? "", content: null, tags: tags },
   })
 
   useEffect(() => {
@@ -71,7 +76,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
         },
         placeholder: "Click here to write your post...",
         inlineToolbar: true,
-        data: { blocks: [] },
+        data: { blocks: blocks ?? [] },
         tools: {
           header: Header,
           linkTool: {
@@ -107,7 +112,7 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
         },
       })
     }
-  }, [])
+  }, [blocks])
 
   useEffect(() => {
     const init = () => {
@@ -139,64 +144,14 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
 
   const { ref: titleRef, ...rest } = register("title")
 
-  const { mutate, isLoading } = useMutation({
-    mutationFn: async (payload: PostCreationRequest) => {
-      const { data }: { data: Post } = await axios.post(
-        "/api/forum/post/create",
-        payload
-      )
-      return data
-    },
-    onError: async (error: unknown) => {
-      if (error instanceof AxiosError) {
-        switch (error.response?.status) {
-          case StatusCodes.UNAUTHORIZED:
-            return router.push("/signin?unauthorized=1")
-          case StatusCodes.FORBIDDEN:
-            return toast({
-              title: "You are not subscribed to this community",
-              description: "Please join the community and try again.",
-              variant: "destructive",
-            })
-          case StatusCodes.BAD_REQUEST:
-            return toast({
-              title: "Post can't be empty",
-              description: "Please make sure to provide content for the post.",
-              variant: "destructive",
-            })
-          default:
-            return toast({
-              title: "Something went wrong",
-              description: "Your post is not published, please try again later",
-              variant: "destructive",
-            })
-        }
-      }
-      return toast({
-        title: "Something went wrong",
-        description: "Your post is not published, please try again later",
-        variant: "destructive",
-      })
-    },
-    onSuccess: () => {
-      const redirectPath = pathname.split("/").slice(0, -1).join("/")
-      router.push(redirectPath)
-      router.refresh()
-      toast({
-        description: "Your post is published",
-      })
-    },
-  })
-
   const handleSubmitForm = async (data: PostCreationRequest) => {
     const blocks = await editorRef.current?.save()
-    const payload: PostCreationRequest = {
-      forumId,
+    const payload: Omit<PostCreationRequest, "forumId"> = {
       title: data.title,
       content: blocks,
       tags: tags,
     }
-    mutate(payload)
+    submit(payload)
   }
 
   return (
@@ -223,15 +178,6 @@ const Editor: FC<EditorProps> = ({ forumId }) => {
           </div>
         </form>
       </ScrollArea>
-      <Button
-        type="submit"
-        className="w-full rounded-md bg-zinc-900 px-3 py-1 text-lg font-bold text-zinc-50 outline-2 outline-zinc-800 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
-        form="devcircle-post-form"
-        disabled={isLoading}
-        isLoading={isLoading}
-      >
-        POST
-      </Button>
     </div>
   )
 }

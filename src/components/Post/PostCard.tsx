@@ -101,7 +101,7 @@ const PostCard: FC<PostCardProps> = ({
         </Link>
         <div className="flex h-full w-full flex-row items-center justify-end">
           {post.tags && (
-            <div className="flex h-fit max-w-full flex-row gap-2 overflow-hidden overflow-x-scroll px-2 py-1">
+            <div className="no-scrollbar flex h-fit max-w-full flex-row gap-2 overflow-hidden overflow-x-scroll px-2 py-1">
               {post.tags.map((tag) => (
                 <Link
                   className="rounded-md border-2 border-zinc-800 px-5 py-1 font-medium hover:bg-zinc-800 hover:text-zinc-50"

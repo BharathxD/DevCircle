@@ -7,7 +7,7 @@ import { ZodError } from "zod"
 import database from "@/lib/database"
 import { forumValidator } from "@/lib/validators/forum"
 
-export async function POST(req: NextRequest) {
+const createForum = async (req: NextRequest) => {
   try {
     // Check if the request comes from authenticated source
     const currentUser = await getCurrentUser()
@@ -51,3 +51,5 @@ export async function POST(req: NextRequest) {
     )
   }
 }
+
+export { createForum as POST }

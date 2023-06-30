@@ -1,21 +1,18 @@
 import { Suspense } from "react"
-import Link from "next/link"
 import { notFound } from "next/navigation"
+import getCurrentUser from "@/actions/getCurrentUser"
 import getPost from "@/actions/getPost"
 import type { Post, Tag, User, Vote } from "@prisma/client"
 import { Loader2 } from "lucide-react"
 
 import type { CachedPost } from "@/types/redis"
 import database from "@/lib/database"
-import formatTimeToNow from "@/lib/formatTimeToNow"
 import redis from "@/lib/redis"
 import CommentsSection from "@/components/Post/CommentsSection"
-import EditorOutput from "@/components/Post/EditorOutput"
+import PostContent from "@/components/Post/PostContent"
 import PostVoteServer from "@/components/Post/PostVoteServer"
-import { Badge } from "@/components/UI/Badge"
 import PostVoteShell from "@/components/UI/PostVoteShell"
 import ShareButton from "@/components/UI/ShareButton"
-import UserAvatar from "@/components/UI/UserAvatar"
 
 interface PageProps {
   params: {
@@ -27,6 +24,7 @@ export const dynamic = "force-dynamic"
 export const fetchCache = "force-no-store"
 
 const PostPage = async ({ params }: PageProps) => {
+  const currentUser = await getCurrentUser()
   const cachedPost = (await redis.hgetall(
     `post:${params.postId}`
   )) as CachedPost
@@ -44,7 +42,7 @@ const PostPage = async ({ params }: PageProps) => {
       },
     })
   }
-  const tags = post?.tags ?? cachedPost.tags
+  const tags = post?.tags ?? cachedPost.tags ?? []
   if (!post && !cachedPost) return notFound()
   return (
     <div className="pb-4 pt-2">
@@ -59,39 +57,18 @@ const PostPage = async ({ params }: PageProps) => {
           </Suspense>
         </div>
         <div className="flex w-full flex-col gap-4">
-          <div className="flex flex-col gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-4 dark:bg-zinc-900">
-            {tags && tags.length !== 0 && (
-              <div className="mb-2 flex flex-row gap-1">
-                {tags.map((tag, index) => {
-                  return (
-                    <Link key={index} href={`?tag=${tag.name}`}>
-                      <Badge variant="secondary">{tag.name}</Badge>
-                    </Link>
-                  )
-                })}
-              </div>
-            )}
-            <div className="flex flex-row items-center gap-2">
-              <UserAvatar
-                user={{
-                  name: post?.author.name ?? cachedPost.authorUsername,
-                  image: post?.author.image || cachedPost.authorImage,
-                }}
-              />
-              <p className="mt-1 max-h-40 truncate text-sm text-zinc-500 dark:text-zinc-300">
-                Posted by u/{post?.author.name ?? cachedPost.authorUsername}{" "}
-                {formatTimeToNow(
-                  new Date(post?.createdAt ?? cachedPost.createdAt)
-                )}
-              </p>
-            </div>
-            <div>
-              <h1 className="pb-1 pt-2 text-xl font-semibold leading-6 text-zinc-900 dark:text-zinc-300">
-                {post?.title ?? cachedPost.title}
-              </h1>
-              <EditorOutput content={post?.content ?? cachedPost.content} />
-            </div>
-          </div>
+          <PostContent
+            content={post?.content ?? cachedPost.content}
+            title={post?.title ?? cachedPost.title}
+            postId={post?.id ?? cachedPost.title}
+            username={post?.author.name ?? cachedPost.authorUsername}
+            userimage={post?.author.image || cachedPost.authorImage}
+            createdAt={post?.createdAt ?? cachedPost.createdAt}
+            tags={tags}
+            isEditable={
+              (post?.authorId ?? cachedPost.createdAt) === currentUser?.id
+            }
+          />
           <div className="flex flex-col gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-4 dark:bg-zinc-900">
             <Suspense
               fallback={

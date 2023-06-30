@@ -12,7 +12,7 @@ const Output = dynamic(
 )
 
 interface EditorOutputProps {
-  content: unknown
+  content: any
   sm?: boolean
 }
 

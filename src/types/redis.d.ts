@@ -1,4 +1,5 @@
 import type { Tag, VoteType } from "@prisma/client"
+import type { OutputData } from "@editorjs/editorjs"
 
 export type CachedPost = {
   id: string

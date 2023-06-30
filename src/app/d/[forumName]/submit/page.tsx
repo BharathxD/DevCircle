@@ -4,7 +4,7 @@ import { IoIosArrowBack } from "react-icons/io"
 
 import database from "@/lib/database"
 import { cn } from "@/lib/utils"
-import Editor from "@/components/Post/Editor"
+import CreatePost from "@/components/Post/CreatePost"
 import { buttonVariants } from "@/components/UI/Button"
 
 interface PageProps {
@@ -13,7 +13,7 @@ interface PageProps {
   }
 }
 
-const SubmitPage = async ({ params }: PageProps) => {
+const CreatePostPage = async ({ params }: PageProps) => {
   const { forumName: forumName } = params
   const forum = await database.forum.findFirst({
     where: {
@@ -38,9 +38,9 @@ const SubmitPage = async ({ params }: PageProps) => {
           <p className="ml-2 mt-1 truncate text-zinc-500">in d/{forumName}</p>
         </div>
       </div>
-      <Editor forumId={forum.id} />
+      <CreatePost forumId={forum.id} />
     </div>
   )
 }
 
-export default SubmitPage
+export default CreatePostPage
