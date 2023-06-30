@@ -89,7 +89,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
   return (
     <div
       className={cn(
-        "flex h-full w-auto flex-row gap-4 md:w-12 md:flex-col md:gap-0",
+        "flex h-full w-auto flex-row items-center gap-4 md:w-12 md:flex-col md:gap-0",
         className
       )}
     >

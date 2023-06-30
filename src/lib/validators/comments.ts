@@ -7,12 +7,18 @@ const CommentValidator = object({
   replyToId: string().optional(),
 })
 
+const EditCommentValidator = object({
+  commentId: string({}),
+  text: string(),
+})
+
 const DeleteCommentValidator = object({
   commentId: string({}),
 })
 
 type CommentPayload = ZodInfer<typeof CommentValidator>
-type DeleteCommentPayload = ZodInfer<typeof CommentValidator>
+type EditCommentPayload = ZodInfer<typeof EditCommentValidator>
+type DeleteCommentPayload = ZodInfer<typeof DeleteCommentValidator>
 
-export { CommentValidator, DeleteCommentValidator }
-export type { CommentPayload, DeleteCommentPayload }
+export { CommentValidator, EditCommentValidator, DeleteCommentValidator }
+export type { CommentPayload, EditCommentPayload, DeleteCommentPayload }

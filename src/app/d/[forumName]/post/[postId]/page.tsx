@@ -12,8 +12,10 @@ import redis from "@/lib/redis"
 import CommentsSection from "@/components/Post/CommentsSection"
 import EditorOutput from "@/components/Post/EditorOutput"
 import PostVoteServer from "@/components/Post/PostVoteServer"
+import { Badge } from "@/components/UI/Badge"
 import PostVoteShell from "@/components/UI/PostVoteShell"
 import ShareButton from "@/components/UI/ShareButton"
+import UserAvatar from "@/components/UI/UserAvatar"
 
 interface PageProps {
   params: {
@@ -45,9 +47,9 @@ const PostPage = async ({ params }: PageProps) => {
   const tags = post?.tags ?? cachedPost.tags
   if (!post && !cachedPost) return notFound()
   return (
-    <div className="pb-4">
-      <div className="flex h-full flex-col items-start gap-0 md:flex-row md:gap-4">
-        <div className="flex w-full flex-row items-center justify-between gap-4 md:w-fit md:flex-col md:pt-5">
+    <div className="pb-4 pt-2">
+      <div className="flex h-full flex-col items-start gap-4 md:flex-row md:gap-2">
+        <div className="flex w-full flex-row items-center justify-between gap-4 pt-0 md:w-fit md:flex-col md:pt-[0.25rem]">
           <Suspense fallback={<PostVoteShell />}>
             <PostVoteServer
               postId={post?.id ?? cachedPost.id}
@@ -57,28 +59,32 @@ const PostPage = async ({ params }: PageProps) => {
           </Suspense>
         </div>
         <div className="flex w-full flex-col gap-4">
-          {tags && (
-            <div className="flex flex-row gap-2">
-              {tags.map((tag, index) => {
-                return (
-                  <Link
-                    key={index}
-                    href={`?tag=${tag.name}`}
-                    className="cursor-pointer rounded-md border-2 border-zinc-700 bg-zinc-50 px-5 py-2 hover:bg-zinc-700 hover:text-zinc-50 dark:bg-zinc-800 hover:dark:bg-zinc-700"
-                  >
-                    {tag.name}
-                  </Link>
-                )
-              })}
-            </div>
-          )}
           <div className="flex flex-col gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-4 dark:bg-zinc-900">
-            <p className="mt-1 max-h-40 truncate text-sm text-zinc-500 dark:text-zinc-300">
-              Posted by u/{post?.author.name ?? cachedPost.authorUsername}{" "}
-              {formatTimeToNow(
-                new Date(post?.createdAt ?? cachedPost.createdAt)
-              )}
-            </p>
+            {tags && tags.length !== 0 && (
+              <div className="mb-2 flex flex-row gap-1">
+                {tags.map((tag, index) => {
+                  return (
+                    <Link key={index} href={`?tag=${tag.name}`}>
+                      <Badge variant="secondary">{tag.name}</Badge>
+                    </Link>
+                  )
+                })}
+              </div>
+            )}
+            <div className="flex flex-row items-center gap-2">
+              <UserAvatar
+                user={{
+                  name: post?.author.name ?? cachedPost.authorUsername,
+                  image: post?.author.image || cachedPost.authorImage,
+                }}
+              />
+              <p className="mt-1 max-h-40 truncate text-sm text-zinc-500 dark:text-zinc-300">
+                Posted by u/{post?.author.name ?? cachedPost.authorUsername}{" "}
+                {formatTimeToNow(
+                  new Date(post?.createdAt ?? cachedPost.createdAt)
+                )}
+              </p>
+            </div>
             <div>
               <h1 className="pb-1 pt-2 text-xl font-semibold leading-6 text-zinc-900 dark:text-zinc-300">
                 {post?.title ?? cachedPost.title}

@@ -4,14 +4,13 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import axios, { AxiosError } from "axios"
 import { StatusCodes } from "http-status-codes"
+import { Loader2, Send } from "lucide-react"
 import queryString from "query-string"
 import { useMutation } from "react-query"
 
 import type { CommentPayload } from "@/lib/validators/comments"
 import { toast } from "@/hooks/useToast"
 
-import { Button } from "../UI/Button"
-import { Label } from "../UI/Label"
 import { Textarea } from "../UI/Textarea"
 
 interface CreateCommentProps {
@@ -58,29 +57,25 @@ const CreateComment: React.FC<CreateCommentProps> = ({ postId, replyToId }) => {
   })
   return (
     <div className="grid w-full gap-1.5">
-      <Label htmlFor="comment" className="text-lg font-semibold">
-        Your comment
-      </Label>
-      <div className="mt-2">
+      <div className="flex flex-row gap-2">
         <Textarea
           id="comment"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           rows={1}
+          className="h-fit"
           placeholder="What are your thoughts on this post?"
         />
-        <div className="mt-2 flex justify-end">
-          <Button
-            variant="outline"
-            disabled={isLoading || input.length === 0}
-            isLoading={isLoading}
-            onClick={() => {
-              return comment({ postId, text: input, replyToId })
-            }}
-          >
-            Comment
-          </Button>
-        </div>
+        <button
+          disabled={isLoading || input.length === 0}
+          onClick={() => {
+            return comment({ postId, text: input, replyToId })
+          }}
+          className="h-full cursor-pointer rounded-md border-2 border-zinc-800 bg-emerald-500 px-4 hover:bg-zinc-800 disabled:cursor-not-allowed disabled:bg-emerald-600 md:px-2"
+        >
+          {isLoading && <Loader2 className="animate-spin" size={20} />}
+          {!isLoading && <Send size={20} />}
+        </button>
       </div>
     </div>
   )
