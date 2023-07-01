@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import { Fragment, useState } from "react"
-import type { Comment, CommentVote, User } from "@prisma/client"
+import { Fragment, useState } from "react";
+import type { Comment, CommentVote, User } from "@prisma/client";
 
-import PostComment from "./PostComment"
+import PostComment from "./PostComment";
 
 type ExtendedComment = Comment & {
-  votes: CommentVote[]
+  votes: CommentVote[];
   replies: (Comment & {
-    author: User
-    votes: CommentVote[]
-  })[]
-}
+    author: User;
+    votes: CommentVote[];
+  })[];
+};
 
 interface CommentRepliesProps {
-  postId: string
-  topLevelComment: ExtendedComment
-  userId?: string
+  postId: string;
+  topLevelComment: ExtendedComment;
+  userId?: string;
 }
 
 const CommentReplies: React.FC<CommentRepliesProps> = ({
@@ -24,7 +24,7 @@ const CommentReplies: React.FC<CommentRepliesProps> = ({
   postId,
   userId,
 }) => {
-  const [showReplies, setShowReplies] = useState<boolean>(false)
+  const [showReplies, setShowReplies] = useState<boolean>(false);
   return (
     <Fragment>
       <div
@@ -38,11 +38,13 @@ const CommentReplies: React.FC<CommentRepliesProps> = ({
           .sort((a, b) => b.votes.length - a.votes.length)
           .map((reply) => {
             const replyVotesAmount = reply.votes.reduce((accumulator, vote) => {
-              if (vote.type === "UP") accumulator++
-              if (vote.type === "DOWN") accumulator--
-              return accumulator
-            }, 0)
-            const replyVote = reply.votes.find((vote) => vote.userId === userId)
+              if (vote.type === "UP") accumulator++;
+              if (vote.type === "DOWN") accumulator--;
+              return accumulator;
+            }, 0);
+            const replyVote = reply.votes.find(
+              (vote) => vote.userId === userId
+            );
             return (
               <div
                 key={reply.id}
@@ -58,10 +60,10 @@ const CommentReplies: React.FC<CommentRepliesProps> = ({
                   isDeletable={true}
                 />
               </div>
-            )
+            );
           })}
     </Fragment>
-  )
-}
+  );
+};
 
-export default CommentReplies
+export default CommentReplies;

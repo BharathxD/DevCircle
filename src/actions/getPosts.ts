@@ -1,9 +1,9 @@
-"use server"
+"use server";
 
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 
-import type { ExtendedPost } from "@/types/database"
-import database from "@/lib/database"
+import type { ExtendedPost } from "@/types/database";
+import database from "@/lib/database";
 
 /**
  * Retrieves posts from the database
@@ -16,8 +16,8 @@ const getPosts = async (
   limit?: number
 ): Promise<ExtendedPost[] | null> => {
   try {
-    let whereClause = {}
-    if (tag) whereClause = { tags: { some: { name: tag } } }
+    let whereClause = {};
+    if (tag) whereClause = { tags: { some: { name: tag } } };
     const allPosts = await database.post.findMany({
       where: whereClause,
       include: {
@@ -31,11 +31,10 @@ const getPosts = async (
         createdAt: "desc",
       },
       take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
-    })
-    return allPosts
+    });
+    return allPosts;
   } catch (error: unknown) {
-    console.log(error)
-    return null
+    return null;
   }
-}
-export default getPosts
+};
+export default getPosts;

@@ -1,9 +1,9 @@
-import type { HTMLAttributes } from "react"
+import type { HTMLAttributes } from "react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 interface HomepageLayoutProps extends HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const HomepageLayout: React.FC<HomepageLayoutProps> = ({
@@ -21,7 +21,7 @@ const HomepageLayout: React.FC<HomepageLayoutProps> = ({
     >
       {children}
     </section>
-  )
-}
+  );
+};
 
-export default HomepageLayout
+export default HomepageLayout;

@@ -1,10 +1,10 @@
-import Link from "next/link"
-import { FiGlobe } from "react-icons/fi"
+import Link from "next/link";
+import { FiGlobe } from "react-icons/fi";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 interface LogoProps {
-  className?: React.HTMLAttributes<HTMLDivElement["className"]>
+  className?: React.HTMLAttributes<HTMLDivElement["className"]>;
 }
 
 const Logo: React.FC<LogoProps> = ({ className }) => {
@@ -22,7 +22,7 @@ const Logo: React.FC<LogoProps> = ({ className }) => {
         DevCircle
       </p>
     </Link>
-  )
-}
+  );
+};
 
-export default Logo
+export default Logo;

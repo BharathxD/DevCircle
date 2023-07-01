@@ -1,18 +1,18 @@
-import { Fragment } from "react"
-import type { ReactNode } from "react"
-import { notFound } from "next/navigation"
-import getCurrentUser from "@/actions/getCurrentUser"
-import getForum from "@/actions/getForum"
-import { format } from "date-fns"
+import { Fragment } from "react";
+import type { ReactNode } from "react";
+import { notFound } from "next/navigation";
+import getCurrentUser from "@/actions/getCurrentUser";
+import getForum from "@/actions/getForum";
+import { format } from "date-fns";
 
-import database from "@/lib/database"
-import SubscribeLeaveToggle from "@/components/Forum/SubscribeLeaveToggle"
+import database from "@/lib/database";
+import SubscribeLeaveToggle from "@/components/Forum/SubscribeLeaveToggle";
 
 interface LayoutProps {
-  children: ReactNode
+  children: ReactNode;
   params: {
-    forumName: string
-  }
+    forumName: string;
+  };
 }
 
 const Layout = async ({
@@ -23,24 +23,24 @@ const Layout = async ({
   const [currentUser, forum] = await Promise.all([
     getCurrentUser(),
     getForum(forumName),
-  ])
+  ]);
 
   // If the forum is not found, return a 404 page
-  if (!forum) return notFound()
+  if (!forum) return notFound();
 
   // Check if the current user is subscribed to the forum
   const subscription = currentUser
     ? await database.subscription.findFirst({
         where: { forumId: forum.id, userId: currentUser.id },
       })
-    : undefined
+    : undefined;
 
-  const isSubscribed = !!subscription
+  const isSubscribed = !!subscription;
 
   // Get the count of forum members
   const memberCount = await database.subscription.count({
     where: { forum: { name: forumName } },
-  })
+  });
 
   return (
     <div className="h-full pb-0 pt-3 font-medium">
@@ -93,7 +93,7 @@ const Layout = async ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

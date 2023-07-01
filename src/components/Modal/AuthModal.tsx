@@ -1,7 +1,7 @@
-import CloseModal from "@/components/UI/CloseModal"
+import CloseModal from "@/components/UI/CloseModal";
 
 interface AuthModalProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const AuthModal: React.FC<AuthModalProps> = ({ children }) => {
@@ -16,7 +16,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ children }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AuthModal
+export default AuthModal;

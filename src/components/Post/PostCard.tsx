@@ -1,27 +1,27 @@
-import { useRef } from "react"
-import type { FC } from "react"
-import Link from "next/link"
-import siteConfig from "@/config"
-import type { Post, Tag, User, Vote } from "@prisma/client"
-import { BiMessageAltDetail } from "react-icons/bi"
+import { useRef } from "react";
+import type { FC } from "react";
+import Link from "next/link";
+import siteConfig from "@/config";
+import type { Post, Tag, User, Vote } from "@prisma/client";
+import { BiMessageAltDetail } from "react-icons/bi";
 
-import formatTimeToNow from "@/lib/formatTimeToNow"
+import formatTimeToNow from "@/lib/formatTimeToNow";
 
-import ShareButton from "../UI/ShareButton"
-import EditorOutput from "./EditorOutput"
-import PostVoteClient from "./PostVoteClient"
+import ShareButton from "../UI/ShareButton";
+import EditorOutput from "./EditorOutput";
+import PostVoteClient from "./PostVoteClient";
 
 interface PostCardProps {
   post: Post & {
-    author: User
-    votes: Vote[]
-    tags: Tag[]
-  }
-  votesAmount: number
-  forumName?: string
-  commentAmount: number
-  currentVote?: Vote["type"]
-  isLoggedIn?: boolean
+    author: User;
+    votes: Vote[];
+    tags: Tag[];
+  };
+  votesAmount: number;
+  forumName: string;
+  commentAmount: number;
+  currentVote?: Vote["type"];
+  isLoggedIn?: boolean;
 }
 
 /**
@@ -35,9 +35,9 @@ const PostCard: FC<PostCardProps> = ({
   currentVote,
   isLoggedIn,
 }) => {
-  const postRef = useRef<HTMLParagraphElement>(null)
-  const isPostOverflowed = postRef.current?.clientHeight === 160
-  const postUrl = `${siteConfig.url}/d/${forumName}/post/${post.id}`
+  const postRef = useRef<HTMLParagraphElement>(null);
+  const isPostOverflowed = postRef.current?.clientHeight === 160;
+  const postUrl = `${siteConfig.url}/d/${forumName}/post/${post.id}`;
 
   const postContent = (
     <div
@@ -49,7 +49,7 @@ const PostCard: FC<PostCardProps> = ({
         <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent dark:from-zinc-900"></div>
       )}
     </div>
-  )
+  );
 
   const postMetaInfo = (
     <div className="mt-1 flex max-h-40 flex-row justify-between gap-1 text-sm text-zinc-500">
@@ -66,7 +66,7 @@ const PostCard: FC<PostCardProps> = ({
       </div>
       <time>{" " + formatTimeToNow(new Date(post.createdAt))}</time>
     </div>
-  )
+  );
 
   return (
     <article className="overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
@@ -93,7 +93,7 @@ const PostCard: FC<PostCardProps> = ({
       </div>
       <div className="z-20 flex h-12 w-full flex-row items-center justify-between rounded-b-md border-t-2 border-t-zinc-800 text-sm">
         <Link
-          href={`/d/${forumName}/post/${post.id}`}
+          href={postUrl}
           className="flex h-full w-fit items-center gap-2 border-r-2 border-r-zinc-800 px-6 font-medium hover:bg-yellow-300 dark:hover:bg-zinc-800"
         >
           <BiMessageAltDetail size={25} /> {commentAmount}{" "}
@@ -116,7 +116,7 @@ const PostCard: FC<PostCardProps> = ({
         </div>
       </div>
     </article>
-  )
-}
+  );
+};
 
-export default PostCard
+export default PostCard;

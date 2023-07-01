@@ -1,11 +1,11 @@
-import "server-only"
+import "server-only";
 
-import { env } from "@/env.mjs"
-import { PrismaClient } from "@prisma/client"
+import { env } from "@/env.mjs";
+import { PrismaClient } from "@prisma/client";
 
 declare global {
   // eslint-disable-next-line no-var
-  var cachedPrisma: PrismaClient
+  var cachedPrisma: PrismaClient;
 }
 
 /**
@@ -17,10 +17,10 @@ declare global {
  * stored in `global.cachedPrisma`. finally returns that instance.
  */
 const getPrismaClient = () => {
-  if (env["NODE_ENV"] === "production") return new PrismaClient()
-  if (!global.cachedPrisma) global.cachedPrisma = new PrismaClient()
-  return global.cachedPrisma
-}
+  if (env["NODE_ENV"] === "production") return new PrismaClient();
+  if (!global.cachedPrisma) global.cachedPrisma = new PrismaClient();
+  return global.cachedPrisma;
+};
 
 /**
  * This TypeScript function exports a Prisma client instance that is cached in development mode and
@@ -28,6 +28,6 @@ const getPrismaClient = () => {
  * @returns The `db` object is being returned, which is an instance of the `PrismaClient` class. This
  * object is used to interact with the database and perform CRUD operations.
  */
-const database = getPrismaClient()
+const database = getPrismaClient();
 
-export default database
+export default database;

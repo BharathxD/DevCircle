@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { usePrevious } from "@mantine/hooks"
-import type { VoteType } from "@prisma/client"
-import axios, { AxiosError } from "axios"
-import { StatusCodes } from "http-status-codes"
-import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai"
-import { useMutation } from "react-query"
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { usePrevious } from "@mantine/hooks";
+import type { VoteType } from "@prisma/client";
+import axios, { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
+import { useMutation } from "react-query";
 
-import { cn } from "@/lib/utils"
-import type { PostVoteRequest } from "@/lib/validators/vote"
-import { toast } from "@/hooks/useToast"
+import { cn } from "@/lib/utils";
+import type { PostVoteRequest } from "@/lib/validators/vote";
+import { toast } from "@/hooks/useToast";
 
-import { Button } from "../UI/Button"
+import { Button } from "../UI/Button";
 
 interface PostVoteClientProps {
-  postId: string
-  initialVote?: VoteType | null
-  initialVoteAmount: number
-  isLoggedIn?: boolean
-  className?: string
+  postId: string;
+  initialVote?: VoteType | null;
+  initialVoteAmount: number;
+  isLoggedIn?: boolean;
+  className?: string;
 }
 
 const PostVoteClient: React.FC<PostVoteClientProps> = ({
@@ -30,62 +30,62 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
   isLoggedIn,
   className,
 }) => {
-  const router = useRouter()
-  const [votesAmount, setVotesAmount] = useState<number>(initialVoteAmount)
-  const [currentVote, setCurrentVote] = useState(initialVote)
-  const prevVote = usePrevious(currentVote)
+  const router = useRouter();
+  const [votesAmount, setVotesAmount] = useState<number>(initialVoteAmount);
+  const [currentVote, setCurrentVote] = useState(initialVote);
+  const prevVote = usePrevious(currentVote);
   useEffect(() => {
-    setCurrentVote(initialVote)
-  }, [initialVote])
+    setCurrentVote(initialVote);
+  }, [initialVote]);
   const { mutate: vote, isLoading } = useMutation({
     mutationFn: async (type: VoteType) => {
       const payload: PostVoteRequest = {
         postId,
         voteType: type,
-      }
-      await axios.patch("/api/forum/post/vote", payload)
+      };
+      await axios.patch("/api/forum/post/vote", payload);
     },
 
     onError: async (error, voteType) => {
-      if (voteType === "UP") setVotesAmount((prev) => prev - 1)
-      else setVotesAmount((prev) => prev + 1)
+      if (voteType === "UP") setVotesAmount((prev) => prev - 1);
+      else setVotesAmount((prev) => prev + 1);
 
-      setCurrentVote(prevVote)
+      setCurrentVote(prevVote);
 
       if (error instanceof AxiosError) {
         if (error.response?.status === StatusCodes.UNAUTHORIZED)
-          return router.push("/signin?unauthorized=1")
+          return router.push("/signin?unauthorized=1");
       }
 
       return toast({
         title: "Something went wrong",
         description: "Your vote was not registered, please try again",
         variant: "destructive",
-      })
+      });
     },
     onMutate: (type: VoteType) => {
       if (currentVote === type) {
         // User is voting the same way again, so remove their vote
-        setCurrentVote(undefined)
-        if (type === "UP") setVotesAmount((prev) => prev - 1)
-        else if (type === "DOWN") setVotesAmount((prev) => prev + 1)
+        setCurrentVote(undefined);
+        if (type === "UP") setVotesAmount((prev) => prev - 1);
+        else if (type === "DOWN") setVotesAmount((prev) => prev + 1);
       } else {
         // User is voting in the opposite direction, so subtract 2
-        setCurrentVote(type)
+        setCurrentVote(type);
         if (type === "UP")
-          setVotesAmount((prev) => prev + (currentVote ? 2 : 1))
+          setVotesAmount((prev) => prev + (currentVote ? 2 : 1));
         else if (type === "DOWN")
-          setVotesAmount((prev) => prev - (currentVote ? 2 : 1))
+          setVotesAmount((prev) => prev - (currentVote ? 2 : 1));
       }
     },
-  })
+  });
   const handleVote = useCallback(
     (voteType: "UP" | "DOWN") => {
-      if (!isLoggedIn) return router.push("/signin/?unauthorized=1")
-      vote(voteType)
+      if (!isLoggedIn) return router.push("/signin/?unauthorized=1");
+      vote(voteType);
     },
     [isLoggedIn, router, vote]
-  )
+  );
   return (
     <div
       className={cn(
@@ -127,7 +127,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
         <AiOutlineArrowDown className={"h-5 w-5"} />
       </Button>
     </div>
-  )
-}
+  );
+};
 
-export default PostVoteClient
+export default PostVoteClient;

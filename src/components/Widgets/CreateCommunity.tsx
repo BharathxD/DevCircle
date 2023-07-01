@@ -1,6 +1,6 @@
-import Link from "next/link"
-import siteConfig from "@/config"
-import { TbSmartHome } from "react-icons/tb"
+import Link from "next/link";
+import siteConfig from "@/config";
+import { TbSmartHome } from "react-icons/tb";
 
 const CreateCommunity = () => {
   return (
@@ -25,7 +25,7 @@ const CreateCommunity = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CreateCommunity
+export default CreateCommunity;

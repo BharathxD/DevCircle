@@ -1,49 +1,48 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useRef, useState } from "react"
-import type { FC } from "react"
-import { useForm } from "react-hook-form"
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { FC } from "react";
+import { useForm } from "react-hook-form";
 
-import { toast } from "@/hooks/useToast"
+import { toast } from "@/hooks/useToast";
 
-import "@/styles/editor.css"
+import "@/styles/editor.css";
 
-import type EditorJS from "@editorjs/editorjs"
-import type { OutputBlockData, OutputData } from "@editorjs/editorjs"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Tag, type Post } from "@prisma/client"
-import { type AxiosError } from "axios"
-import type { UseMutateFunction } from "react-query"
-import TextareaAutosize from "react-textarea-autosize"
-import type { infer as zodInfer } from "zod"
+import type EditorJS from "@editorjs/editorjs";
+import type { OutputBlockData } from "@editorjs/editorjs";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { Post } from "@prisma/client";
+import { type AxiosError } from "axios";
+import type { UseMutateFunction } from "react-query";
+import TextareaAutosize from "react-textarea-autosize";
+import type { infer as zodInfer } from "zod";
 
-import { uploadFiles } from "@/lib/uploadFiles"
-import { CreatePostValidator } from "@/lib/validators/post"
-import type { PostCreationRequest } from "@/lib/validators/post"
+import { uploadFiles } from "@/lib/uploadFiles";
+import { CreatePostValidator } from "@/lib/validators/post";
+import type { PostCreationRequest } from "@/lib/validators/post";
 
-import { Button } from "../UI/Button"
-import { ScrollArea } from "../UI/ScrollArea"
-import Tags from "./Tags"
+import { ScrollArea } from "../UI/ScrollArea";
+import Tags from "./Tags";
 
 interface EditorProps {
   submit: UseMutateFunction<
     Post,
     AxiosError<unknown, unknown>,
     Omit<PostCreationRequest, "forumId">
-  >
-  isLoading: boolean
-  blocks?: OutputBlockData[]
-  title?: string
-  tags?: string[]
+  >;
+  isLoading: boolean;
+  blocks?: OutputBlockData[];
+  title?: string;
+  tags?: string[];
 }
 
-type FormData = zodInfer<typeof CreatePostValidator>
+type FormData = zodInfer<typeof CreatePostValidator>;
 
 const Editor: FC<EditorProps> = ({ submit, blocks, title, tags: _tags }) => {
-  const editorRef = useRef<EditorJS | null>(null)
-  const _titleRef = useRef<HTMLTextAreaElement>(null)
-  const [isMounted, setIsMounted] = useState(false)
-  const [tags, setTags] = useState<string[]>(_tags ?? [])
+  const editorRef = useRef<EditorJS | null>(null);
+  const _titleRef = useRef<HTMLTextAreaElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const [tags, setTags] = useState<string[]>(_tags ?? []);
 
   const {
     register,
@@ -52,27 +51,27 @@ const Editor: FC<EditorProps> = ({ submit, blocks, title, tags: _tags }) => {
   } = useForm<FormData>({
     resolver: zodResolver(CreatePostValidator.omit({ forumId: true })),
     defaultValues: { title: title ?? "", content: null, tags: tags },
-  })
+  });
 
   useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    setIsMounted(true);
+  }, []);
 
   const initializeEditor = useCallback(async () => {
-    const EditorJS = (await import("@editorjs/editorjs")).default
-    const Header = (await import("@editorjs/header")).default
-    const Embed = (await import("@editorjs/embed")).default
-    const Table = (await import("@editorjs/table")).default
-    const List = (await import("@editorjs/list")).default
-    const Code = (await import("@editorjs/code")).default
-    const LinkTool = (await import("@editorjs/link")).default
-    const InlineCode = (await import("@editorjs/inline-code")).default
-    const ImageTool = (await import("@editorjs/image")).default
+    const EditorJS = (await import("@editorjs/editorjs")).default;
+    const Header = (await import("@editorjs/header")).default;
+    const Embed = (await import("@editorjs/embed")).default;
+    const Table = (await import("@editorjs/table")).default;
+    const List = (await import("@editorjs/list")).default;
+    const Code = (await import("@editorjs/code")).default;
+    const LinkTool = (await import("@editorjs/link")).default;
+    const InlineCode = (await import("@editorjs/inline-code")).default;
+    const ImageTool = (await import("@editorjs/image")).default;
     if (!editorRef.current) {
       const editor = new EditorJS({
         holder: "editor",
         onReady() {
-          editorRef.current = editor
+          editorRef.current = editor;
         },
         placeholder: "Click here to write your post...",
         inlineToolbar: true,
@@ -93,13 +92,13 @@ const Editor: FC<EditorProps> = ({ submit, blocks, title, tags: _tags }) => {
                   const [res] = await uploadFiles({
                     endpoint: "imageUploader",
                     files: file,
-                  })
+                  });
                   return {
                     success: 1,
                     file: {
                       url: res?.fileUrl,
                     },
-                  }
+                  };
                 },
               },
             },
@@ -110,25 +109,25 @@ const Editor: FC<EditorProps> = ({ submit, blocks, title, tags: _tags }) => {
           table: Table,
           embed: Embed,
         },
-      })
+      });
     }
-  }, [blocks])
+  }, [blocks]);
 
   useEffect(() => {
-    const init = () => {
-      initializeEditor()
+    const init = async () => {
+      await initializeEditor();
       setTimeout(() => {
-        if (_titleRef.current) _titleRef.current.focus()
-      }, 0)
-    }
+        if (_titleRef.current) _titleRef.current.focus();
+      }, 0);
+    };
     if (isMounted) {
-      init()
+      void init();
       return () => {
-        editorRef.current?.destroy()
-        editorRef.current = null
-      }
+        editorRef.current?.destroy();
+        editorRef.current = null;
+      };
     }
-  }, [isMounted, initializeEditor])
+  }, [isMounted, initializeEditor]);
 
   useEffect(() => {
     if (Object.keys(errors).length) {
@@ -137,22 +136,22 @@ const Editor: FC<EditorProps> = ({ submit, blocks, title, tags: _tags }) => {
           title: "Something went wrong",
           description: (value as { message: string }).message,
           variant: "destructive",
-        })
+        });
       }
     }
-  }, [errors])
+  }, [errors]);
 
-  const { ref: titleRef, ...rest } = register("title")
+  const { ref: titleRef, ...rest } = register("title");
 
   const handleSubmitForm = async (data: PostCreationRequest) => {
-    const blocks = await editorRef.current?.save()
+    const blocks = await editorRef.current?.save();
     const payload: Omit<PostCreationRequest, "forumId"> = {
       title: data.title,
       content: blocks,
       tags: tags,
-    }
-    submit(payload)
-  }
+    };
+    submit(payload);
+  };
 
   return (
     <div className="flex h-full w-full flex-col gap-3">
@@ -179,7 +178,7 @@ const Editor: FC<EditorProps> = ({ submit, blocks, title, tags: _tags }) => {
         </form>
       </ScrollArea>
     </div>
-  )
-}
+  );
+};
 
-export default Editor
+export default Editor;

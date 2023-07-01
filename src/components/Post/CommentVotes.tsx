@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { usePrevious } from "@mantine/hooks"
-import type { VoteType } from "@prisma/client"
-import axios, { AxiosError } from "axios"
-import { StatusCodes } from "http-status-codes"
-import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai"
-import { useMutation } from "react-query"
+import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { usePrevious } from "@mantine/hooks";
+import type { VoteType } from "@prisma/client";
+import axios, { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
+import { useMutation } from "react-query";
 
-import { cn } from "@/lib/utils"
-import type { CommentVoteRequest } from "@/lib/validators/vote"
-import { toast } from "@/hooks/useToast"
+import { cn } from "@/lib/utils";
+import type { CommentVoteRequest } from "@/lib/validators/vote";
+import { toast } from "@/hooks/useToast";
 
-import { Button } from "../UI/Button"
+import { Button } from "../UI/Button";
 
 interface CommentVotesProps {
-  commentId: string
-  initialVoteAmount: number
-  initialCommentVote?: VoteType | null
-  isLoggedIn?: boolean
-  classNames?: string
+  commentId: string;
+  initialVoteAmount: number;
+  initialCommentVote?: VoteType | null;
+  isLoggedIn?: boolean;
+  classNames?: string;
 }
 
 const CommentVotes: React.FC<CommentVotesProps> = ({
@@ -30,63 +30,63 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
   isLoggedIn,
   classNames,
 }) => {
-  const router = useRouter()
+  const router = useRouter();
   const [commentsAmount, setCommentsAmount] =
-    useState<number>(initialVoteAmount)
-  const [currentVote, setCurrentVote] = useState(initialCommentVote)
-  const prevVote = usePrevious(currentVote)
+    useState<number>(initialVoteAmount);
+  const [currentVote, setCurrentVote] = useState(initialCommentVote);
+  const prevVote = usePrevious(currentVote);
   useEffect(() => {
-    setCurrentVote(initialCommentVote)
-  }, [initialCommentVote])
+    setCurrentVote(initialCommentVote);
+  }, [initialCommentVote]);
   const { mutate: vote, isLoading } = useMutation({
     mutationFn: async (type: VoteType) => {
       const payload: CommentVoteRequest = {
         commentId,
         voteType: type,
-      }
-      await axios.patch("/api/forum/post/comment/vote", payload)
+      };
+      await axios.patch("/api/forum/post/comment/vote", payload);
     },
 
     onError: async (error, voteType) => {
-      if (voteType === "UP") setCommentsAmount((prev) => prev - 1)
-      else setCommentsAmount((prev) => prev + 1)
+      if (voteType === "UP") setCommentsAmount((prev) => prev - 1);
+      else setCommentsAmount((prev) => prev + 1);
 
-      setCurrentVote(prevVote)
+      setCurrentVote(prevVote);
 
       if (error instanceof AxiosError) {
         if (error.response?.status === StatusCodes.UNAUTHORIZED)
-          return router.push("/signin?unauthorized=1")
+          return router.push("/signin?unauthorized=1");
       }
 
       return toast({
         title: "Something went wrong",
         description: "Your vote was not registered, please try again",
         variant: "destructive",
-      })
+      });
     },
     onMutate: (type: VoteType) => {
       if (currentVote === type) {
         // User is voting the same way again, so remove their vote
-        setCurrentVote(undefined)
-        if (type === "UP") setCommentsAmount((prev) => prev - 1)
-        else if (type === "DOWN") setCommentsAmount((prev) => prev + 1)
+        setCurrentVote(undefined);
+        if (type === "UP") setCommentsAmount((prev) => prev - 1);
+        else if (type === "DOWN") setCommentsAmount((prev) => prev + 1);
       } else {
         // User is voting in the opposite direction, so subtract 2
-        setCurrentVote(type)
+        setCurrentVote(type);
         if (type === "UP")
-          setCommentsAmount((prev) => prev + (currentVote ? 2 : 1))
+          setCommentsAmount((prev) => prev + (currentVote ? 2 : 1));
         else if (type === "DOWN")
-          setCommentsAmount((prev) => prev - (currentVote ? 2 : 1))
+          setCommentsAmount((prev) => prev - (currentVote ? 2 : 1));
       }
     },
-  })
+  });
   const handleVote = useCallback(
     (voteType: "UP" | "DOWN") => {
-      if (!isLoggedIn) return router.push("/signin/?unauthorized=1")
-      vote(voteType)
+      if (!isLoggedIn) return router.push("/signin/?unauthorized=1");
+      vote(voteType);
     },
     [isLoggedIn, router, vote]
-  )
+  );
   return (
     <div className={cn("flex w-16 flex-col gap-4 pb-0", classNames)}>
       <Button
@@ -123,7 +123,7 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
         <AiOutlineArrowDown className={"h-5 w-5"} />
       </Button>
     </div>
-  )
-}
+  );
+};
 
-export default CommentVotes
+export default CommentVotes;

@@ -1,17 +1,17 @@
-import getTopCommunities from "@/actions/getTopCommunities"
-import { AiOutlineInfoCircle } from "react-icons/ai"
-import { MdOutlineLeaderboard } from "react-icons/md"
+import getTopCommunities from "@/actions/getTopCommunities";
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import { MdOutlineLeaderboard } from "react-icons/md";
 
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/UI/Tooltip"
+} from "@/components/UI/Tooltip";
 
 const CommunityLeaderboard = async () => {
-  const topCommunities = await getTopCommunities()
-  if (!topCommunities) return null
+  const topCommunities = await getTopCommunities();
+  if (!topCommunities) return null;
   return (
     <div className="order-first h-fit overflow-hidden rounded-md border-2 border-zinc-800 md:order-last">
       <div className="flex flex-row items-center justify-between border-b-2 border-b-zinc-800 bg-zinc-900 px-5 py-4 text-zinc-50 ">
@@ -53,7 +53,7 @@ const CommunityLeaderboard = async () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CommunityLeaderboard
+export default CommunityLeaderboard;

@@ -1,8 +1,8 @@
-import { Loader2 } from "lucide-react"
-import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai"
+import { Loader2 } from "lucide-react";
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/UI/Button"
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/UI/Button";
 
 const PostVoteShell = () => {
   return (
@@ -30,7 +30,7 @@ const PostVoteShell = () => {
         <AiOutlineArrowDown className={"h-5 w-5"} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PostVoteShell
+export default PostVoteShell;

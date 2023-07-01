@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useState } from "react"
-import { useTheme } from "next-themes"
-import { MdDarkMode, MdLightMode } from "react-icons/md"
+import { useCallback, useEffect, useState } from "react";
+import { useTheme } from "next-themes";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const ThemeSwitcher: React.FC = ({}) => {
-  const [isMounted, setIsMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const [isMounted, setIsMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const toggleMode = useCallback(() => {
-    const updatedTheme = theme === "dark" ? "light" : "dark"
-    setTheme(updatedTheme)
-  }, [setTheme, theme])
+    const updatedTheme = theme === "dark" ? "light" : "dark";
+    setTheme(updatedTheme);
+  }, [setTheme, theme]);
 
   useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    setIsMounted(true);
+  }, []);
 
   if (!isMounted) {
-    return null
+    return null;
   }
 
   return (
@@ -32,7 +32,7 @@ const ThemeSwitcher: React.FC = ({}) => {
         <MdDarkMode size={25} />
       )}
     </button>
-  )
-}
+  );
+};
 
-export default ThemeSwitcher
+export default ThemeSwitcher;

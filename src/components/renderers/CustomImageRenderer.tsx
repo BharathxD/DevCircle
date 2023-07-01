@@ -1,22 +1,22 @@
-import { useState } from "react"
-import Image from "next/image"
-import { ImCancelCircle } from "react-icons/im"
+import { useState } from "react";
+import Image from "next/image";
+import { ImCancelCircle } from "react-icons/im";
 
-import { Button } from "../UI/Button"
+import { Button } from "../UI/Button";
 
 function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
-  const [open, setOpen] = useState<boolean>(false)
-  const src = data.file.url
+  const [open, setOpen] = useState<boolean>(false);
+  const src = data.file.url;
 
   const handleDownload = () => {
-    const link = document.createElement("a")
-    link.href = src
-    link.download = "image.jpg"
-    link.target = "_blank"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
+    const link = document.createElement("a");
+    link.href = src;
+    link.download = "image.jpg";
+    link.target = "_blank";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <>
@@ -57,7 +57,7 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default CustomImageRenderer
+export default CustomImageRenderer;

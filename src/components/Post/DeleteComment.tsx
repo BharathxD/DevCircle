@@ -1,20 +1,20 @@
-import { useRouter } from "next/navigation"
-import axios, { AxiosError } from "axios"
-import { StatusCodes } from "http-status-codes"
-import { Loader2, Trash2 } from "lucide-react"
-import { useMutation } from "react-query"
+import { useRouter } from "next/navigation";
+import axios, { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
+import { Loader2, Trash2 } from "lucide-react";
+import { useMutation } from "react-query";
 
-import { toast } from "@/hooks/useToast"
+import { toast } from "@/hooks/useToast";
 
 interface DeleteCommentProps {
-  commentId: string
+  commentId: string;
 }
 
 const DeleteComment: React.FC<DeleteCommentProps> = ({ commentId }) => {
-  const router = useRouter()
+  const router = useRouter();
   const { mutate: deleteComment, isLoading } = useMutation({
     mutationFn: async () => {
-      await axios.delete(`/api/forum/post/comment?commentId=${commentId}`)
+      await axios.delete(`/api/forum/post/comment?commentId=${commentId}`);
     },
     onError: async (error: unknown) => {
       if (
@@ -25,24 +25,24 @@ const DeleteComment: React.FC<DeleteCommentProps> = ({ commentId }) => {
           title: "Unauthorized",
           description: "You are not authorized to delete this comment.",
           variant: "destructive",
-        })
+        });
       } else {
         toast({
           title: "Error",
           description:
             "Something went wrong. The comment could not be deleted.",
           variant: "destructive",
-        })
+        });
       }
     },
     onSuccess: () => {
-      router.refresh()
+      router.refresh();
       toast({
         title: "Success",
         description: "The comment has been deleted successfully.",
-      })
+      });
     },
-  })
+  });
 
   return (
     <button
@@ -54,7 +54,7 @@ const DeleteComment: React.FC<DeleteCommentProps> = ({ commentId }) => {
       {isLoading && <Loader2 size={20} className="animate-spin" />}
       Delete
     </button>
-  )
-}
+  );
+};
 
-export default DeleteComment
+export default DeleteComment;

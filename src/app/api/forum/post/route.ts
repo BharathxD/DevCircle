@@ -1,11 +1,14 @@
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { NextRequest } from "next/server";
 import getCurrentUser from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
 import database from "@/lib/database";
-import { CreatePostValidator, UpdatePostValidator } from "@/lib/validators/post";
+import {
+  CreatePostValidator,
+  UpdatePostValidator,
+} from "@/lib/validators/post";
 
 /**
  * Handles the HTTP POST request for creating a new post.

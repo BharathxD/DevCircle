@@ -1,9 +1,9 @@
-"use server"
+"use server";
 
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 
-import type { ExtendedForum } from "@/types/database"
-import database from "@/lib/database"
+import type { ExtendedForum } from "@/types/database";
+import database from "@/lib/database";
 
 /**
  * This function retrieves a forum and its associated posts from a database, with an optional limit on
@@ -38,12 +38,11 @@ const getForum = async (
           take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
         },
       },
-    })
+    });
 
-    return forum
+    return forum;
   } catch (error: unknown) {
-    console.log(error)
-    return null
+    return null;
   }
-}
-export default getForum
+};
+export default getForum;

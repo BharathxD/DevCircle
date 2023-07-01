@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
-import { Fragment, useCallback, useState } from "react"
-import Link from "next/link"
-import type { Tag } from "@prisma/client"
-import { MoreVertical } from "lucide-react"
+import { Fragment, useCallback, useState } from "react";
+import Link from "next/link";
+import type { Tag } from "@prisma/client";
+import { MoreVertical } from "lucide-react";
 
-import formatTimeToNow from "@/lib/formatTimeToNow"
-import { cn } from "@/lib/utils"
+import formatTimeToNow from "@/lib/formatTimeToNow";
+import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/UI/DropdownMenu"
+} from "@/components/UI/DropdownMenu";
 
-import { Badge } from "../UI/Badge"
-import { Button } from "../UI/Button"
-import UserAvatar from "../UI/UserAvatar"
-import EditorOutput from "./EditorOutput"
-import UpdatePost from "./UpdatePost"
+import { Badge } from "../UI/Badge";
+import { Button } from "../UI/Button";
+import UserAvatar from "../UI/UserAvatar";
+import EditorOutput from "./EditorOutput";
+import UpdatePost from "./UpdatePost";
 
 interface PostContentProps {
-  content: any
-  postId: string
-  title: string
-  tags: Tag[]
-  username: string
-  userimage: string
-  createdAt: Date
-  isEditable: boolean
+  content: any;
+  postId: string;
+  title: string;
+  tags: Tag[];
+  username: string;
+  userimage: string;
+  createdAt: Date;
+  isEditable: boolean;
 }
 
 const PostContent: React.FC<PostContentProps> = ({
@@ -41,10 +41,10 @@ const PostContent: React.FC<PostContentProps> = ({
   createdAt,
   isEditable,
 }) => {
-  const [isEditing, setIsEditing] = useState<boolean>(false)
+  const [isEditing, setIsEditing] = useState<boolean>(false);
   const toggleEditing = useCallback(() => {
-    setIsEditing((prev) => !prev)
-  }, [])
+    setIsEditing((prev) => !prev);
+  }, []);
   return (
     <div className="flex flex-col gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-4 dark:bg-zinc-900">
       {!isEditing && tags && tags.length !== 0 && (
@@ -54,7 +54,7 @@ const PostContent: React.FC<PostContentProps> = ({
               <Link key={index} href={`?tag=${tag.name}`}>
                 <Badge variant="secondary">{tag.name}</Badge>
               </Link>
-            )
+            );
           })}
         </div>
       )}
@@ -73,8 +73,7 @@ const PostContent: React.FC<PostContentProps> = ({
               }}
             />
             <p className="mt-1 max-h-40 truncate text-sm text-zinc-500 dark:text-zinc-300">
-              Posted by u/{username}{" "}
-              {formatTimeToNow(new Date(createdAt))}
+              Posted by u/{username} {formatTimeToNow(new Date(createdAt))}
             </p>
           </div>
         )}
@@ -119,7 +118,7 @@ const PostContent: React.FC<PostContentProps> = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PostContent
+export default PostContent;

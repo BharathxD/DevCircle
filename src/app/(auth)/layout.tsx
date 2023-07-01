@@ -1,12 +1,12 @@
-import Image from "next/image"
-import Link from "next/link"
-import siteConfig from "@/config"
-import { FiGlobe } from "react-icons/fi"
+import Image from "next/image";
+import Link from "next/link";
+import siteConfig from "@/config";
+import { FiGlobe } from "react-icons/fi";
 
-import AspectRatio from "@/components/UI/AspectRatio"
+import AspectRatio from "@/components/UI/AspectRatio";
 
 interface AuthLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
@@ -42,5 +42,5 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         {children}
       </main>
     </div>
-  )
+  );
 }

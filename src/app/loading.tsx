@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { MoonLoader } from "react-spinners"
+import { MoonLoader } from "react-spinners";
 
 const Loader = () => {
   return (
@@ -12,7 +12,7 @@ const Loader = () => {
         <MoonLoader size={50} color="black" />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;

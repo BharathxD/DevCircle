@@ -1,8 +1,8 @@
-import Link from "next/link"
+import Link from "next/link";
 
-import { buttonVariants } from "@/components/UI/Button"
+import { buttonVariants } from "@/components/UI/Button";
 
-import { toast } from "./useToast"
+import { toast } from "./useToast";
 
 export const useCustomToasts = () => {
   const loginToast = () => {
@@ -19,8 +19,8 @@ export const useCustomToasts = () => {
           Login
         </Link>
       ),
-    })
-  }
+    });
+  };
 
-  return { loginToast }
-}
+  return { loginToast };
+};

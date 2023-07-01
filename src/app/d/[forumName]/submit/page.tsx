@@ -1,26 +1,26 @@
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import { IoIosArrowBack } from "react-icons/io"
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { IoIosArrowBack } from "react-icons/io";
 
-import database from "@/lib/database"
-import { cn } from "@/lib/utils"
-import CreatePost from "@/components/Post/CreatePost"
-import { buttonVariants } from "@/components/UI/Button"
+import database from "@/lib/database";
+import { cn } from "@/lib/utils";
+import CreatePost from "@/components/Post/CreatePost";
+import { buttonVariants } from "@/components/UI/Button";
 
 interface PageProps {
   params: {
-    forumName: string
-  }
+    forumName: string;
+  };
 }
 
 const CreatePostPage = async ({ params }: PageProps) => {
-  const { forumName: forumName } = params
+  const { forumName: forumName } = params;
   const forum = await database.forum.findFirst({
     where: {
       name: forumName,
     },
-  })
-  if (!forum) return notFound()
+  });
+  if (!forum) return notFound();
   return (
     <div className="flex flex-col items-start gap-3 pt-2">
       <div className="flex flex-row items-center gap-4">
@@ -40,7 +40,7 @@ const CreatePostPage = async ({ params }: PageProps) => {
       </div>
       <CreatePost forumId={forum.id} />
     </div>
-  )
-}
+  );
+};
 
-export default CreatePostPage
+export default CreatePostPage;

@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { usePathname, useRouter } from "next/navigation"
-import type { Post, Tag } from "@prisma/client"
-import axios, { AxiosError } from "axios"
-import { StatusCodes } from "http-status-codes"
-import { useMutation } from "react-query"
+import { useRouter } from "next/navigation";
+import type { Post, Tag } from "@prisma/client";
+import axios, { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
+import { useMutation } from "react-query";
 
-import type { PostUpdateRequest } from "@/lib/validators/post"
-import { toast } from "@/hooks/useToast"
+import type { PostUpdateRequest } from "@/lib/validators/post";
+import { toast } from "@/hooks/useToast";
 
-import { Button } from "../UI/Button"
-import Editor from "./Editor"
+import { Button } from "../UI/Button";
+import Editor from "./Editor";
 
 interface UpdatePostProps {
-  postId: string
-  blocks: any
-  title: string
-  toggleEdit: () => void
-  tags: Tag[]
+  postId: string;
+  title: string;
+  toggleEdit: () => void;
+  tags: Tag[];
+  blocks: any;
 }
 
 const UpdatePost: React.FC<UpdatePostProps> = ({
@@ -27,8 +27,8 @@ const UpdatePost: React.FC<UpdatePostProps> = ({
   toggleEdit,
   tags,
 }) => {
-  const router = useRouter()
-  const tagArray = tags.map((tag) => tag.name)
+  const router = useRouter();
+  const tagArray = tags.map((tag) => tag.name);
   const { mutate, isLoading } = useMutation<
     Post,
     AxiosError,
@@ -38,48 +38,48 @@ const UpdatePost: React.FC<UpdatePostProps> = ({
       const { data }: { data: Post } = await axios.patch("/api/forum/post", {
         ...payload,
         postId,
-      })
-      return data
+      });
+      return data;
     },
     onError: async (error: unknown) => {
       if (error instanceof AxiosError) {
         switch (error.response?.status) {
           case StatusCodes.UNAUTHORIZED:
-            return router.push("/signin?unauthorized=1")
+            return router.push("/signin?unauthorized=1");
           case StatusCodes.FORBIDDEN:
             return toast({
               title: "You are not subscribed to this community",
               description: "Please join the community and try again.",
               variant: "destructive",
-            })
+            });
           case StatusCodes.BAD_REQUEST:
             return toast({
               title: "Post can't be empty",
               description: "Please make sure to provide content for the post.",
               variant: "destructive",
-            })
+            });
           default:
             return toast({
               title: "Something went wrong",
               description: "Post cannot be edited, please try again later",
               variant: "destructive",
-            })
+            });
         }
       }
       return toast({
         title: "Something went wrong",
         description: "Your post is not updated, please try again later",
         variant: "destructive",
-      })
+      });
     },
     onSuccess: () => {
-      router.refresh()
+      router.refresh();
       toast({
         description: "Your post has been edited",
-      })
-      toggleEdit()
+      });
+      toggleEdit();
     },
-  })
+  });
   return (
     <div className="flex flex-col gap-4">
       <Editor
@@ -108,7 +108,7 @@ const UpdatePost: React.FC<UpdatePostProps> = ({
         </Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UpdatePost
+export default UpdatePost;

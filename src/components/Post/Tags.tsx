@@ -1,59 +1,59 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useRef } from "react"
-import { AiOutlinePlus } from "react-icons/ai"
+import { useCallback, useEffect, useRef } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
 
-import { cn } from "@/lib/utils"
-import { toast } from "@/hooks/useToast"
+import { cn } from "@/lib/utils";
+import { toast } from "@/hooks/useToast";
 
-import { Button } from "../UI/Button"
-import { Input } from "../UI/Input"
+import { Button } from "../UI/Button";
+import { Input } from "../UI/Input";
 
 interface TagProps {
-  tags: string[]
-  setTags: React.Dispatch<React.SetStateAction<string[]>>
+  tags: string[];
+  setTags: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const Tags: React.FC<TagProps> = ({ tags, setTags }) => {
-  const tagRef = useRef<HTMLInputElement>(null)
+  const tagRef = useRef<HTMLInputElement>(null);
 
   const handleKeyAddition = useCallback(() => {
-    const tag = tagRef.current?.value
-    if (!tag || tag.length === 0) return
+    const tag = tagRef.current?.value;
+    if (!tag || tag.length === 0) return;
 
     if (tags.length === 5) {
       toast({
         title: "Maximum tag limit reached",
         description: "You can add a maximum of 5 tags.",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
-    const lowerCaseTag = tag.toLowerCase().trim()
+    const lowerCaseTag = tag.toLowerCase().trim();
     if (tags.includes(lowerCaseTag)) {
       toast({
         title: "Duplicate tags are not allowed",
         description: `The tag '${tag}' is already in use.`,
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
-    setTags((prevTags) => [...prevTags, lowerCaseTag])
-    tagRef.current.value = ""
-  }, [setTags, tags])
+    setTags((prevTags) => [...prevTags, lowerCaseTag]);
+    tagRef.current.value = "";
+  }, [setTags, tags]);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key !== "Enter") return
-      handleKeyAddition()
-    }
-    document.addEventListener("keydown", handleKeyPress)
+      if (event.key !== "Enter") return;
+      handleKeyAddition();
+    };
+    document.addEventListener("keydown", handleKeyPress);
     return () => {
-      document.removeEventListener("keydown", handleKeyPress)
-    }
-  }, [handleKeyAddition, tags])
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyAddition, tags]);
 
   return (
     <div className="no-scrollbar flex h-min w-full flex-row items-center justify-start gap-2">
@@ -93,7 +93,7 @@ const Tags: React.FC<TagProps> = ({ tags, setTags }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Tags
+export default Tags;

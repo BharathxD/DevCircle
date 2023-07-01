@@ -1,45 +1,45 @@
-"use client"
+"use client";
 
-import { Fragment, useRef, useState } from "react"
-import { useRouter } from "next/navigation"
-import type { Comment, CommentVote, User, VoteType } from "@prisma/client"
-import axios, { AxiosError } from "axios"
-import { StatusCodes } from "http-status-codes"
-import { MoreVertical } from "lucide-react"
-import queryString from "query-string"
-import { BiMessageDetail } from "react-icons/bi"
-import { useMutation } from "react-query"
+import { Fragment, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import type { Comment, CommentVote, User, VoteType } from "@prisma/client";
+import axios, { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
+import { MoreVertical } from "lucide-react";
+import queryString from "query-string";
+import { BiMessageDetail } from "react-icons/bi";
+import { useMutation } from "react-query";
 
-import formatTimeToNow from "@/lib/formatTimeToNow"
-import type { CommentPayload } from "@/lib/validators/comments"
-import useOnClickOutside from "@/hooks/useOnClickOutside"
-import { toast } from "@/hooks/useToast"
+import formatTimeToNow from "@/lib/formatTimeToNow";
+import type { CommentPayload } from "@/lib/validators/comments";
+import useOnClickOutside from "@/hooks/useOnClickOutside";
+import { toast } from "@/hooks/useToast";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/UI/DropdownMenu"
+} from "@/components/UI/DropdownMenu";
 
-import { Button } from "../UI/Button"
-import { Textarea } from "../UI/Textarea"
-import UserAvatar from "../UI/UserAvatar"
-import CommentVotes from "./CommentVotes"
-import DeleteComment from "./DeleteComment"
-import EditComment from "./EditComment"
+import { Button } from "../UI/Button";
+import { Textarea } from "../UI/Textarea";
+import UserAvatar from "../UI/UserAvatar";
+import CommentVotes from "./CommentVotes";
+import DeleteComment from "./DeleteComment";
+import EditComment from "./EditComment";
 
 type ExtendedComment = Comment & {
-  votes: CommentVote[]
-  author: User
-}
+  votes: CommentVote[];
+  author: User;
+};
 
 interface PostCommentProps {
-  comment: ExtendedComment
-  initialCommentVoteAmount: number
-  initialCommentVote?: VoteType
-  userId?: string
-  postId: string
-  isDeletable: boolean
+  comment: ExtendedComment;
+  initialCommentVoteAmount: number;
+  initialCommentVote?: VoteType;
+  userId?: string;
+  postId: string;
+  isDeletable: boolean;
 }
 
 const PostComment: React.FC<PostCommentProps> = ({
@@ -50,39 +50,41 @@ const PostComment: React.FC<PostCommentProps> = ({
   postId,
   isDeletable,
 }) => {
-  const [isReplying, setIsReplying] = useState<boolean>(false)
-  const [input, setInput] = useState<string>(`@${comment.author.name} `)
-  const commentRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
-  useOnClickOutside(commentRef, () => setIsReplying(false))
+  const [isReplying, setIsReplying] = useState<boolean>(false);
+  const [input, setInput] = useState<string>(
+    `@${comment.author.name ?? comment.author.username ?? "reply"} `
+  );
+  const commentRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  useOnClickOutside(commentRef, () => setIsReplying(false));
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setInput(e.target.value)
+    setInput(e.target.value);
   const toggleReplying = () => {
     if (!userId) {
       const redirectPath = `/signin?${queryString.stringify({
         unauthorized: 1,
-      })}`
-      return router.push(redirectPath)
+      })}`;
+      return router.push(redirectPath);
     }
-    setIsReplying((prev) => !prev)
-  }
+    setIsReplying((prev) => !prev);
+  };
   const handleReply = () => {
-    if (!input) return
+    if (!input) return;
     return reply({
       postId,
       text: input,
       replyToId: comment.replyToId ?? comment.id,
-    })
-  }
+    });
+  };
   const { mutate: reply, isLoading: replyIsLoading } = useMutation({
     mutationFn: async ({ postId, text, replyToId }: CommentPayload) => {
       const payload: CommentPayload = {
         postId,
         text,
         replyToId,
-      }
-      const { data } = await axios.patch(`/api/forum/post/comment `, payload)
-      return data
+      };
+      const { data } = await axios.patch(`/api/forum/post/comment `, payload);
+      return data as { message: string };
     },
     onError: async (error: unknown) => {
       if (
@@ -94,24 +96,26 @@ const PostComment: React.FC<PostCommentProps> = ({
           query: {
             unauthorized: 1,
           },
-        })
-        return router.push(redirectPath)
+        });
+        return router.push(redirectPath);
       }
       return toast({
         title: "There was a problem",
         description: "Something went wrong, please try again later",
         variant: "destructive",
-      })
+      });
     },
     onSuccess: () => {
-      setIsReplying(false)
-      router.refresh()
+      setIsReplying(false);
+      router.refresh();
       toast({
-        title: `Replied to u/${comment.author.name}`,
-      })
-      setInput("")
+        title: `Replied to u/${
+          comment.author.name ?? comment.author.username ?? "reply"
+        }`,
+      });
+      setInput("");
     },
-  })
+  });
   return (
     <div
       className="flex flex-col gap-3 overflow-hidden rounded-md border-2 border-zinc-800 dark:border-zinc-700 dark:bg-zinc-900/50"
@@ -208,7 +212,7 @@ const PostComment: React.FC<PostCommentProps> = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PostComment
+export default PostComment;

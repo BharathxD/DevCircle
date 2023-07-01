@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import type { FC } from "react"
-import Link from "next/link"
-import siteConfig from "@/config"
-import { FiGlobe } from "react-icons/fi"
+import type { FC } from "react";
+import Link from "next/link";
+import siteConfig from "@/config";
+import { FiGlobe } from "react-icons/fi";
 
 import {
   Card,
@@ -12,15 +12,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../UI/Card"
-import OAuthSignIn from "./OAuthSignIn"
+} from "../UI/Card";
+import OAuthSignIn from "./OAuthSignIn";
 
 interface SignInProps {
-  customTitle?: string
+  customTitle?: string;
 }
 
 const SignIn: FC<SignInProps> = ({ customTitle }) => {
-  const title = customTitle ?? "Welcome back!"
+  const title = customTitle ?? "Welcome back!";
   return (
     <Card className="flex flex-col justify-center border-2 border-zinc-800 text-center backdrop-blur-sm dark:bg-zinc-950/80">
       <CardHeader className="flex flex-col gap-2">
@@ -58,7 +58,7 @@ const SignIn: FC<SignInProps> = ({ customTitle }) => {
         </Link>
       </CardFooter>
     </Card>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;

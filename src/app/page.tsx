@@ -1,28 +1,28 @@
-import { notFound } from "next/navigation"
-import getCurrentUser from "@/actions/getCurrentUser"
-import fetchPosts from "@/actions/getPosts"
-import getSubscribedForums from "@/actions/getSubscribedForums"
+import { notFound } from "next/navigation";
+import getCurrentUser from "@/actions/getCurrentUser";
+import fetchPosts from "@/actions/getPosts";
+import getSubscribedForums from "@/actions/getSubscribedForums";
 
-import type { ExtendedPost } from "@/types/database"
-import HomepageLayout from "@/components/Layout/HomepageLayout"
-import PostFeed from "@/components/Post/PostFeed"
-import { Input } from "@/components/UI/Input"
-import CommunityLeaderboard from "@/components/Widgets/CommunityLeaderboard"
-import CreateCommunity from "@/components/Widgets/CreateCommunity"
-import SubscribedCommunities from "@/components/Widgets/SubscribedCommunities"
+import type { ExtendedPost } from "@/types/database";
+import HomepageLayout from "@/components/Layout/HomepageLayout";
+import PostFeed from "@/components/Post/PostFeed";
+import { Input } from "@/components/UI/Input";
+import CommunityLeaderboard from "@/components/Widgets/CommunityLeaderboard";
+import CreateCommunity from "@/components/Widgets/CreateCommunity";
+import SubscribedCommunities from "@/components/Widgets/SubscribedCommunities";
 
 interface HomeProps {
   searchParams: {
-    tag: string
-  }
+    tag: string;
+  };
 }
 
 const Home = async ({ searchParams }: HomeProps) => {
-  const { tag } = searchParams
-  const posts: ExtendedPost[] | null = await fetchPosts(tag)
-  const currentUser = await getCurrentUser()
-  const subscribedCommunities = await getSubscribedForums()
-  if (!posts) return notFound()
+  const { tag } = searchParams;
+  const posts: ExtendedPost[] | null = await fetchPosts(tag);
+  const currentUser = await getCurrentUser();
+  const subscribedCommunities = await getSubscribedForums();
+  if (!posts) return notFound();
   return (
     <HomepageLayout>
       <section className="hidden py-4 md:flex md:flex-col md:gap-5">
@@ -41,7 +41,7 @@ const Home = async ({ searchParams }: HomeProps) => {
         <CommunityLeaderboard />
       </section>
     </HomepageLayout>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -1,20 +1,20 @@
-import { Fragment } from "react"
-import getCurrentUser from "@/actions/getCurrentUser"
+import { Fragment } from "react";
+import getCurrentUser from "@/actions/getCurrentUser";
 
-import database from "@/lib/database"
+import database from "@/lib/database";
 
-import { Label } from "../UI/Label"
-import { Separator } from "../UI/Separator"
-import CommentReplies from "./CommentReplies"
-import CreateComment from "./CreateComment"
-import PostComment from "./PostComment"
+import { Label } from "../UI/Label";
+import { Separator } from "../UI/Separator";
+import CommentReplies from "./CommentReplies";
+import CreateComment from "./CreateComment";
+import PostComment from "./PostComment";
 
 interface CommentsSectionProps {
-  postId: string
+  postId: string;
 }
 
 const CommentsSection = async ({ postId }: CommentsSectionProps) => {
-  const currentUser = await getCurrentUser()
+  const currentUser = await getCurrentUser();
   const comments = await database.comment.findMany({
     where: {
       postId,
@@ -30,7 +30,7 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
         },
       },
     },
-  })
+  });
 
   return (
     <div className="flex flex-col gap-2">
@@ -45,15 +45,15 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
               .map((topLevelComment) => {
                 const topLevelCommentAmount = topLevelComment.votes.reduce(
                   (accumulator, vote) => {
-                    if (vote.type === "UP") accumulator++
-                    if (vote.type === "DOWN") accumulator--
-                    return accumulator
+                    if (vote.type === "UP") accumulator++;
+                    if (vote.type === "DOWN") accumulator--;
+                    return accumulator;
                   },
                   0
-                )
+                );
                 const topLevelCommentVote = topLevelComment.votes.find(
                   (vote) => vote.userId === currentUser?.id
-                )
+                );
                 return (
                   <div key={topLevelComment.id} className="flex flex-col">
                     <div
@@ -78,13 +78,13 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
                       />
                     )}
                   </div>
-                )
+                );
               })}
           </div>
         </Fragment>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default CommentsSection
+export default CommentsSection;

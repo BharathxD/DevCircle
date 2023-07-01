@@ -1,12 +1,12 @@
-import siteConfig from "@/config"
+import siteConfig from "@/config";
 
-import SignUp from "@/components/Auth/SignUp"
+import SignUp from "@/components/Auth/SignUp";
 
 export const metadata = {
   title: `${siteConfig.name} - Sign Up`,
   description: "Sign up for an account",
-}
+};
 
-const SignUpPage = () => <SignUp />
+const SignUpPage = () => <SignUp />;
 
-export default SignUpPage
+export default SignUpPage;

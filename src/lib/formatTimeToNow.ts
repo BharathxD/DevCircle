@@ -1,5 +1,5 @@
-import { formatDistanceToNowStrict } from "date-fns"
-import locale from "date-fns/locale/en-US"
+import { formatDistanceToNowStrict } from "date-fns";
+import locale from "date-fns/locale/en-US";
 
 // Define the format distance locale
 const formatDistanceLocale = {
@@ -19,7 +19,7 @@ const formatDistanceLocale = {
   xYears: "{{count}}y",
   overXYears: "{{count}}y",
   almostXYears: "{{count}}y",
-}
+};
 
 /**
  * The function formats a distance in time with options for adding a suffix and comparison.
@@ -37,17 +37,17 @@ const formatDistance = (
   count: number,
   options?: { addSuffix?: boolean; comparison?: number }
 ): string => {
-  const { addSuffix = false, comparison = 0 } = options || {}
+  const { addSuffix = false, comparison = 0 } = options || {};
   // Get the format distance locale string and replace the count
   const result = formatDistanceLocale[token].replace(
     "{{count}}",
     count.toString()
-  )
-  if (!addSuffix) return result
+  );
+  if (!addSuffix) return result;
   // Return the result with 'in' prefix
-  if (comparison > 0) return "in " + result
-  return result === "just now" ? result : result + " ago"
-}
+  if (comparison > 0) return "in " + result;
+  return result === "just now" ? result : result + " ago";
+};
 
 /**
  * The function formats a given date to a string representing the time distance from now, using strict
@@ -63,6 +63,6 @@ const formatTimeToNow = (date: Date) =>
   formatDistanceToNowStrict(date, {
     addSuffix: true,
     locale: { ...locale, formatDistance },
-  })
+  });
 
-export default formatTimeToNow
+export default formatTimeToNow;

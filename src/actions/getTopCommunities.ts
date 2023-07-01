@@ -1,5 +1,5 @@
-import database from "@/lib/database"
-import redis from "@/lib/redis"
+import database from "@/lib/database";
+import redis from "@/lib/redis";
 
 /**
  * Fetches the top five forums with the highest number of subscribers from the database.
@@ -14,35 +14,35 @@ const fetchTopCommunities = async (): Promise<
   { forumName: string; memberCount: number }[] | null
 > => {
   try {
-    const cachedTopCommunities = await redis.hgetall("leaderboard:forums")
+    const cachedTopCommunities = await redis.hgetall("leaderboard:forums");
 
     if (!cachedTopCommunities) {
       const forums = await database.forum.findMany({
         include: { subscribers: true },
-      })
+      });
 
       const updatedForums = forums.map((forum) => ({
         forumName: forum.name,
         memberCount: forum.subscribers.length,
-      }))
+      }));
 
       const sortedForums = updatedForums.sort(
         (a, b) => b.memberCount - a.memberCount
-      )
-      return sortedForums.slice(0, 5)
+      );
+      return sortedForums.slice(0, 5);
     }
 
     const topCommunities = Object.values(cachedTopCommunities) as {
-      forumName: string
-      memberCount: number
-    }[]
+      forumName: string;
+      memberCount: number;
+    }[];
     const sortedCommunities = topCommunities.sort(
       (a, b) => b.memberCount - a.memberCount
-    )
-    return sortedCommunities
+    );
+    return sortedCommunities;
   } catch (error) {
-    throw new Error("An error occurred while retrieving the top communities.")
+    throw new Error("An error occurred while retrieving the top communities.");
   }
-}
+};
 
-export default fetchTopCommunities
+export default fetchTopCommunities;

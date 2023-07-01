@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import axios, { AxiosError } from "axios"
-import { StatusCodes } from "http-status-codes"
-import { Edit, Loader2 } from "lucide-react"
-import queryString from "query-string"
-import { useMutation } from "react-query"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import axios, { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
+import { Edit, Loader2 } from "lucide-react";
+import queryString from "query-string";
+import { useMutation } from "react-query";
 
-import type { EditCommentPayload } from "@/lib/validators/comments"
-import { toast } from "@/hooks/useToast"
+import type { EditCommentPayload } from "@/lib/validators/comments";
+import { toast } from "@/hooks/useToast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,26 +20,26 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/UI/AlertDialog"
+} from "@/components/UI/AlertDialog";
 
-import { Textarea } from "../UI/Textarea"
+import { Textarea } from "../UI/Textarea";
 
 interface EditCommentProps {
-  commentId: string
-  text: string
+  commentId: string;
+  text: string;
 }
 
 const EditComment: React.FC<EditCommentProps> = ({ commentId, text }) => {
-  const router = useRouter()
-  const [input, setInput] = useState<string>(text)
+  const router = useRouter();
+  const [input, setInput] = useState<string>(text);
   const { mutate: editComment, isLoading } = useMutation({
     mutationFn: async ({ text }: Omit<EditCommentPayload, "commentId">) => {
       const payload: EditCommentPayload = {
         commentId: commentId,
         text,
-      }
-      const { data } = await axios.post(`/api/forum/post/comment `, payload)
-      return data
+      };
+      const { data } = await axios.post(`/api/forum/post/comment `, payload);
+      return data as { message: string };
     },
     onError: async (error: unknown) => {
       if (
@@ -51,23 +51,23 @@ const EditComment: React.FC<EditCommentProps> = ({ commentId, text }) => {
           query: {
             unauthorized: 1,
           },
-        })
-        return router.push(redirectPath)
+        });
+        return router.push(redirectPath);
       }
       return toast({
         title: "There was a problem",
         description: "Something went wrong, please try again later",
         variant: "destructive",
-      })
+      });
     },
     onSuccess: () => {
       toast({
         title: "Succesfully edited the comment",
-      })
-      router.refresh()
-      setInput("")
+      });
+      router.refresh();
+      setInput("");
     },
-  })
+  });
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -98,7 +98,7 @@ const EditComment: React.FC<EditCommentProps> = ({ commentId, text }) => {
           <AlertDialogAction
             disabled={isLoading || input.length === 0}
             onClick={() => {
-              return editComment({ text: input })
+              return editComment({ text: input });
             }}
           >
             {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
@@ -107,7 +107,7 @@ const EditComment: React.FC<EditCommentProps> = ({ commentId, text }) => {
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
-}
+  );
+};
 
-export default EditComment
+export default EditComment;

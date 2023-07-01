@@ -1,5 +1,5 @@
-import { any, array, object, string } from "zod"
-import type { infer as zodInfer } from "zod"
+import { any, array, object, string } from "zod";
+import type { infer as zodInfer } from "zod";
 
 const CreatePostValidator = object({
   title: string()
@@ -8,9 +8,9 @@ const CreatePostValidator = object({
   forumId: string(),
   content: any(),
   tags: array(string()),
-})
+});
 
-type PostCreationRequest = zodInfer<typeof CreatePostValidator>
+type PostCreationRequest = zodInfer<typeof CreatePostValidator>;
 
 const UpdatePostValidator = object({
   title: string()
@@ -19,9 +19,9 @@ const UpdatePostValidator = object({
   postId: string(),
   content: any(),
   tags: array(string()),
-})
+});
 
-type PostUpdateRequest = zodInfer<typeof UpdatePostValidator>
+type PostUpdateRequest = zodInfer<typeof UpdatePostValidator>;
 
-export { CreatePostValidator, UpdatePostValidator }
-export type { PostCreationRequest, PostUpdateRequest }
+export { CreatePostValidator, UpdatePostValidator };
+export type { PostCreationRequest, PostUpdateRequest };

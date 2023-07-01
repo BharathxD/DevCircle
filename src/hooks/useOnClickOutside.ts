@@ -1,6 +1,6 @@
-import { useEffect } from "react"
+import { useEffect } from "react";
 
-type Event = MouseEvent | TouchEvent
+type Event = MouseEvent | TouchEvent;
 
 /**
  * This is a TypeScript function that listens for clicks outside of a specified element and triggers a
@@ -17,21 +17,21 @@ const useOnClickOutside = <T extends HTMLElement = HTMLElement>(
 ) => {
   useEffect(() => {
     const listener = (event: Event) => {
-      const el = ref?.current
-      if (!el || el.contains((event?.target as Node) || null)) return
+      const el = ref?.current;
+      if (!el || el.contains((event?.target as Node) || null)) return;
       // Call the handler only if the click is outside of the element passed.
-      handler(event)
-    }
+      handler(event);
+    };
 
-    document.addEventListener("mousedown", listener)
-    document.addEventListener("touchstart", listener)
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
 
     return () => {
-      document.removeEventListener("mousedown", listener)
-      document.removeEventListener("touchstart", listener)
-    }
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
+    };
     // Reload only if ref or handler changes
-  }, [ref, handler])
-}
+  }, [ref, handler]);
+};
 
-export default useOnClickOutside
+export default useOnClickOutside;

@@ -1,34 +1,34 @@
-import { Suspense } from "react"
-import { notFound } from "next/navigation"
-import getCurrentUser from "@/actions/getCurrentUser"
-import getPost from "@/actions/getPost"
-import type { Post, Tag, User, Vote } from "@prisma/client"
-import { Loader2 } from "lucide-react"
+import { Suspense } from "react";
+import { notFound } from "next/navigation";
+import getCurrentUser from "@/actions/getCurrentUser";
+import getPost from "@/actions/getPost";
+import type { Post, Tag, User, Vote } from "@prisma/client";
+import { Loader2 } from "lucide-react";
 
-import type { CachedPost } from "@/types/redis"
-import database from "@/lib/database"
-import redis from "@/lib/redis"
-import CommentsSection from "@/components/Post/CommentsSection"
-import PostContent from "@/components/Post/PostContent"
-import PostVoteServer from "@/components/Post/PostVoteServer"
-import PostVoteShell from "@/components/UI/PostVoteShell"
-import ShareButton from "@/components/UI/ShareButton"
+import type { CachedPost } from "@/types/redis";
+import database from "@/lib/database";
+import redis from "@/lib/redis";
+import CommentsSection from "@/components/Post/CommentsSection";
+import PostContent from "@/components/Post/PostContent";
+import PostVoteServer from "@/components/Post/PostVoteServer";
+import PostVoteShell from "@/components/UI/PostVoteShell";
+import ShareButton from "@/components/UI/ShareButton";
 
 interface PageProps {
   params: {
-    postId: string
-  }
+    postId: string;
+  };
 }
 
-export const dynamic = "force-dynamic"
-export const fetchCache = "force-no-store"
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 const PostPage = async ({ params }: PageProps) => {
-  const currentUser = await getCurrentUser()
+  const currentUser = await getCurrentUser();
   const cachedPost = (await redis.hgetall(
     `post:${params.postId}`
-  )) as CachedPost
-  let post: (Post & { votes: Vote[]; author: User; tags: Tag[] }) | null = null
+  )) as CachedPost;
+  let post: (Post & { votes: Vote[]; author: User; tags: Tag[] }) | null = null;
 
   if (!cachedPost) {
     post = await database.post.findFirst({
@@ -40,10 +40,10 @@ const PostPage = async ({ params }: PageProps) => {
         author: true,
         tags: true,
       },
-    })
+    });
   }
-  const tags = post?.tags ?? cachedPost.tags ?? []
-  if (!post && !cachedPost) return notFound()
+  const tags = post?.tags ?? cachedPost.tags ?? [];
+  if (!post && !cachedPost) return notFound();
   return (
     <div className="pb-4 pt-2">
       <div className="flex h-full flex-col items-start gap-4 md:flex-row md:gap-2">
@@ -81,7 +81,7 @@ const PostPage = async ({ params }: PageProps) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PostPage
+export default PostPage;

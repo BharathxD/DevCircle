@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import type { FC } from "react"
-import { usePathname, useRouter } from "next/navigation"
-import type { User } from "@prisma/client"
-import { FiLink2 } from "react-icons/fi"
-import { IoMdImage } from "react-icons/io"
+import type { FC } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import type { User } from "@prisma/client";
+import { FiLink2 } from "react-icons/fi";
+import { IoMdImage } from "react-icons/io";
 
-import { Button } from "../UI/Button"
-import { Input } from "../UI/Input"
-import UserAvatar from "../UI/UserAvatar"
+import { Button } from "../UI/Button";
+import { Input } from "../UI/Input";
+import UserAvatar from "../UI/UserAvatar";
 
 interface MiniCreatePostProps {
-  currentUser: User | null
+  currentUser: User | null;
 }
 
 const MiniCreatePost: FC<MiniCreatePostProps> = ({ currentUser }) => {
-  const router = useRouter()
-  const pathname = usePathname()
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleCreatePostClick = () => {
-    if (!currentUser) router.push("/signin/?unauthorized=1")
-    router.push(`${pathname}/submit`)
-  }
+    if (!currentUser) router.push("/signin/?unauthorized=1");
+    router.push(`${pathname}/submit`);
+  };
 
   return (
     <li className="list-none overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
@@ -56,7 +56,7 @@ const MiniCreatePost: FC<MiniCreatePostProps> = ({ currentUser }) => {
         </Button>
       </div>
     </li>
-  )
-}
+  );
+};
 
-export default MiniCreatePost
+export default MiniCreatePost;

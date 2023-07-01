@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
-import siteConfig from "@/config"
-import { FiShare2 } from "react-icons/fi"
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import siteConfig from "@/config";
+import { FiShare2 } from "react-icons/fi";
 
-import { cn } from "@/lib/utils"
-import { toast } from "@/hooks/useToast"
+import { cn } from "@/lib/utils";
+import { toast } from "@/hooks/useToast";
 
 interface ShareButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  url?: string
+  url?: string;
 }
 
 const ShareButton: React.FC<ShareButtonProps> = ({
@@ -17,19 +17,19 @@ const ShareButton: React.FC<ShareButtonProps> = ({
   className,
   ...props
 }) => {
-  const [onMount, setOnMount] = useState<boolean>(false)
-  const pathName = usePathname()
-  const handleShareButtonClick = () => {
-    navigator.clipboard.writeText(url ?? `${siteConfig.url}${pathName}`)
+  const [onMount, setOnMount] = useState<boolean>(false);
+  const pathName = usePathname();
+  const handleShareButtonClick = async () => {
+    await navigator.clipboard.writeText(url ?? `${siteConfig.url}${pathName}`);
     toast({
       title: "Link copied to clipboard",
       description: "You can share this link with anyone.",
-    })
-  }
+    });
+  };
   useEffect(() => {
-    setOnMount(true)
-  }, [])
-  if (!onMount) return
+    setOnMount(true);
+  }, []);
+  if (!onMount) return;
   return (
     <button
       className={cn(
@@ -41,7 +41,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
     >
       <FiShare2 size={20} />
     </button>
-  )
-}
+  );
+};
 
-export default ShareButton
+export default ShareButton;

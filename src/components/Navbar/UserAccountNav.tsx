@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import type { FC } from "react"
-import { useRouter } from "next/navigation"
-import type { User } from "@prisma/client"
-import { LogOut, PlusCircle, Settings, StretchHorizontal } from "lucide-react"
-import { signOut } from "next-auth/react"
+import type { FC } from "react";
+import { useRouter } from "next/navigation";
+import type { User } from "@prisma/client";
+import { LogOut, PlusCircle, Settings, StretchHorizontal } from "lucide-react";
+import { signOut } from "next-auth/react";
 
 import {
   DropdownMenu,
@@ -13,21 +13,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "../UI/DropdownMenu"
-import UserAvatar from "../UI/UserAvatar"
+} from "../UI/DropdownMenu";
+import UserAvatar from "../UI/UserAvatar";
 
 interface UserAccountNavProps {
-  user: Pick<User, "image" | "name" | "email">
+  user: Pick<User, "image" | "name" | "email">;
 }
 
 const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
-  const router = useRouter()
-  const handleSignOut = (event: Event) => {
-    event.preventDefault()
-    signOut({
+  const router = useRouter();
+  const handleSignOut = async (event: Event) => {
+    event.preventDefault();
+    await signOut({
       callbackUrl: `${window.location.origin}/signin`,
-    })
-  }
+    });
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -73,7 +73,7 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
 
-export default UserAccountNav
+export default UserAccountNav;

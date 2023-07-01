@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import type { FC } from "react"
-import { useRouter } from "next/navigation"
-import axios, { AxiosError } from "axios"
-import { StatusCodes } from "http-status-codes"
-import { useMutation } from "react-query"
+import { useState } from "react";
+import type { FC } from "react";
+import { useRouter } from "next/navigation";
+import axios, { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
+import { useMutation } from "react-query";
 
-import type { CreateForumPayload } from "@/lib/validators/forum"
-import { toast } from "@/hooks/useToast"
-import { Button } from "@/components/UI/Button"
-import { Input } from "@/components/UI/Input"
+import type { CreateForumPayload } from "@/lib/validators/forum";
+import { toast } from "@/hooks/useToast";
+import { Button } from "@/components/UI/Button";
+import { Input } from "@/components/UI/Input";
 
 const PostCreationPage: FC = () => {
-  const [input, setInput] = useState<string>("")
-  const router = useRouter()
+  const [input, setInput] = useState<string>("");
+  const router = useRouter();
 
   const { mutate: createCommunity, isLoading } = useMutation<
     string,
@@ -23,18 +23,18 @@ const PostCreationPage: FC = () => {
     mutationFn: async () => {
       const payload: CreateForumPayload = {
         forumName: input,
-      }
-      const { data } = await axios.post<string>("/api/forum", payload)
-      return data
+      };
+      const { data } = await axios.post<string>("/api/forum", payload);
+      return data;
     },
 
     onError: async (err: AxiosError | Error) => {
       const errorMap: {
         [key: number]: {
-          title: string
-          description: string
-          variant: "default" | "destructive" | null | undefined
-        }
+          title: string;
+          description: string;
+          variant: "default" | "destructive" | null | undefined;
+        };
       } = {
         [StatusCodes.CONFLICT]: {
           title: "Forum already exists",
@@ -46,31 +46,31 @@ const PostCreationPage: FC = () => {
           description: "Please choose a name between 3 and 21 letters.",
           variant: "destructive",
         },
-      }
+      };
 
       if (err instanceof AxiosError) {
-        const { status = 0 } = err.response || {}
-        const errorToast = errorMap[status]
-        setInput("")
-        if (errorToast) return toast(errorToast)
+        const { status = 0 } = err.response || {};
+        const errorToast = errorMap[status];
+        setInput("");
+        if (errorToast) return toast(errorToast);
         if (status === StatusCodes.UNAUTHORIZED)
-          return router.push("/signin?unauthorized=1")
+          return router.push("/signin?unauthorized=1");
       }
 
       return toast({
         title: "There was an error",
         description: "Could not create the Forum.",
         variant: "destructive",
-      })
+      });
     },
     onSuccess: (data) => {
-      router.push(`/d/${data}`)
+      router.push(`/d/${data}`);
     },
-  })
+  });
 
-  const handleCancelClick = () => router.back()
-  const handleCreateForumClick = () => createCommunity()
-  const isInputValid = input.length > 0
+  const handleCancelClick = () => router.back();
+  const handleCreateForumClick = () => createCommunity();
+  const isInputValid = input.length > 0;
 
   return (
     <div className="md:flex md:h-[70vh] md:w-full md:items-center md:justify-center">
@@ -119,7 +119,7 @@ const PostCreationPage: FC = () => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PostCreationPage
+export default PostCreationPage;

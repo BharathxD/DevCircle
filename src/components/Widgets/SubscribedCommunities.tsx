@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { BsArrowUpRightSquare, BsPeople } from "react-icons/bs"
+import Link from "next/link";
+import { BsArrowUpRightSquare, BsPeople } from "react-icons/bs";
 
 interface SubscribedCommunitiesProps {
-  forums: string[] | null
+  forums: string[] | null;
 }
 
 const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
   forums,
 }) => {
-  if (!forums) return null
+  if (!forums) return null;
   return (
     <div className="overflow-hidden rounded-md border-2 border-zinc-800">
       <div className="border-b-2 border-b-zinc-800 bg-zinc-900 px-5 py-4 text-zinc-50">
@@ -33,7 +33,7 @@ const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SubscribedCommunities
+export default SubscribedCommunities;

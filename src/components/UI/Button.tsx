@@ -1,9 +1,9 @@
-import * as React from "react"
-import type { VariantProps } from "class-variance-authority"
-import { cva } from "class-variance-authority"
-import { Loader2 } from "lucide-react"
+import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
+import { Loader2 } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   "flex flex-row items-center gap-2 justify-between active:scale-95 inline-flex items-center justify-center rounded-md text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:ring-offset-2 disabled:bg-opacity-50 dark:focus:ring-zinc-800 disabled:cursor-not-allowed disabled:pointer-events-none dark:focus:ring-offset-slate-900",
@@ -38,12 +38,12 @@ const buttonVariants = cva(
       size: "default",
     },
   }
-)
+);
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  isLoading?: boolean
+  isLoading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -58,9 +58,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
         {children}
       </button>
-    )
+    );
   }
-)
-Button.displayName = "Button"
+);
+Button.displayName = "Button";
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };

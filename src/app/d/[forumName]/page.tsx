@@ -1,26 +1,26 @@
-import { notFound } from "next/navigation"
-import getCurrentUser from "@/actions/getCurrentUser"
-import getForum from "@/actions/getForum"
+import { notFound } from "next/navigation";
+import getCurrentUser from "@/actions/getCurrentUser";
+import getForum from "@/actions/getForum";
 
-import type { ExtendedForum } from "@/types/database"
-import MiniCreatePost from "@/components/Post/MiniCreatePost"
-import PostFeed from "@/components/Post/PostFeed"
+import type { ExtendedForum } from "@/types/database";
+import MiniCreatePost from "@/components/Post/MiniCreatePost";
+import PostFeed from "@/components/Post/PostFeed";
 
 interface ForumPageProps {
   params: {
-    forumName: string
-  }
+    forumName: string;
+  };
   searchParams: {
-    tag: string
-  }
+    tag: string;
+  };
 }
 
 const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
-  const { forumName } = params
-  const { tag } = searchParams
-  const currentUser = await getCurrentUser()
-  const forum: ExtendedForum | null = await getForum(forumName)
-  if (!forum) return notFound()
+  const { forumName } = params;
+  const { tag } = searchParams;
+  const currentUser = await getCurrentUser();
+  const forum: ExtendedForum | null = await getForum(forumName);
+  if (!forum) return notFound();
   return (
     <div className="flex flex-col gap-4 pt-2">
       <MiniCreatePost currentUser={currentUser} />
@@ -40,7 +40,7 @@ const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ForumPage
+export default ForumPage;

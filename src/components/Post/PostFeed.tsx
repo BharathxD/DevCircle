@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
-import { useIntersection } from "@mantine/hooks"
-import type { Forum, User } from "@prisma/client"
-import axios from "axios"
-import type { AxiosError } from "axios"
-import { StatusCodes } from "http-status-codes"
-import queryString from "query-string"
-import { useInfiniteQuery } from "react-query"
-import { PulseLoader } from "react-spinners"
+import { useEffect, useRef, useState } from "react";
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
+import { useIntersection } from "@mantine/hooks";
+import type { Forum, User } from "@prisma/client";
+import axios from "axios";
+import type { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
+import queryString from "query-string";
+import { useInfiniteQuery } from "react-query";
+import { PulseLoader } from "react-spinners";
 
-import type { ExtendedPost } from "@/types/database"
-import { cn } from "@/lib/utils"
+import type { ExtendedPost } from "@/types/database";
+import { cn } from "@/lib/utils";
 
-import PostCard from "./PostCard"
+import PostCard from "./PostCard";
 
 interface PostFeedProps {
-  initialPosts: ExtendedPost[]
-  forumName?: Forum["name"]
-  userId?: User["id"]
+  initialPosts: ExtendedPost[];
+  forumName?: Forum["name"];
+  userId?: User["id"];
   filters?: {
-    tag: string
-  }
+    tag: string;
+  };
 }
 
 /**
@@ -34,25 +34,25 @@ const PostFeed: React.FC<PostFeedProps> = ({
   userId,
   filters,
 }) => {
-  const [endOfThePosts, setEndOfThePosts] = useState<boolean>(false)
-  const lastPostRef = useRef<HTMLElement>(null)
+  const [endOfThePosts, setEndOfThePosts] = useState<boolean>(false);
+  const lastPostRef = useRef<HTMLElement>(null);
   const { ref, entry } = useIntersection({
     root: lastPostRef.current,
     threshold: 1,
-  })
+  });
 
   const fetchPosts = async ({ pageParam = 1 }): Promise<ExtendedPost[]> => {
-    setEndOfThePosts(false)
+    setEndOfThePosts(false);
     const queryParams = queryString.stringify({
       limit: INFINITE_SCROLL_PAGINATION_RESULTS,
       page: pageParam,
       forumName,
       ...filters,
-    })
-    const query = `/api/posts?${queryParams}`
-    const response = await axios.get(query)
-    return response.data as ExtendedPost[]
-  }
+    });
+    const query = `/api/posts?${queryParams}`;
+    const response = await axios.get(query);
+    return response.data as ExtendedPost[];
+  };
 
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     "infinite-query",
@@ -62,36 +62,36 @@ const PostFeed: React.FC<PostFeedProps> = ({
       initialData: { pages: [initialPosts], pageParams: [1] },
       retry: (_, error: AxiosError) => {
         if (error.response?.status === StatusCodes.NOT_FOUND)
-          setEndOfThePosts(true)
-        return false
+          setEndOfThePosts(true);
+        return false;
       },
     }
-  )
+  );
 
   useEffect(() => {
     if (entry?.isIntersecting) {
-      fetchNextPage()
+      fetchNextPage();
     }
-  }, [entry, fetchNextPage])
+  }, [entry, fetchNextPage]);
 
-  const posts = data?.pages.flatMap((page) => page) ?? initialPosts
+  const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
   return (
     <ul className="col-span-2 flex flex-col space-y-4">
       {posts.map((post, index) => {
         const voteCount = post.votes.reduce((acc, vote) => {
           if (vote.type === "UP") {
-            return acc + 1
+            return acc + 1;
           }
           if (vote.type === "DOWN") {
-            return acc - 1
+            return acc - 1;
           }
-          return acc
-        }, 0)
+          return acc;
+        }, 0);
 
-        const currentVote = post.votes.find((vote) => vote.userId === userId)
+        const currentVote = post.votes.find((vote) => vote.userId === userId);
 
-        const isLastPost = index === posts.length - 1
+        const isLastPost = index === posts.length - 1;
 
         return (
           <li key={index} ref={isLastPost ? ref : null}>
@@ -104,7 +104,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
               isLoggedIn={!!userId}
             />
           </li>
-        )
+        );
       })}
       {isFetchingNextPage && !endOfThePosts && (
         <>
@@ -122,7 +122,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
         </li>
       )}
     </ul>
-  )
-}
+  );
+};
 
-export default PostFeed
+export default PostFeed;

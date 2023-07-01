@@ -1,8 +1,8 @@
-"use server"
+"use server";
 
-import database from "@/lib/database"
+import database from "@/lib/database";
 
-import getCurrentUser from "./getCurrentUser"
+import getCurrentUser from "./getCurrentUser";
 
 /**
  * The function retrieves the names of communities that a user has subscribed to from a database.
@@ -11,18 +11,18 @@ import getCurrentUser from "./getCurrentUser"
  */
 const getSubscribedForums = async () => {
   try {
-    const user = await getCurrentUser()
-    if (!user) return null
+    const user = await getCurrentUser();
+    if (!user) return null;
     const subscriptions = await database.subscription.findMany({
       where: { userId: user.id },
       include: { forum: true },
-    })
+    });
     const communities = subscriptions.map(
       (subscription) => subscription.forum.name
-    )
-    return communities
+    );
+    return communities;
   } catch (error: unknown) {
-    return null
+    return null;
   }
-}
-export default getSubscribedForums
+};
+export default getSubscribedForums;

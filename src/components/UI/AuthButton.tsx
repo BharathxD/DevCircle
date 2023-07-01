@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import type { User } from "@prisma/client"
+import Link from "next/link";
+import type { User } from "@prisma/client";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-import UserAccountNav from "../Navbar/UserAccountNav"
+import UserAccountNav from "../Navbar/UserAccountNav";
 
 interface SignInButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
-  user: User | null
+  user: User | null;
 }
 
 const SignInButton: React.FC<SignInButtonProps> = ({
@@ -16,7 +16,7 @@ const SignInButton: React.FC<SignInButtonProps> = ({
   className,
   ...props
 }) => {
-  if (user) return <UserAccountNav user={user} />
+  if (user) return <UserAccountNav user={user} />;
   return (
     <Link
       href="/signin"
@@ -28,7 +28,7 @@ const SignInButton: React.FC<SignInButtonProps> = ({
     >
       Sign In
     </Link>
-  )
-}
+  );
+};
 
-export default SignInButton
+export default SignInButton;
