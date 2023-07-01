@@ -37,10 +37,6 @@ const DeleteComment: React.FC<DeleteCommentProps> = ({ commentId }) => {
     },
     onSuccess: () => {
       router.refresh();
-      toast({
-        title: "Success",
-        description: "The comment has been deleted successfully.",
-      });
     },
   });
 

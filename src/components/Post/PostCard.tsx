@@ -88,7 +88,7 @@ const PostCard: FC<PostCardProps> = ({
         <div className="flex w-full flex-col gap-2">
           {postMetaInfo}
           <Link
-            href={postUrl}
+            href={`/d/${forumName}/post/${post.id}`}
             className="pt-2 text-lg font-semibold leading-6 text-zinc-900 dark:text-zinc-50"
             aria-label={post.title}
           >
@@ -99,7 +99,7 @@ const PostCard: FC<PostCardProps> = ({
       </div>
       <div className="z-20 flex h-12 w-full flex-row items-center justify-between rounded-b-md border-t-2 border-t-zinc-800 text-sm">
         <Link
-          href={postUrl}
+          href={`/d/${forumName}/post/${post.id}`}
           className="flex h-full w-fit items-center gap-2 border-r-2 border-r-zinc-800 px-6 font-medium hover:bg-yellow-300 dark:hover:bg-zinc-800"
         >
           <BiMessageAltDetail size={25} /> {commentAmount}{" "}
@@ -120,7 +120,7 @@ const PostCard: FC<PostCardProps> = ({
           )}
           <ShareButton
             url={postUrl}
-            className="border-0 border-l-2 border-zinc-800"
+            className="border-0 border-l-2 border-l-zinc-800"
           />
         </div>
       </div>

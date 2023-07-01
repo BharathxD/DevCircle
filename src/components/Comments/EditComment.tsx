@@ -61,9 +61,6 @@ const EditComment: React.FC<EditCommentProps> = ({ commentId, text }) => {
       });
     },
     onSuccess: () => {
-      toast({
-        title: "Succesfully edited the comment",
-      });
       router.refresh();
       setInput("");
     },

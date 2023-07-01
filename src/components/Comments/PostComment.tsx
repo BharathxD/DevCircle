@@ -108,11 +108,6 @@ const PostComment: React.FC<PostCommentProps> = ({
     onSuccess: () => {
       setIsReplying(false);
       router.refresh();
-      toast({
-        title: `Replied to u/${
-          comment.author.name ?? comment.author.username ?? "reply"
-        }`,
-      });
       setInput("");
     },
   });
@@ -137,9 +132,9 @@ const PostComment: React.FC<PostCommentProps> = ({
               <Fragment>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button size="xs">
+                    <button className="hover:opacity-75">
                       <MoreVertical size={20} />
-                    </Button>
+                    </button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent
                     sideOffset={10}

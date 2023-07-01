@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 
 import CustomCodeRenderer from "../Renderers/CustomCodeRenderer";
 import CustomImageRenderer from "../Renderers/CustomImageRenderer";
+import CustomTableRenderer from "../Renderers/CustomTableRenderer";
 
 const Output = dynamic(
   async () => (await import("editorjs-react-renderer")).default,
@@ -20,7 +21,7 @@ const EditorOutput: FC<EditorOutputProps> = ({ content, sm }) => {
   const renderers = {
     image: CustomImageRenderer,
     code: CustomCodeRenderer,
-    table: () => <div>TABLE!</div>
+    table: CustomTableRenderer,
   };
   const style = {
     paragraph: {

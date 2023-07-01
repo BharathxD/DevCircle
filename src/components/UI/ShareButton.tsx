@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import siteConfig from "@/config";
+import { useClipboard } from "@mantine/hooks";
 import { FiShare2 } from "react-icons/fi";
 
 import { cn } from "@/lib/utils";
@@ -18,9 +19,10 @@ const ShareButton: React.FC<ShareButtonProps> = ({
   ...props
 }) => {
   const [onMount, setOnMount] = useState<boolean>(false);
+  const clipboard = useClipboard({ timeout: 500 });
   const pathName = usePathname();
   const handleShareButtonClick = async () => {
-    await navigator.clipboard.writeText(url ?? `${siteConfig.url}${pathName}`);
+    await clipboard.copy(url ?? `${siteConfig.url}${pathName}`);
     toast({
       title: "Link copied to clipboard",
       description: "You can share this link with anyone.",
@@ -33,7 +35,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
   return (
     <button
       className={cn(
-        "flex h-full w-fit items-center gap-2 border-2 border-zinc-800 bg-zinc-950 px-6 font-medium hover:bg-yellow-300 dark:hover:border-zinc-500 dark:hover:bg-zinc-950",
+        "flex h-full w-fit items-center gap-2 bg-zinc-950 px-6 font-medium hover:bg-yellow-300 dark:hover:bg-zinc-950",
         className
       )}
       onClick={handleShareButtonClick}

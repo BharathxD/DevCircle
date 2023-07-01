@@ -25,8 +25,8 @@ interface PostContentProps {
   postId: string;
   title: string;
   tags: Tag[];
-  username: string;
-  userimage: string;
+  username: string | null;
+  userimage: string | null;
   createdAt: Date;
   isEditable: boolean;
 }
@@ -46,8 +46,8 @@ const PostContent: React.FC<PostContentProps> = ({
     setIsEditing((prev) => !prev);
   }, []);
   return (
-    <div className="flex flex-col gap-2 overflow-hidden rounded-lg border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
-      <div className="flex flex-col p-4 dark:bg-neutral-900">
+    <div className="flex flex-col gap-4 overflow-hidden rounded-lg border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
+      <div className="flex flex-col gap-4 p-4 dark:bg-neutral-900">
         {!isEditing && tags && tags.length !== 0 && (
           <div className="mb-2 flex flex-row gap-1">
             {tags.map((tag, index) => {
@@ -82,7 +82,7 @@ const PostContent: React.FC<PostContentProps> = ({
           )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button>
+              <button className="hover:opacity-75">
                 <MoreVertical size={20} />
               </button>
             </DropdownMenuTrigger>

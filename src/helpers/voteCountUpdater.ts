@@ -27,6 +27,7 @@ async function updateVoteCount({ id, voteType, post }: updateVoteCountParams) {
       title: post.title,
       authorUsername: post.author.name ?? "",
       authorImage: post.author.image ?? "",
+      authorId: post.authorId,
       content: JSON.stringify(post.content),
       tags: post.tags,
       currentVote: voteType,

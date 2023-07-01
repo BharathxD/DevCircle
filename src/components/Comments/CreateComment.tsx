@@ -63,7 +63,7 @@ const CreateComment: React.FC<CreateCommentProps> = ({ postId, replyToId }) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           rows={1}
-          className="h-fit"
+          className="flex h-fit items-center justify-center"
           placeholder="What are your thoughts on this post?"
         />
         <button
