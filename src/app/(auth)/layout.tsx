@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import siteConfig from "@/config";
 import { FiGlobe } from "react-icons/fi";
 
 import AspectRatio from "@/components/UI/AspectRatio";
+import { BlurImage } from "@/components/UI/BlurImage";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className="absolute inset-0 grid min-h-screen w-full grid-cols-1 overflow-hidden md:grid-cols-2">
       <AspectRatio ratio={16 / 9}>
-        <Image
+        <BlurImage
           src="/images/auth-bg.jpeg"
           alt="An abstract art"
           className="absolute inset-0 object-cover"

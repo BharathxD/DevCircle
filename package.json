@@ -53,6 +53,7 @@
     "cmdk": "^0.2.0",
     "date-fns": "^2.30.0",
     "editorjs-react-renderer": "^3.5.1",
+    "framer-motion": "^10.12.18",
     "http-status-codes": "^2.2.0",
     "lodash.debounce": "^4.0.8",
     "lucide-react": "^0.252.0",
@@ -79,6 +80,7 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^4.29.9",
+    "@total-typescript/ts-reset": "^0.4.2",
     "@types/editorjs__header": "^2.6.0",
     "@types/eslint": "^8.40.2",
     "@types/lodash.debounce": "^4.0.7",
@@ -95,6 +97,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-query": "^0.8.0",
     "eslint-plugin-tailwindcss": "^3.12.1",
+    "nodemailer": "^6.9.3",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",

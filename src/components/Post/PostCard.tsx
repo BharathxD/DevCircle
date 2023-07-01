@@ -3,6 +3,7 @@ import type { FC } from "react";
 import Link from "next/link";
 import siteConfig from "@/config";
 import type { Post, Tag, User, Vote } from "@prisma/client";
+import { motion } from "framer-motion";
 import { BiMessageAltDetail } from "react-icons/bi";
 
 import formatTimeToNow from "@/lib/formatTimeToNow";
@@ -69,7 +70,12 @@ const PostCard: FC<PostCardProps> = ({
   );
 
   return (
-    <article className="overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
+    <motion.article
+      className="overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900"
+      initial={{ opacity: 0, backdropFilter: "blur(4px)" }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.25 }}
+    >
       <div className="flex flex-col justify-between px-6 py-4 md:flex-row">
         <div className="py-2 pr-4">
           <PostVoteClient
@@ -115,7 +121,7 @@ const PostCard: FC<PostCardProps> = ({
           <ShareButton url={postUrl} className="border-0 border-l-2" />
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 };
 

@@ -34,6 +34,7 @@ const EditorOutput: FC<EditorOutputProps> = ({ content, sm }) => {
   };
   return (
     <Output
+      key={"any"}
       style={sm && style}
       className="text-sm"
       data={content}

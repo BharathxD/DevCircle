@@ -1,10 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import siteConfig from "@/config";
+import { motion } from "framer-motion";
 import { TbSmartHome } from "react-icons/tb";
 
 const CreateCommunity = () => {
   return (
-    <div className="order-first h-fit overflow-hidden rounded-md border-2 border-zinc-800 md:order-last ">
+    <motion.div
+      className="order-first h-fit overflow-hidden rounded-md border-2 border-zinc-800 md:order-last"
+      initial="hidden"
+      animate="show"
+      variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+    >
       <div className="border-b-2 border-zinc-800 bg-zinc-800 px-5 py-4 text-zinc-50 dark:bg-zinc-900">
         <div className="flex items-center gap-1.5 text-xl font-bold">
           <TbSmartHome size={25} />
@@ -24,7 +32,7 @@ const CreateCommunity = () => {
           Create Community
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

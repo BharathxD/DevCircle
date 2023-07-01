@@ -1,7 +1,8 @@
 import { useState } from "react";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import { ImCancelCircle } from "react-icons/im";
 
+import { BlurImage } from "../UI/BlurImage";
 import { Button } from "../UI/Button";
 
 function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
@@ -20,8 +21,8 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
 
   return (
     <>
-      <div className="relative min-h-[15rem] w-full">
-        <Image
+      <div className="relative min-h-[30rem] w-full">
+        <BlurImage
           alt="image"
           className="cursor-pointer object-contain"
           fill
@@ -30,14 +31,18 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
         />
       </div>
       {open && (
-        <div className="absolute inset-0 bg-zinc-800/50 backdrop-blur-md">
+        <motion.div
+          key="backdrop"
+          className="fixed inset-0 h-full cursor-default overflow-hidden bg-zinc-800/50 backdrop-blur-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
           <div>
-            <Image
+            <BlurImage
               alt="image"
-              className="cursor-pointer object-contain p-0 md:p-5"
+              className="object-contain p-0 md:p-5"
               fill
               src={src}
-              onClick={() => setOpen((prev) => !prev)}
             />
           </div>
           <div className="absolute bottom-10 z-10 flex h-fit w-full items-center justify-center">
@@ -54,7 +59,7 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
               </Button>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
     </>
   );

@@ -1,3 +1,5 @@
+"use server";
+
 import database from "@/lib/database";
 import redis from "@/lib/redis";
 

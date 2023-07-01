@@ -1,4 +1,6 @@
-import getTopCommunities from "@/actions/getTopCommunities";
+"use client";
+
+import { motion } from "framer-motion";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { MdOutlineLeaderboard } from "react-icons/md";
 
@@ -9,11 +11,26 @@ import {
   TooltipTrigger,
 } from "@/components/UI/Tooltip";
 
-const CommunityLeaderboard = async () => {
-  const topCommunities = await getTopCommunities();
+interface CommunityLeaderboardProps {
+  topCommunities:
+    | {
+        forumName: string;
+        memberCount: number;
+      }[]
+    | null;
+}
+
+const CommunityLeaderboard: React.FC<CommunityLeaderboardProps> = ({
+  topCommunities,
+}) => {
   if (!topCommunities) return null;
   return (
-    <div className="order-first h-fit overflow-hidden rounded-md border-2 border-zinc-800 md:order-last">
+    <motion.div
+      className="order-first h-fit overflow-hidden rounded-md border-2 border-zinc-800 md:order-last"
+      initial="hidden"
+      animate="show"
+      variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+    >
       <div className="flex flex-row items-center justify-between border-b-2 border-b-zinc-800 bg-zinc-900 px-5 py-4 text-zinc-50 ">
         <div className="flex items-center gap-1.5 text-xl font-bold">
           <MdOutlineLeaderboard size={25} />
@@ -52,7 +69,7 @@ const CommunityLeaderboard = async () => {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

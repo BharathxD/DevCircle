@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { BsArrowUpRightSquare, BsPeople } from "react-icons/bs";
 
 interface SubscribedCommunitiesProps {
@@ -12,7 +13,12 @@ const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
 }) => {
   if (!forums) return null;
   return (
-    <div className="overflow-hidden rounded-md border-2 border-zinc-800">
+    <motion.div
+      className="overflow-hidden rounded-md border-2 border-zinc-800"
+      initial="hidden"
+      animate="show"
+      variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+    >
       <div className="border-b-2 border-b-zinc-800 bg-zinc-900 px-5 py-4 text-zinc-50">
         <div className="flex items-center gap-1.5 text-xl font-bold">
           <BsPeople size={25} />
@@ -32,7 +38,7 @@ const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
           </Link>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

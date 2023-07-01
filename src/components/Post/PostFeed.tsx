@@ -6,6 +6,7 @@ import { useIntersection } from "@mantine/hooks";
 import type { Forum, User } from "@prisma/client";
 import axios from "axios";
 import type { AxiosError } from "axios";
+import { motion } from "framer-motion";
 import { StatusCodes } from "http-status-codes";
 import queryString from "query-string";
 import { useInfiniteQuery } from "react-query";
@@ -24,6 +25,23 @@ interface PostFeedProps {
     tag: string;
   };
 }
+
+const container = {
+  hidden: { opacity: 0, transition: { delay: 0 } },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.125,
+      ease: "easeOut",
+      duration: 1,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1 },
+};
 
 /**
  * Component for displaying a feed of posts.
@@ -70,14 +88,19 @@ const PostFeed: React.FC<PostFeedProps> = ({
 
   useEffect(() => {
     if (entry?.isIntersecting) {
-      fetchNextPage();
+      void fetchNextPage();
     }
   }, [entry, fetchNextPage]);
 
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
   return (
-    <ul className="col-span-2 flex flex-col space-y-4">
+    <motion.ul
+      className="col-span-2 flex flex-col space-y-4"
+      variants={container}
+      initial="hidden"
+      animate="show"
+    >
       {posts.map((post, index) => {
         const voteCount = post.votes.reduce((acc, vote) => {
           if (vote.type === "UP") {
@@ -94,7 +117,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
         const isLastPost = index === posts.length - 1;
 
         return (
-          <li key={index} ref={isLastPost ? ref : null}>
+          <motion.li key={index} ref={isLastPost ? ref : null} variants={item}>
             <PostCard
               post={post}
               currentVote={currentVote?.type}
@@ -103,7 +126,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
               commentAmount={post.comments.length}
               isLoggedIn={!!userId}
             />
-          </li>
+          </motion.li>
         );
       })}
       {isFetchingNextPage && !endOfThePosts && (
@@ -121,7 +144,7 @@ const PostFeed: React.FC<PostFeedProps> = ({
           Impressive, it looks like you&apos;ve caught up.
         </li>
       )}
-    </ul>
+    </motion.ul>
   );
 };
 

@@ -1,47 +1,41 @@
-import { notFound } from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
 import fetchPosts from "@/actions/getPosts";
 import getSubscribedForums from "@/actions/getSubscribedForums";
+import getTopCommunities from "@/actions/getTopCommunities";
 
 import type { ExtendedPost } from "@/types/database";
+import LeftSection from "@/components/Home/LeftSection";
+import MainSection from "@/components/Home/MainSection";
+import RightSection from "@/components/Home/RightSection";
 import HomepageLayout from "@/components/Layout/HomepageLayout";
-import PostFeed from "@/components/Post/PostFeed";
-import { Input } from "@/components/UI/Input";
-import CommunityLeaderboard from "@/components/Widgets/CommunityLeaderboard";
-import CreateCommunity from "@/components/Widgets/CreateCommunity";
-import SubscribedCommunities from "@/components/Widgets/SubscribedCommunities";
 
 interface HomeProps {
-  searchParams: {
-    tag: string;
-  };
+  searchParams: { tag: string };
 }
 
-const Home = async ({ searchParams }: HomeProps) => {
+const fetchData = async () => {
+  const currentUser = await getCurrentUser();
+  const topCommunities = await getTopCommunities();
+  const subscribedCommunities = await getSubscribedForums();
+  return { currentUser, topCommunities, subscribedCommunities };
+};
+
+const HomePage = async ({ searchParams }: HomeProps) => {
   const { tag } = searchParams;
   const posts: ExtendedPost[] | null = await fetchPosts(tag);
-  const currentUser = await getCurrentUser();
-  const subscribedCommunities = await getSubscribedForums();
-  if (!posts) return notFound();
+  const { currentUser, topCommunities, subscribedCommunities } =
+    await fetchData();
   return (
     <HomepageLayout>
-      <section className="hidden py-4 md:flex md:flex-col md:gap-5">
-        <Input />
-        <SubscribedCommunities forums={subscribedCommunities} />
-      </section>
-      <section className="no-scrollbar relative w-full overflow-hidden overflow-y-scroll py-4 md:col-span-2 md:border-x-2 md:border-zinc-800 md:px-4 ">
-        <PostFeed
-          initialPosts={posts}
-          userId={currentUser?.id}
-          filters={searchParams}
-        />
-      </section>
-      <section className="hidden py-4 md:flex md:flex-col md:gap-5">
-        <CreateCommunity />
-        <CommunityLeaderboard />
-      </section>
+      <LeftSection forums={subscribedCommunities} />
+      <MainSection
+        posts={posts}
+        userId={currentUser?.id}
+        filters={searchParams}
+      />
+      <RightSection topCommunities={topCommunities} />
     </HomepageLayout>
   );
 };
 
-export default Home;
+export default HomePage;
