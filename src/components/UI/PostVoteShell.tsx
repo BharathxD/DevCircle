@@ -6,11 +6,11 @@ import { buttonVariants } from "@/components/UI/Button";
 
 const PostVoteShell = () => {
   return (
-    <div className="flex items-center justify-center gap-4 py-2 pr-5 sm:w-20 sm:flex-col sm:gap-0 sm:pb-0">
+    <div className="flex h-full w-auto flex-row items-center gap-4 md:w-11 md:flex-col md:gap-0">
       <div
         className={cn(
           buttonVariants(),
-          "h-9 w-full px-2 text-zinc-800 dark:text-zinc-700"
+          "h-9 w-full animate-pulse px-2 text-zinc-800 dark:text-zinc-700"
         )}
       >
         <AiOutlineArrowUp className={"h-5 w-5"} />
@@ -24,7 +24,7 @@ const PostVoteShell = () => {
       <div
         className={cn(
           buttonVariants(),
-          "h-9 w-full px-2 text-zinc-800 dark:text-zinc-700"
+          "h-9 w-full animate-pulse px-2 text-zinc-800 dark:text-zinc-700"
         )}
       >
         <AiOutlineArrowDown className={"h-5 w-5"} />

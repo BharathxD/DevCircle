@@ -71,7 +71,7 @@ const PostCard: FC<PostCardProps> = ({
 
   return (
     <motion.article
-      className="overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900"
+      className="overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950"
       initial={{ opacity: 0, backdropFilter: "blur(4px)" }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.25 }}
@@ -118,7 +118,10 @@ const PostCard: FC<PostCardProps> = ({
               ))}
             </div>
           )}
-          <ShareButton url={postUrl} className="border-0 border-l-2" />
+          <ShareButton
+            url={postUrl}
+            className="border-0 border-l-2 border-zinc-800"
+          />
         </div>
       </div>
     </motion.article>

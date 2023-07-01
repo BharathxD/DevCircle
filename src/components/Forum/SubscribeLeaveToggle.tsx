@@ -1,101 +1,101 @@
 "use client";
 
 import { startTransition, useState } from "react";
-import type { FC } from "react";
 import { useRouter } from "next/navigation";
-import type { Forum } from "@prisma/client";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { StatusCodes } from "http-status-codes";
+import { Loader2 } from "lucide-react";
 import qs from "query-string";
 import { useMutation } from "react-query";
 
+import { cn } from "@/lib/utils";
 import { toast } from "@/hooks/useToast";
 
-import { Button } from "../UI/Button";
+interface Forum {
+  id: string;
+  name: string;
+}
 
 interface SubscribeLeaveToggleProps {
   isSubscribed: boolean;
-  forum: Pick<Forum, "id" | "name">;
+  forum: Forum;
 }
 
-const SubscribeLeaveToggle: FC<SubscribeLeaveToggleProps> = ({
+const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
   isSubscribed,
   forum,
 }) => {
   const router = useRouter();
-  const [subscribed, setSubscribed] =
-    useState<typeof isSubscribed>(isSubscribed);
+  const [subscribed, setSubscribed] = useState<boolean>(isSubscribed);
   const { id, name } = forum;
-  const { mutate: patchSubscription, isLoading } = useMutation({
+  const { mutate: patchSubscription, isLoading } = useMutation<number>({
     mutationFn: async () => {
-      const { status } = await axios.patch(`/api/forum/${id}/subscription`);
-      return status;
+      const response = await axios.patch(`/api/forum/${id}/subscription`);
+      return response.status;
     },
-
-    onError: async (error: unknown) => {
-      if (error instanceof AxiosError) {
-        if (error.response?.status === StatusCodes.UNAUTHORIZED) {
+    onError: async (error) => {
+      if (axios.isAxiosError(error)) {
+        const { response } = error;
+        if (response?.status === StatusCodes.UNAUTHORIZED) {
           const redirectPath = qs.stringifyUrl({
             url: "/signin",
             query: {
               unauthorized: 1,
             },
           });
-          return router.push(redirectPath);
-        }
-        if (error.response?.status === StatusCodes.NOT_FOUND) {
-          return toast({
+          await router.push(redirectPath);
+        } else if (response?.status === StatusCodes.NOT_FOUND) {
+          toast({
             title: "Uh-Oh cannot do that right now",
             description: "It's on us, please try again later",
             variant: "destructive",
           });
         }
       }
-      return toast({
+      toast({
         title: "There was a problem",
-        description: "Something went wrong, please try again later",
+        description: "Something went wrong, try again later",
         variant: "destructive",
       });
     },
-
     onSuccess: async (status) => {
       startTransition(() => router.refresh());
       if (status === StatusCodes.OK) {
         setSubscribed(true);
-        return toast({
+        toast({
           title: "Subscription Successful",
           description: `You are now subscribed to d/${name}.`,
         });
       } else if (status === StatusCodes.ACCEPTED) {
         setSubscribed(false);
-        return toast({
+        toast({
           title: "Unsubscription Successful",
           description: `You are now unsubscribed from d/${name}.`,
         });
       }
     },
   });
-  if (!subscribed) {
-    return (
-      <Button
-        className="w-full hover:bg-green-500 dark:text-zinc-50"
-        onClick={() => patchSubscription()}
-        disabled={isLoading}
-        isLoading={isLoading}
-      >
-        Join to Post
-      </Button>
-    );
-  }
+
+  const handleToggleSubscription = () => {
+    patchSubscription();
+  };
+
+  const buttonClassName = cn(
+    `flex h-full w-full items-center justify-center px-6 py-4 text-center text-zinc-800`,
+    subscribed
+      ? "hover:bg-red-500 hover:text-zinc-50 dark:border-red-500 dark:text-zinc-50"
+      : "hover:bg-green-500 hover:text-zinc-50 dark:border-green-500 dark:text-zinc-50"
+  );
+
   return (
-    <Button
-      className="w-full text-zinc-800 hover:bg-red-500 dark:border-red-500 dark:text-zinc-50"
-      onClick={() => patchSubscription()}
+    <button
+      className={buttonClassName}
+      onClick={handleToggleSubscription}
       disabled={isLoading}
-      isLoading={isLoading}
     >
-      Leave Community
-    </Button>
+      {isLoading && <Loader2 className="animate-spin" />}
+      {!isLoading && (subscribed ? "Leave Community" : "Join Community")}
+    </button>
   );
 };
 

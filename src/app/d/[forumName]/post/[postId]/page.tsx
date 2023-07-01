@@ -8,11 +8,12 @@ import { Loader2 } from "lucide-react";
 import type { CachedPost } from "@/types/redis";
 import database from "@/lib/database";
 import redis from "@/lib/redis";
-import CommentsSection from "@/components/Post/CommentsSection";
+import CommentsSection from "@/components/Comments/CommentsSection";
 import PostContent from "@/components/Post/PostContent";
 import PostVoteServer from "@/components/Post/PostVoteServer";
 import PostVoteShell from "@/components/UI/PostVoteShell";
 import ShareButton from "@/components/UI/ShareButton";
+import { Skeleton } from "@/components/UI/Skeleton";
 
 interface PageProps {
   params: {
@@ -45,7 +46,7 @@ const PostPage = async ({ params }: PageProps) => {
   const tags = post?.tags ?? cachedPost.tags ?? [];
   if (!post && !cachedPost) return notFound();
   return (
-    <div className="pb-4 pt-2">
+    <div className="pb-4 pt-1">
       <div className="flex h-full flex-col items-start gap-4 md:flex-row md:gap-2">
         <div className="flex w-full flex-row items-center justify-between gap-4 pt-0 md:w-fit md:flex-col md:pt-[0.25rem]">
           <Suspense fallback={<PostVoteShell />}>
@@ -69,10 +70,16 @@ const PostPage = async ({ params }: PageProps) => {
               (post?.authorId ?? cachedPost.createdAt) === currentUser?.id
             }
           />
-          <div className="flex flex-col gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-4 dark:bg-zinc-900">
+          <div className="flex flex-col gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-4 dark:bg-zinc-950">
             <Suspense
               fallback={
-                <Loader2 className="h-5 w-5 animate-spin text-zinc-500" />
+                <div className="flex items-center space-x-4">
+                  <Skeleton className="h-12 w-12 rounded-full" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                  </div>
+                </div>
               }
             >
               <CommentsSection postId={post?.id ?? cachedPost.id} />

@@ -11,6 +11,20 @@
   border-color: theme("colors.border");
 }
 
+.dark .link-tool__progress,
+.dark .link-tool__progress--loading,
+.dark .link-tool__progress--loaded {
+  background-color: #fafafa;
+  color: #09090b;
+}
+
+.dark .link-tool__content,
+.dark .link-tool__input,
+.dark .link-tool__content--rendered {
+  color: #fafafa;
+  background-color: #18181b;
+}
+
 .dark .ce-inline-tool,
 .dark .ce-conversion-toolbar__label,
 .dark .ce-toolbox__button,

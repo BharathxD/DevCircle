@@ -14,7 +14,7 @@ const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
   if (!forums) return null;
   return (
     <motion.div
-      className="overflow-hidden rounded-md border-2 border-zinc-800"
+      className="overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-950"
       initial="hidden"
       animate="show"
       variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
@@ -26,10 +26,11 @@ const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
         </div>
       </div>
       <div>
-        {forums.map((forumName: string) => (
+        {forums.map((forumName: string, index: number) => (
           <Link
             className="flex w-full items-center justify-between border-b-2 border-zinc-800 p-2 px-3 py-4 last:border-b-0 hover:bg-zinc-300 hover:text-zinc-800 hover:dark:bg-zinc-900 hover:dark:text-zinc-300"
             href={`/d/${forumName}`}
+            key={index}
           >
             <h2>{forumName}</h2>
             <span>

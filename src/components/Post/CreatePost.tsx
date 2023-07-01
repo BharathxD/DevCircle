@@ -10,7 +10,7 @@ import type { PostCreationRequest } from "@/lib/validators/post";
 import { toast } from "@/hooks/useToast";
 
 import { Button } from "../UI/Button";
-import Editor from "./Editor";
+import Editor from "../UI/Editor";
 
 interface CreatePostProps {
   forumId: string;

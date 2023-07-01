@@ -21,10 +21,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/UI/DropdownMenu";
 
+import CommentVotes from "../Post/CommentVotes";
 import { Button } from "../UI/Button";
 import { Textarea } from "../UI/Textarea";
 import UserAvatar from "../UI/UserAvatar";
-import CommentVotes from "./CommentVotes";
 import DeleteComment from "./DeleteComment";
 import EditComment from "./EditComment";
 
@@ -118,12 +118,12 @@ const PostComment: React.FC<PostCommentProps> = ({
   });
   return (
     <div
-      className="flex flex-col gap-3 overflow-hidden rounded-md border-2 border-zinc-800 dark:border-zinc-700 dark:bg-zinc-900/50"
+      className="flex flex-col gap-3 overflow-hidden rounded-md border-2 border-zinc-800 dark:border-zinc-800 dark:bg-zinc-900/50"
       ref={commentRef}
     >
       <div className="flex items-center px-4 pt-3">
         <UserAvatar user={comment.author} className="h-6 w-6" />
-        <div className="ml-2 flex w-full items-center justify-between gap-x-2">
+        <div className="ml-2 flex w-full items-center justify-between">
           <div>
             <p className="font-medium text-zinc-800 dark:text-zinc-50">
               u/{comment.author.name}
@@ -161,7 +161,9 @@ const PostComment: React.FC<PostCommentProps> = ({
           </div>
         </div>
       </div>
-      <p className="px-4 text-zinc-900 dark:text-zinc-50">{comment.text}</p>
+      <p className="px-4 pb-2 text-zinc-900 dark:text-zinc-50">
+        {comment.text}
+      </p>
       <div className="flex flex-wrap items-center gap-2">
         <div className="flex w-full flex-row gap-5 px-4 pb-3">
           <CommentVotes

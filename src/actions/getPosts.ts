@@ -1,15 +1,13 @@
-"use server";
-
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 
 import type { ExtendedPost } from "@/types/database";
 import database from "@/lib/database";
 
 /**
- * Retrieves posts from the database
+ * Retrieves posts from the database.
+ * @param {string} [tag] The tag to filter posts by (optional).
  * @param {number} [limit] The maximum number of posts to retrieve (optional).
- * @returns {Promise<ExtendedPost[] | null>} A promise that resolves to an array of fetched posts.
- * @throws {Error} If an error occurs during the database operation.
+ * @returns {Promise<ExtendedPost[] | null>} A promise that resolves to an array of fetched posts, or null if an error occurs.
  */
 const getPosts = async (
   tag?: string,
@@ -18,6 +16,8 @@ const getPosts = async (
   try {
     let whereClause = {};
     if (tag) whereClause = { tags: { some: { name: tag } } };
+
+    // Retrieve posts from the database, including associated data
     const allPosts = await database.post.findMany({
       where: whereClause,
       include: {
@@ -32,9 +32,11 @@ const getPosts = async (
       },
       take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
     });
+
     return allPosts;
   } catch (error: unknown) {
     return null;
   }
 };
+
 export default getPosts;

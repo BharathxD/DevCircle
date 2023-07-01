@@ -21,8 +21,8 @@ import { CreatePostValidator } from "@/lib/validators/post";
 import type { PostCreationRequest } from "@/lib/validators/post";
 import { useEditor } from "@/hooks/useEditor";
 
-import { ScrollArea } from "../UI/ScrollArea";
-import Tags from "./Tags";
+import Tags from "../Post/Tags";
+import { ScrollArea } from "./ScrollArea";
 
 interface EditorProps {
   submit: UseMutateFunction<

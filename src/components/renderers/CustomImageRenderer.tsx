@@ -24,7 +24,7 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
       <div className="relative min-h-[30rem] w-full">
         <BlurImage
           alt="image"
-          className="cursor-pointer object-contain"
+          className="cursor-pointer rounded-lg border-2 border-zinc-800 bg-zinc-50 object-contain p-1 dark:border dark:bg-zinc-950/20"
           fill
           src={src}
           onClick={() => setOpen((prev) => !prev)}

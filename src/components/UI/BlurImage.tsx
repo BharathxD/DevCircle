@@ -14,7 +14,7 @@ const BlurImage = (props: ComponentProps<typeof Image>) => {
       alt={props.alt}
       className={cn(
         props.className,
-        "brightness-90 transition will-change-auto duration-700 ease-in-out group-hover:brightness-110",
+        "rounded-md brightness-90 transition will-change-auto duration-700 ease-in-out group-hover:brightness-110",
         isLoading ? "scale-105 blur-lg" : "scale-100 blur-0"
       )}
       onLoadingComplete={() => setLoading(false)}

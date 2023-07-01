@@ -69,15 +69,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: rootProps) {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
-      <body className="no-scrollbar bg-zinc-50 text-zinc-800 dark:bg-zinc-950 dark:text-zinc-50">
-        <RtkProvider>
+      <RtkProvider>
+        <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-zinc-950/20 dark:text-zinc-50">
           <ThemeProvider>
             <Navbar />
             <main className="container h-full">{children}</main>
             <Toaster />
           </ThemeProvider>
-        </RtkProvider>
-      </body>
+        </body>
+      </RtkProvider>
     </html>
   );
 }

@@ -31,7 +31,6 @@ export const useEditor = (
           inlineToolbar: true,
           data: { blocks: blocks ?? [] },
           tools: {
-            header: Header,
             linkTool: {
               class: LinkTool,
               config: {
@@ -42,10 +41,10 @@ export const useEditor = (
               class: ImageTool,
               config: {
                 uploader: {
-                  async uploadByFile(file: File[]) {
+                  async uploadByFile(file: File) {
                     const [res] = await uploadFiles({
+                      files: [file],
                       endpoint: "imageUploader",
-                      files: file,
                     });
                     return {
                       success: 1,
@@ -58,6 +57,7 @@ export const useEditor = (
               },
             },
             list: List,
+            header: Header,
             code: Code,
             inlineCode: InlineCode,
             table: Table,
