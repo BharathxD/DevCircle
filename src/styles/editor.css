@@ -25,6 +25,10 @@
   background-color: #18181b;
 }
 
+.dark .codex-editor__redactor {
+  margin-bottom: 100px !important;
+}
+
 .dark .ce-inline-tool,
 .dark .ce-conversion-toolbar__label,
 .dark .ce-toolbox__button,

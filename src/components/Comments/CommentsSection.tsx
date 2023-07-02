@@ -1,27 +1,42 @@
+"use client";
+
 import { Fragment } from "react";
-import getComments from "@/actions/getComments";
-import getCurrentUser from "@/actions/getCurrentUser";
+import type { Comment, CommentVote, User } from "@prisma/client";
 
 import { cn } from "@/lib/utils";
 
 import { Label } from "../UI/Label";
-import { Separator } from "../UI/Separator";
 import CommentReplies from "./CommentReplies";
 import CreateComment from "./CreateComment";
 import PostComment from "./PostComment";
 
+type ModifiedComment = Comment & {
+  author: User;
+  replies: (Comment & {
+    author: User;
+    votes: CommentVote[];
+  })[];
+  votes: CommentVote[];
+};
+
 interface CommentsSectionProps {
   postId: string;
+  currentUser: User | null;
+  comments: ModifiedComment[] | null;
 }
 
-const CommentsSection = async ({ postId }: CommentsSectionProps) => {
-  const currentUser = await getCurrentUser();
-  const comments = await getComments(postId);
+const CommentsSection = async ({
+  postId,
+  currentUser,
+  comments,
+}: CommentsSectionProps) => {
   if (!comments) return null;
   const topLevelComments = comments.filter((comment) => !comment.replyToId);
   return (
-    <div className="flex flex-col gap-2">
-      <Label className="mb-2 ml-1">Top Comments ({comments.length})</Label>
+    <section className="flex flex-col gap-2" id="comments">
+      <Label className="mb-2 ml-1 text-lg">
+        Top Comments ({comments.length})
+      </Label>
       <CreateComment postId={postId} />
       {comments.length !== 0 && (
         <Fragment>
@@ -64,7 +79,7 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
           </div>
         </Fragment>
       )}
-    </div>
+    </section>
   );
 };
 

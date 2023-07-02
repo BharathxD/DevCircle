@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
+import type { AxiosResponse } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { Loader2, Send } from "lucide-react";
 import queryString from "query-string";
@@ -28,7 +29,10 @@ const CreateComment: React.FC<CreateCommentProps> = ({ postId, replyToId }) => {
         text,
         replyToId,
       };
-      const { data } = await axios.patch(`/api/forum/post/comment`, payload);
+      const { data }: AxiosResponse<{ message: string }> = await axios.patch(
+        `/api/forum/post/comment`,
+        payload
+      );
       return data;
     },
     onError: async (error: unknown) => {

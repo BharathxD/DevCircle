@@ -1,13 +1,15 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import getCachedPost from "@/actions/getCachedPost";
+import getComments from "@/actions/getComments";
 import getCurrentUser from "@/actions/getCurrentUser";
 import getPost from "@/actions/getPost";
+import siteConfig from "@/config";
 import type { Post, Tag, User, Vote } from "@prisma/client";
-import { Loader2 } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 
-import type { CachedPost } from "@/types/redis";
 import database from "@/lib/database";
-import redis from "@/lib/redis";
 import CommentsSection from "@/components/Comments/CommentsSection";
 import PostContent from "@/components/Post/PostContent";
 import PostVoteServer from "@/components/Post/PostVoteServer";
@@ -18,20 +20,25 @@ import { Skeleton } from "@/components/UI/Skeleton";
 
 interface PageProps {
   params: {
+    forumName: string;
     postId: string;
   };
 }
 
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
+type ModifiedPost = Post & {
+  votes: Vote[];
+  author: User;
+  tags: Tag[];
+};
 
 const PostPage = async ({ params }: PageProps) => {
-  const currentUser = await getCurrentUser();
-  const cachedPost = (await redis.hgetall(
-    `post:${params.postId}`
-  )) as CachedPost;
-  let post: (Post & { votes: Vote[]; author: User; tags: Tag[] }) | null = null;
+  const { postId } = params;
 
+  const cachedPost = await getCachedPost(postId);
+  const comments = await getComments(postId);
+  const currentUser = await getCurrentUser();
+
+  let post: ModifiedPost | null = null;
   if (!cachedPost) {
     post = await database.post.findFirst({
       where: {
@@ -44,52 +51,60 @@ const PostPage = async ({ params }: PageProps) => {
       },
     });
   }
-  const tags = post?.tags ?? cachedPost?.tags ?? [];
+
   if (!post && !cachedPost) return notFound();
+
+  const postContentProps = {
+    postId,
+    tags: post?.tags || cachedPost?.tags || [],
+    title: post?.title || cachedPost?.title || "",
+    content: post?.content || cachedPost?.content,
+    userimage: post?.author?.image || cachedPost?.authorImage || null,
+    createdAt: post?.createdAt || cachedPost?.createdAt || new Date(),
+    username: post?.author?.username || cachedPost?.authorUsername || "",
+    isEditable: (post?.authorId || cachedPost?.authorId) === currentUser?.id,
+  };
+
   return (
-    <div className="pb-4 pt-2">
-      <div className="flex h-full flex-col items-start gap-4 md:flex-row md:gap-2">
-        <div className="flex w-full flex-row items-center justify-between gap-4 pt-0 md:w-fit md:flex-col md:pt-[0.25rem]">
-          <Suspense fallback={<PostVoteShell />}>
-            <PostVoteServer
-              postId={post?.id ?? cachedPost.id}
-              getData={() => getPost(params.postId)}
-            />
-            <ShareButton className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-500" />
-          </Suspense>
+    <div className="mb-4 flex flex-col items-start gap-2 pt-2 md:flex-row">
+      <div className="flex w-full items-center justify-between gap-4 rounded-xl border-2 border-zinc-800 bg-zinc-50 bg-gradient-to-b from-muted/30 to-muted/30 p-1.5 pl-2.5 shadow-inner dark:bg-zinc-950 dark:from-background/10 dark:to-background/80 md:w-fit md:flex-col md:pl-1.5 md:pt-2.5">
+        <Suspense fallback={<PostVoteShell />}>
+          <PostVoteServer postId={postId} getData={() => getPost(postId)} />
+        </Suspense>
+        <div className="flex flex-row gap-2 md:flex-col">
+          <ShareButton className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-500" />
+          <Link
+            href={`${siteConfig.url}/d/${params.forumName}/post/${postId}#comment`}
+            className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-500"
+          >
+            <MessageSquare size={20} />
+          </Link>
         </div>
-        <ScrollArea className="no-scrollbar fixed max-h-[90vh] w-full overflow-hidden overflow-y-auto rounded-lg">
-          <div className="flex w-full flex-col gap-4">
-            <PostContent
-              content={post?.content ?? cachedPost.content}
-              title={post?.title ?? cachedPost.title}
-              postId={post?.id ?? cachedPost.title}
-              username={post?.author.name ?? cachedPost.authorUsername}
-              userimage={post?.author.image || cachedPost.authorImage}
-              createdAt={post?.createdAt ?? cachedPost.createdAt}
-              tags={tags}
-              isEditable={
-                (post?.authorId || cachedPost.authorId) === currentUser?.id
-              }
-            />
-            <div className="flex flex-col gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-4 dark:bg-zinc-950">
-              <Suspense
-                fallback={
-                  <div className="flex items-center space-x-4">
-                    <Skeleton className="h-12 w-12 rounded-full" />
-                    <div className="space-y-2">
-                      <Skeleton className="h-4 w-[250px]" />
-                      <Skeleton className="h-4 w-[200px]" />
-                    </div>
-                  </div>
-                }
-              >
-                <CommentsSection postId={post?.id ?? cachedPost.id} />
-              </Suspense>
-            </div>
-          </div>
-        </ScrollArea>
       </div>
+      <ScrollArea className="no-scrollbar fixed max-h-[80vh] w-full overflow-hidden overflow-y-auto scroll-smooth rounded-lg border-2 border-zinc-800 bg-gradient-to-b from-muted/30 to-muted/30 p-2 shadow-inner dark:from-background/10 dark:to-background/80">
+        <article className="mb-2 flex flex-col gap-4 overflow-hidden rounded-lg border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
+          <PostContent {...postContentProps} />
+        </article>
+        <section className="flex flex-col gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-4 dark:bg-zinc-950">
+          <Suspense
+            fallback={
+              <div className="flex items-center space-x-4">
+                <Skeleton className="h-12 w-12 rounded-full" />
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-[250px]" />
+                  <Skeleton className="h-4 w-[200px]" />
+                </div>
+              </div>
+            }
+          >
+            <CommentsSection
+              postId={postId}
+              comments={comments}
+              currentUser={currentUser}
+            />
+          </Suspense>
+        </section>
+      </ScrollArea>
     </div>
   );
 };

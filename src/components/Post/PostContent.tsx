@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useCallback, useState } from "react";
+import { Suspense, useCallback, useState } from "react";
 import Link from "next/link";
 import type { Tag } from "@prisma/client";
 import { Dot, Edit, MoreVertical, Trash2 } from "lucide-react";
@@ -15,7 +15,7 @@ import {
 } from "@/components/UI/DropdownMenu";
 
 import { Badge } from "../UI/Badge";
-import { Button } from "../UI/Button";
+import { Skeleton } from "../UI/Skeleton";
 import UserAvatar from "../UI/UserAvatar";
 import EditorOutput from "./EditorOutput";
 import UpdatePost from "./UpdatePost";
@@ -46,7 +46,7 @@ const PostContent: React.FC<PostContentProps> = ({
     setIsEditing((prev) => !prev);
   }, []);
   return (
-    <div className="flex flex-col gap-4 overflow-hidden rounded-lg border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
+    <section id="post">
       <div className="flex flex-col gap-4 p-4 dark:bg-neutral-900">
         {!isEditing && tags && tags.length !== 0 && (
           <div className="mb-2 flex flex-row gap-1">
@@ -82,7 +82,7 @@ const PostContent: React.FC<PostContentProps> = ({
           )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="hover:opacity-75">
+              <button className="absolute right-5 top-7 hover:opacity-75">
                 <MoreVertical size={20} />
               </button>
             </DropdownMenuTrigger>
@@ -108,15 +108,23 @@ const PostContent: React.FC<PostContentProps> = ({
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <h1 className="py-1 text-4xl font-extrabold leading-6 text-zinc-800 dark:bg-gradient-to-br dark:from-zinc-200 dark:to-zinc-400 dark:bg-clip-text dark:text-transparent sm:text-2xl md:text-3xl lg:text-4xl">
+        <h1 className="py-1 text-4xl font-extrabold leading-6 text-zinc-800 dark:text-zinc-100 sm:text-2xl md:text-3xl lg:text-4xl">
           {title}
         </h1>
       </div>
-      <div className="flex flex-col gap-4 px-4 pb-4 pt-2">
+      <div className="flex flex-col gap-4 p-4">
         {!isEditing ? (
-          <Fragment>
+          <Suspense
+            fallback={
+              <div className="flex flex-col items-center justify-start gap-2">
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-40 w-full" />
+                <Skeleton className="h-[40vh] w-full rounded-lg" />
+              </div>
+            }
+          >
             <EditorOutput content={content} />
-          </Fragment>
+          </Suspense>
         ) : (
           <UpdatePost
             toggleEdit={toggleEditing}
@@ -127,7 +135,7 @@ const PostContent: React.FC<PostContentProps> = ({
           />
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

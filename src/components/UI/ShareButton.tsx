@@ -22,7 +22,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
   const clipboard = useClipboard({ timeout: 500 });
   const pathName = usePathname();
   const handleShareButtonClick = async () => {
-    await clipboard.copy(url ?? `${siteConfig.url}${pathName}`);
+    clipboard.copy(url ?? `${siteConfig.url}${pathName}`);
     toast({
       title: "Link copied to clipboard",
       description: "You can share this link with anyone.",
@@ -32,10 +32,11 @@ const ShareButton: React.FC<ShareButtonProps> = ({
     setOnMount(true);
   }, []);
   if (!onMount) return;
+
   return (
     <button
       className={cn(
-        "flex h-full w-fit items-center gap-2 bg-zinc-950 px-6 font-medium hover:bg-yellow-300 dark:hover:bg-zinc-950",
+        "flex h-full w-fit items-center gap-2 bg-zinc-950 px-6 font-medium hover:bg-yellow-300 dark:hover:bg-zinc-900",
         className
       )}
       onClick={handleShareButtonClick}
