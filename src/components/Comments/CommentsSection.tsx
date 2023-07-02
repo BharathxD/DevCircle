@@ -3,11 +3,10 @@
 import { Fragment } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import type { Comment, CommentVote, User } from "@prisma/client";
-import { MessageSquare, MessageSquareIcon } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-import { Button } from "../UI/Button";
 import {
   Sheet,
   SheetContent,
@@ -50,14 +49,14 @@ const CommentsSection = async ({
         </button>
       </SheetTrigger>
       <SheetContent
-        className="flex w-full flex-col gap-4 border-zinc-800 md:w-[840px]"
+        className="flex w-full flex-col gap-4 border-zinc-800 p-0 md:w-[840px]"
         side={isMobileScreen ? "right" : "bottom"}
       >
-        <SheetHeader>
+        <SheetHeader className="px-4 py-5">
           <SheetTitle>Top Comments ({comments.length})</SheetTitle>
         </SheetHeader>
         <section
-          className="no-scrollbar flex h-[59vh] w-full flex-col gap-2 overflow-hidden overflow-y-scroll rounded-md md:h-full"
+          className="no-scrollbar flex h-[59vh] w-full flex-col gap-2 overflow-hidden overflow-y-scroll rounded-md px-4 py-5 md:h-full"
           id="comments"
         >
           {comments.length !== 0 && (
@@ -102,7 +101,9 @@ const CommentsSection = async ({
             </Fragment>
           )}
         </section>
-        <CreateComment postId={postId} />
+        <div className="border-t-2 border-zinc-800 bg-zinc-900 px-3 py-5">
+          <CreateComment postId={postId} />
+        </div>
       </SheetContent>
     </Sheet>
   );

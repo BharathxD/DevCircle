@@ -91,6 +91,7 @@ model Post {
   content   Json?
   authorId  String
   forumId   String
+  banner    String?
   comments  Comment[]
   votes     Vote[]
   tags      Tag[]

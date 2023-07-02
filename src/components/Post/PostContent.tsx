@@ -27,6 +27,7 @@ interface PostContentProps {
   tags: Tag[];
   username: string | null;
   userimage: string | null;
+  banner?: string;
   createdAt: Date;
   isEditable: boolean;
 }
@@ -47,72 +48,74 @@ const PostContent: React.FC<PostContentProps> = ({
   }, []);
   return (
     <section id="post">
-      <div className="flex flex-col gap-4 p-4 dark:bg-neutral-900">
-        {!isEditing && tags && tags.length !== 0 && (
-          <div className="mb-2 flex flex-row gap-1">
-            {tags.map((tag, index) => {
-              return (
-                <Link key={index} href={`?tag=${tag.name}`}>
-                  <Badge variant="secondary">{tag.name}</Badge>
-                </Link>
-              );
-            })}
-          </div>
-        )}
-        <div
-          className={cn(
-            "flex w-full justify-between",
-            isEditing && "justify-end"
-          )}
-        >
-          {!isEditing && (
-            <div className="flex flex-row items-center gap-2">
-              <UserAvatar
-                user={{
-                  name: username,
-                  image: userimage,
-                }}
-              />
-              <p className="mt-1 flex max-h-40 items-center truncate text-zinc-500 dark:text-zinc-300">
-                Posted by u/{username}
-                <Dot />
-                {formatTimeToNow(new Date(createdAt))}
-              </p>
+      {!isEditing && (
+        <div className="flex flex-col gap-4 p-4 dark:bg-zinc-950/10">
+          {tags && tags.length !== 0 && (
+            <div className="mb-2 flex flex-row gap-1">
+              {tags.map((tag, index) => {
+                return (
+                  <Link key={index} href={`?tag=${tag.name}`}>
+                    <Badge variant="secondary">{tag.name}</Badge>
+                  </Link>
+                );
+              })}
             </div>
           )}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="absolute right-5 top-7 hover:opacity-75">
-                <MoreVertical size={20} />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              sideOffset={2}
-              align="end"
-              className="w-fit rounded-md border-2 border-zinc-800 bg-zinc-50 p-0 dark:bg-zinc-900"
-            >
-              {isEditable && (
-                <DropdownMenuItem onClick={toggleEditing}>
+          <div
+            className={cn(
+              "flex w-full justify-between",
+              isEditing && "justify-end"
+            )}
+          >
+            {!isEditing && (
+              <div className="flex flex-row items-center gap-2">
+                <UserAvatar
+                  user={{
+                    name: username,
+                    image: userimage,
+                  }}
+                />
+                <p className="mt-1 flex max-h-40 items-center truncate text-zinc-500 dark:text-zinc-300">
+                  Posted by u/{username}
+                  <Dot />
+                  {formatTimeToNow(new Date(createdAt))}
+                </p>
+              </div>
+            )}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="absolute right-5 top-7 hover:opacity-75">
+                  <MoreVertical size={20} />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                sideOffset={2}
+                align="end"
+                className="w-fit rounded-md border-2 border-zinc-800 bg-zinc-50 p-0 dark:bg-zinc-900"
+              >
+                {isEditable && (
+                  <DropdownMenuItem onClick={toggleEditing}>
+                    <button>
+                      <Edit className="mr-2 inline-flex h-4 w-4" />
+                      Edit
+                    </button>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem asChild className="hover:bg-red-500">
                   <button>
-                    <Edit className="mr-2 inline-flex h-4 w-4" />
-                    Edit
+                    <Trash2 className="mr-2 h-4 w-4" />
+                    Delete
                   </button>
                 </DropdownMenuItem>
-              )}
-              <DropdownMenuItem asChild className="hover:bg-red-500">
-                <button>
-                  <Trash2 className="mr-2 h-4 w-4" />
-                  Delete
-                </button>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+          <h1 className="py-1 text-4xl font-extrabold leading-6 text-zinc-800 dark:text-zinc-100 sm:text-2xl md:text-3xl lg:text-4xl">
+            {title}
+          </h1>
         </div>
-        <h1 className="py-1 text-4xl font-extrabold leading-6 text-zinc-800 dark:text-zinc-100 sm:text-2xl md:text-3xl lg:text-4xl">
-          {title}
-        </h1>
-      </div>
-      <div className="flex flex-col gap-4 p-4">
+      )}
+      <div className="flex flex-col gap-4 p-4 dark:bg-zinc-900">
         {!isEditing ? (
           <Suspense
             fallback={

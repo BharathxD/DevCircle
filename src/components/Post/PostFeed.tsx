@@ -43,9 +43,6 @@ const item = {
   show: { opacity: 1 },
 };
 
-/**
- * Component for displaying a feed of posts.
- */
 const PostFeed: React.FC<PostFeedProps> = ({
   initialPosts,
   forumName,

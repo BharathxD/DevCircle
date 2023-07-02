@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { ImCancelCircle } from "react-icons/im";
 
@@ -6,6 +7,7 @@ import { BlurImage } from "../UI/BlurImage";
 import { Button } from "../UI/Button";
 
 function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
+  const isHomepage = usePathname() === "/";
   const [open, setOpen] = useState<boolean>(false);
   const src = data.file.url;
 
@@ -27,7 +29,7 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
           className="cursor-pointer rounded-lg border-2 border-zinc-800 bg-zinc-50 object-contain p-1 dark:border dark:bg-zinc-950/20"
           fill
           src={src}
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={() => setOpen((prev) => !isHomepage ?? !prev)}
         />
       </div>
       {open && (

@@ -6,7 +6,7 @@ const CreatePostValidator = object({
     .min(3, { message: "Title must be at least 3 characters long" })
     .max(128, { message: "Title must be less than 128 characters long" }),
   forumId: string(),
-  content: any(),
+  content: any().optional(),
   tags: array(string()),
 });
 

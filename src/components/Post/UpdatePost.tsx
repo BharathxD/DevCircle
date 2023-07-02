@@ -89,7 +89,7 @@ const UpdatePost: React.FC<UpdatePostProps> = ({
         title={title}
         tags={tagArray}
       />
-      <div className="flex w-full flex-row gap-2">
+      <div className="flex w-full flex-row gap-4">
         <Button
           onClick={toggleEdit}
           variant="destructive"

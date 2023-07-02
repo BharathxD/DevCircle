@@ -1,22 +1,19 @@
 import { Suspense } from "react";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import getCachedPost from "@/actions/getCachedPost";
 import getComments from "@/actions/getComments";
 import getCurrentUser from "@/actions/getCurrentUser";
 import getPost from "@/actions/getPost";
-import siteConfig from "@/config";
 import type { Post, Tag, User, Vote } from "@prisma/client";
-import { MessageSquare } from "lucide-react";
 
 import database from "@/lib/database";
 import CommentsSection from "@/components/Comments/CommentsSection";
 import PostContent from "@/components/Post/PostContent";
 import PostVoteServer from "@/components/Post/PostVoteServer";
+import { BlurImage } from "@/components/UI/BlurImage";
 import PostVoteShell from "@/components/UI/PostVoteShell";
 import { ScrollArea } from "@/components/UI/ScrollArea";
 import ShareButton from "@/components/UI/ShareButton";
-import { Skeleton } from "@/components/UI/Skeleton";
 
 interface PageProps {
   params: {

@@ -79,7 +79,6 @@ const PostCard: FC<PostCardProps> = ({
       transition={{ delay: 0.25 }}
       onClick={(event) => {
         event.stopPropagation();
-        router.push(`/d/${forumName}/post/${post.id}`);
       }}
     >
       <div className="flex flex-col justify-between px-6 py-4 md:flex-row">

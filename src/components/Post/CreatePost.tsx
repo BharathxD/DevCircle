@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import type { Post } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
+import { ImagePlus } from "lucide-react";
 import { useMutation } from "react-query";
 
 import type { PostCreationRequest } from "@/lib/validators/post";
@@ -72,7 +73,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ forumId }) => {
     },
   });
   return (
-    <div className="flex h-fit w-full flex-col gap-2">
+    <div className="relative flex h-fit w-full flex-col gap-2">
       <Editor submit={mutate} isLoading={isLoading} />
       <Button
         type="submit"
