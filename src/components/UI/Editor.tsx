@@ -31,18 +31,23 @@ interface EditorProps {
     Omit<PostCreationRequest, "forumId">
   >;
   isLoading: boolean;
-  blocks?: OutputBlockData[];
+  existingblocks?: OutputBlockData[];
   title?: string;
   tags?: string[];
 }
 
 type FormData = zodInfer<typeof CreatePostValidator>;
 
-const Editor: FC<EditorProps> = ({ submit, blocks, title, tags: _tags }) => {
+const Editor: FC<EditorProps> = ({
+  submit,
+  existingblocks,
+  title,
+  tags: _tags,
+}) => {
   const [tags, setTags] = useState<string[]>(_tags ?? []);
   const _titleRef = useRef<HTMLTextAreaElement>(null);
   const editorRef = useRef<EditorJS | null>(null);
-  useEditor(editorRef, _titleRef, blocks);
+  useEditor(editorRef, _titleRef, existingblocks);
 
   const {
     register,

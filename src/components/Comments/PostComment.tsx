@@ -52,7 +52,7 @@ const PostComment: React.FC<PostCommentProps> = ({
 }) => {
   const [isReplying, setIsReplying] = useState<boolean>(false);
   const [input, setInput] = useState<string>(
-    `@${comment.author.name ?? comment.author.username ?? "reply"} `
+    `@${comment.author?.username ?? "reply"} `
   );
   const commentRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -121,7 +121,7 @@ const PostComment: React.FC<PostCommentProps> = ({
         <div className="ml-2 flex w-full items-center justify-between">
           <div>
             <p className="font-medium text-zinc-800 dark:text-zinc-50">
-              u/{comment.author.name}
+              u/{comment.author.username ?? comment.author.name}
             </p>
             <p className="max-h-40 truncate text-sm text-zinc-500">
               {formatTimeToNow(new Date(comment.createdAt))}
@@ -189,7 +189,9 @@ const PostComment: React.FC<PostCommentProps> = ({
                 onChange={handleInputChange}
                 rows={1}
                 className="border-2 border-zinc-800"
-                placeholder="What are your thoughts on this post?"
+                placeholder={`What do you think about u/${
+                  comment.author.name || comment.author.username || ""
+                }'s comment?`}
               />
               <div className="flex justify-end gap-3 pl-3 pt-5">
                 <Button variant="destructive" onClick={toggleReplying}>

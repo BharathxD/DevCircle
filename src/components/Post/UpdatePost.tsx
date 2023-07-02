@@ -85,7 +85,7 @@ const UpdatePost: React.FC<UpdatePostProps> = ({
       <Editor
         submit={mutate}
         isLoading={isLoading}
-        blocks={blocks}
+        existingblocks={blocks}
         title={title}
         tags={tagArray}
       />

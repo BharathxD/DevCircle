@@ -9,6 +9,8 @@ import {
   CreatePostValidator,
   UpdatePostValidator,
 } from "@/lib/validators/post";
+import { Tag, User, Vote } from "lucide-react";
+import updatePostCache from "@/helpers/updatePostCache";
 
 /**
  * Handles the HTTP POST request for creating a new post.
@@ -142,7 +144,14 @@ const editPost = async (req: NextRequest) => {
           create: tags.map((name) => ({ name })),
         },
       },
+      include: {
+        votes: true,
+        author: true,
+        tags: true
+      }
     });
+
+    await updatePostCache(post);
 
     return NextResponse.json(post, { status: StatusCodes.OK });
   } catch (error: unknown) {

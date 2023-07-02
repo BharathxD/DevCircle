@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import type { FC } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import siteConfig from "@/config";
 import type { Post, Tag, User, Vote } from "@prisma/client";
 import { motion } from "framer-motion";
@@ -39,10 +40,11 @@ const PostCard: FC<PostCardProps> = ({
   const postRef = useRef<HTMLParagraphElement>(null);
   const isPostOverflowed = postRef.current?.clientHeight === 160;
   const postUrl = `${siteConfig.url}/d/${forumName}/post/${post.id}`;
+  const router = useRouter();
 
   const postContent = (
     <div
-      className="relative max-h-40 w-full overflow-hidden text-sm"
+      className="relative z-10 max-h-40 w-full overflow-hidden text-sm"
       ref={postRef}
     >
       <EditorOutput content={post.content} sm />
@@ -62,7 +64,7 @@ const PostCard: FC<PostCardProps> = ({
         </Link>
         <span className="px-1 text-zinc-800 dark:text-zinc-50">•</span>
         <span className="text-zinc-800 dark:text-zinc-50">
-          Posted by u/{post.author.name}
+          Posted by u/{post.author.username ?? post.author.name}
         </span>
       </div>
       <time>{" " + formatTimeToNow(new Date(post.createdAt))}</time>
@@ -75,6 +77,10 @@ const PostCard: FC<PostCardProps> = ({
       initial={{ opacity: 0, backdropFilter: "blur(4px)" }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.25 }}
+      onClick={(event) => {
+        event.stopPropagation();
+        router.push(`/d/${forumName}/post/${post.id}`);
+      }}
     >
       <div className="flex flex-col justify-between px-6 py-4 md:flex-row">
         <div className="py-2 pr-4">
