@@ -21,7 +21,7 @@ import { CreatePostValidator } from "@/lib/validators/post";
 import type { PostCreationRequest } from "@/lib/validators/post";
 import { useEditor } from "@/hooks/useEditor";
 
-import Tags from "../Post/Tags";
+import CreateTags from "../Post/CreateTags";
 import { ScrollArea } from "./ScrollArea";
 
 interface EditorProps {
@@ -84,7 +84,7 @@ const Editor: FC<EditorProps> = ({
 
   return (
     <div className="flex h-full w-full flex-col gap-3">
-      <Tags tags={tags} setTags={setTags} />
+      <CreateTags tags={tags} setTags={setTags} />
       <ScrollArea className="relative h-[60vh] w-full rounded-lg border-2 border-zinc-800 bg-zinc-50 p-5 dark:bg-zinc-900">
         <form
           id="devcircle-post-form"

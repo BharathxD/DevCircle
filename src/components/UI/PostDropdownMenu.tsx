@@ -65,7 +65,7 @@ const PostDropdownMenu: React.FC<PostDropdownMenuProps> = ({
       >
         {isEditable && (
           <DropdownMenuItem onClick={onEdit}>
-            <button>
+            <button className="inline-flex items-center">
               <Edit className="mr-2 h-4 w-4" />
               Edit
             </button>

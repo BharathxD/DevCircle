@@ -9,12 +9,12 @@ import { toast } from "@/hooks/useToast";
 import { Button } from "../UI/Button";
 import { Input } from "../UI/Input";
 
-interface TagProps {
+interface CreateTagsProps {
   tags: string[];
   setTags: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const Tags: React.FC<TagProps> = ({ tags, setTags }) => {
+const CreateTags: React.FC<CreateTagsProps> = ({ tags, setTags }) => {
   const tagRef = useRef<HTMLInputElement>(null);
 
   const handleKeyAddition = useCallback(() => {
@@ -96,4 +96,4 @@ const Tags: React.FC<TagProps> = ({ tags, setTags }) => {
   );
 };
 
-export default Tags;
+export default CreateTags;

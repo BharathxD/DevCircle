@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 
 import { Badge } from "../UI/Badge";
 import PostDropdownMenu from "../UI/PostDropdownMenu";
+import Tags from "../UI/Tags";
 import UserAvatar from "../UI/UserAvatar";
 import UpdatePost from "./UpdatePost";
 
@@ -61,15 +62,7 @@ const PostContent: React.FC<PostContentProps> = ({
     <article id="post">
       {!isEditing && (
         <header className="flex flex-col gap-4 p-4 dark:bg-zinc-950/10">
-          {tags.length !== 0 && (
-            <div className="mb-2 flex flex-row gap-1">
-              {tags.map((tag, index) => (
-                <Link key={index} href={`?tag=${tag.name}`}>
-                  <Badge variant="secondary">{tag.name}</Badge>
-                </Link>
-              ))}
-            </div>
-          )}
+          <Tags tags={tags} />
           <div
             className={cn(
               "flex w-full justify-between",

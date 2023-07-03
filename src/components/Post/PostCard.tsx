@@ -11,6 +11,7 @@ import { BiMessageAltDetail } from "react-icons/bi";
 import formatTimeToNow from "@/lib/formatTimeToNow";
 
 import ShareButton from "../UI/ShareButton";
+import Tags from "../UI/Tags";
 import EditorOutput from "./EditorOutput";
 import PostVoteClient from "./PostVoteClient";
 
@@ -111,18 +112,9 @@ const PostCard: FC<PostCardProps> = ({
           <p className="hidden md:inline-block">comments</p>
         </Link>
         <div className="flex h-full w-full flex-row items-center justify-end">
-          {post.tags && (
-            <div className="no-scrollbar flex h-fit max-w-full flex-row gap-2 overflow-hidden overflow-x-scroll px-2 py-1">
-              {post.tags.map((tag) => (
-                <Link
-                  className="rounded-md border-2 border-zinc-800 px-5 py-1 font-medium hover:bg-zinc-800 hover:text-zinc-50"
-                  href={`/?tag=${tag.name}`}
-                >
-                  {tag.name}
-                </Link>
-              ))}
-            </div>
-          )}
+          <div className="no-scrollbar flex h-fit max-w-full flex-row gap-2 overflow-hidden overflow-x-scroll px-2 py-1">
+            <Tags tags={post.tags} />
+          </div>
           <ShareButton
             url={postUrl}
             className="border-0 border-l-2 border-l-zinc-800"
