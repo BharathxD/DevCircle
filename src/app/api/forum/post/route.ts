@@ -9,7 +9,6 @@ import {
   CreatePostValidator,
   UpdatePostValidator,
 } from "@/lib/validators/post";
-import { Tag, User, Vote } from "lucide-react";
 import updatePostCache from "@/helpers/updatePostCache";
 
 /**
@@ -32,7 +31,7 @@ const createPost = async (req: NextRequest) => {
 
     // Parse the request body
     const body = await req.json();
-    const { title, content, forumId, tags, banner } = CreatePostValidator.parse(body);
+    const { title, content, forumId, tags } = CreatePostValidator.parse(body);
 
     if (content.blocks.length === 0) {
       return NextResponse.json(
@@ -61,7 +60,6 @@ const createPost = async (req: NextRequest) => {
         forumId,
         authorId: currentUser.id,
         title,
-        banner,
         content,
         tags: {
           create: tags.map((name) => ({ name })),
@@ -103,7 +101,7 @@ const editPost = async (req: NextRequest) => {
 
     // Parse the request body
     const body = await req.json();
-    const { title, content, tags, postId, banner } = UpdatePostValidator.parse(body);
+    const { title, content, tags, postId } = UpdatePostValidator.parse(body);
 
     if (content.blocks.length === 0) {
       return NextResponse.json(
@@ -141,7 +139,6 @@ const editPost = async (req: NextRequest) => {
       data: {
         title,
         content,
-        banner,
         tags: {
           create: tags.map((name) => ({ name })),
         },

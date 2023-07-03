@@ -1,3 +1,5 @@
+"use state";
+
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";

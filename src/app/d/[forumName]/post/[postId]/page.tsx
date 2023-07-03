@@ -10,7 +10,6 @@ import database from "@/lib/database";
 import CommentsSection from "@/components/Comments/CommentsSection";
 import PostContent from "@/components/Post/PostContent";
 import PostVoteServer from "@/components/Post/PostVoteServer";
-import { BlurImage } from "@/components/UI/BlurImage";
 import PostVoteShell from "@/components/UI/PostVoteShell";
 import { ScrollArea } from "@/components/UI/ScrollArea";
 import ShareButton from "@/components/UI/ShareButton";
@@ -36,6 +35,7 @@ const PostPage = async ({ params }: PageProps) => {
   const currentUser = await getCurrentUser();
 
   let post: ModifiedPost | null = null;
+  
   if (!cachedPost) {
     post = await database.post.findFirst({
       where: {
@@ -48,9 +48,7 @@ const PostPage = async ({ params }: PageProps) => {
       },
     });
   }
-
   if (!post && !cachedPost) return notFound();
-
   const postContentProps = {
     postId,
     tags: post?.tags || cachedPost?.tags || [],

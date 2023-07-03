@@ -1,3 +1,5 @@
+"use client"
+
 import { Fragment } from "react";
 import { format } from "date-fns";
 
@@ -15,10 +17,10 @@ interface ForumInfoWidgetProps {
 const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
   forumId,
   forumName,
-  forumCreationDate,
-  memberCount,
   isCreator,
+  memberCount,
   isSubscribed,
+  forumCreationDate,
 }) => {
   return (
     <div className="order-first mt-14 hidden h-fit overflow-hidden rounded-lg border-2 border-zinc-800 md:order-last md:block">

@@ -1,7 +1,8 @@
+"use client";
+
 import { useRef } from "react";
 import type { FC } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import siteConfig from "@/config";
 import type { Post, Tag, User, Vote } from "@prisma/client";
 import { motion } from "framer-motion";
@@ -40,7 +41,6 @@ const PostCard: FC<PostCardProps> = ({
   const postRef = useRef<HTMLParagraphElement>(null);
   const isPostOverflowed = postRef.current?.clientHeight === 160;
   const postUrl = `${siteConfig.url}/d/${forumName}/post/${post.id}`;
-  const router = useRouter();
 
   const postContent = (
     <div
