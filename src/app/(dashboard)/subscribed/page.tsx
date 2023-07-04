@@ -1,8 +1,14 @@
-import DashboardContentShell from "@/components/UI/DashboarContentShell";
+import getSubscribedForums from "@/actions/getSubscribedForums";
 
-const SubscribedCommunitesPage = () => {
+import DashboardContentShell from "@/components/UI/DashboarContentShell";
+import SubscribedCommunities from "@/components/Widgets/SubscribedCommunities";
+
+const SubscribedCommunitesPage = async () => {
+  const joinedCommunities = await getSubscribedForums();
   return (
-    <DashboardContentShell>Subscribed Communities Page</DashboardContentShell>
+    <DashboardContentShell>
+      <SubscribedCommunities forums={joinedCommunities} />
+    </DashboardContentShell>
   );
 };
 

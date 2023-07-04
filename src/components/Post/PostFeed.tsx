@@ -95,8 +95,6 @@ const PostFeed: React.FC<PostFeedProps> = ({
     <motion.ul
       className="col-span-2 flex flex-col space-y-4"
       variants={container}
-      initial="hidden"
-      animate="show"
     >
       {posts.map((post, index) => {
         const voteCount = post.votes.reduce((acc, vote) => {

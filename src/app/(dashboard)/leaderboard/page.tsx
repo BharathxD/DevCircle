@@ -1,7 +1,15 @@
-import DashboardContentShell from "@/components/UI/DashboarContentShell";
+import getTopCommunities from "@/actions/getTopCommunities";
 
-const LeaderboardPage = () => {
-  return <DashboardContentShell>Leaderboard Page</DashboardContentShell>;
+import DashboardContentShell from "@/components/UI/DashboarContentShell";
+import CommunityLeaderboard from "@/components/Widgets/CommunityLeaderboard";
+
+const LeaderboardPage = async () => {
+  const topCommunities = await getTopCommunities();
+  return (
+    <DashboardContentShell>
+      <CommunityLeaderboard topCommunities={topCommunities} />
+    </DashboardContentShell>
+  );
 };
 
 export default LeaderboardPage;

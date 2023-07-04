@@ -7,7 +7,7 @@ import redis from "@/lib/redis";
  * Fetches the top communities based on member count.
  * @returns An array of objects containing the forum name and member count, or null if an error occurs.
  */
-const fetchTopCommunities = async (): Promise<
+const getTopCommunities = async (): Promise<
   { forumName: string; memberCount: number }[] | null
 > => {
   try {
@@ -52,4 +52,4 @@ const fetchTopCommunities = async (): Promise<
   }
 };
 
-export default fetchTopCommunities;
+export default getTopCommunities;

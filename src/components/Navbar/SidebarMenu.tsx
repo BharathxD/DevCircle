@@ -6,13 +6,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
 import {
   Crown,
+  Github,
   Home,
   PlusSquare,
   Search,
   UserCircle2,
   Users2,
 } from "lucide-react";
-import queryString from "query-string";
 
 import { cn } from "@/lib/utils";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
@@ -20,7 +20,7 @@ import useOnClickOutside from "@/hooks/useOnClickOutside";
 import Footer from "../Widgets/Footer";
 
 const navLinks = [
-  { href: "/search", icon: Search, text: "Search Community" },
+  { href: "/search", icon: Search, text: "Search Communities" },
   { href: "/home", icon: Home, text: "Home" },
   { href: "/profile", icon: UserCircle2, text: "Profile" },
   { href: "/leaderboard", icon: Crown, text: "Leaderboards" },
@@ -67,7 +67,7 @@ const SidebarMenu = () => {
   }
 
   return (
-    <nav className="flex h-full flex-col items-center justify-between border-r-2 border-zinc-800 py-4 pr-4">
+    <nav className="flex h-full flex-col items-center justify-between gap-2 border-r-2 border-zinc-800 py-4 pr-4 ">
       <div className="flex h-full w-full list-none flex-col rounded-md">
         <div className="overflow-hidden rounded-md border-2 border-zinc-800">
           {navLinks.map(({ href, icon: Icon, text }) => {
@@ -86,7 +86,7 @@ const SidebarMenu = () => {
                       )
                     }
                     onChange={handleInputChange}
-                    className="flex w-full flex-row items-center gap-4 rounded-none border-b-2 bg-zinc-50 p-4 hover:bg-zinc-800 hover:text-zinc-50  focus:outline-0 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+                    className="flex w-full flex-row items-center gap-4 rounded-none border-b-2 border-b-zinc-800 bg-zinc-50 p-4 hover:bg-zinc-800 hover:text-zinc-50  focus:outline-0 dark:bg-zinc-950 dark:hover:bg-zinc-900"
                   />
                 );
               }
@@ -105,7 +105,13 @@ const SidebarMenu = () => {
               <Link
                 key={href}
                 href={href}
-                className="flex w-full flex-row items-center gap-4 border-b-2 border-b-zinc-800 bg-zinc-50 p-4 last:border-b-0 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+                className={cn(
+                  "flex w-full flex-row items-center gap-4 border-b-2 border-b-zinc-800 bg-zinc-50 p-4 last:border-b-0 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-800",
+                  href === pathname &&
+                    "bg-zinc-900 text-zinc-50 dark:bg-zinc-900 dark:text-zinc-50",
+                  href === "/home" &&
+                    "bg-zinc-950 text-zinc-50 dark:bg-zinc-950 dark:text-zinc-50"
+                )}
               >
                 <Icon />
                 <p>{text}</p>
@@ -114,6 +120,12 @@ const SidebarMenu = () => {
           })}
         </div>
       </div>
+      <Link
+        className="inline-flex w-full items-center justify-center gap-2 rounded-md border-2 border-zinc-800 bg-zinc-50 px-5 py-3 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+        href="/"
+      >
+        Star me on Github <Github className="h-4 w-4" />
+      </Link>
       <Footer />
     </nav>
   );

@@ -44,18 +44,32 @@ model User {
   name          String?
   email         String?        @unique
   emailVerified DateTime?
+  bio           String?
   createdforums Forum[]        @relation("CreatedBy")
   votes         Vote[]
   subscriptions Subscription[]
+  username      String?        @unique
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  Post          Post[]
+  Comment       Comment[]
+  CommentVote   CommentVote[]
+  socialMedia   SocialMedia?
 
-  username String? @unique
+  socialMediaId String? @unique
+}
 
-  image       String?
-  accounts    Account[]
-  sessions    Session[]
-  Post        Post[]
-  Comment     Comment[]
-  CommentVote CommentVote[]
+model SocialMedia {
+  id       String  @id @default(cuid())
+  linkedIn String?
+  github   String?
+  facebook String?
+  user     User?   @relation(fields: [userId], references: [id])
+
+  userId String? @unique
+
+  @@index([userId])
 }
 
 model Forum {
