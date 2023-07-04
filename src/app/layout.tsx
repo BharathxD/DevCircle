@@ -74,10 +74,7 @@ export default function RootLayout({ children }: rootProps) {
         <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-zinc-950/20 dark:text-zinc-50">
           <ThemeProvider>
             <Navbar />
-            <Shell>
-              {children}
-              <SidebarMenu />
-            </Shell>
+            {children}
             <Toaster />
           </ThemeProvider>
         </body>
