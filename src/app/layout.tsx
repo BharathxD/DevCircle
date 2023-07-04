@@ -8,7 +8,10 @@ import RtkProvider from "@/providers/RtkProvider";
 import ThemeProvider from "@/providers/ThemeProvider";
 import { Toaster } from "@/providers/Toaster";
 import { cn } from "@/lib/utils";
+// TODO: Navbar/Navbar not a best practice, fix it
 import Navbar from "@/components/Navbar/Navbar";
+import SidebarMenu from "@/components/Navbar/SidebarMenu";
+import Shell from "@/components/UI/Shell";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -71,9 +74,10 @@ export default function RootLayout({ children }: rootProps) {
         <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-zinc-950/20 dark:text-zinc-50">
           <ThemeProvider>
             <Navbar />
-            <main className="container h-full" id="main-layout">
+            <Shell>
               {children}
-            </main>
+              <SidebarMenu />
+            </Shell>
             <Toaster />
           </ThemeProvider>
         </body>

@@ -1,41 +1,32 @@
+import { Suspense } from "react";
 import getCurrentUser from "@/actions/getCurrentUser";
-import fetchPosts from "@/actions/getPosts";
-import getSubscribedForums from "@/actions/getSubscribedForums";
-import getTopCommunities from "@/actions/getTopCommunities";
 
-import type { ExtendedPost } from "@/types/database";
-import LeftSection from "@/components/Home/LeftSection";
-import MainSection from "@/components/Home/MainSection";
-import RightSection from "@/components/Home/RightSection";
-import HomepageLayout from "@/components/Layout/HomepageLayout";
+import GeneralFeed from "@/components/Post/GeneralFeed";
+import { Skeleton } from "@/components/UI/Skeleton";
 
 interface HomeProps {
   searchParams: { tag: string };
 }
 
-const fetchData = async () => {
-  const currentUser = await getCurrentUser();
-  const topCommunities = await getTopCommunities();
-  const subscribedCommunities = await getSubscribedForums();
-  return { currentUser, topCommunities, subscribedCommunities };
-};
-
 const HomePage = async ({ searchParams }: HomeProps) => {
   const { tag } = searchParams;
-  const posts: ExtendedPost[] | null = await fetchPosts(tag);
-  const { currentUser, topCommunities, subscribedCommunities } =
-    await fetchData();
+  // TODO: User zustand for user auth state management
+  const currentUser = await getCurrentUser();
   return (
-    <HomepageLayout>
-      <LeftSection forums={subscribedCommunities} />
-      <MainSection
-        posts={posts}
-        userId={currentUser?.id}
-        filters={searchParams}
-      />
-      <RightSection topCommunities={topCommunities} />
-    </HomepageLayout>
+    // <LeftSection forums={subscribedCommunities} />
+    <section className="no-scrollbar relative w-full overflow-hidden overflow-y-scroll py-4 md:col-span-3 md:border-x-2 md:border-zinc-800 md:px-4">
+      <Suspense fallback={<Skeleton className="h-10 w-full" />}>
+        <GeneralFeed
+          tag={tag}
+          userId={currentUser?.id}
+          filters={searchParams}
+        />
+      </Suspense>
+    </section>
   );
+  {
+    /* <RightSection topCommunities={topCommunities} /> */
+  }
 };
 
 export default HomePage;
