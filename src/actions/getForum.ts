@@ -25,12 +25,14 @@ const getForum = async (
             comments: true,
             forum: true,
             tags: true,
+            _count: true
           },
           orderBy: {
             createdAt: "desc",
           },
           take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
         },
+        Creator: true
       },
     });
     return forum;

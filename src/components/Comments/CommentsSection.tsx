@@ -59,7 +59,7 @@ const CommentsSection = async ({
           className="no-scrollbar flex h-[59vh] w-full flex-col gap-2 overflow-hidden overflow-y-scroll rounded-md px-4 py-5 md:h-full"
           id="comments"
         >
-          {comments.length !== 0 && (
+          {topLevelComments.length !== 0 && (
             <Fragment>
               <div className="flex flex-col gap-4">
                 {topLevelComments.map((topLevelComment) => {

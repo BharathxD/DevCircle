@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Fragment } from "react";
 import { format } from "date-fns";
@@ -12,6 +12,7 @@ interface ForumInfoWidgetProps {
   memberCount: number;
   isCreator: boolean;
   isSubscribed: boolean;
+  authorName?: string | null;
 }
 
 const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
@@ -21,6 +22,7 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
   memberCount,
   isSubscribed,
   forumCreationDate,
+  authorName,
 }) => {
   return (
     <div className="order-first mt-14 hidden h-fit overflow-hidden rounded-lg border-2 border-zinc-800 md:order-last md:block">
@@ -38,6 +40,15 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
           </dd>
         </div>
 
+        {authorName && (
+          <Fragment>
+            <div className="h-[2px] w-full bg-zinc-800" />
+            <div className="flex justify-between gap-x-4 px-6 py-4">
+              <dt className="text-zinc-700 dark:text-zinc-100">Admin</dt>
+              <dd className="text-zinc-700 dark:text-zinc-50">u/{authorName}</dd>
+            </div>
+          </Fragment>
+        )}
         <div className="h-[2px] w-full bg-zinc-800" />
 
         <div className="flex justify-between gap-x-4 px-6 py-4">

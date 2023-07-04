@@ -1,17 +1,16 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import Link from "next/link";
 import type { Tag } from "@prisma/client";
 import { Dot } from "lucide-react";
 
 import formatTimeToNow from "@/lib/formatTimeToNow";
 import { cn } from "@/lib/utils";
 
-import { Badge } from "../UI/Badge";
 import PostDropdownMenu from "../UI/PostDropdownMenu";
 import Tags from "../UI/Tags";
 import UserAvatar from "../UI/UserAvatar";
+import EditorOutput from "./EditorOutput";
 import UpdatePost from "./UpdatePost";
 
 interface PostContentProps {
@@ -38,7 +37,6 @@ const PostContent: React.FC<PostContentProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const toggleEditing = useCallback(() => setIsEditing((prev) => !prev), []);
-
   const renderUserInfo = () => {
     if (isEditing) return null;
     return (
@@ -82,13 +80,17 @@ const PostContent: React.FC<PostContentProps> = ({
         </header>
       )}
       <div className="flex flex-col gap-4 p-4 dark:bg-zinc-900">
-        <UpdatePost
-          toggleEdit={toggleEditing}
-          postId={postId}
-          title={title}
-          blocks={content.blocks}
-          tags={tags}
-        />
+        {!isEditing ? (
+          <EditorOutput content={content} />
+        ) : (
+          <UpdatePost
+            toggleEdit={toggleEditing}
+            postId={postId}
+            title={title}
+            blocks={content.blocks}
+            tags={tags}
+          />
+        )}
       </div>
     </article>
   );

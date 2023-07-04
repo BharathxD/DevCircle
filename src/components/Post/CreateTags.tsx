@@ -75,7 +75,7 @@ const CreateTags: React.FC<CreateTagsProps> = ({ tags, setTags }) => {
           </Button>
         </>
       )}
-      {tags && (
+      {tags && tags.length !== 0 && (
         <div className="no-scrollbar flex flex-row gap-2 overflow-hidden overflow-x-scroll rounded-md">
           {tags.map((tag, index) => (
             <div

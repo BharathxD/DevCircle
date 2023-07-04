@@ -13,4 +13,5 @@ export type ExtendedForum = Forum & {
   author?: User;
   comments?: Comment[];
   votes?: Vote[];
+  Creator: User | null;
 };

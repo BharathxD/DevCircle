@@ -4,7 +4,6 @@ import { usePathname, useRouter } from "next/navigation";
 import type { Post } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
-import { ImagePlus } from "lucide-react";
 import { useMutation } from "react-query";
 
 import type { PostCreationRequest } from "@/lib/validators/post";

@@ -36,7 +36,6 @@ const Layout = async ({
   const memberCount = await database.subscription.count({
     where: { forum: { name: forumName } },
   });
-
   return (
     <div className="h-full pb-0 pt-3 font-medium">
       <div className="grid grid-cols-1 gap-y-4 md:grid-cols-4 md:gap-x-4">
@@ -46,14 +45,17 @@ const Layout = async ({
           </h1>
           <div className="flex flex-col gap-4">{children}</div>
         </div>
-        <ForumInfoWidget
-          forumId={forum.id}
-          forumName={forum.name}
-          forumCreationDate={forum.createdAt}
-          memberCount={memberCount}
-          isCreator={forum.creatorId === currentUser?.id}
-          isSubscribed={isSubscribed}
-        />
+        <div className="flex flex-col gap-4">
+          <ForumInfoWidget
+            forumId={forum.id}
+            forumName={forum.name}
+            forumCreationDate={forum.createdAt}
+            memberCount={memberCount}
+            authorName={forum.Creator?.username}
+            isCreator={forum.creatorId === currentUser?.id}
+            isSubscribed={isSubscribed}
+          />
+        </div>
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ import ShareButton from "@/components/UI/ShareButton";
 interface PageProps {
   params: {
     forumName: string;
-    postId: string;
+    postId?: string;
   };
 }
 
@@ -29,7 +29,7 @@ type ModifiedPost = Post & {
 
 const PostPage = async ({ params }: PageProps) => {
   const { postId } = params;
-
+  if (!postId) return notFound();
   const cachedPost = await getCachedPost(postId);
   const comments = await getComments(postId);
   const currentUser = await getCurrentUser();
@@ -59,7 +59,6 @@ const PostPage = async ({ params }: PageProps) => {
     username: post?.author?.username || cachedPost?.authorUsername || "",
     isEditable: (post?.authorId || cachedPost?.authorId) === currentUser?.id,
   };
-
   return (
     <div className="relative mb-4 flex flex-col items-start gap-2 pt-2 md:flex-row">
       <div className="flex w-full items-center justify-between gap-4 rounded-xl border-2 border-zinc-800 bg-zinc-50 bg-gradient-to-b from-muted/30 to-muted/30 p-1.5 pl-2.5 shadow-inner dark:bg-zinc-950 dark:from-background/10 dark:to-background/80 md:w-fit md:flex-col md:pl-1.5 md:pt-2.5">

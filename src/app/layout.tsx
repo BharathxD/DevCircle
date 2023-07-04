@@ -56,13 +56,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/seo/og-image.jpg`],
+    images: [`${siteConfig.url}/seo/Optimized-OG.webp`],
     creator: "@Bharath_uwu",
   },
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
   },
 };
 
