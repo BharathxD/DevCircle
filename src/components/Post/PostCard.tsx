@@ -112,7 +112,7 @@ const PostCard: FC<PostCardProps> = ({
           <p className="hidden md:inline-block">comments</p>
         </Link>
         <div className="flex h-full w-full flex-row items-center justify-end">
-          <div className="no-scrollbar flex h-fit max-w-full flex-row gap-2 overflow-hidden overflow-x-scroll px-2 py-1">
+          <div className="no-scrollbar flex h-full max-w-full flex-row items-center gap-2 overflow-hidden overflow-x-scroll px-2">
             <Tags tags={post.tags} />
           </div>
           <ShareButton

@@ -36,7 +36,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
   return (
     <button
       className={cn(
-        "flex h-full w-fit items-center gap-2 bg-zinc-950 px-6 font-medium hover:bg-yellow-300 dark:hover:bg-zinc-900",
+        "flex h-full w-fit items-center gap-2 bg-zinc-50 px-6 font-medium hover:bg-yellow-300 dark:bg-zinc-950 dark:hover:bg-zinc-900",
         className
       )}
       onClick={handleShareButtonClick}

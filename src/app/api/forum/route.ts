@@ -23,7 +23,7 @@ const createForum = async (req: NextRequest) => {
     const name = data.forumName.toLowerCase();
     // Check if the forum already exists
     const forumExists = await database.forum.findFirst({ where: { name } });
-    if (forumExists)
+    if (forumExists || name === "create")
       return NextResponse.json(
         { message: "The forum with the given name already exists." },
         { status: StatusCodes.CONFLICT }

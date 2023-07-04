@@ -35,7 +35,7 @@ const PostPage = async ({ params }: PageProps) => {
   const currentUser = await getCurrentUser();
 
   let post: ModifiedPost | null = null;
-  
+
   if (!cachedPost) {
     post = await database.post.findFirst({
       where: {
@@ -66,7 +66,7 @@ const PostPage = async ({ params }: PageProps) => {
           <PostVoteServer postId={postId} getData={() => getPost(postId)} />
         </Suspense>
         <div className="flex flex-row gap-2 md:flex-col">
-          <ShareButton className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-500" />
+          <ShareButton className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-300" />
           <CommentsSection
             postId={postId}
             comments={comments}

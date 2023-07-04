@@ -4,6 +4,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { BsArrowUpRightSquare, BsPeople } from "react-icons/bs";
 
+import { capitalizeString } from "@/lib/utils";
+
 interface SubscribedCommunitiesProps {
   forums: string[] | null;
 }
@@ -14,7 +16,7 @@ const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
   if (!forums) return null;
   return (
     <motion.div
-      className="overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-950"
+      className="overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950"
       initial="hidden"
       animate="show"
       variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
@@ -32,7 +34,7 @@ const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
             href={`/d/${forumName}`}
             key={index}
           >
-            <h2>{forumName}</h2>
+            <h2>{capitalizeString(forumName)}</h2>
             <span>
               <BsArrowUpRightSquare size={25} />
             </span>

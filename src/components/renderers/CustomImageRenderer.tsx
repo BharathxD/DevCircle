@@ -37,7 +37,7 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
       {open && (
         <motion.div
           key="backdrop"
-          className="fixed inset-0 h-full cursor-default overflow-hidden bg-zinc-800/50 backdrop-blur-md"
+          className="fixed inset-0 h-full cursor-default overflow-hidden bg-zinc-50 backdrop-blur-md dark:bg-zinc-800/50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
@@ -57,6 +57,7 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
               <Button
                 onClick={() => setOpen((prev) => !prev)}
                 variant="destructive"
+                className="bg-red-500"
                 size="sm"
               >
                 <ImCancelCircle />

@@ -98,7 +98,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
         aria-label="upvote"
         onClick={() => handleVote("UP")}
         className={cn(
-          "bg-zinc-950 text-zinc-800 hover:bg-green-300 hover:text-zinc-800 hover:outline-2 hover:outline-green-500 dark:text-zinc-50 dark:hover:bg-green-500 dark:hover:text-zinc-50",
+          "bg-zinc-50 text-zinc-800 hover:bg-green-300 hover:text-zinc-800 hover:outline-2 hover:outline-green-500 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:bg-green-500 dark:hover:text-zinc-50",
           {
             "bg-green-300 dark:bg-green-500 dark:outline-green-600":
               currentVote === "UP",
@@ -116,7 +116,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
         aria-label="downvote"
         onClick={() => handleVote("DOWN")}
         className={cn(
-          "bg-zinc-950 text-zinc-800 hover:bg-red-300 hover:text-zinc-800 hover:outline-2 hover:outline-red-500 dark:text-zinc-50 dark:hover:bg-red-500 dark:hover:text-zinc-50",
+          "bg-zinc-50 text-zinc-800 hover:bg-red-300 hover:text-zinc-800 hover:outline-2 hover:outline-red-500 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:bg-red-500 dark:hover:text-zinc-50",
           {
             "bg-red-300 dark:bg-red-500 dark:outline-red-600":
               currentVote === "DOWN",

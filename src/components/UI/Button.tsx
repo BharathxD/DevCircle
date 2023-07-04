@@ -15,7 +15,7 @@ const buttonVariants = cva(
         inverted:
           "text-zinc-100 bg-zinc-800 hover:bg-zinc-50 hover:text-zinc-800 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700 dark:disabled:text-zinc-600",
         destructive:
-          "text-zinc-800 dark:text-zinc-50 dark:bg-red-500 hover:text-zinc-50 hover:bg-red-600 dark:hover:bg-red-400 rounded-lg hover:rounded-sm outline outline-2 outline-red-500 hover:dark:outline-red-400",
+          "text-zinc-800 text-zinc-50 bg-red-500 hover:text-zinc-50 hover:bg-red-600 dark:hover:bg-red-400 rounded-lg hover:rounded-sm outline outline-2 outline-red-500 hover:dark:outline-red-400",
         outline:
           "bg-zinc-100 text-zinc-900 hover:text-zinc-50 hover:bg-zinc-800 dark:bg-zinc-800 hover:dark:bg-zinc-700 dark:text-zinc-50 outline outline-2 outline-zinc-800 hover:cursor-pointer disabled:dark:text-zinc-600 disabled:bg-zinc-500",
         skeleton:
@@ -29,7 +29,7 @@ const buttonVariants = cva(
       size: {
         default: "h-full py-2 px-4",
         sm: "h-9 py-2 px-3 rounded-md",
-        xs: "h-full p-1 rounded-sm",
+        xs: "h-10 p-1 rounded-sm",
         lg: "h-11 px-8 rounded-md",
       },
     },

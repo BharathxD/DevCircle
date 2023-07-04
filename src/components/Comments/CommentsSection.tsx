@@ -44,7 +44,7 @@ const CommentsSection = async ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-500">
+        <button className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 hover:bg-pink-300 dark:hover:border-zinc-300 dark:hover:bg-zinc-900">
           <MessageSquare size={20} />
         </button>
       </SheetTrigger>
