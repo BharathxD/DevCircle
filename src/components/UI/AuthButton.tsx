@@ -5,7 +5,7 @@ import type { User } from "@prisma/client";
 
 import { cn } from "@/lib/utils";
 
-import UserAccountNav from "../Navbar/UserAccountNav";
+import UserAccountNav from "../Navigation/UserAccountNav";
 
 interface SignInButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
   user: User | null;

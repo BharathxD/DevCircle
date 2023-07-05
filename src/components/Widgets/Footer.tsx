@@ -15,11 +15,11 @@ import {
 const Footer: React.FC = () => {
   return (
     <Card className="border-2 border-zinc-800">
-      <CardHeader className="flex flex-row items-center gap-1 pb-2 pt-4 text-sm">
+      <CardHeader className="flex flex-row items-center gap-1 pb-2 pt-4 text-sm font-bold">
         {siteConfig.name}
         <p className="inline-flex items-center gap-1 text-sm">
           {siteConfig.copyrights}
-          <Copyright className="h-4 w-4" />
+          <Copyright className="h-3 w-3 font-bold" />
         </p>
       </CardHeader>
       <CardContent className="pb-2">

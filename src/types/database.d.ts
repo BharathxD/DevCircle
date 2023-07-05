@@ -1,6 +1,6 @@
 import type { Comment, Forum, Post, Tag, User, Vote } from "@prisma/client";
 
-export type ExtendedPost = Post & {
+type ExtendedPost = Post & {
   forum: Forum;
   votes: Vote[];
   author: User;
@@ -8,10 +8,21 @@ export type ExtendedPost = Post & {
   tags: Tag[];
 };
 
-export type ExtendedForum = Forum & {
+type ExtendedForum = Forum & {
   posts: ExtendedPost[];
   author?: User;
   comments?: Comment[];
   votes?: Vote[];
   Creator: User | null;
 };
+
+type ExtendedComment = Comment & {
+  author: User;
+  replies: (Comment & {
+    author: User;
+    votes: CommentVote[];
+  })[];
+  votes: CommentVote[];
+};
+
+export { ExtendedPost, ExtendedForum, ExtendedComment }

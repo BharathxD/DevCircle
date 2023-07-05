@@ -2,9 +2,10 @@
 
 import { Fragment } from "react";
 import { useMediaQuery } from "@mantine/hooks";
-import type { Comment, CommentVote, User } from "@prisma/client";
+import type { User } from "@prisma/client";
 import { MessageSquare } from "lucide-react";
 
+import type { ExtendedComment } from "@/types/database";
 import { cn } from "@/lib/utils";
 
 import {
@@ -18,24 +19,15 @@ import CommentReplies from "./CommentReplies";
 import CreateComment from "./CreateComment";
 import PostComment from "./PostComment";
 
-type ModifiedComment = Comment & {
-  author: User;
-  replies: (Comment & {
-    author: User;
-    votes: CommentVote[];
-  })[];
-  votes: CommentVote[];
-};
-
 interface CommentsSectionProps {
   postId?: string;
-  currentUser: User | null;
-  comments: ModifiedComment[] | null;
+  comments: ExtendedComment[] | null;
+  userId?: User["id"];
 }
 
 const CommentsSection = async ({
   postId,
-  currentUser,
+  userId,
   comments,
 }: CommentsSectionProps) => {
   const isMobileScreen = useMediaQuery("(min-width: 640px)");
@@ -67,12 +59,12 @@ const CommentsSection = async ({
                     (accumulator, vote) => {
                       if (vote.type === "UP") accumulator++;
                       if (vote.type === "DOWN") accumulator--;
-                      return accumulator;
+                      return accumulator as number;
                     },
                     0
                   );
                   const topLevelCommentVote = topLevelComment.votes.find(
-                    (vote) => vote.userId === currentUser?.id
+                    (vote) => vote.userId === userId
                   );
                   const hasReplies = topLevelComment.replies.length !== 0;
                   return (
@@ -82,7 +74,7 @@ const CommentsSection = async ({
                           comment={topLevelComment}
                           initialCommentVoteAmount={topLevelCommentAmount}
                           initialCommentVote={topLevelCommentVote?.type}
-                          userId={currentUser?.id}
+                          userId={userId}
                           postId={postId}
                           isDeletable={!hasReplies}
                         />
@@ -91,7 +83,7 @@ const CommentsSection = async ({
                         <CommentReplies
                           postId={postId}
                           topLevelComment={topLevelComment}
-                          userId={currentUser?.id}
+                          userId={userId}
                         />
                       )}
                     </div>

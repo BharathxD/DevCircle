@@ -1,4 +1,4 @@
-import SidebarMenu from "@/components/Navbar/SidebarMenu";
+import SidebarMenu from "@/components/Navigation/SidebarMenu";
 import Shell from "@/components/UI/Shell";
 
 interface rootProps {

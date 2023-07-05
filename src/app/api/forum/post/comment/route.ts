@@ -27,8 +27,7 @@ const PATCH = async (req: NextRequest): Promise<NextResponse> => {
       );
     }
 
-    const requestBody = await req.json();
-    const { postId, text, replyToId } = CommentValidator.parse(requestBody);
+    const { postId, text, replyToId } = CommentValidator.parse(await req.json());
 
     await database.comment.create({
       data: {
@@ -197,4 +196,4 @@ const POST = async (req: NextRequest): Promise<NextResponse> => {
   }
 };
 
-export { PATCH, DELETE, POST };
+export { PATCH, POST, DELETE };

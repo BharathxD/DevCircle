@@ -19,12 +19,10 @@ const getCurrentUser = async (): Promise<User | null> => {
   try {
     const session: Session | null = await getSession();
     if (!session?.user?.email) return null;
-
     // Retrieve the current user from the database based on the email in the session
     const currentUser = await database.user.findUnique({
       where: { email: session.user.email },
     });
-
     if (!currentUser) return null;
     return currentUser;
   } catch (error: unknown) {

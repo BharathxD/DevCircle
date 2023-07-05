@@ -8,10 +8,7 @@ import RtkProvider from "@/providers/RtkProvider";
 import ThemeProvider from "@/providers/ThemeProvider";
 import { Toaster } from "@/providers/Toaster";
 import { cn } from "@/lib/utils";
-// TODO: Navbar/Navbar not a best practice, fix it
-import Navbar from "@/components/Navbar/Navbar";
-import SidebarMenu from "@/components/Navbar/SidebarMenu";
-import Shell from "@/components/UI/Shell";
+import Navbar from "@/components/Navigation/Navbar";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -59,7 +56,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/seo/Optimized-OG.webp`],
+    images: [`${siteConfig.url}/opengraph-image.webp`],
     creator: "@Bharath_uwu",
   },
   icons: {

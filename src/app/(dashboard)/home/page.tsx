@@ -10,11 +10,9 @@ interface HomeProps {
 }
 
 const HomePage = async ({ searchParams }: HomeProps) => {
-  const { tag } = searchParams;
-  // TODO: User zustand for user auth state management
   const currentUser = await getCurrentUser();
+  const { tag } = searchParams;
   return (
-    // <LeftSection forums={subscribedCommunities} />
     <DashboardContentShell>
       <Suspense fallback={<FeedSkeleton />}>
         <GeneralFeed
@@ -25,9 +23,6 @@ const HomePage = async ({ searchParams }: HomeProps) => {
       </Suspense>
     </DashboardContentShell>
   );
-  {
-    /* <RightSection topCommunities={topCommunities} /> */
-  }
 };
 
 export default HomePage;

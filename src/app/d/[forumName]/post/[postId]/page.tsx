@@ -70,7 +70,7 @@ const PostPage = async ({ params }: PageProps) => {
           <CommentsSection
             postId={postId}
             comments={comments}
-            currentUser={currentUser}
+            userId={currentUser?.id}
           />
         </div>
       </div>
