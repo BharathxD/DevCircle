@@ -14,18 +14,16 @@ type OAuthSignInProps = HTMLAttributes<HTMLDivElement>;
 
 const OAuthSignIn: React.FC<OAuthSignInProps> = ({ className, ...props }) => {
   const { toast } = useToast();
-
   const { mutate: SignIn, isLoading } = useMutation({
     mutationFn: async () => {
-      try {
-        await signIn("google");
-      } catch (error) {
-        toast({
-          title: "Something went wrong...",
-          description: "There was an error logging in with Google",
-          variant: "destructive",
-        });
-      }
+      await signIn("google");
+    },
+    onError: () => {
+      toast({
+        title: "Something went wrong...",
+        description: "There was an error logging in with Google",
+        variant: "destructive",
+      });
     },
   });
 

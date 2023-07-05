@@ -3,8 +3,10 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import siteConfig from "@/config";
+import { SessionProvider } from "next-auth/react";
 
 import RtkProvider from "@/providers/RtkProvider";
+import Session from "@/providers/SessionProviders";
 import ThemeProvider from "@/providers/ThemeProvider";
 import { Toaster } from "@/providers/Toaster";
 import { cn } from "@/lib/utils";
@@ -68,13 +70,15 @@ export default function RootLayout({ children }: rootProps) {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
       <RtkProvider>
-        <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-zinc-950/20 dark:text-zinc-50">
-          <ThemeProvider>
-            <Navbar />
-            {children}
-            <Toaster />
-          </ThemeProvider>
-        </body>
+        <Session>
+          <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-zinc-950/20 dark:text-zinc-50">
+            <ThemeProvider>
+              <Navbar />
+              {children}
+              <Toaster />
+            </ThemeProvider>
+          </body>
+        </Session>
       </RtkProvider>
     </html>
   );

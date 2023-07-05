@@ -3,14 +3,20 @@ import type { User } from "@prisma/client";
 import type { AvatarProps } from "@radix-ui/react-avatar";
 import { FaUserCircle } from "react-icons/fa";
 
+import { cn } from "@/lib/utils";
+
 import { Avatar, AvatarFallback } from "./Avatar";
 
 interface UserAvatarProps extends AvatarProps {
   user: Pick<User, "image" | "name">;
 }
 
-const UserAvatar: React.FC<UserAvatarProps> = ({ user, ...props }) => (
-  <Avatar {...props}>
+const UserAvatar: React.FC<UserAvatarProps> = ({
+  user,
+  className,
+  ...props
+}) => (
+  <Avatar {...props} className={cn(className)}>
     {user.image ? (
       <div className="relative aspect-square h-full w-full">
         <Image

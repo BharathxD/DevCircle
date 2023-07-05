@@ -117,6 +117,7 @@ const editPost = async (req: NextRequest) => {
         authorId: currentUser.id,
       },
     });
+    
     if (!postExists) {
       return NextResponse.json(
         { message: "You are not authorized to update this post" },
