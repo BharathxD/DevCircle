@@ -1,6 +1,7 @@
 import database from "@/lib/database";
 import { StatusCodes } from "http-status-codes";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { ZodError, string } from "zod";
 
 const getForums = async (req: NextRequest) => {
