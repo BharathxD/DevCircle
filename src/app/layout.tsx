@@ -2,15 +2,12 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
-import getCurrentUser from "@/actions/getCurrentUser";
 import siteConfig from "@/config";
-import { SessionProvider } from "next-auth/react";
 
 import RtkProvider from "@/providers/RtkProvider";
 import Session from "@/providers/SessionProviders";
 import ThemeProvider from "@/providers/ThemeProvider";
 import { Toaster } from "@/providers/Toaster";
-import database from "@/lib/database";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navigation/Navbar";
 

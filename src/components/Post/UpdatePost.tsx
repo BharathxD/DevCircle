@@ -17,6 +17,7 @@ interface UpdatePostProps {
   title: string;
   toggleEdit: () => void;
   tags: Tag[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   blocks: any;
 }
 

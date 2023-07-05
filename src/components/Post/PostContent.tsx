@@ -14,6 +14,7 @@ import EditorOutput from "./EditorOutput";
 import UpdatePost from "./UpdatePost";
 
 interface PostContentProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   content: any;
   postId: string;
   title: string;

@@ -4,13 +4,7 @@ import Link from "next/link";
 import siteConfig from "@/config";
 import { Copyright } from "lucide-react";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-} from "../UI/Card";
+import { Card, CardFooter, CardHeader } from "../UI/Card";
 
 const Footer: React.FC = () => {
   return (
