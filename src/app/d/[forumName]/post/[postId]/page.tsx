@@ -56,7 +56,7 @@ const PostPage = async ({ params }: PageProps) => {
     content: post?.content || cachedPost?.content,
     userimage: post?.author?.image || cachedPost?.authorImage || null,
     createdAt: post?.createdAt || cachedPost?.createdAt || new Date(),
-    username: post?.author?.username || cachedPost?.authorUsername || "",
+    name: post?.author?.name || cachedPost?.authorUsername || "",
     isAuthor:
       (post?.authorId || cachedPost?.authorId) === currentUser?.id ||
       currentUser?.role === "admin",

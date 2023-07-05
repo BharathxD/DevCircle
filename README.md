@@ -5,7 +5,7 @@
 
 ## TODO
 
-- Implement Search feature for users and communities.
+- Implement Search feature for users [Not yet completed] and communities [Done].
 - Add a /settings page to configure the following:
   - Cookies
   - Theme/Mode

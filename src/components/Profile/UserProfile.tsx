@@ -27,13 +27,13 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isEditable }) => {
         width={300}
         height={300}
         src={user.image}
-        alt={`${user.username ?? "User"}'s profile picture`}
+        alt={`${user.name ?? "User"}'s profile picture`}
         referrerPolicy="no-referrer"
       />
     </div>
   ) : (
     <AvatarFallback>
-      <span className="sr-only">{user?.username}</span>
+      <span className="sr-only">{user?.name}</span>
       <FaUserCircle size={40} />
     </AvatarFallback>
   );
@@ -87,18 +87,18 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isEditable }) => {
       <div>
         <div
           className={`h-28 w-full rounded-lg border-2 border-zinc-800 md:h-40 md:rounded-none md:border-x-0 md:border-t-0
-          ${getGradient(user?.username ?? undefined)}`}
+          ${getGradient(user?.name ?? undefined)}`}
         />
         <div
-          className={`${profileWidth} -mt-12 flex items-end space-x-5 md:-mt-16`}
+          className={`${profileWidth} -mt-12 flex items-center justify-between space-x-5 md:-mt-16`}
         >
           <div className="group relative h-24 w-24 overflow-hidden rounded-full sm:h-32 sm:w-32">
             {avatarImage}
           </div>
           <div className="flex min-w-0 flex-1 items-center justify-end space-x-6 pb-1">
             <div className="flex min-w-0 flex-1 items-center space-x-2">
-              <h1 className="truncate text-2xl font-semibold text-zinc-800 dark:text-zinc-50">
-                {user?.username}
+              <h1 className="mt-16 truncate text-2xl font-semibold text-zinc-800 dark:text-zinc-50">
+                {user?.name}
               </h1>
             </div>
             <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
@@ -106,7 +106,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isEditable }) => {
             </div>
           </div>
           {isEditable && (
-            <Link href="/settings">
+            <Link href="/settings" className="mt-14 md:mt-16">
               <Edit />
             </Link>
           )}

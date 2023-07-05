@@ -19,7 +19,7 @@ interface PostContentProps {
   postId: string;
   title: string;
   tags: Tag[];
-  username: string | null;
+  name: string | null;
   userimage: string | null;
   banner?: string;
   createdAt: Date;
@@ -31,7 +31,7 @@ const PostContent: React.FC<PostContentProps> = ({
   postId,
   title,
   tags,
-  username,
+  name,
   userimage,
   createdAt,
   isAuthor,
@@ -44,12 +44,12 @@ const PostContent: React.FC<PostContentProps> = ({
       <div className="flex flex-row items-center gap-2">
         <UserAvatar
           user={{
-            name: username,
+            name: name,
             image: userimage,
           }}
         />
         <p className="mt-1 flex max-h-40 items-center truncate text-zinc-500 dark:text-zinc-300">
-          Posted by u/{username}
+          Posted by u/{name}
           <Dot />
           {formatTimeToNow(new Date(createdAt))}
         </p>
