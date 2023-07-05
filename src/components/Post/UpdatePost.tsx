@@ -48,8 +48,7 @@ const UpdatePost: React.FC<UpdatePostProps> = ({
             return router.push("/signin?unauthorized=1");
           case StatusCodes.FORBIDDEN:
             return toast({
-              title: "You are not subscribed to this community",
-              description: "Please join the community and try again.",
+              title: "You are not authorized to update this post",
               variant: "destructive",
             });
           case StatusCodes.BAD_REQUEST:

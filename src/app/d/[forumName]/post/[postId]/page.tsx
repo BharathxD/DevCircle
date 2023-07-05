@@ -57,7 +57,9 @@ const PostPage = async ({ params }: PageProps) => {
     userimage: post?.author?.image || cachedPost?.authorImage || null,
     createdAt: post?.createdAt || cachedPost?.createdAt || new Date(),
     username: post?.author?.username || cachedPost?.authorUsername || "",
-    isAuthor: (post?.authorId || cachedPost?.authorId) === currentUser?.id,
+    isAuthor:
+      (post?.authorId || cachedPost?.authorId) === currentUser?.id ||
+      currentUser?.role === "admin",
   };
   return (
     <div className="relative mb-4 flex flex-col items-start gap-2 pt-2 md:flex-row">
@@ -71,6 +73,7 @@ const PostPage = async ({ params }: PageProps) => {
             postId={postId}
             comments={comments}
             userId={currentUser?.id}
+            isAdmin={currentUser?.role === "admin"}
           />
         </div>
       </div>

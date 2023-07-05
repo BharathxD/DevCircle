@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 const NotFoundPage = () => {
   const router = useRouter();
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
+    <div className="flex h-[91vh] w-full flex-col items-center justify-center">
       <h1 className="text-4xl font-extrabold text-zinc-50">A Big 404</h1>
       <Image
         src="/images/timed-out-error.svg"

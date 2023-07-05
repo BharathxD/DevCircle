@@ -101,6 +101,8 @@ const editPost = async (req: NextRequest) => {
       );
     }
 
+    const isAdmin = currentUser.role === "admin";
+
     // Parse the request body
     const body = await req.json();
     const { title, content, tags, postId } = UpdatePostValidator.parse(body);
@@ -120,7 +122,7 @@ const editPost = async (req: NextRequest) => {
       },
     });
 
-    if (!postExists) {
+    if (!postExists && !isAdmin) {
       return NextResponse.json(
         { message: "You are not authorized to update this post" },
         { status: StatusCodes.FORBIDDEN }
@@ -187,6 +189,8 @@ const deletePost = async (req: NextRequest) => {
       );
     }
 
+    const isAdmin = currentUser.role === "admin";
+
     // Parse the request body
     const url = new URL(req.url);
     const { postId } = DeletePostValidator.parse({ postId: url.searchParams.get("postId") });
@@ -199,7 +203,7 @@ const deletePost = async (req: NextRequest) => {
       },
     });
 
-    if (!postExists) {
+    if (!postExists && !isAdmin) {
       return NextResponse.json(
         { message: "You are not authorized to delete this post" },
         { status: StatusCodes.UNAUTHORIZED }

@@ -45,6 +45,9 @@ const PostDropdownMenu: React.FC<PostDropdownMenuProps> = ({
       }
     },
     onSuccess: () => {
+      toast({
+        title: "Succesfully deleted the post",
+      });
       router.push("/");
     },
   });

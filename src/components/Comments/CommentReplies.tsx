@@ -17,12 +17,14 @@ interface CommentRepliesProps {
   postId: string;
   topLevelComment: ExtendedComment;
   userId?: string;
+  isAdmin?: boolean;
 }
 
 const CommentReplies: React.FC<CommentRepliesProps> = ({
   topLevelComment,
   postId,
   userId,
+  isAdmin,
 }) => {
   const [showReplies, setShowReplies] = useState<boolean>(false);
   return (
@@ -58,6 +60,7 @@ const CommentReplies: React.FC<CommentRepliesProps> = ({
                   userId={userId}
                   // Replies can be deleted
                   isDeletable={true}
+                  isAdmin={isAdmin}
                 />
               </div>
             );

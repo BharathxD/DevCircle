@@ -74,6 +74,8 @@ const DELETE = async (req: NextRequest): Promise<NextResponse> => {
       );
     }
 
+    const isAdmin = currentUser.role === "admin";
+
     const url = new URL(req.url);
     const { commentId } = DeleteCommentValidator.parse({
       commentId: url.searchParams.get("commentId"),
@@ -82,16 +84,22 @@ const DELETE = async (req: NextRequest): Promise<NextResponse> => {
     const comment = await database.comment.findFirst({
       where: {
         id: commentId,
-        authorId: currentUser.id,
       },
       include: {
         replies: true,
       },
     });
 
+    if (comment?.authorId !== currentUser.id && !isAdmin) {
+      return NextResponse.json(
+        { message: "You are not authorized to delete it" },
+        { status: StatusCodes.UNAUTHORIZED }
+      );
+    }
+
     if (!comment) {
       return NextResponse.json(
-        { message: "Comment not found or you are not authorized to delete it" },
+        { message: "Comment not found" },
         { status: StatusCodes.NOT_FOUND }
       );
     }

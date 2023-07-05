@@ -23,12 +23,14 @@ interface CommentsSectionProps {
   postId?: string;
   comments: ExtendedComment[] | null;
   userId?: User["id"];
+  isAdmin?: boolean;
 }
 
 const CommentsSection = async ({
   postId,
   userId,
   comments,
+  isAdmin,
 }: CommentsSectionProps) => {
   const isMobileScreen = useMediaQuery("(min-width: 640px)");
   if (!comments || !postId) return null;
@@ -44,7 +46,7 @@ const CommentsSection = async ({
         className="flex w-full flex-col gap-4 border-zinc-800 p-0 md:w-[840px]"
         side={isMobileScreen ? "right" : "bottom"}
       >
-        <SheetHeader className="px-4 py-5">
+        <SheetHeader className="px-4 pt-5">
           <SheetTitle>Top Comments ({comments.length})</SheetTitle>
         </SheetHeader>
         <section
@@ -77,6 +79,7 @@ const CommentsSection = async ({
                           userId={userId}
                           postId={postId}
                           isDeletable={!hasReplies}
+                          isAdmin={isAdmin}
                         />
                       </div>
                       {hasReplies && (
@@ -84,6 +87,7 @@ const CommentsSection = async ({
                           postId={postId}
                           topLevelComment={topLevelComment}
                           userId={userId}
+                          isAdmin={isAdmin}
                         />
                       )}
                     </div>

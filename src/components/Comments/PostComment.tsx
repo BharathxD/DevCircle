@@ -40,6 +40,7 @@ interface PostCommentProps {
   userId?: string;
   postId: string;
   isDeletable: boolean;
+  isAdmin?: boolean;
 }
 
 const PostComment: React.FC<PostCommentProps> = ({
@@ -49,6 +50,7 @@ const PostComment: React.FC<PostCommentProps> = ({
   userId,
   postId,
   isDeletable,
+  isAdmin,
 }) => {
   const [isReplying, setIsReplying] = useState<boolean>(false);
   const [input, setInput] = useState<string>(
@@ -60,7 +62,7 @@ const PostComment: React.FC<PostCommentProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
     setInput(e.target.value);
   const toggleReplying = () => {
-    if (!userId) {
+    if (!userId && !isAdmin) {
       const redirectPath = `/signin?${queryString.stringify({
         unauthorized: 1,
       })}`;
@@ -128,7 +130,7 @@ const PostComment: React.FC<PostCommentProps> = ({
             </p>
           </div>
           <div className="flex flex-row items-center gap-2">
-            {comment.authorId === userId && (
+            {(comment.authorId === userId || isAdmin) && (
               <Fragment>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>

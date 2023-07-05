@@ -27,13 +27,13 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isEditable }) => {
         width={300}
         height={300}
         src={user.image}
-        alt={`${user.name ?? "User"}'s profile picture`}
+        alt={`${user.username ?? "User"}'s profile picture`}
         referrerPolicy="no-referrer"
       />
     </div>
   ) : (
     <AvatarFallback>
-      <span className="sr-only">{user?.name}</span>
+      <span className="sr-only">{user?.username}</span>
       <FaUserCircle size={40} />
     </AvatarFallback>
   );
@@ -95,10 +95,10 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isEditable }) => {
           <div className="group relative h-24 w-24 overflow-hidden rounded-full sm:h-32 sm:w-32">
             {avatarImage}
           </div>
-          <div className="mt-2 flex min-w-0 flex-1 items-center justify-end space-x-6 pb-1">
+          <div className="flex min-w-0 flex-1 items-center justify-end space-x-6 pb-1">
             <div className="flex min-w-0 flex-1 items-center space-x-2">
               <h1 className="truncate text-2xl font-semibold text-zinc-800 dark:text-zinc-50">
-                {user?.name}
+                {user?.username}
               </h1>
             </div>
             <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
