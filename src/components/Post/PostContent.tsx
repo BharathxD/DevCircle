@@ -22,7 +22,7 @@ interface PostContentProps {
   userimage: string | null;
   banner?: string;
   createdAt: Date;
-  isEditable: boolean;
+  isAuthor: boolean;
 }
 
 const PostContent: React.FC<PostContentProps> = ({
@@ -33,7 +33,7 @@ const PostContent: React.FC<PostContentProps> = ({
   username,
   userimage,
   createdAt,
-  isEditable,
+  isAuthor,
 }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const toggleEditing = useCallback(() => setIsEditing((prev) => !prev), []);
@@ -68,11 +68,9 @@ const PostContent: React.FC<PostContentProps> = ({
             )}
           >
             {renderUserInfo()}
-            <PostDropdownMenu
-              isEditable={isEditable}
-              onEdit={toggleEditing}
-              postId={postId}
-            />
+            {isAuthor && (
+              <PostDropdownMenu onEdit={toggleEditing} postId={postId} />
+            )}
           </div>
           <h1 className="py-1 text-4xl font-extrabold leading-6 text-zinc-800 dark:text-zinc-100 sm:text-2xl md:text-3xl lg:text-4xl">
             {title}

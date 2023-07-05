@@ -24,7 +24,6 @@ async function updatePostCache(post: updatePostCacheParams) {
         createdAt: post.createdAt,
     };
     await redis.hmset(`post:${post.id}`, updatedCachedPayload);
-    return true
 }
 
 export default updatePostCache;

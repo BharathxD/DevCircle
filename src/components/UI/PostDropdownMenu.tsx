@@ -13,20 +13,18 @@ import {
 } from "@/components/UI/DropdownMenu";
 
 interface PostDropdownMenuProps {
-  isEditable: boolean;
   onEdit: () => void;
   postId: string;
 }
 
 const PostDropdownMenu: React.FC<PostDropdownMenuProps> = ({
-  isEditable,
   onEdit,
   postId,
 }) => {
   const router = useRouter();
   const { mutate: deletePost, isLoading } = useMutation({
     mutationFn: async () => {
-      await axios.delete(postId);
+      await axios.delete(`/api/forum/post/?postId=${postId}`);
     },
     onError: async (error: unknown) => {
       if (
@@ -35,14 +33,13 @@ const PostDropdownMenu: React.FC<PostDropdownMenuProps> = ({
       ) {
         toast({
           title: "Unauthorized",
-          description: "You are not authorized to delete this comment.",
+          description: "You are not authorized to delete this post.",
           variant: "destructive",
         });
       } else {
         toast({
           title: "Error",
-          description:
-            "Something went wrong. The comment could not be deleted.",
+          description: "Something went wrong. The post could not be deleted.",
           variant: "destructive",
         });
       }
@@ -63,14 +60,12 @@ const PostDropdownMenu: React.FC<PostDropdownMenuProps> = ({
         align="end"
         className="w-fit rounded-md border-2 border-zinc-800 bg-zinc-50 p-0 dark:bg-zinc-900"
       >
-        {isEditable && (
-          <DropdownMenuItem onClick={onEdit}>
-            <button className="inline-flex items-center">
-              <Edit className="mr-2 h-4 w-4" />
-              Edit
-            </button>
-          </DropdownMenuItem>
-        )}
+        <DropdownMenuItem onClick={onEdit}>
+          <button className="inline-flex items-center">
+            <Edit className="mr-2 h-4 w-4" />
+            Edit
+          </button>
+        </DropdownMenuItem>
         <DropdownMenuItem asChild className="hover:bg-red-500">
           <button onClick={() => deletePost()} disabled={isLoading}>
             {!isLoading && <Trash2 className="mr-2 h-4 w-4" />}

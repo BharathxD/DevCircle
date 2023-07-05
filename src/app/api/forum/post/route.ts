@@ -7,9 +7,11 @@ import { ZodError } from "zod";
 import database from "@/lib/database";
 import {
   CreatePostValidator,
+  DeletePostValidator,
   UpdatePostValidator,
 } from "@/lib/validators/post";
 import updatePostCache from "@/helpers/updatePostCache";
+import deletePostCache from "@/helpers/deletePostCache";
 
 /**
  * Handles the HTTP POST request for creating a new post.
@@ -117,7 +119,7 @@ const editPost = async (req: NextRequest) => {
         authorId: currentUser.id,
       },
     });
-    
+
     if (!postExists) {
       return NextResponse.json(
         { message: "You are not authorized to update this post" },
@@ -167,4 +169,63 @@ const editPost = async (req: NextRequest) => {
   }
 };
 
-export { createPost as POST, editPost as PATCH };
+/**
+ * Handles the HTTP DELETE request to delete a post.
+ * @param req - The Next.js request object.
+ * @returns The Next.js response object.
+ */
+const deletePost = async (req: NextRequest) => {
+  try {
+    // Retrieve the current user
+    const currentUser = await getCurrentUser();
+
+    // Check if the user is authenticated
+    if (!currentUser) {
+      return NextResponse.json(
+        { message: "This action requires authentication" },
+        { status: StatusCodes.UNAUTHORIZED }
+      );
+    }
+
+    // Parse the request body
+    const url = new URL(req.url);
+    const { postId } = DeletePostValidator.parse({ postId: url.searchParams.get("postId") });
+
+    // Check if the user is authorized to update the post
+    const postExists = await database.post.findFirst({
+      where: {
+        id: postId,
+        authorId: currentUser.id,
+      },
+    });
+
+    if (!postExists) {
+      return NextResponse.json(
+        { message: "You are not authorized to delete this post" },
+        { status: StatusCodes.UNAUTHORIZED }
+      );
+    }
+
+    // Delete all existing tags
+    await Promise.all([
+      database.tag.deleteMany({ where: { postId: postId, }, }),
+      database.post.delete({ where: { id: postId } })
+    ])
+
+    await deletePostCache(postId)
+
+    return NextResponse.json({ message: `Deleted the post with id:${postId}` }, { status: StatusCodes.OK });
+  } catch (error: unknown) {
+    if (error instanceof ZodError) {
+      // Handle validation errors
+      return new Response(error.message, { status: StatusCodes.BAD_REQUEST });
+    }
+    // Handle other errors
+    return NextResponse.json(
+      { message: "Cannot update the post" },
+      { status: StatusCodes.INTERNAL_SERVER_ERROR }
+    );
+  }
+}
+
+export { createPost as POST, editPost as PATCH, deletePost as DELETE };

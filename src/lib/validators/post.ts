@@ -12,6 +12,13 @@ const CreatePostValidator = object({
 
 type PostCreationRequest = zodInfer<typeof CreatePostValidator>;
 
+
+const DeletePostValidator = object({
+  postId: string(),
+});
+
+type DeletePostRequest = zodInfer<typeof DeletePostValidator>;
+
 const UpdatePostValidator = object({
   title: string()
     .min(3, { message: "Title must be at least 3 characters long" })
@@ -23,5 +30,5 @@ const UpdatePostValidator = object({
 
 type PostUpdateRequest = zodInfer<typeof UpdatePostValidator>;
 
-export { CreatePostValidator, UpdatePostValidator };
-export type { PostCreationRequest, PostUpdateRequest };
+export { CreatePostValidator, UpdatePostValidator, DeletePostValidator };
+export type { PostCreationRequest, DeletePostRequest, PostUpdateRequest };
