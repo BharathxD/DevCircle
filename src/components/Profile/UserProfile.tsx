@@ -27,13 +27,13 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isEditable }) => {
         width={300}
         height={300}
         src={user.image}
-        alt={`${user.name ?? "User"}'s profile picture`}
+        alt={`${user.username ?? "User"}'s profile picture`}
         referrerPolicy="no-referrer"
       />
     </div>
   ) : (
     <AvatarFallback>
-      <span className="sr-only">{user?.name}</span>
+      <span className="sr-only">{user?.username}</span>
       <FaUserCircle size={40} />
     </AvatarFallback>
   );
@@ -83,11 +83,11 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isEditable }) => {
     );
 
   return (
-    <div className="py-4 md:pt-0 dark:md:bg-gradient-to-b dark:md:from-zinc-700 dark:md:to-zinc-950">
+    <div className="py-4 md:pt-0 dark:md:bg-gradient-to-b dark:md:from-zinc-700 dark:md:to-zinc-950/20">
       <div>
         <div
           className={`h-28 w-full rounded-lg border-2 border-zinc-800 md:h-40 md:rounded-none md:border-x-0 md:border-t-0
-          ${getGradient(user?.name ?? undefined)}`}
+          ${getGradient(user?.username ?? undefined)}`}
         />
         <div
           className={`${profileWidth} -mt-12 flex items-center justify-between space-x-5 md:-mt-16`}
@@ -98,7 +98,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isEditable }) => {
           <div className="flex min-w-0 flex-1 items-center justify-end space-x-6 pb-1">
             <div className="flex min-w-0 flex-1 items-center space-x-2">
               <h1 className="mt-16 truncate text-2xl font-semibold text-zinc-800 dark:text-zinc-50">
-                {user?.name}
+                {user?.username}
               </h1>
             </div>
             <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">

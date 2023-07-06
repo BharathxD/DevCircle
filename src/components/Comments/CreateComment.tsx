@@ -67,7 +67,7 @@ const CreateComment: React.FC<CreateCommentProps> = ({ postId, replyToId }) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           rows={1}
-          className="flex items-center justify-center"
+          className="flex resize-none items-center justify-center"
           placeholder="Comment your thoughts..."
         />
         <button

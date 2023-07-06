@@ -73,7 +73,7 @@ const PostCreationPage: FC = () => {
   const isInputValid = input.length > 0;
 
   return (
-    <div className="md:flex md:h-[70vh] md:w-full md:items-center md:justify-center">
+    <div className="mt-4 md:mt-0 md:flex md:h-[70vh] md:w-full md:items-center md:justify-center">
       <div className="flex h-full w-full items-center md:container md:mx-auto md:max-w-3xl">
         <section className="w-full rounded-lg border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
           <header className="flex items-center justify-between border-b-2 border-b-zinc-800 p-5 ">
@@ -101,7 +101,7 @@ const PostCreationPage: FC = () => {
           <footer className="flex justify-end gap-4 p-5 text-lg">
             <Button
               disabled={isLoading}
-              className="dark:bg-red-400"
+              className="dark:bg-red-500"
               variant="destructive"
               onClick={handleCancelClick}
             >
