@@ -47,4 +47,3 @@ const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
 };
 
 export default ForumPage;
-

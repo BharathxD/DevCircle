@@ -38,7 +38,7 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
             <p>{description}</p>
           </dd>
         </div>
-        
+
         <div className="h-[2px] w-full bg-zinc-800" />
 
         <div className="flex items-center justify-between gap-x-4 px-6 py-4">

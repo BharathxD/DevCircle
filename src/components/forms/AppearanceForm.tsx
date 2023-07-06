@@ -48,7 +48,7 @@ const AppearanceForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
         <FormField
           control={form.control}
           name="theme"
@@ -63,7 +63,7 @@ const AppearanceForm = () => {
                 // @ts-expect-error: The types are compatible, but TypeScript throws an error
                 onValueChange={field.onChange}
                 defaultValue={field.value}
-                className="grid max-w-md grid-cols-2 gap-8 pt-2"
+                className="grid w-full grid-cols-2 gap-8 pt-2"
               >
                 <FormItem>
                   <FormLabel className="[&:has([data-state=checked])>div]:border-primary">
@@ -74,6 +74,14 @@ const AppearanceForm = () => {
                       <div className="space-y-2 overflow-hidden rounded-sm bg-zinc-300 p-2">
                         <div className="space-y-2 overflow-hidden rounded-md bg-white p-2 shadow-sm">
                           <div className="h-2 w-[80px] rounded-lg bg-zinc-300" />
+                          <div className="h-2 w-[100px] rounded-lg bg-zinc-300" />
+                        </div>
+                        <div className="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
+                          <div className="h-4 w-4 rounded-full bg-zinc-300" />
+                          <div className="h-2 w-[100px] rounded-lg bg-zinc-300" />
+                        </div>
+                        <div className="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
+                          <div className="h-4 w-4 rounded-full bg-zinc-300" />
                           <div className="h-2 w-[100px] rounded-lg bg-zinc-300" />
                         </div>
                         <div className="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
@@ -100,6 +108,14 @@ const AppearanceForm = () => {
                       <div className="space-y-2 overflow-hidden rounded-sm bg-slate-950 p-2">
                         <div className="space-y-2 overflow-hidden rounded-md bg-slate-800 p-2 shadow-sm">
                           <div className="h-2 w-[80px] rounded-lg bg-slate-400" />
+                          <div className="h-2 w-[100px] rounded-lg bg-slate-400" />
+                        </div>
+                        <div className="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">
+                          <div className="h-4 w-4 rounded-full bg-slate-400" />
+                          <div className="h-2 w-[100px] rounded-lg bg-slate-400" />
+                        </div>
+                        <div className="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">
+                          <div className="h-4 w-4 rounded-full bg-slate-400" />
                           <div className="h-2 w-[100px] rounded-lg bg-slate-400" />
                         </div>
                         <div className="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">

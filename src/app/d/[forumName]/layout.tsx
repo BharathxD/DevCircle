@@ -56,7 +56,7 @@ const Layout = async ({
             isCreator={forum.creatorId === currentUser?.id}
             isSubscribed={isSubscribed}
           />
-      </div>
+        </div>
       </div>
     </div>
   );

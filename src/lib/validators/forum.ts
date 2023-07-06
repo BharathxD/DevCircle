@@ -3,7 +3,9 @@ import type { infer as zodInfer } from "zod";
 
 const forumValidator = object({
   forumName: string({ required_error: "Name is required" }).min(3).max(21),
-  description: string({ required_error: "Description is required" }).min(10).max(75),
+  description: string({ required_error: "Description is required" })
+    .min(10)
+    .max(75),
 });
 
 const forumSubscriptionValidator = object({
