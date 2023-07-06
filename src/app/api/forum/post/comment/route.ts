@@ -27,7 +27,9 @@ const PATCH = async (req: NextRequest): Promise<NextResponse> => {
       );
     }
 
-    const { postId, text, replyToId } = CommentValidator.parse(await req.json());
+    const { postId, text, replyToId } = CommentValidator.parse(
+      await req.json()
+    );
 
     await database.comment.create({
       data: {

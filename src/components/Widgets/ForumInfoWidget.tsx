@@ -10,6 +10,7 @@ interface ForumInfoWidgetProps {
   forumName: string;
   forumCreationDate: Date;
   memberCount: number;
+  description: string;
   isCreator: boolean;
   isSubscribed: boolean;
   authorName?: string | null;
@@ -19,6 +20,7 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
   forumId,
   forumName,
   isCreator,
+  description,
   memberCount,
   isSubscribed,
   forumCreationDate,
@@ -32,6 +34,14 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
       <div className="h-[2px] w-full bg-zinc-800" />
       <dl className="bg-zinc-50 leading-6 dark:bg-zinc-950">
         <div className="flex items-center justify-between gap-x-4 px-6 py-4">
+          <dd className="text-zinc-700 dark:text-zinc-50">
+            <p>{description}</p>
+          </dd>
+        </div>
+        
+        <div className="h-[2px] w-full bg-zinc-800" />
+
+        <div className="flex items-center justify-between gap-x-4 px-6 py-4">
           <dt className="text-zinc-700 dark:text-zinc-100">Created</dt>
           <dd className="text-zinc-700 dark:text-zinc-50">
             <time dateTime={forumCreationDate.toDateString()}>
@@ -40,15 +50,13 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
           </dd>
         </div>
 
-        {authorName && (
-          <Fragment>
-            <div className="h-[2px] w-full bg-zinc-800" />
-            <div className="flex justify-between gap-x-4 px-6 py-4">
-              <dt className="text-zinc-700 dark:text-zinc-100">Admin</dt>
-              <dd className="text-zinc-700 dark:text-zinc-50">u/{authorName}</dd>
-            </div>
-          </Fragment>
-        )}
+        <div className="h-[2px] w-full bg-zinc-800" />
+
+        <div className="flex justify-between gap-x-4 px-6 py-4">
+          <dt className="text-zinc-700 dark:text-zinc-100">Admin</dt>
+          <dd className="text-zinc-700 dark:text-zinc-50">u/{authorName}</dd>
+        </div>
+
         <div className="h-[2px] w-full bg-zinc-800" />
 
         <div className="flex justify-between gap-x-4 px-6 py-4">
@@ -56,7 +64,6 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
           <dd className="text-zinc-700 dark:text-zinc-50">{memberCount}</dd>
         </div>
 
-        {/* {forum.creatorId === currentUser?.id ? ( */}
         {isCreator ? (
           <Fragment>
             <div className="h-[2px] w-full bg-zinc-800" />

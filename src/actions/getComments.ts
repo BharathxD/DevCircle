@@ -1,3 +1,5 @@
+"use server";
+
 import type { Comment, CommentVote, User } from "@prisma/client";
 
 import database from "@/lib/database";

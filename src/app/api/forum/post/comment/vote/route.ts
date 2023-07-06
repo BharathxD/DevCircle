@@ -39,11 +39,9 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
 
     if (!existingVote) {
       // If no existing vote, create a new vote and update the vote count concurrently
-      await Promise.all([
-        database.commentVote.create({
-          data: { type: voteType, userId, commentId },
-        }),
-      ]);
+      await database.commentVote.create({
+        data: { type: voteType, userId, commentId },
+      });
       return NextResponse.json(
         { message: "Vote created successfully." },
         { status: StatusCodes.OK }
@@ -54,14 +52,14 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
     const updatePromise =
       existingVote.type === voteType
         ? // If the existing vote is of the same type as the new vote, delete the vote and update vote count
-          database.commentVote.delete({
-            where: { userId_commentId: { userId, commentId } },
-          })
+        database.commentVote.delete({
+          where: { userId_commentId: { userId, commentId } },
+        })
         : // If the existing vote is of a different type, update the vote and update vote count
-          database.commentVote.update({
-            where: { userId_commentId: { userId, commentId } },
-            data: { type: voteType },
-          });
+        database.commentVote.update({
+          where: { userId_commentId: { userId, commentId } },
+          data: { type: voteType },
+        });
 
     await updatePromise;
 

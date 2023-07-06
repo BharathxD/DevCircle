@@ -27,5 +27,15 @@ type CommentPayload = ZodInfer<typeof CommentValidator>;
 type EditCommentPayload = ZodInfer<typeof EditCommentValidator>;
 type DeleteCommentPayload = ZodInfer<typeof DeleteCommentValidator>;
 
-export { GetCommentsValidator, CommentValidator, EditCommentValidator, DeleteCommentValidator };
-export type { GetCommentsPayload, CommentPayload, EditCommentPayload, DeleteCommentPayload };
+export {
+  GetCommentsValidator,
+  CommentValidator,
+  EditCommentValidator,
+  DeleteCommentValidator,
+};
+export type {
+  GetCommentsPayload,
+  CommentPayload,
+  EditCommentPayload,
+  DeleteCommentPayload,
+};

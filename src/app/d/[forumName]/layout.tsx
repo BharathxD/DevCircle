@@ -49,13 +49,14 @@ const Layout = async ({
           <ForumInfoWidget
             forumId={forum.id}
             forumName={forum.name}
+            description={forum?.description}
             forumCreationDate={forum.createdAt}
             memberCount={memberCount}
             authorName={forum.Creator?.username}
             isCreator={forum.creatorId === currentUser?.id}
             isSubscribed={isSubscribed}
           />
-        </div>
+      </div>
       </div>
     </div>
   );

@@ -79,6 +79,7 @@ model Forum {
   creatorId   String?
   posts       Post[]
   subscribers Subscription[]
+  description String
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
 
@@ -101,20 +102,21 @@ model Subscription {
 }
 
 model Post {
-  id        String    @id @default(cuid())
-  title     String
-  content   Json?
-  authorId  String
-  forumId   String
-  banner    String?
-  comments  Comment[]
+  id       String  @id @default(cuid())
+  title    String
+  content  Json?
+  authorId String
+  forumId  String
+  banner   String?
+
   votes     Vote[]
   tags      Tag[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  author User  @relation(fields: [authorId], references: [id])
-  forum  Forum @relation(fields: [forumId], references: [id])
+  author  User      @relation(fields: [authorId], references: [id])
+  forum   Forum     @relation(fields: [forumId], references: [id])
+  comments Comment[]
 
   @@index([authorId])
   @@index([forumId])

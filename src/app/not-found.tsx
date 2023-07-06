@@ -1,10 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 const NotFoundPage = () => {
-  const router = useRouter();
   return (
     <div className="flex h-[91vh] w-full flex-col items-center justify-center">
       <h1 className="text-4xl font-extrabold text-zinc-50">A Big 404</h1>
@@ -19,12 +17,12 @@ const NotFoundPage = () => {
       <p className="text-lg text-zinc-50">
         Blimey! You&apos;ve found a page that doesn&apos;t exist.
       </p>
-      <button
+      <a
         className="border-b-2 border-zinc-500 py-1 hover:border-zinc-300"
-        onClick={() => router.back()}
+        href="/home"
       >
-        Head Back
-      </button>
+        Head back home
+      </a>
     </div>
   );
 };

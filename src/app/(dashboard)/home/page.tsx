@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import getCurrentUser from "@/actions/getCurrentUser";
 
 import GeneralFeed from "@/components/Post/GeneralFeed";
 import DashboardContentShell from "@/components/UI/DashboarContentShell";
@@ -10,16 +9,11 @@ interface HomeProps {
 }
 
 const HomePage = async ({ searchParams }: HomeProps) => {
-  const currentUser = await getCurrentUser();
   const { tag } = searchParams;
   return (
     <DashboardContentShell>
       <Suspense fallback={<FeedSkeleton />}>
-        <GeneralFeed
-          tag={tag}
-          userId={currentUser?.id}
-          filters={searchParams}
-        />
+        <GeneralFeed tag={tag} filters={searchParams} />
       </Suspense>
     </DashboardContentShell>
   );

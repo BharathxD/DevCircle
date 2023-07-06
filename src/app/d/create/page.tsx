@@ -11,9 +11,11 @@ import type { CreateForumPayload } from "@/lib/validators/forum";
 import { toast } from "@/hooks/useToast";
 import { Button } from "@/components/UI/Button";
 import { Input } from "@/components/UI/Input";
+import { Textarea } from "@/components/UI/Textarea";
 
 const PostCreationPage: FC = () => {
   const [input, setInput] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
   const router = useRouter();
 
   const { mutate: createCommunity, isLoading } = useMutation<
@@ -23,6 +25,7 @@ const PostCreationPage: FC = () => {
     mutationFn: async () => {
       const payload: CreateForumPayload = {
         forumName: input,
+        description,
       };
       const { data } = await axios.post<string>("/api/forum", payload);
       return data;
@@ -70,7 +73,7 @@ const PostCreationPage: FC = () => {
 
   const handleCancelClick = () => router.back();
   const handleCreateForumClick = () => createCommunity();
-  const isInputValid = input.length > 0;
+  const isInputValid = input.length > 0 && description.length > 10;
 
   return (
     <div className="mt-4 md:mt-0 md:flex md:h-[70vh] md:w-full md:items-center md:justify-center">
@@ -96,6 +99,21 @@ const PostCreationPage: FC = () => {
                   className="pl-6"
                 />
               </div>
+              <div>
+                <Textarea
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)}
+                  className="resize-none border-zinc-700 outline-none"
+                  rows={2}
+                  minLength={10}
+                  maxLength={75}
+                  placeholder="What does your community do?"
+                />
+              </div>
+              <p className="text-zinc-500">
+                Forum/Community and description should atleast be 3 and 10
+                characters respectively
+              </p>
             </div>
           </section>
           <footer className="flex justify-end gap-4 p-5 text-lg">

@@ -1,8 +1,7 @@
 "use client";
 
-import type { FC } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import type { User } from "@prisma/client";
+import { useSession } from "next-auth/react";
 import { FiLink2 } from "react-icons/fi";
 import { IoMdImage } from "react-icons/io";
 
@@ -10,16 +9,14 @@ import { Button } from "../UI/Button";
 import { Input } from "../UI/Input";
 import UserAvatar from "../UI/UserAvatar";
 
-interface MiniCreatePostProps {
-  currentUser: User | null;
-}
-
-const MiniCreatePost: FC<MiniCreatePostProps> = ({ currentUser }) => {
+const MiniCreatePost: React.FC = () => {
   const router = useRouter();
+  const { data } = useSession();
+
   const pathname = usePathname();
 
   const handleCreatePostClick = () => {
-    if (!currentUser) router.push("/signin/?unauthorized=1");
+    if (!data?.user) router.push("/signin/?unauthorized=1");
     router.push(`${pathname}/submit`);
   };
 
@@ -29,8 +26,8 @@ const MiniCreatePost: FC<MiniCreatePostProps> = ({ currentUser }) => {
         <div className="relative">
           <UserAvatar
             user={{
-              name: currentUser?.username || null,
-              image: currentUser?.image || null,
+              name: data?.user.username || null,
+              image: data?.user.image || null,
             }}
           />
           <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-100 outline outline-2 outline-zinc-800" />

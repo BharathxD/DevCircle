@@ -1,3 +1,5 @@
+"use server";
+
 import type { CachedPost } from "@/types/redis";
 import redis from "@/lib/redis";
 

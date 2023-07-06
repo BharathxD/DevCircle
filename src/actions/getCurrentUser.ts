@@ -1,3 +1,5 @@
+"use server";
+
 import type { SocialMedia, User } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import type { Session } from "next-auth";
@@ -31,21 +33,22 @@ const getCurrentUser = async (): Promise<User | null> => {
 
 export type UserWithSocialLinks = { socialMedia: SocialMedia | null } & User;
 
-export const getUserWithSocialLinks = async (): Promise<UserWithSocialLinks | null> => {
-  try {
-    const session: Session | null = await getSession();
-    if (!session?.user?.email) return null;
-    const currentUserWithSocialLinks: UserWithSocialLinks | null
-      = await database.user.findUnique({
-        where: { email: session.user.email },
-        include: {
-          socialMedia: true
-        }
-      });
-    return currentUserWithSocialLinks;
-  } catch (error: unknown) {
-    return null;
-  }
-}
+export const getUserWithSocialLinks =
+  async (): Promise<UserWithSocialLinks | null> => {
+    try {
+      const session: Session | null = await getSession();
+      if (!session?.user?.email) return null;
+      const currentUserWithSocialLinks: UserWithSocialLinks | null =
+        await database.user.findUnique({
+          where: { email: session.user.email },
+          include: {
+            socialMedia: true,
+          },
+        });
+      return currentUserWithSocialLinks;
+    } catch (error: unknown) {
+      return null;
+    }
+  };
 
 export default getCurrentUser;

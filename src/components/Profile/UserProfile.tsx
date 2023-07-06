@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { UserWithSocialLinks } from "@/actions/getCurrentUser";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Edit } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { FaFacebook, FaGithub, FaLinkedin, FaUserCircle } from "react-icons/fa";
 
 import { getGradient } from "@/lib/gradients";
@@ -15,10 +16,11 @@ import { Button } from "../UI/Button";
 
 interface UserProfileProps {
   user: UserWithSocialLinks | null;
-  isEditable: boolean;
 }
 
-const UserProfile: React.FC<UserProfileProps> = ({ user, isEditable }) => {
+const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
+  const session = useSession();
+  const isEditable = session.data?.user.id === user?.id;
   const profileWidth = "max-w-5xl mx-auto px-4 sm:px-6 lg:px-8";
 
   const avatarImage = user?.image ? (
@@ -87,7 +89,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, isEditable }) => {
       <div>
         <div
           className={`h-28 w-full rounded-lg border-2 border-zinc-800 md:h-40 md:rounded-none md:border-x-0 md:border-t-0
-          ${getGradient(user?.username ?? undefined)}`}
+          ${getGradient(user?.username ?? user?.name ?? undefined)}`}
         />
         <div
           className={`${profileWidth} -mt-12 flex items-center justify-between space-x-5 md:-mt-16`}

@@ -1,3 +1,5 @@
+"use server";
+
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 
 import type { ExtendedPost } from "@/types/database";

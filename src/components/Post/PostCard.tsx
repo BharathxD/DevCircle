@@ -82,7 +82,7 @@ const PostCard: FC<PostCardProps> = ({
         event.stopPropagation();
       }}
     >
-      <div className="flex flex-col justify-between px-6 py-4 md:flex-row">
+      <div className="flex flex-col justify-between px-6 pt-4 md:flex-row">
         <div className="py-2 pr-4">
           <PostVoteClient
             postId={post.id}

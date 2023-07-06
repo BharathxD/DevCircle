@@ -30,7 +30,7 @@ const createForum = async (req: NextRequest) => {
       );
     // Create forum with the given name
     const forum = await database.forum.create({
-      data: { name, creatorId: currentUser.id },
+      data: { name, creatorId: currentUser.id, description: data.description },
     });
     // Create a subscription
     await database.subscription.create({

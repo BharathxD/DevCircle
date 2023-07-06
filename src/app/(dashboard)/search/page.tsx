@@ -84,21 +84,16 @@ const SearchPage = () => {
                     <div className="flex items-center gap-1.5 text-xl font-bold">
                       <Users className="mr-2 h-4 w-4" />
                       <Link href={`/r/${forum.name}`} className="ml-2">
-                        r/{forum.name}
+                        d/{capitalizeString(forum.name)}
                       </Link>
                     </div>
                   </div>
                   <div className="flex w-full flex-row items-center justify-between border-b-2 border-zinc-800 font-medium last:border-b-0">
-                    <div className="px-5 py-3 text-lg font-bold">
-                      d/{capitalizeString(forum.name)}
-                    </div>
+                    <div className="px-5 py-3 text-lg font-bold">Members</div>
                     <div className="flex flex-row gap-2">
                       <span className="min-w-[175px] border-zinc-800 p-[auto] px-5 py-3 text-center">
                         <div className="rounded-md border-2 border-zinc-800 p-1 text-zinc-800 dark:text-zinc-50">
-                          {forum._count.subscribers}{" "}
-                          {forum._count.subscribers === 1
-                            ? "Member"
-                            : "Members"}
+                          {forum._count.subscribers}
                         </div>
                       </span>
                     </div>
@@ -108,8 +103,7 @@ const SearchPage = () => {
                     <div className="flex flex-row gap-2">
                       <span className="min-w-[175px] border-zinc-800 p-[auto] px-5 py-3 text-center">
                         <div className="rounded-md border-2 border-zinc-800 p-1 text-zinc-800 dark:text-zinc-50">
-                          {forum._count.posts}{" "}
-                          {forum._count.posts === 1 ? "Post" : "Posts"}
+                          {forum._count.posts}
                         </div>
                       </span>
                     </div>

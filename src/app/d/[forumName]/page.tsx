@@ -24,7 +24,7 @@ const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
   if (!forum) return notFound();
   return (
     <div className="flex flex-col gap-4 pt-2">
-      <MiniCreatePost currentUser={currentUser} />
+      <MiniCreatePost />
       <ScrollArea className="no-scrollbar fixed max-h-[70vh] w-full overflow-hidden overflow-y-auto">
         <div className="w-full pb-4">
           {forum.posts.length === 0 ? (
@@ -47,3 +47,4 @@ const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
 };
 
 export default ForumPage;
+

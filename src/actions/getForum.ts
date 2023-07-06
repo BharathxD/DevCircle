@@ -1,3 +1,5 @@
+"use server";
+
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 
 import type { ExtendedForum } from "@/types/database";
@@ -25,14 +27,14 @@ const getForum = async (
             comments: true,
             forum: true,
             tags: true,
-            _count: true
+            _count: true,
           },
           orderBy: {
             createdAt: "desc",
           },
           take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
         },
-        Creator: true
+        Creator: true,
       },
     });
     return forum;

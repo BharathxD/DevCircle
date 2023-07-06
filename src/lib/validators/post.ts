@@ -12,7 +12,6 @@ const CreatePostValidator = object({
 
 type PostCreationRequest = zodInfer<typeof CreatePostValidator>;
 
-
 const DeletePostValidator = object({
   postId: string(),
 });

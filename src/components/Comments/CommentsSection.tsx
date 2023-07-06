@@ -41,9 +41,9 @@ const CommentsSection = async ({
         <button className="relative flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 hover:bg-pink-300 dark:hover:border-zinc-300 dark:hover:bg-zinc-900">
           <MessageSquare size={20} />
           {comments.length !== 0 && (
-            <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-green-500 p-1 text-zinc-800">
-              {comments.length}
-            </span>
+            <div className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center overflow-hidden rounded-full bg-green-500/80 p-1 text-zinc-50">
+              <p>{comments.length > 10 ? "10+" : comments.length}</p>
+            </div>
           )}
         </button>
       </SheetTrigger>

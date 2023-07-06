@@ -4,14 +4,14 @@ import getCurrentUser from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
+import deletePostCache from "@/helpers/deletePostCache";
+import updatePostCache from "@/helpers/updatePostCache";
 import database from "@/lib/database";
 import {
   CreatePostValidator,
   DeletePostValidator,
   UpdatePostValidator,
 } from "@/lib/validators/post";
-import updatePostCache from "@/helpers/updatePostCache";
-import deletePostCache from "@/helpers/deletePostCache";
 
 /**
  * Handles the HTTP POST request for creating a new post.
@@ -151,8 +151,8 @@ const editPost = async (req: NextRequest) => {
       include: {
         votes: true,
         author: true,
-        tags: true
-      }
+        tags: true,
+      },
     });
 
     await updatePostCache(post);
@@ -193,7 +193,9 @@ const deletePost = async (req: NextRequest) => {
 
     // Parse the request body
     const url = new URL(req.url);
-    const { postId } = DeletePostValidator.parse({ postId: url.searchParams.get("postId") });
+    const { postId } = DeletePostValidator.parse({
+      postId: url.searchParams.get("postId"),
+    });
 
     // Check if the user is authorized to update the post
     const postExists = await database.post.findFirst({
@@ -211,14 +213,15 @@ const deletePost = async (req: NextRequest) => {
     }
 
     // Delete all existing tags
-    await Promise.all([
-      database.tag.deleteMany({ where: { postId: postId, }, }),
-      database.post.delete({ where: { id: postId } })
-    ])
+    await database.tag.deleteMany({ where: { postId: postId } });
+    await database.post.delete({ where: { id: postId } });
 
-    await deletePostCache(postId)
+    await deletePostCache(postId);
 
-    return NextResponse.json({ message: `Deleted the post with id:${postId}` }, { status: StatusCodes.OK });
+    return NextResponse.json(
+      { message: `Deleted the post with id:${postId}` },
+      { status: StatusCodes.OK }
+    );
   } catch (error: unknown) {
     if (error instanceof ZodError) {
       // Handle validation errors
@@ -226,10 +229,10 @@ const deletePost = async (req: NextRequest) => {
     }
     // Handle other errors
     return NextResponse.json(
-      { message: "Cannot update the post" },
+      { message: "Cannot delete the post" },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
-}
+};
 
 export { createPost as POST, editPost as PATCH, deletePost as DELETE };

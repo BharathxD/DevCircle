@@ -13,12 +13,14 @@ import {
   UserCircle2,
   Users2,
 } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 
 import Footer from "../Widgets/Footer";
 
-const SidebarMenu = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+const HomepageMenu = () => {
+  const isLoggedIn = useSession().status === "authenticated";
   const isDesktopScreen = useMediaQuery("(min-width: 640px)");
   const pathname = usePathname();
 
@@ -67,7 +69,8 @@ const SidebarMenu = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
       <aside className="flex h-full w-full list-none flex-col rounded-md">
         <div className="overflow-hidden rounded-md border-2 border-zinc-800">
           {navLinks.map(({ href, icon: Icon, text }) => {
-            if (href === "/profile" && !isLoggedIn) return null;
+            if ((href === "/profile" || href === "/subscribed") && !isLoggedIn)
+              return null;
             return (
               <Link
                 key={href}
@@ -99,4 +102,4 @@ const SidebarMenu = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   );
 };
 
-export default SidebarMenu;
+export default HomepageMenu;

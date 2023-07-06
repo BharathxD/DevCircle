@@ -25,4 +25,4 @@ type ExtendedComment = Comment & {
   votes: CommentVote[];
 };
 
-export { ExtendedPost, ExtendedForum, ExtendedComment }
+export { ExtendedPost, ExtendedForum, ExtendedComment };
