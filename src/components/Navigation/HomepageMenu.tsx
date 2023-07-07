@@ -36,7 +36,7 @@ const HomepageMenu = () => {
   if (!isDesktopScreen) {
     return (
       <nav
-        className="absolute inset-x-0 -bottom-0.5 flex flex-row items-center justify-center overflow-hidden border-t-2 border-t-zinc-800 bg-zinc-50/50 backdrop-blur-md dark:bg-zinc-950/50 md:hidden"
+        className="fixed inset-x-0 -bottom-0.5 flex flex-row items-center justify-center overflow-hidden border-t-2 border-t-zinc-800 bg-zinc-50/50 backdrop-blur-md dark:bg-zinc-950/50 md:hidden"
         aria-label="Mobile Navigation"
       >
         {navLinks
@@ -78,7 +78,7 @@ const HomepageMenu = () => {
                 className={cn(
                   "flex w-full flex-row items-center gap-4 border-b-2 border-b-zinc-800 bg-zinc-50 p-4 last:border-b-0 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-800",
                   href === pathname &&
-                    "bg-zinc-900 text-zinc-50 dark:bg-zinc-900 dark:text-zinc-50",
+                    "bg-zinc-800 text-zinc-50 dark:bg-zinc-900 dark:text-zinc-50",
                   href === "/home" &&
                     "bg-zinc-50 text-zinc-800 dark:bg-zinc-950 dark:text-zinc-50"
                 )}

@@ -12,7 +12,7 @@ interface UserPostsProps {
 const UserPosts: React.FC<UserPostsProps> = ({ posts }) => {
   return (
     <div
-      className={`mx-auto mt-4 flex max-w-5xl flex-col items-start justify-start gap-4 px-4 py-2 sm:px-6 lg:px-8`}
+      className={`mx-auto my-4 flex max-w-5xl flex-col items-start justify-start gap-4 px-4 py-2 sm:px-6 lg:px-8`}
     >
       {posts?.length !== 0 ? (
         <Fragment>
@@ -25,7 +25,7 @@ const UserPosts: React.FC<UserPostsProps> = ({ posts }) => {
                   className="inline-flex items-center gap-2 overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950"
                 >
                   <h2 className="px-4 py-2">{post.title}</h2>
-                  <time className="bg-zinc-300 px-4 py-2 dark:bg-zinc-800">
+                  <time className="h-full bg-zinc-300 px-4 py-2 dark:bg-zinc-800">
                     {formatTimeToNow(post.createdAt)}
                   </time>
                 </article>

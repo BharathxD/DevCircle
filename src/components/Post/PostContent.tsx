@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import Link from "next/link";
 import type { Tag } from "@prisma/client";
 import { Dot } from "lucide-react";
 
@@ -19,7 +20,7 @@ interface PostContentProps {
   postId: string;
   title: string;
   tags: Tag[];
-  name: string | null;
+  username: string;
   userimage: string | null;
   banner?: string;
   createdAt: Date;
@@ -31,7 +32,7 @@ const PostContent: React.FC<PostContentProps> = ({
   postId,
   title,
   tags,
-  name,
+  username,
   userimage,
   createdAt,
   isAuthor,
@@ -44,12 +45,12 @@ const PostContent: React.FC<PostContentProps> = ({
       <div className="flex flex-row items-center gap-2">
         <UserAvatar
           user={{
-            name: name,
+            name: username,
             image: userimage,
           }}
         />
         <p className="mt-1 flex max-h-40 items-center truncate text-zinc-500 dark:text-zinc-300">
-          Posted by u/{name}
+          <Link href={`/user/${username}`}>Posted by u/{username}</Link>
           <Dot />
           {formatTimeToNow(new Date(createdAt))}
         </p>
@@ -60,7 +61,7 @@ const PostContent: React.FC<PostContentProps> = ({
   return (
     <article id="post">
       {!isEditing && (
-        <header className="flex flex-col gap-4 p-4 dark:bg-zinc-950/10">
+        <header className="flex flex-col gap-4 bg-zinc-800 p-4 dark:bg-zinc-950/10">
           <Tags tags={tags} />
           <div
             className={cn(
@@ -73,7 +74,7 @@ const PostContent: React.FC<PostContentProps> = ({
               <PostDropdownMenu onEdit={toggleEditing} postId={postId} />
             )}
           </div>
-          <h1 className="py-1 text-4xl font-extrabold leading-6 text-zinc-800 dark:text-zinc-100 sm:text-2xl md:text-3xl lg:text-4xl">
+          <h1 className="py-1 text-4xl font-extrabold text-zinc-800 dark:text-zinc-100 sm:text-2xl md:text-3xl md:leading-6 lg:text-4xl">
             {title}
           </h1>
         </header>

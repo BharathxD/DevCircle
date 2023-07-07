@@ -16,7 +16,7 @@ async function updatePostCache(post: updatePostCacheParams) {
   const updatedCachedPayload: CachedPost = {
     id: post.id,
     title: post.title,
-    authorUsername: post.author.name ?? "",
+    authorUsername: post.author.username ?? "",
     authorImage: post.author.image ?? "",
     authorId: post.authorId,
     content: JSON.stringify(post.content),

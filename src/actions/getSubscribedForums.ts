@@ -2,7 +2,7 @@
 
 import database from "@/lib/database";
 
-import getCurrentUser from "./getCurrentUser";
+import { getAuthSession } from "./getCurrentUser";
 
 /**
  * Retrieves the names of the forums that the current user is subscribed to.
@@ -10,11 +10,11 @@ import getCurrentUser from "./getCurrentUser";
  */
 const getSubscribedForums = async (): Promise<string[] | null> => {
   try {
-    const user = await getCurrentUser();
-    if (!user) return null;
+    const session = await getAuthSession();
+    if (!session?.user) return null;
 
     const subscriptions = await database.subscription.findMany({
-      where: { userId: user.id },
+      where: { userId: session.user.id },
       include: { forum: true },
     });
 

@@ -15,7 +15,7 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 
 interface rootProps {
   children: React.ReactNode;
-  authModal: React.ReactNode;
+  userModal: React.ReactNode;
 }
 
 export const metadata: Metadata = {
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: rootProps) {
+export default async function RootLayout({ children, userModal }: rootProps) {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
       <Session>
@@ -73,6 +73,7 @@ export default async function RootLayout({ children }: rootProps) {
           <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-neutral-950 dark:text-zinc-50">
             <ThemeProvider>
               <Navbar />
+              {userModal}
               {children}
               <Toaster />
             </ThemeProvider>

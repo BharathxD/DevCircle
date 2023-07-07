@@ -16,7 +16,6 @@ const getAuthSession = async (): Promise<Session | null> => {
     const session = await getServerSession(authOptions);
     return session ?? null;
   } catch (error) {
-    console.error("Error while retrieving session:", error);
     return null;
   }
 };
@@ -36,7 +35,6 @@ const getCurrentUser = async (): Promise<User | null> => {
     });
     return currentUser ?? null;
   } catch (error) {
-    console.error("Error while retrieving current user:", error);
     return null;
   }
 };
@@ -57,7 +55,6 @@ const getUserWithSocialLinks = async (): Promise<UserWithSocialLinks | null> => 
     });
     return currentUserWithSocialLinks ?? null;
   } catch (error) {
-    console.error("Error while retrieving user with social links:", error);
     return null;
   }
 };
@@ -71,10 +68,10 @@ const getUserWithSocialLinksAndPosts = async (
   username?: string
 ): Promise<UserWithSocialLinksAndPosts | null> => {
   try {
-    let whereClause: { name?: string; email?: string } = {};
+    let whereClause: { username?: string; email?: string } = {};
     if (username) {
       whereClause = {
-        name: username,
+        username: username,
       };
     } else {
       const session = await getAuthSession();
@@ -89,10 +86,6 @@ const getUserWithSocialLinksAndPosts = async (
     });
     return currentUserWithSocialLinksAndPosts ?? null;
   } catch (error) {
-    console.error(
-      "Error while retrieving user with social links and posts:",
-      error
-    );
     return null;
   }
 };

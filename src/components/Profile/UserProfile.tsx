@@ -70,7 +70,8 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
     url ? (
       <Link href={url} key={platform}>
         <Button size="sm" className="flex flex-row items-center gap-1">
-          {icon} {label}
+          {icon}
+          <p>{label}</p>
         </Button>
       </Link>
     ) : (
@@ -118,7 +119,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
               <p>{user.bio}</p>
             </div>
           </div>
-          <div className="mt-4 h-[2px] bg-zinc-900" />
+          <div className="mt-4 h-[2px] bg-zinc-800" />
         </>
       )}
       <div

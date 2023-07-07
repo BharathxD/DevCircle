@@ -102,7 +102,7 @@ const CommentsSection = async ({
             </Fragment>
           )}
         </section>
-        <div className="border-t-2 border-zinc-800 bg-zinc-900 px-3 py-5">
+        <div className="border-t-2 border-zinc-800 bg-zinc-50 px-3 py-5 dark:bg-zinc-900">
           <CreateComment postId={postId} />
         </div>
       </SheetContent>

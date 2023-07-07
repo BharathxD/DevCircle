@@ -1,7 +1,6 @@
 import { env } from "@/env.mjs";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { nanoid } from "nanoid";
-import { getServerSession } from "next-auth";
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 

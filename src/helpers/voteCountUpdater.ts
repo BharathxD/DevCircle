@@ -25,7 +25,7 @@ async function updateVoteCount({ id, voteType, post }: updateVoteCountParams) {
     const cachedPayload: CachedPost = {
       id: post.id,
       title: post.title,
-      authorUsername: post.author.name ?? "",
+      authorUsername: post.author.username ?? "",
       authorImage: post.author.image ?? "",
       authorId: post.authorId,
       content: JSON.stringify(post.content),

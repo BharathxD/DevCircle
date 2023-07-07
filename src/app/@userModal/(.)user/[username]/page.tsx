@@ -3,30 +3,28 @@ import { getUserWithSocialLinksAndPosts } from "@/actions/getCurrentUser";
 
 import UserPosts from "@/components/Profile/UserPosts";
 import UserProfile from "@/components/Profile/UserProfile";
+import ModalClose from "@/components/UI/ModalClose";
 
-interface ProfilePageArgs {
+interface UserInterceptorArgs {
   params: {
     username: string;
   };
 }
 
-const UserProfilePage = async ({ params }: ProfilePageArgs) => {
+const UserInterceptor = async ({ params }: UserInterceptorArgs) => {
   const { username } = params;
   const user = await getUserWithSocialLinksAndPosts(username);
   if (!user) return notFound();
   return (
-    <section
-      className={
-        "no-scrollbar container relative h-[91vh] w-fit overflow-hidden overflow-y-scroll py-4 md:col-span-3 md:px-4"
-      }
-    >
-      <div className="h-full w-full overflow-hidden rounded-xl border-2 border-zinc-800 p-0">
+    <div className="fixed inset-0 z-10 flex h-screen max-h-screen w-screen items-center justify-center overflow-hidden rounded-lg bg-zinc-800/20 backdrop-blur-md">
+      <div className="relative overflow-hidden rounded-lg border-2 border-zinc-800 bg-zinc-950">
+        <ModalClose />
         <UserProfile user={user} />
         <div className="h-[2px] w-full bg-zinc-800" />
         <UserPosts posts={user.post} />
       </div>
-    </section>
+    </div>
   );
 };
 
-export default UserProfilePage;
+export default UserInterceptor;

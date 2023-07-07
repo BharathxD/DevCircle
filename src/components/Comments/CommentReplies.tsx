@@ -33,7 +33,9 @@ const CommentReplies: React.FC<CommentRepliesProps> = ({
         onClick={() => setShowReplies((prevValue) => !prevValue)}
         className="w-fit cursor-pointer rounded-md border-2 border-zinc-800 bg-zinc-50 px-2 py-1 hover:bg-zinc-800 hover:text-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 hover:dark:bg-zinc-700"
       >
-        {showReplies ? "Hide Replies" : "Show replies"}
+        {showReplies
+          ? "Hide Replies"
+          : `${topLevelComment.replies.length} replies`}
       </div>
       {showReplies &&
         topLevelComment.replies

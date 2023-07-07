@@ -13,7 +13,18 @@ interface SubscribedCommunitiesProps {
 const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
   forums,
 }) => {
-  if (!forums) return null;
+  if (!forums || forums.length === 0)
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <h1>
+          Discover and join vibrant communities and forums! Click{" "}
+          <Link href="/search" className="border-b-2 border-zinc-300">
+            here
+          </Link>{" "}
+          to explore.
+        </h1>
+      </div>
+    );
   return (
     <motion.div
       className="overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950"
