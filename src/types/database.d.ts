@@ -13,7 +13,7 @@ type ExtendedForum = Forum & {
   author?: User;
   comments?: Comment[];
   votes?: Vote[];
-  Creator: User | null;
+  creator: User | null;
 };
 
 type ExtendedComment = Comment & {
@@ -26,5 +26,15 @@ type ExtendedComment = Comment & {
 };
 
 type UserWithSocialLinks = User & { socialMedia: SocialMedia | null };
+type UserWithSocialLinksAndPosts = User & {
+  socialMedia: SocialMedia | null;
+  post: Post[] | null;
+};
 
-export { ExtendedPost, ExtendedForum, ExtendedComment, UserWithSocialLinks };
+export {
+  ExtendedPost,
+  ExtendedForum,
+  ExtendedComment,
+  UserWithSocialLinks,
+  UserWithSocialLinksAndPosts,
+};

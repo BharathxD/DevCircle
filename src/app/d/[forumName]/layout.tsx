@@ -52,7 +52,7 @@ const Layout = async ({
             description={forum?.description}
             forumCreationDate={forum.createdAt}
             memberCount={memberCount}
-            authorName={forum.Creator?.username}
+            authorName={forum.creator?.username}
             isCreator={forum.creatorId === currentUser?.id}
             isSubscribed={isSubscribed}
           />

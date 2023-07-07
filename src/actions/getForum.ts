@@ -31,7 +31,7 @@ const getForum = async (
           orderBy: { createdAt: "desc" },
           take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
         },
-        Creator: true,
+        creator: true,
       },
     });
     return forum ?? null;

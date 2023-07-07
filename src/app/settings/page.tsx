@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import getUserWithSocialLinks from "@/actions/getUserWithSocialLinks";
+import { getUserWithSocialLinks } from "@/actions/getCurrentUser";
 
 import ProfileForm from "@/components/Forms/ProfileForm";
 
