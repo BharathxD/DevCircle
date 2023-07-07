@@ -10,7 +10,7 @@ import database from "@/lib/database";
  * @param req The NextRequest object representing the incoming request.
  * @returns The NextResponse object representing the server's response.
  */
-export async function GET(req: NextRequest): Promise<NextResponse> {
+const retrievePosts = async (req: NextRequest): Promise<NextResponse> => {
   try {
     // Parse the URL from the request
     const url = new URL(req.url);
@@ -61,18 +61,20 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     // Return the retrieved posts
     return NextResponse.json(posts, { status: StatusCodes.OK });
   } catch (error: unknown) {
-    // Handle validation errors
     if (error instanceof ZodError) {
+      // Return a JSON response with a 400 status code if there's a ZodError
       return NextResponse.json(
-        { message: error.message },
+        { message: `Invalid request parameters: ${error.message}` },
         { status: StatusCodes.BAD_REQUEST }
       );
     }
 
-    // Handle other errors
+    // Return a JSON response with a 500 status code for other errors
     return NextResponse.json(
-      { message: "Internal server error. Please try again later." },
+      { message: "Could not retrieve the posts, please try again later" },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
 }
+
+export { retrievePosts as GET }

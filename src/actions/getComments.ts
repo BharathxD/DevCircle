@@ -1,9 +1,7 @@
 "use server";
 
-import database from "@/lib/database";
 import type { ExtendedComment } from "@/types/database";
-
-
+import database from "@/lib/database";
 
 /**
  * Retrieves comments for a given post.

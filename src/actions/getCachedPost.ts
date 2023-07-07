@@ -10,11 +10,13 @@ import redis from "@/lib/redis";
  */
 const getCachedPost = async (postId: string): Promise<CachedPost | null> => {
   try {
-    const cachedPost = (await redis.hgetall(`post:${postId}`)) as CachedPost | null;
+    const cachedPost = (await redis.hgetall(
+      `post:${postId}`
+    )) as CachedPost | null;
     return cachedPost;
   } catch (error) {
     return null;
   }
-}
+};
 
 export default getCachedPost;

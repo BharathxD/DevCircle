@@ -1,6 +1,7 @@
-"use server"
+"use server";
 
 import database from "@/lib/database";
+
 import getCurrentUser from "./getCurrentUser";
 
 /**
@@ -25,6 +26,6 @@ const getSubscribedForums = async (): Promise<string[] | null> => {
   } catch (error) {
     return null;
   }
-}
+};
 
 export default getSubscribedForums;

@@ -53,7 +53,7 @@ const defaultValues: Partial<ProfileFormValues> = {
   bio: "I'm in a college which doesn't teach anything except bakchodi.",
 };
 
-const ProfilePage = () => {
+const ProfileForm = () => {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
@@ -159,4 +159,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default ProfileForm;

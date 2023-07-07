@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getUserWithSocialLinks } from "@/actions/getCurrentUser";
+import getUserWithSocialLinks from "@/actions/getUserWithSocialLinks";
 
 import UserProfile from "@/components/Profile/UserProfile";
 import DashboardContentShell from "@/components/UI/DashboarContentShell";

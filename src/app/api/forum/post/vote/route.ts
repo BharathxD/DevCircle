@@ -13,7 +13,7 @@ import { PostVoteValidator } from "@/lib/validators/vote";
  * @param {NextRequest} req - The Next.js request object.
  * @returns {Promise<NextResponse>} The Next.js response.
  */
-export async function PATCH(req: NextRequest): Promise<NextResponse> {
+const patchVotes = async (req: NextRequest): Promise<NextResponse> => {
   try {
     // Get the current user
     const currentUser = await getCurrentUser();
@@ -71,20 +71,20 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
     const updatePromise =
       existingVote.type === voteType
         ? // If the existing vote is of the same type as the new vote, delete the vote and update vote count
-          Promise.all([
-            database.vote.delete({
-              where: { userId_postId: { userId, postId } },
-            }),
-            updateVoteCount({ id: postId, voteType: null, post }),
-          ])
+        Promise.all([
+          database.vote.delete({
+            where: { userId_postId: { userId, postId } },
+          }),
+          updateVoteCount({ id: postId, voteType: null, post }),
+        ])
         : // If the existing vote is of a different type, update the vote and update vote count
-          Promise.all([
-            database.vote.update({
-              where: { userId_postId: { userId, postId } },
-              data: { type: voteType },
-            }),
-            updateVoteCount({ id: postId, voteType, post }),
-          ]);
+        Promise.all([
+          database.vote.update({
+            where: { userId_postId: { userId, postId } },
+            data: { type: voteType },
+          }),
+          updateVoteCount({ id: postId, voteType, post }),
+        ]);
 
     await updatePromise;
 
@@ -99,17 +99,19 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
     );
   } catch (error: unknown) {
     if (error instanceof ZodError) {
-      // If there's a validation error, return a bad request response
+      // Return a JSON response with a 400 status code if there's a ZodError
       return NextResponse.json(
-        { message: "Invalid request. Please provide valid data." },
+        { message: `Invalid request parameters: ${error.message}` },
         { status: StatusCodes.BAD_REQUEST }
       );
     }
 
-    // If an error occurs, return an internal server error response
+    // Return a JSON response with a 500 status code for other errors
     return NextResponse.json(
-      { message: "Internal server error. Please try again later." },
+      { message: "Internal server error, please try again later." },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
 }
+
+export { patchVotes as PATCH };

@@ -1,4 +1,4 @@
-import CookiesForm from "@/components/forms/CookiesForm";
+import CookiesForm from "@/components/Forms/CookiesForm";
 
 export default function SettingsCookiesPage() {
   return (

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import type { User } from "@prisma/client";
-import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 

@@ -1,5 +1,5 @@
-import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import getCurrentUser from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
@@ -18,7 +18,7 @@ import {
  * @param req - The Next.js request object.
  * @returns The Next.js response object.
  */
-const createPost = async (req: NextRequest) => {
+const createPost = async (req: NextRequest): Promise<NextResponse> => {
   try {
     // Retrieve the current user
     const currentUser = await getCurrentUser();
@@ -35,9 +35,10 @@ const createPost = async (req: NextRequest) => {
     const body = await req.json();
     const { title, content, forumId, tags } = CreatePostValidator.parse(body);
 
+    // Check if the post content is empty
     if (content.blocks.length === 0) {
       return NextResponse.json(
-        { message: "Post can't be empty" },
+        { message: "Post content cannot be empty" },
         { status: StatusCodes.BAD_REQUEST }
       );
     }
@@ -72,12 +73,16 @@ const createPost = async (req: NextRequest) => {
     return NextResponse.json(post, { status: StatusCodes.CREATED });
   } catch (error: unknown) {
     if (error instanceof ZodError) {
-      // Handle validation errors
-      return new Response(error.message, { status: StatusCodes.BAD_REQUEST });
+      // Return a JSON response with a 400 status code if there's a ZodError
+      return NextResponse.json(
+        { message: `Invalid request parameters: ${error.message}` },
+        { status: StatusCodes.BAD_REQUEST }
+      );
     }
-    // Handle other errors
+
+    // Return a JSON response with a 500 status code for other errors
     return NextResponse.json(
-      { message: "Cannot create the post" },
+      { message: "Could not create the post." },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
@@ -88,7 +93,7 @@ const createPost = async (req: NextRequest) => {
  * @param req - The Next.js request object.
  * @returns The Next.js response object.
  */
-const editPost = async (req: NextRequest) => {
+const editPost = async (req: NextRequest): Promise<NextResponse> => {
   try {
     // Retrieve the current user
     const currentUser = await getCurrentUser();
@@ -107,9 +112,10 @@ const editPost = async (req: NextRequest) => {
     const body = await req.json();
     const { title, content, tags, postId } = UpdatePostValidator.parse(body);
 
+    // Check if the post content is empty
     if (content.blocks.length === 0) {
       return NextResponse.json(
-        { message: "Post can't be empty" },
+        { message: "Post content cannot be empty" },
         { status: StatusCodes.BAD_REQUEST }
       );
     }
@@ -137,7 +143,7 @@ const editPost = async (req: NextRequest) => {
     });
 
     // Update the post
-    const post = await database.post.update({
+    const updatedPost = await database.post.update({
       where: {
         id: postId,
       },
@@ -155,17 +161,21 @@ const editPost = async (req: NextRequest) => {
       },
     });
 
-    await updatePostCache(post);
+    await updatePostCache(updatedPost);
 
-    return NextResponse.json(post, { status: StatusCodes.OK });
+    return NextResponse.json(updatedPost, { status: StatusCodes.OK });
   } catch (error: unknown) {
     if (error instanceof ZodError) {
-      // Handle validation errors
-      return new Response(error.message, { status: StatusCodes.BAD_REQUEST });
+      // Return a JSON response with a 400 status code if there's a ZodError
+      return NextResponse.json(
+        { message: `Invalid request parameters: ${error.message}` },
+        { status: StatusCodes.BAD_REQUEST }
+      );
     }
-    // Handle other errors
+
+    // Return a JSON response with a 500 status code for other errors
     return NextResponse.json(
-      { message: "Cannot update the post" },
+      { message: "Could not update the post." },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
@@ -176,7 +186,7 @@ const editPost = async (req: NextRequest) => {
  * @param req - The Next.js request object.
  * @returns The Next.js response object.
  */
-const deletePost = async (req: NextRequest) => {
+const deletePost = async (req: NextRequest): Promise<NextResponse> => {
   try {
     // Retrieve the current user
     const currentUser = await getCurrentUser();
@@ -197,7 +207,7 @@ const deletePost = async (req: NextRequest) => {
       postId: url.searchParams.get("postId"),
     });
 
-    // Check if the user is authorized to update the post
+    // Check if the user is authorized to delete the post
     const postExists = await database.post.findFirst({
       where: {
         id: postId,
@@ -224,12 +234,16 @@ const deletePost = async (req: NextRequest) => {
     );
   } catch (error: unknown) {
     if (error instanceof ZodError) {
-      // Handle validation errors
-      return new Response(error.message, { status: StatusCodes.BAD_REQUEST });
+      // Return a JSON response with a 400 status code if there's a ZodError
+      return NextResponse.json(
+        { message: `Invalid request parameters: ${error.message}` },
+        { status: StatusCodes.BAD_REQUEST }
+      );
     }
-    // Handle other errors
+
+    // Return a JSON response with a 500 status code for other errors
     return NextResponse.json(
-      { message: "Cannot delete the post" },
+      { message: "Could not delete the post." },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }

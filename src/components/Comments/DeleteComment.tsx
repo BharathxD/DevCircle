@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";

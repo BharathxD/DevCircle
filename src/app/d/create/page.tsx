@@ -44,7 +44,7 @@ const PostCreationPage: FC = () => {
           description: "Please choose a different name.",
           variant: "destructive",
         },
-        [StatusCodes.UNPROCESSABLE_ENTITY]: {
+        [StatusCodes.BAD_REQUEST]: {
           title: "Invalid forum name",
           description: "Please choose a name between 3 and 21 letters.",
           variant: "destructive",

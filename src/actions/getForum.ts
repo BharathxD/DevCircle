@@ -1,6 +1,7 @@
-"use server"
+"use server";
 
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
+
 import type { ExtendedForum } from "@/types/database";
 import database from "@/lib/database";
 
@@ -37,6 +38,6 @@ const getForum = async (
   } catch (error) {
     return null;
   }
-}
+};
 
 export default getForum;

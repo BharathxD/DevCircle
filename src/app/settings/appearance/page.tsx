@@ -1,4 +1,4 @@
-import AppearanceForm from "@/components/forms/AppearanceForm";
+import AppearanceForm from "@/components/Forms/AppearanceForm";
 
 const SettingsAppearancePage = () => {
   return (

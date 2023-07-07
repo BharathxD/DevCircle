@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-import ProfileForm from "@/components/forms/ProfileForm";
+import ProfileForm from "@/components/Forms/ProfileForm";
 
 const SettingsProfilePage = async () => {
   const session = useSession();

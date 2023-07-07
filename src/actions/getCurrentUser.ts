@@ -1,10 +1,11 @@
-"use server"
+"use server";
 
+import type { User } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import type { Session } from "next-auth";
+
 import { authOptions } from "@/lib/auth";
 import database from "@/lib/database";
-import type { User } from "@prisma/client";
 
 /**
  * Retrieves a server session using authentication options.
@@ -17,7 +18,7 @@ const getSession = async (): Promise<Session | null> => {
   } catch (error: unknown) {
     return null;
   }
-}
+};
 
 /**
  * Retrieves the current user from the database based on the session's email.
@@ -34,6 +35,6 @@ const getCurrentUser = async (): Promise<User | null> => {
   } catch (error: unknown) {
     return null;
   }
-}
+};
 
 export default getCurrentUser;

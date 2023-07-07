@@ -2,12 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import type { UserWithSocialLinks } from "@/actions/getCurrentUser";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Edit } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { FaFacebook, FaGithub, FaLinkedin, FaUserCircle } from "react-icons/fa";
 
+import type { UserWithSocialLinks } from "@/types/database";
 import { getGradient } from "@/lib/gradients";
 import { cn } from "@/lib/utils";
 

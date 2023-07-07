@@ -16,7 +16,7 @@ interface SiteMetadata {
  * @param {NextRequest} req - The incoming request object.
  * @returns {Promise<NextResponse>} A promise that resolves to the response object.
  */
-export async function GET(req: NextRequest): Promise<NextResponse> {
+const getLinkMetada = async (req: NextRequest): Promise<NextResponse> => {
   try {
     // Extract the "url" query parameter from the request URL
     const url = new URL(req.url);
@@ -55,10 +55,12 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       { status: StatusCodes.OK }
     );
   } catch (error: unknown) {
-    // Handle any errors that occur during the process
+    // Return a JSON response with a 500 status code for other errors
     return NextResponse.json(
-      { message: "Cannot generate the metadata" },
+      { message: "Cannot generate the metadata for the given link, please try again later" },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
-}
+};
+
+export { getLinkMetada as GET };
