@@ -17,7 +17,7 @@ const DeleteForum: React.FC<DeleteForumProps> = ({ forumId }) => {
   const router = useRouter();
   const { mutate: deleteForum, isLoading } = useMutation<number>({
     mutationFn: async () => {
-      const { status } = await axios.delete(`/api/forum/${forumId}`);
+      const { status } = await axios.delete(`/api/forum/?forumId=${forumId}`);
       return status;
     },
     onError: async (error: unknown) => {

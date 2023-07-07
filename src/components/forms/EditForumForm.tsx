@@ -13,7 +13,6 @@ import {
   forumUpdateValidator,
   type ForumUpdatePayload,
 } from "@/lib/validators/forum";
-import { profileFormSchema } from "@/lib/validators/profile";
 import { toast } from "@/hooks/useToast";
 import {
   Form,

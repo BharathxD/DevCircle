@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment } from "react";
+import Link from "next/link";
 import { format } from "date-fns";
 import { Edit2 } from "lucide-react";
 
@@ -28,7 +29,7 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
   authorName,
 }) => {
   return (
-    <div className="order-first hidden h-fit overflow-hidden rounded-lg border-2 border-zinc-800 md:order-last md:block">
+    <div className="order-first mt-14 hidden h-fit overflow-hidden rounded-lg border-2 border-zinc-800 md:order-last md:block">
       <div className="bg-green-100 px-6 py-4 dark:bg-zinc-900">
         <p className="py-3 text-xl font-bold">About d/{forumName}</p>
       </div>
@@ -70,9 +71,9 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
             <div className="h-[2px] w-full bg-zinc-800" />
             <div className="flex justify-between gap-x-4 px-6 py-4">
               <p className="text-zinc-500">Edit this community</p>
-              <button>
+              <Link href={`/d/${forumName}/edit`}>
                 <Edit2 className="h-4 w-4" />
-              </button>
+              </Link>
             </div>
           </Fragment>
         ) : (

@@ -1,11 +1,12 @@
 import type { User } from "@prisma/client";
 import { getServerSession, type Session } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import database from "@/lib/database";
+
 import type {
   UserWithSocialLinks,
   UserWithSocialLinksAndPosts,
 } from "@/types/database";
+import { authOptions } from "@/lib/auth";
+import database from "@/lib/database";
 
 /**
  * Retrieves a server session using the provided authentication options.
@@ -43,21 +44,22 @@ const getCurrentUser = async (): Promise<User | null> => {
  * Retrieves the currently authenticated user with associated social media links from the database based on the session's email.
  * @returns A promise that resolves to either a UserWithSocialLinks object or null.
  */
-const getUserWithSocialLinks = async (): Promise<UserWithSocialLinks | null> => {
-  try {
-    const session = await getAuthSession();
-    if (!session?.user?.email) {
+const getUserWithSocialLinks =
+  async (): Promise<UserWithSocialLinks | null> => {
+    try {
+      const session = await getAuthSession();
+      if (!session?.user?.email) {
+        return null;
+      }
+      const currentUserWithSocialLinks = await database.user.findUnique({
+        where: { email: session.user.email },
+        include: { socialMedia: true },
+      });
+      return currentUserWithSocialLinks ?? null;
+    } catch (error) {
       return null;
     }
-    const currentUserWithSocialLinks = await database.user.findUnique({
-      where: { email: session.user.email },
-      include: { socialMedia: true },
-    });
-    return currentUserWithSocialLinks ?? null;
-  } catch (error) {
-    return null;
-  }
-};
+  };
 
 /**
  * Retrieves the currently authenticated user with associated social media links and posts from the database based on the session's email or userId.

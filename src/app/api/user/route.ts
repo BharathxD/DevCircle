@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getAuthSession } from "@/actions/getCurrentUser";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
 import database from "@/lib/database";
 import { profileFormSchema } from "@/lib/validators/profile";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 /**
  * Update user profile.
@@ -30,7 +30,6 @@ const updateUser = async (req: NextRequest): Promise<NextResponse> => {
     const { username, bio, urls } = profileFormSchema.parse(requestBody);
 
     // const username = await database.user.findFirst({ where: { username } });
-
 
     // Update user in the database
     await database.user.update({
@@ -63,8 +62,14 @@ const updateUser = async (req: NextRequest): Promise<NextResponse> => {
         { status: StatusCodes.BAD_REQUEST }
       );
     }
-    if (error instanceof PrismaClientKnownRequestError && error.code == "P2002") {
-      return NextResponse.json({ message: "User with the username already exists." }, { status: StatusCodes.CONFLICT });
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code == "P2002"
+    ) {
+      return NextResponse.json(
+        { message: "User with the username already exists." },
+        { status: StatusCodes.CONFLICT }
+      );
     }
     // Return a JSON response with a 500 status code for other errors
     return NextResponse.json(
