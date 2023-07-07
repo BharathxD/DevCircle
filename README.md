@@ -16,3 +16,4 @@
   - Add a section where users can, `edit/delete` the communities that they have created
 - Add a section in the post page to view the details about the `Author`
 - Check user clicks on the Author name or profile picture, he should be redirected to users personal page
+- Add gradients to the button on the post page (only on white mode)

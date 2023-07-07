@@ -1,26 +1,23 @@
-"use server";
+"use server"
 
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
-
 import type { ExtendedPost } from "@/types/database";
 import database from "@/lib/database";
 
 /**
  * Retrieves posts from the database.
- * @param {string} [tag] The tag to filter posts by (optional).
- * @param {number} [limit] The maximum number of posts to retrieve (optional).
- * @returns {Promise<ExtendedPost[] | null>} A promise that resolves to an array of fetched posts, or null if an error occurs.
+ * @param tag - The tag to filter posts by (optional).
+ * @param limit - The maximum number of posts to retrieve (optional).
+ * @returns A promise that resolves to an array of fetched posts, or null if an error occurs.
  */
 const getPosts = async (
   tag?: string,
   limit?: number
 ): Promise<ExtendedPost[] | null> => {
   try {
-    let whereClause = {};
-    if (tag) whereClause = { tags: { some: { name: tag } } };
+    const whereClause = tag ? { tags: { some: { name: tag } } } : {};
 
-    // Retrieve posts from the database, including associated data
-    const allPosts = await database.post.findMany({
+    const posts = await database.post.findMany({
       where: whereClause,
       include: {
         votes: true,
@@ -29,16 +26,14 @@ const getPosts = async (
         forum: true,
         tags: true,
       },
-      orderBy: {
-        createdAt: "desc",
-      },
+      orderBy: { createdAt: "desc" },
       take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
     });
 
-    return allPosts;
-  } catch (error: unknown) {
+    return posts ?? null;
+  } catch (error) {
     return null;
   }
-};
+}
 
 export default getPosts;

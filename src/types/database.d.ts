@@ -25,4 +25,6 @@ type ExtendedComment = Comment & {
   votes: CommentVote[];
 };
 
-export { ExtendedPost, ExtendedForum, ExtendedComment };
+type UserWithSocialLinks = User & { socialMedia: SocialMedia | null };
+
+export { ExtendedPost, ExtendedForum, ExtendedComment, UserWithSocialLinks };

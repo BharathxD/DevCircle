@@ -1,17 +1,9 @@
 "use server";
 
-import type { Comment, CommentVote, User } from "@prisma/client";
-
 import database from "@/lib/database";
+import type { ExtendedComment } from "@/types/database";
 
-type ModifiedComment = Comment & {
-  author: User;
-  replies: (Comment & {
-    author: User;
-    votes: CommentVote[];
-  })[];
-  votes: CommentVote[];
-};
+
 
 /**
  * Retrieves comments for a given post.
@@ -20,7 +12,7 @@ type ModifiedComment = Comment & {
  */
 const getComments = async (
   postId: string
-): Promise<ModifiedComment[] | null> => {
+): Promise<ExtendedComment[] | null> => {
   try {
     const comments = await database.comment.findMany({
       where: {
