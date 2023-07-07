@@ -15,7 +15,7 @@ import { BlurImage } from "../UI/BlurImage";
 import { Button } from "../UI/Button";
 
 interface UserProfileProps {
-  user: UserWithSocialLinks | null;
+  user: UserWithSocialLinks;
 }
 
 const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
@@ -114,19 +114,15 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
           )}
         </div>
       </div>
+      <div className={cn(profileWidth, "mt-4")}>
+        <div className="rounded-md border-2 border-zinc-700/50 bg-zinc-100 p-2 leading-6 backdrop-blur-sm dark:bg-zinc-950/50">
+          <p>{user.bio}</p>
+        </div>
+      </div>
       <div
         className={`${profileWidth} mt-4 flex flex-row items-center justify-start gap-4 px-4 py-2`}
       >
         {socialButtons.map(renderSocialButton)}
-      </div>
-      <div className={cn(profileWidth, "mt-4")}>
-        <div className="rounded-md border-2 border-zinc-700/50 bg-zinc-100 p-2 leading-6 backdrop-blur-sm dark:bg-zinc-950/50">
-          <h1 className="py-1 text-2xl font-bold">Bio</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-        </div>
       </div>
     </div>
   );

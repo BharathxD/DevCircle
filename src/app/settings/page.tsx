@@ -1,13 +1,11 @@
-"use client";
-
 import { redirect } from "next/navigation";
-import { useSession } from "next-auth/react";
+import getUserWithSocialLinks from "@/actions/getUserWithSocialLinks";
 
 import ProfileForm from "@/components/Forms/ProfileForm";
 
 const SettingsProfilePage = async () => {
-  const session = useSession();
-  if (session.status === "unauthenticated") redirect("/settings/appearance");
+  const user = await getUserWithSocialLinks();
+  if (!user) redirect("/settings/appearance");
   return (
     <section>
       <div className="px-4 py-2">
@@ -17,7 +15,15 @@ const SettingsProfilePage = async () => {
         </p>
       </div>
       <div className="px-4">
-        <ProfileForm />
+        <ProfileForm
+          username={user.username ?? undefined}
+          bio={user.bio ?? undefined}
+          urls={{
+            github: user.socialMedia.github,
+            linkedIn: user.socialMedia.linkedIn,
+            facebook: user.socialMedia.facebook,
+          }}
+        />
       </div>
     </section>
   );

@@ -12,15 +12,9 @@ const profileFormSchema = object({
     .max(160, { message: "Bio must not exceed 160 characters." })
     .optional(),
   urls: object({
-    linkedIn: string()
-      .url({ message: "Please enter a valid LinkedIn URL." })
-      .optional(),
-    github: string()
-      .url({ message: "Please enter a valid GitHub URL." })
-      .optional(),
-    facebook: string()
-      .url({ message: "Please enter a valid Facebook URL." })
-      .optional(),
+    linkedIn: string().optional().nullable(),
+    github: string().optional().nullable(),
+    facebook: string().optional().nullable(),
   }).optional(),
 });
 

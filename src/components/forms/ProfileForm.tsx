@@ -1,7 +1,11 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios, { AxiosError } from "axios";
+import { StatusCodes } from "http-status-codes";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
 
 import { profileFormSchema } from "@/lib/validators/profile";
 import type { ProfileFormValues } from "@/lib/validators/profile";
@@ -19,27 +23,57 @@ import {
 import { Input } from "@/components/UI/Input";
 import { Textarea } from "@/components/UI/Textarea";
 
-const defaultValues: Partial<ProfileFormValues> = {
-  bio: "I'm in a college which doesn't teach anything except bakchodi.",
-};
+interface ProfileFormProps {
+  username?: string;
+  bio?: string;
+  urls?: {
+    linkedIn?: string;
+    github?: string;
+    facebook?: string;
+  };
+}
 
-const ProfileForm = () => {
+const ProfileForm: React.FC<ProfileFormProps> = ({ username, bio, urls }) => {
+  const router = useRouter();
+  const defaultValues: Partial<ProfileFormValues> = {
+    username,
+    bio:
+      bio ?? "I'm in a college which doesn't teach anything except bakchodi.",
+    urls,
+  };
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
     mode: "onChange",
   });
 
-  const onSubmit = (data: ProfileFormValues) => {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  };
+  const { mutate, isLoading } = useMutation({
+    mutationFn: async (payload: ProfileFormValues) => {
+      await axios.patch("/api/user", payload);
+    },
+    onError: async (error: unknown) => {
+      if (
+        error instanceof AxiosError &&
+        error.response?.status === StatusCodes.UNAUTHORIZED
+      ) {
+        return router.push("/signin/?unauthorized=1");
+      }
+      toast({
+        title: "Something went wrong",
+        description: "It's on us, please try again later",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      router.refresh();
+      toast({
+        title: "Profile Updated",
+        description: "Your profile has been updated successfully.",
+      });
+    },
+  });
+
+  const onSubmit = (data: ProfileFormValues) => mutate(data);
 
   return (
     <Form {...form}>
@@ -117,13 +151,14 @@ const ProfileForm = () => {
                 <FormControl>
                   <Input placeholder="Facebook" {...field} />
                 </FormControl>
-
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
-        <Button type="submit">Update profile</Button>
+        <Button type="submit" disabled={isLoading} isLoading={isLoading}>
+          Update profile
+        </Button>
       </form>
     </Form>
   );
