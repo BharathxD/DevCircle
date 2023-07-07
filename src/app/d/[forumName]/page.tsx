@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import getCurrentUser from "@/actions/getCurrentUser";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 import getForum from "@/actions/getForum";
 
 import type { ExtendedForum } from "@/types/database";

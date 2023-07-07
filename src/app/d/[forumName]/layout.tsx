@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
-import getCurrentUser from "@/actions/getCurrentUser";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 import getForum from "@/actions/getForum";
 
 import database from "@/lib/database";

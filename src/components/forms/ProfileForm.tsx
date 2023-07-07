@@ -52,11 +52,17 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ username, bio, urls }) => {
       await axios.patch("/api/user", payload);
     },
     onError: async (error: unknown) => {
-      if (
-        error instanceof AxiosError &&
-        error.response?.status === StatusCodes.UNAUTHORIZED
-      ) {
-        return router.push("/signin/?unauthorized=1");
+      if (error instanceof AxiosError) {
+        if (error.response?.status === StatusCodes.UNAUTHORIZED) {
+          return router.push("/signin/?unauthorized=1");
+        }
+        if (error.response?.status === StatusCodes.CONFLICT) {
+          return toast({
+            title: "The username is already taken",
+            description: "Please choose another one.",
+            variant: "destructive",
+          });
+        }
       }
       toast({
         title: "Something went wrong",
@@ -123,7 +129,11 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ username, bio, urls }) => {
               <FormItem>
                 <FormLabel>LinkedIn</FormLabel>
                 <FormControl>
-                  <Input placeholder="LinkedIn" {...field} />
+                  <Input
+                    placeholder="LinkedIn"
+                    {...field}
+                    value={field.value ?? ""}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -136,7 +146,11 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ username, bio, urls }) => {
               <FormItem>
                 <FormLabel>Github</FormLabel>
                 <FormControl>
-                  <Input placeholder="Github" {...field} />
+                  <Input
+                    placeholder="Github"
+                    {...field}
+                    value={field.value ?? ""}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -149,7 +163,11 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ username, bio, urls }) => {
               <FormItem>
                 <FormLabel>Facebook</FormLabel>
                 <FormControl>
-                  <Input placeholder="Facebook" {...field} />
+                  <Input
+                    placeholder="Facebook"
+                    {...field}
+                    value={field.value ?? ""}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

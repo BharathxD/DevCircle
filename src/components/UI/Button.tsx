@@ -1,6 +1,5 @@
 import * as React from "react";
-import type { VariantProps } from "class-variance-authority";
-import { cva } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 import { Loader2 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -11,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "text-zinc-900 dark:text-zinc-50 hover:bg-zinc-800 hover:text-zinc-100 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700",
+          "text-zinc-900 dark:text-zinc-50 hover:bg-zinc-800 hover:text-zinc-100 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700 disabled:bg-zinc-400",
         inverted:
           "text-zinc-100 bg-zinc-800 hover:bg-zinc-50 hover:text-zinc-800 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700 dark:disabled:text-zinc-600",
         destructive:
-          "text-zinc-800 text-zinc-50 bg-red-500 hover:text-zinc-50 hover:bg-red-600 dark:hover:bg-red-400 rounded-lg hover:rounded-sm outline outline-2 outline-red-500 hover:dark:outline-red-400",
+          "text-zinc-800 text-zinc-50 bg-red-500 hover:text-zinc-50 hover:bg-red-600 dark:hover:bg-red-400 rounded-lg hover:rounded-sm outline outline-2 outline-red-900 hover:dark:outline-red-400",
         outline:
           "bg-zinc-100 text-zinc-900 hover:text-zinc-50 hover:bg-zinc-800 dark:bg-zinc-800 hover:dark:bg-zinc-700 dark:text-zinc-50 outline outline-2 outline-zinc-800 hover:cursor-pointer disabled:dark:text-zinc-600 disabled:bg-zinc-500",
         skeleton:
@@ -27,10 +26,10 @@ const buttonVariants = cva(
         link: "bg-transparent dark:bg-transparent underline-offset-4 hover:underline text-slate-900 dark:text-slate-100 hover:bg-transparent dark:hover:bg-transparent",
       },
       size: {
-        default: "h-full py-2 px-4",
-        sm: "h-9 py-2 px-3 rounded-md",
-        xs: "h-10 p-1 rounded-sm",
-        lg: "h-11 px-8 rounded-md",
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10",
       },
     },
     defaultVariants: {
@@ -43,6 +42,7 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
   isLoading?: boolean;
 }
 

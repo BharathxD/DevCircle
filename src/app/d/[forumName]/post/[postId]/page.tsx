@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import getCachedPost from "@/actions/getCachedPost";
 import getComments from "@/actions/getComments";
-import getCurrentUser from "@/actions/getCurrentUser";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 import getPost from "@/actions/getPost";
 import type { Post, Tag, User, Vote } from "@prisma/client";
 

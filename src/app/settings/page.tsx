@@ -19,9 +19,9 @@ const SettingsProfilePage = async () => {
           username={user.username ?? undefined}
           bio={user.bio ?? undefined}
           urls={{
-            github: user.socialMedia.github,
-            linkedIn: user.socialMedia.linkedIn,
-            facebook: user.socialMedia.facebook,
+            github: user.socialMedia?.github,
+            linkedIn: user.socialMedia?.linkedIn,
+            facebook: user.socialMedia?.facebook,
           }}
         />
       </div>

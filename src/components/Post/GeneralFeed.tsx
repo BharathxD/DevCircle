@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import getCurrentUser from "@/actions/getCurrentUser";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 import fetchPosts from "@/actions/getPosts";
 
 import PostFeed from "./PostFeed";

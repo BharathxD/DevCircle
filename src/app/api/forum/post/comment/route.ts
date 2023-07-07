@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import getCurrentUser from "@/actions/getCurrentUser";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 

@@ -128,7 +128,6 @@ const PostCreationPage: FC = () => {
             <Button
               onClick={handleCreateForumClick}
               isLoading={isLoading}
-              variant="inverted"
               disabled={!isInputValid}
             >
               Create Forum

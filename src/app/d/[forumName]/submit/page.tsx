@@ -22,7 +22,7 @@ const CreatePostPage = async ({ params }: PageProps) => {
   });
   if (!forum) return notFound();
   return (
-    <div className="flex flex-col items-start gap-3 pt-2">
+    <div className="flex flex-col items-start gap-3 pt-2 shadow-custom">
       <div className="flex flex-row items-center gap-4">
         <Link
           className={cn(buttonVariants({ variant: "skeleton" }), "w-max")}
