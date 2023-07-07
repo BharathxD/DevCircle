@@ -11,7 +11,7 @@ import database from "@/lib/database";
  * Retrieves a server session using authentication options.
  * @returns A promise that resolves to either a Session object or null.
  */
-const getSession = async (): Promise<Session | null> => {
+const getAuthSession = async (): Promise<Session | null> => {
   try {
     const session = await getServerSession(authOptions);
     return session ?? null;
@@ -26,7 +26,7 @@ const getSession = async (): Promise<Session | null> => {
  */
 const getCurrentUser = async (): Promise<User | null> => {
   try {
-    const session = await getSession();
+    const session = await getAuthSession();
     if (!session?.user?.email) return null;
     const currentUser = await database.user.findUnique({
       where: { email: session.user.email },
@@ -37,4 +37,5 @@ const getCurrentUser = async (): Promise<User | null> => {
   }
 };
 
+export { getAuthSession };
 export default getCurrentUser;

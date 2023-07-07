@@ -68,6 +68,6 @@ const createForum = async (req: NextRequest): Promise<NextResponse> => {
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
-}
+};
 
 export { createForum as POST };

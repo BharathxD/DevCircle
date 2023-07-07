@@ -75,6 +75,6 @@ const retrievePosts = async (req: NextRequest): Promise<NextResponse> => {
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
-}
+};
 
-export { retrievePosts as GET }
+export { retrievePosts as GET };

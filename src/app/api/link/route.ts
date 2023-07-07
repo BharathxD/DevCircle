@@ -57,7 +57,10 @@ const getLinkMetada = async (req: NextRequest): Promise<NextResponse> => {
   } catch (error: unknown) {
     // Return a JSON response with a 500 status code for other errors
     return NextResponse.json(
-      { message: "Cannot generate the metadata for the given link, please try again later" },
+      {
+        message:
+          "Cannot generate the metadata for the given link, please try again later",
+      },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }

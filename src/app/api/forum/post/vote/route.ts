@@ -71,20 +71,20 @@ const patchVotes = async (req: NextRequest): Promise<NextResponse> => {
     const updatePromise =
       existingVote.type === voteType
         ? // If the existing vote is of the same type as the new vote, delete the vote and update vote count
-        Promise.all([
-          database.vote.delete({
-            where: { userId_postId: { userId, postId } },
-          }),
-          updateVoteCount({ id: postId, voteType: null, post }),
-        ])
+          Promise.all([
+            database.vote.delete({
+              where: { userId_postId: { userId, postId } },
+            }),
+            updateVoteCount({ id: postId, voteType: null, post }),
+          ])
         : // If the existing vote is of a different type, update the vote and update vote count
-        Promise.all([
-          database.vote.update({
-            where: { userId_postId: { userId, postId } },
-            data: { type: voteType },
-          }),
-          updateVoteCount({ id: postId, voteType, post }),
-        ]);
+          Promise.all([
+            database.vote.update({
+              where: { userId_postId: { userId, postId } },
+              data: { type: voteType },
+            }),
+            updateVoteCount({ id: postId, voteType, post }),
+          ]);
 
     await updatePromise;
 
@@ -112,6 +112,6 @@ const patchVotes = async (req: NextRequest): Promise<NextResponse> => {
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
-}
+};
 
 export { patchVotes as PATCH };

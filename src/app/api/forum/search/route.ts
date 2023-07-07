@@ -48,6 +48,6 @@ const getForums = async (req: NextRequest): Promise<NextResponse> => {
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
-}
+};
 
 export { getForums as GET };

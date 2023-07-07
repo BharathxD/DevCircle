@@ -2,8 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 
+import { profileFormSchema } from "@/lib/validators/profile";
+import type { ProfileFormValues } from "@/lib/validators/profile";
 import { toast } from "@/hooks/useToast";
 import { Button } from "@/components/UI/Button";
 import {
@@ -17,37 +18,6 @@ import {
 } from "@/components/UI/Form";
 import { Input } from "@/components/UI/Input";
 import { Textarea } from "@/components/UI/Textarea";
-
-const profileFormSchema = z.object({
-  username: z
-    .string()
-    .min(2, { message: "Username must be at least 2 characters." })
-    .max(30, { message: "Username must not exceed 30 characters." })
-    .optional(),
-  bio: z
-    .string()
-    .min(4, { message: "Bio must be at least 4 characters." })
-    .max(160, { message: "Bio must not exceed 160 characters." })
-    .optional(),
-  urls: z
-    .object({
-      linkedIn: z
-        .string()
-        .url({ message: "Please enter a valid LinkedIn URL." })
-        .optional(),
-      github: z
-        .string()
-        .url({ message: "Please enter a valid GitHub URL." })
-        .optional(),
-      facebook: z
-        .string()
-        .url({ message: "Please enter a valid Facebook URL." })
-        .optional(),
-    })
-    .optional(),
-});
-
-type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 const defaultValues: Partial<ProfileFormValues> = {
   bio: "I'm in a college which doesn't teach anything except bakchodi.",
