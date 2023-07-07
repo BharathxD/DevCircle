@@ -61,7 +61,7 @@ const PostContent: React.FC<PostContentProps> = ({
   return (
     <article id="post">
       {!isEditing && (
-        <header className="flex flex-col gap-4 bg-zinc-800 p-4 dark:bg-zinc-950/10">
+        <header className="flex flex-col gap-4 bg-zinc-200 p-4 dark:bg-zinc-950/10">
           <Tags tags={tags} />
           <div
             className={cn(

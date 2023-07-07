@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/actions/getCurrentUser";
-import getForum from "@/actions/getForum";
+import { getForumWithPosts } from "@/actions/getForum";
 
 import type { ExtendedForum } from "@/types/database";
 import MiniCreatePost from "@/components/Post/MiniCreatePost";
@@ -20,7 +20,7 @@ const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
   const { forumName } = params;
   const { tag } = searchParams;
   const currentUser = await getCurrentUser();
-  const forum: ExtendedForum | null = await getForum(forumName);
+  const forum: ExtendedForum | null = await getForumWithPosts(forumName);
   if (!forum) return notFound();
   return (
     <div className="flex flex-col gap-4 pt-2">

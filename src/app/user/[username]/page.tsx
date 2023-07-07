@@ -15,11 +15,7 @@ const UserProfilePage = async ({ params }: ProfilePageArgs) => {
   const user = await getUserWithSocialLinksAndPosts(username);
   if (!user) return notFound();
   return (
-    <section
-      className={
-        "no-scrollbar container relative h-[91vh] w-fit overflow-hidden overflow-y-scroll py-4 md:col-span-3 md:px-4"
-      }
-    >
+    <section className="no-scrollbar container relative h-[91vh] w-fit overflow-hidden overflow-y-scroll py-4 md:col-span-3 md:px-4">
       <div className="h-full w-full overflow-hidden rounded-xl border-2 border-zinc-800 p-0">
         <UserProfile user={user} />
         <div className="h-[2px] w-full bg-zinc-800" />

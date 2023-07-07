@@ -28,9 +28,6 @@ interface PostCardProps {
   isLoggedIn?: boolean;
 }
 
-/**
- * Represents a post card component.
- */
 const PostCard: FC<PostCardProps> = ({
   post,
   forumName,
