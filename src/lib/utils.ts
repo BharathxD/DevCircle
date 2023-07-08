@@ -1,3 +1,4 @@
+import { env } from "@/env.mjs";
 import { clsx, type ClassValue } from "clsx";
 import queryString from "query-string";
 import { twMerge } from "tailwind-merge";
@@ -12,3 +13,10 @@ export const generateCbUrl = (pathname: string) =>
     url: "/signin",
     query: { callbackUrl: pathname },
   });
+
+export const absoluteUrl = (path: string) => `${env.NEXT_PUBLIC_APP_URL}${path}`;
+
+export const extractString = (str: string) => {
+  if (str.length <= 75) return str;
+  return str.slice(0, 75) + "...";
+};

@@ -1,12 +1,15 @@
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import getCachedPost from "@/actions/getCachedPost";
 import getComments from "@/actions/getComments";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import getPost from "@/actions/getPost";
+import { env } from "@/env.mjs";
 import type { Post, Tag, User, Vote } from "@prisma/client";
 
 import database from "@/lib/database";
+import { absoluteUrl, extractString } from "@/lib/utils";
 import CommentsSection from "@/components/Comments/CommentsSection";
 import PostContent from "@/components/Post/PostContent";
 import PostVoteServer from "@/components/Post/PostVoteServer";
@@ -17,7 +20,7 @@ import ShareButton from "@/components/UI/ShareButton";
 interface PageProps {
   params: {
     forumName: string;
-    postId?: string;
+    postId: string;
   };
 }
 
@@ -26,6 +29,61 @@ type ModifiedPost = Post & {
   author: User;
   tags: Tag[];
 };
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { postId, forumName } = params;
+  if (!postId) return notFound();
+  const cachedPost = await getCachedPost(postId);
+
+  let post: (Post & { author: User }) | null = null;
+
+  if (!cachedPost) {
+    post = await database.post.findFirst({
+      where: { id: params.postId },
+      include: { author: true },
+    });
+  }
+
+  const url = env.NEXT_PUBLIC_APP_URL;
+
+  const authorName =
+    post?.author.username ?? cachedPost?.authorUsername ?? "DevCircle User";
+  const postTitle =
+    post?.title ?? cachedPost?.title ?? `A post by ${authorName}`;
+  const description = `Check out ${authorName}'s new post!`;
+
+  const ogUrl = new URL(`${url}/api/og`);
+  ogUrl.searchParams.set("title", extractString(postTitle));
+  ogUrl.searchParams.set("description", extractString(description));
+
+  return {
+    title: postTitle,
+    authors: {
+      name: post?.author.username ?? cachedPost?.authorUsername ?? "",
+    },
+    openGraph: {
+      title: postTitle,
+      description: description,
+      url: absoluteUrl(`/d/${forumName}/${postId}`),
+      images: [
+        {
+          url: ogUrl.toString(),
+          width: 1200,
+          height: 630,
+          alt: postTitle,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: postTitle,
+      description: description,
+      images: [ogUrl.toString()],
+    },
+  };
+}
 
 const PostPage = async ({ params }: PageProps) => {
   const { postId } = params;
