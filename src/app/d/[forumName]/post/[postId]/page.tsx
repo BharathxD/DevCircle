@@ -30,9 +30,7 @@ type ModifiedPost = Post & {
   tags: Tag[];
 };
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { postId, forumName } = params;
   if (!postId) return notFound();
   const cachedPost = await getCachedPost(postId);
@@ -41,18 +39,17 @@ export async function generateMetadata({
 
   if (!cachedPost) {
     post = await database.post.findFirst({
-      where: { id: params.postId },
+      where: { id: postId },
       include: { author: true },
     });
   }
 
   const url = env.NEXT_PUBLIC_APP_URL;
 
-  const authorName =
-    post?.author.username ?? cachedPost?.authorUsername ?? "DevCircle User";
-  const postTitle =
-    post?.title ?? cachedPost?.title ?? `A post by ${authorName}`;
-  const description = `Check out ${authorName}'s new post!`;
+  const authorName = post?.author?.username || cachedPost?.authorUsername || "DevCircle User";
+  const postTitle = post?.title || cachedPost?.title || `Post by ${authorName}`;
+  const description = `Check out the latest post by ${authorName} on DevCircle.`;
+
 
   const ogUrl = new URL(`${url}/api/og`);
   ogUrl.searchParams.set("title", extractString(postTitle));
@@ -97,7 +94,7 @@ const PostPage = async ({ params }: PageProps) => {
   if (!cachedPost) {
     post = await database.post.findFirst({
       where: {
-        id: params.postId,
+        id: postId,
       },
       include: {
         votes: true,
@@ -142,4 +139,5 @@ const PostPage = async ({ params }: PageProps) => {
   );
 };
 
+export { generateMetadata };
 export default PostPage;
