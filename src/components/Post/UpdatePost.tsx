@@ -1,11 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { Post, Tag } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { useMutation } from "react-query";
 
+import { generateCbUrl } from "@/lib/utils";
 import type { PostUpdateRequest } from "@/lib/validators/post";
 import { toast } from "@/hooks/useToast";
 
@@ -28,6 +29,7 @@ const UpdatePost: React.FC<UpdatePostProps> = ({
   toggleEdit,
   tags,
 }) => {
+  const pathname = usePathname();
   const router = useRouter();
   const tagArray = tags.map((tag) => tag.name);
   const { mutate, isLoading } = useMutation<
@@ -46,7 +48,7 @@ const UpdatePost: React.FC<UpdatePostProps> = ({
       if (error instanceof AxiosError) {
         switch (error.response?.status) {
           case StatusCodes.UNAUTHORIZED:
-            return router.push("/signin?unauthorized=1");
+            return router.push(generateCbUrl(pathname));
           case StatusCodes.FORBIDDEN:
             return toast({
               title: "You are not authorized to update this post",

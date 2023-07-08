@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { Edit, Loader2 } from "lucide-react";
-import queryString from "query-string";
 import { useMutation } from "react-query";
 
+import { generateCbUrl } from "@/lib/utils";
 import type { EditCommentPayload } from "@/lib/validators/comments";
 import { toast } from "@/hooks/useToast";
 import {
@@ -30,6 +30,7 @@ interface EditCommentProps {
 }
 
 const EditComment: React.FC<EditCommentProps> = ({ commentId, text }) => {
+  const pathname = usePathname();
   const router = useRouter();
   const [input, setInput] = useState<string>(text);
   const { mutate: editComment, isLoading } = useMutation({
@@ -46,13 +47,7 @@ const EditComment: React.FC<EditCommentProps> = ({ commentId, text }) => {
         error instanceof AxiosError &&
         error.response?.status === StatusCodes.UNAUTHORIZED
       ) {
-        const redirectPath = queryString.stringifyUrl({
-          url: "/signin",
-          query: {
-            unauthorized: 1,
-          },
-        });
-        return router.push(redirectPath);
+        return router.push(generateCbUrl(pathname));
       }
       return toast({
         title: "There was a problem",

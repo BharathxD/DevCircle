@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Forum } from "@prisma/client";
 import axios, { AxiosError } from "axios";
@@ -9,6 +9,7 @@ import { StatusCodes } from "http-status-codes";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
+import { generateCbUrl } from "@/lib/utils";
 import {
   forumUpdateValidator,
   type ForumUpdatePayload,
@@ -33,6 +34,7 @@ interface EditForumFormProps {
 }
 
 const EditForumForm: React.FC<EditForumFormProps> = ({ forum }) => {
+  const pathname = usePathname();
   const router = useRouter();
   const defaultValues: Partial<ForumUpdatePayload> = {
     forumId: forum.id,
@@ -52,7 +54,7 @@ const EditForumForm: React.FC<EditForumFormProps> = ({ forum }) => {
     onError: async (error: unknown) => {
       if (error instanceof AxiosError) {
         if (error.response?.status === StatusCodes.UNAUTHORIZED) {
-          return router.push("/signin/?unauthorized=1");
+          return router.push(generateCbUrl(pathname));
         }
         if (error.response?.status === StatusCodes.CONFLICT) {
           return toast({
@@ -84,11 +86,21 @@ const EditForumForm: React.FC<EditForumFormProps> = ({ forum }) => {
       router.push(`/d/${data.name}`);
     },
   });
-  const onSubmit = (data: Omit<ForumUpdatePayload, "forumId">) =>
-    updateForum({
+  const onSubmit = (data: Omit<ForumUpdatePayload, "forumId">) => {
+    if (
+      data.forumName === forum.name &&
+      data.description === forum.description
+    ) {
+      return toast({
+        title: "No changes detected",
+        description: "The forum will only be updated if there are any changes.",
+      });
+    }
+    return updateForum({
       ...data,
       forumId: forum.id,
     });
+  };
   useEffect(() => {
     if (Object.keys(form.formState.errors).length) {
       for (const [, value] of Object.entries(form.formState.errors)) {
@@ -102,7 +114,6 @@ const EditForumForm: React.FC<EditForumFormProps> = ({ forum }) => {
   }, [form.formState.errors]);
   return (
     <Form {...form}>
-      <h1 className="pb-2 text-xl font-semibold">Edit your forum</h1>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-4 py-4 md:pt-0 lg:max-w-2xl"

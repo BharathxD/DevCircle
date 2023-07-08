@@ -1,14 +1,13 @@
 "use client";
 
 import { startTransition, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
 import { StatusCodes } from "http-status-codes";
 import { Loader2 } from "lucide-react";
-import qs from "query-string";
 import { useMutation } from "react-query";
 
-import { cn } from "@/lib/utils";
+import { cn, generateCbUrl } from "@/lib/utils";
 import { toast } from "@/hooks/useToast";
 
 interface Forum {
@@ -25,6 +24,7 @@ const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
   isSubscribed,
   forum,
 }) => {
+  const pathname = usePathname();
   const router = useRouter();
   const [subscribed, setSubscribed] = useState<boolean>(isSubscribed);
   const { id, name } = forum;
@@ -37,13 +37,7 @@ const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
       if (axios.isAxiosError(error)) {
         const { response } = error;
         if (response?.status === StatusCodes.UNAUTHORIZED) {
-          const redirectPath = qs.stringifyUrl({
-            url: "/signin",
-            query: {
-              unauthorized: 1,
-            },
-          });
-          await router.push(redirectPath);
+          router.push(generateCbUrl(pathname));
         } else if (response?.status === StatusCodes.NOT_FOUND) {
           toast({
             title: "Uh-Oh cannot do that right now",

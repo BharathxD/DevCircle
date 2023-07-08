@@ -35,7 +35,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ forumId }) => {
       if (error instanceof AxiosError) {
         switch (error.response?.status) {
           case StatusCodes.UNAUTHORIZED:
-            return router.push("/signin?unauthorized=1");
+            return router.push(`/signin`);
           case StatusCodes.FORBIDDEN:
             return toast({
               title: "You are not subscribed to this community",

@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { Comment, CommentVote, User, VoteType } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
@@ -11,6 +11,7 @@ import { BiMessageDetail } from "react-icons/bi";
 import { useMutation } from "react-query";
 
 import formatTimeToNow from "@/lib/formatTimeToNow";
+import { generateCbUrl } from "@/lib/utils";
 import type { CommentPayload } from "@/lib/validators/comments";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { toast } from "@/hooks/useToast";
@@ -52,6 +53,7 @@ const PostComment: React.FC<PostCommentProps> = ({
   isDeletable,
   isAdmin,
 }) => {
+  const pathname = usePathname();
   const [isReplying, setIsReplying] = useState<boolean>(false);
   const [input, setInput] = useState<string>(
     `@${comment.author?.username ?? "reply"} `
@@ -93,13 +95,7 @@ const PostComment: React.FC<PostCommentProps> = ({
         error instanceof AxiosError &&
         error.response?.status === StatusCodes.UNAUTHORIZED
       ) {
-        const redirectPath = queryString.stringifyUrl({
-          url: "/signin",
-          query: {
-            unauthorized: 1,
-          },
-        });
-        return router.push(redirectPath);
+        return router.push(generateCbUrl(pathname));
       }
       return toast({
         title: "There was a problem",

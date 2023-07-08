@@ -1,14 +1,13 @@
-/**
- * @module PostCreationPage
- */
+"use client";
 
 import { useState } from "react";
 import type { FC } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { useMutation } from "react-query";
 
+import { generateCbUrl } from "@/lib/utils";
 import type { CreateForumPayload } from "@/lib/validators/forum";
 import { toast } from "@/hooks/useToast";
 import { Button } from "@/components/UI/Button";
@@ -19,6 +18,7 @@ import { Textarea } from "@/components/UI/Textarea";
  * Component for the page that allows creating a new forum/community.
  */
 const PostCreationPage: FC = () => {
+  const pathname = usePathname();
   const [input, setInput] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const router = useRouter();
@@ -62,7 +62,7 @@ const PostCreationPage: FC = () => {
         setInput("");
         if (errorToast) return toast(errorToast);
         if (status === StatusCodes.UNAUTHORIZED)
-          return router.push("/signin?unauthorized=1");
+          return router.push(generateCbUrl(pathname));
       }
 
       return toast({

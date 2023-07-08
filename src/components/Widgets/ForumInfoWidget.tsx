@@ -71,10 +71,10 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
         {isCreator ? (
           <Fragment>
             <div className="h-[2px] w-full bg-zinc-800" />
-            <div className="flex justify-between gap-x-4 px-6 py-4">
+            <div className="flex items-center justify-between gap-x-4 px-6 py-4">
               <p className="text-zinc-500">Edit this community</p>
               <Link href={`/d/${forumName}/edit`}>
-                <Edit2 className="h-4 w-4" />
+                <Edit2 className="h-4 w-4 hover:text-zinc-500" />
               </Link>
             </div>
           </Fragment>

@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import type { AxiosResponse } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { Loader2, Send } from "lucide-react";
-import queryString from "query-string";
 import { useMutation } from "react-query";
 
+import { generateCbUrl } from "@/lib/utils";
 import type { CommentPayload } from "@/lib/validators/comments";
 import { toast } from "@/hooks/useToast";
 
@@ -20,6 +20,7 @@ interface CreateCommentProps {
 }
 
 const CreateComment: React.FC<CreateCommentProps> = ({ postId, replyToId }) => {
+  const pathname = usePathname();
   const router = useRouter();
   const [input, setInput] = useState<string>("");
   const { mutate: comment, isLoading } = useMutation({
@@ -40,13 +41,7 @@ const CreateComment: React.FC<CreateCommentProps> = ({ postId, replyToId }) => {
         error instanceof AxiosError &&
         error.response?.status === StatusCodes.UNAUTHORIZED
       ) {
-        const redirectPath = queryString.stringifyUrl({
-          url: "/signin",
-          query: {
-            unauthorized: 1,
-          },
-        });
-        return router.push(redirectPath);
+        return router.push(generateCbUrl(pathname));
       }
       return toast({
         title: "There was a problem",

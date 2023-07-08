@@ -4,7 +4,7 @@ import SignIn from "@/components/Auth/SignIn";
 
 interface SignInPageProps {
   searchParams: {
-    unauthorized: number;
+    callbackUrl: string;
   };
 }
 
@@ -14,7 +14,14 @@ export const metadata = {
 };
 
 const SignInPage: React.FC<SignInPageProps> = ({
-  searchParams: { unauthorized },
-}) => <SignIn customTitle={!!unauthorized ? "Login Required" : undefined} />;
+  searchParams: { callbackUrl },
+}) => {
+  return (
+    <SignIn
+      customTitle={!!callbackUrl ? "Login Required" : undefined}
+      redirectUrl={callbackUrl}
+    />
+  );
+};
 
 export default SignInPage;

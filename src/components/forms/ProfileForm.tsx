@@ -1,12 +1,13 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
+import { generateCbUrl } from "@/lib/utils";
 import { profileFormSchema } from "@/lib/validators/profile";
 import type { ProfileFormValues } from "@/lib/validators/profile";
 import { toast } from "@/hooks/useToast";
@@ -34,6 +35,7 @@ interface ProfileFormProps {
 }
 
 const ProfileForm: React.FC<ProfileFormProps> = ({ username, bio, urls }) => {
+  const pathname = usePathname();
   const router = useRouter();
   const defaultValues: Partial<ProfileFormValues> = {
     username,
@@ -54,7 +56,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ username, bio, urls }) => {
     onError: async (error: unknown) => {
       if (error instanceof AxiosError) {
         if (error.response?.status === StatusCodes.UNAUTHORIZED) {
-          return router.push("/signin/?unauthorized=1");
+          return router.push(generateCbUrl(pathname));
         }
         if (error.response?.status === StatusCodes.CONFLICT) {
           return toast({

@@ -5,6 +5,8 @@ import { useSession } from "next-auth/react";
 import { FiLink2 } from "react-icons/fi";
 import { IoMdImage } from "react-icons/io";
 
+import { generateCbUrl } from "@/lib/utils";
+
 import { Button } from "../UI/Button";
 import { Input } from "../UI/Input";
 import UserAvatar from "../UI/UserAvatar";
@@ -16,7 +18,7 @@ const MiniCreatePost: React.FC = () => {
   const pathname = usePathname();
 
   const handleCreatePostClick = () => {
-    if (!data?.user) router.push("/signin/?unauthorized=1");
+    if (!data?.user) router.push(generateCbUrl(pathname));
     router.push(`${pathname}/submit`);
   };
 

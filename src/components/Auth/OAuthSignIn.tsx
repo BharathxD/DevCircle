@@ -10,13 +10,19 @@ import { useToast } from "@/hooks/useToast";
 
 import { Button } from "../UI/Button";
 
-type OAuthSignInProps = HTMLAttributes<HTMLDivElement>;
+type OAuthSignInProps = HTMLAttributes<HTMLDivElement> & {
+  redirectUrl?: string;
+};
 
-const OAuthSignIn: React.FC<OAuthSignInProps> = ({ className, ...props }) => {
+const OAuthSignIn: React.FC<OAuthSignInProps> = ({
+  className,
+  redirectUrl = "/",
+  ...props
+}) => {
   const { toast } = useToast();
   const { mutate: SignIn, isLoading } = useMutation({
     mutationFn: async () => {
-      await signIn("google");
+      await signIn("google", { callbackUrl: redirectUrl });
     },
     onError: () => {
       toast({

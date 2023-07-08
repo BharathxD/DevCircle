@@ -17,9 +17,10 @@ import OAuthSignIn from "./OAuthSignIn";
 
 interface SignInProps {
   customTitle?: string;
+  redirectUrl?: string;
 }
 
-const SignIn: FC<SignInProps> = ({ customTitle }) => {
+const SignIn: FC<SignInProps> = ({ customTitle, redirectUrl }) => {
   const title = customTitle ?? "Welcome back!";
   return (
     <Card className="flex flex-col justify-center border-2 border-zinc-800 text-center backdrop-blur-sm dark:bg-zinc-950/80">
@@ -34,7 +35,7 @@ const SignIn: FC<SignInProps> = ({ customTitle }) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <OAuthSignIn />
+        <OAuthSignIn redirectUrl={redirectUrl} />
       </CardContent>
       <CardContent>
         <div className="relative">

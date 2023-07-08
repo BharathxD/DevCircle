@@ -75,14 +75,14 @@ const DeleteForum: React.FC<DeleteForumProps> = ({ forumId, forumName }) => {
       <AlertDialogTrigger asChild>
         <Button variant="destructive">Delete</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="border-2 border-zinc-800 p-6">
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. Deleting the forum will permanently
             remove all the associated posts and subscriptions.
           </AlertDialogDescription>
-          <p className="text-sm">
+          <p className="select-none text-sm">
             To confirm, type &quot;d/{forumName}&quot; in the box below
           </p>
           <Input
@@ -92,7 +92,11 @@ const DeleteForum: React.FC<DeleteForumProps> = ({ forumId, forumName }) => {
           />
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel aria-label="Cancel">Cancel</AlertDialogCancel>
+          <AlertDialogCancel asChild>
+            <Button variant="destructive" aria-label="Cancel">
+              Cancel
+            </Button>
+          </AlertDialogCancel>
           <AlertDialogAction asChild>
             <Button
               variant="destructive"

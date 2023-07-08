@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { usePrevious } from "@mantine/hooks";
 import type { VoteType } from "@prisma/client";
 import axios, { AxiosError } from "axios";
@@ -9,7 +9,7 @@ import { StatusCodes } from "http-status-codes";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { useMutation } from "react-query";
 
-import { cn } from "@/lib/utils";
+import { cn, generateCbUrl } from "@/lib/utils";
 import type { PostVoteRequest } from "@/lib/validators/vote";
 import { toast } from "@/hooks/useToast";
 
@@ -31,6 +31,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
   className,
 }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [votesAmount, setVotesAmount] = useState<number>(initialVoteAmount);
   const [currentVote, setCurrentVote] = useState(initialVote);
   const prevVote = usePrevious(currentVote);
@@ -52,9 +53,11 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
 
       setCurrentVote(prevVote);
 
-      if (error instanceof AxiosError) {
-        if (error.response?.status === StatusCodes.UNAUTHORIZED)
-          return router.push("/signin?unauthorized=1");
+      if (
+        error instanceof AxiosError &&
+        error.response?.status === StatusCodes.UNAUTHORIZED
+      ) {
+        return router.push(generateCbUrl(pathname));
       }
 
       return toast({
@@ -81,10 +84,10 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
   });
   const handleVote = useCallback(
     (voteType: "UP" | "DOWN") => {
-      if (!isLoggedIn) return router.push("/signin/?unauthorized=1");
+      if (!isLoggedIn) return router.push(generateCbUrl(pathname));
       vote(voteType);
     },
-    [isLoggedIn, router, vote]
+    [isLoggedIn, pathname, router, vote]
   );
   return (
     <div

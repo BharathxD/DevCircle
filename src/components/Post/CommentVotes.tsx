@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { usePrevious } from "@mantine/hooks";
 import type { VoteType } from "@prisma/client";
 import axios, { AxiosError } from "axios";
@@ -31,6 +31,7 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
   classNames,
 }) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [commentsAmount, setCommentsAmount] =
     useState<number>(initialVoteAmount);
   const [currentVote, setCurrentVote] = useState(initialCommentVote);
@@ -53,11 +54,12 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
 
       setCurrentVote(prevVote);
 
-      if (error instanceof AxiosError) {
-        if (error.response?.status === StatusCodes.UNAUTHORIZED)
-          return router.push("/signin?unauthorized=1");
+      if (
+        error instanceof AxiosError &&
+        error.response?.status === StatusCodes.UNAUTHORIZED
+      ) {
+        return router.push(`/signin/?callbackUrl=${pathname}`);
       }
-
       return toast({
         title: "Something went wrong",
         description: "Your vote was not registered, please try again",
@@ -82,10 +84,10 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
   });
   const handleVote = useCallback(
     (voteType: "UP" | "DOWN") => {
-      if (!isLoggedIn) return router.push("/signin/?unauthorized=1");
+      if (!isLoggedIn) return router.push(`/signin/?callbackUrl=${pathname}`);
       vote(voteType);
     },
-    [isLoggedIn, router, vote]
+    [isLoggedIn, pathname, router, vote]
   );
   return (
     <div className={cn("flex w-16 flex-col gap-4 pb-0", classNames)}>

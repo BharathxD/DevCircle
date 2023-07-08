@@ -5,7 +5,6 @@ import { useTheme } from "next-themes";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { toast } from "@/hooks/useToast";
 import { Button } from "@/components/UI/Button";
 import {
   Form,

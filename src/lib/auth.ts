@@ -56,8 +56,8 @@ export const authOptions: NextAuthOptions = {
         username: dbUser.username,
       };
     },
-    redirect() {
-      return "/";
+    redirect(params) {
+      return params.url;
     },
   },
 };
