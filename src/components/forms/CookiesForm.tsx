@@ -1,12 +1,27 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 import { Label } from "@/components/UI/Label";
 
 import { Switch } from "../UI/Switch";
 
-const CookiesForm = () => {
+const CookiesForm = (): JSX.Element => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isChecked, setIsChecked] = useState<boolean>(true);
+
+  useEffect(() => {
+    const consentState = localStorage.getItem("cookie_consent");
+    setIsChecked(consentState === "true");
+    setIsLoading(false);
+  }, []);
+
+  const toggleCookieConfiguration = (value: boolean): void => {
+    setIsChecked(value);
+    localStorage.setItem("cookie_consent", value.toString());
+  };
+
   return (
     <Fragment>
       <div className="flex items-center justify-between space-x-2 rounded-t-md border-2 border-zinc-800 p-4">
@@ -17,7 +32,18 @@ const CookiesForm = () => {
             functionality.
           </span>
         </Label>
-        <Switch id="functional" />
+        {isLoading ? (
+          <div className="flex items-center">
+            <Loader2 className="animate-spin" />
+            <span className="ml-2">Loading...</span>
+          </div>
+        ) : (
+          <Switch
+            id="functional"
+            onCheckedChange={toggleCookieConfiguration}
+            checked={isChecked}
+          />
+        )}
       </div>
       <div className="flex items-center justify-between space-x-2 rounded-b-md border-2 border-t-0 border-zinc-800 px-4 py-2">
         <p className="text-zinc-400">

@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
@@ -18,15 +16,20 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/UI/AlertDialog";
+import { Button } from "@/components/UI/Button";
+import { Input } from "@/components/UI/Input";
 
-import { Button } from "../UI/Button";
-import { Input } from "../UI/Input";
-
+/**
+ * Props for the DeleteForum component.
+ */
 interface DeleteForumProps {
   forumId: string;
   forumName: string;
 }
 
+/**
+ * Component for deleting a forum.
+ */
 const DeleteForum: React.FC<DeleteForumProps> = ({ forumId, forumName }) => {
   const router = useRouter();
   const [confirmationText, setConfirmationText] = useState<string>();
@@ -60,7 +63,7 @@ const DeleteForum: React.FC<DeleteForumProps> = ({ forumId, forumName }) => {
     onSuccess: () => {
       router.push("/");
       toast({
-        title: "Forum has been deleted sucessfully",
+        title: "Forum has been successfully deleted.",
       });
     },
   });
@@ -77,7 +80,7 @@ const DeleteForum: React.FC<DeleteForumProps> = ({ forumId, forumName }) => {
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. Deleting the forum will permanently
-            remove all the associated posts, subscriptions.
+            remove all the associated posts and subscriptions.
           </AlertDialogDescription>
           <p className="text-sm">
             To confirm, type &quot;d/{forumName}&quot; in the box below
@@ -85,15 +88,17 @@ const DeleteForum: React.FC<DeleteForumProps> = ({ forumId, forumName }) => {
           <Input
             value={confirmationText}
             onChange={(event) => setConfirmationText(event.target.value)}
+            aria-label="Input box for confirmation"
           />
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel aria-label="Cancel">Cancel</AlertDialogCancel>
           <AlertDialogAction asChild>
             <Button
               variant="destructive"
               onClick={handleForumDeletion}
               isLoading={isLoading}
+              aria-label="Delete"
               className="border-red-500"
               disabled={isLoading || confirmationText !== `d/${forumName}`}
             >

@@ -46,7 +46,8 @@ const EditForumForm: React.FC<EditForumFormProps> = ({ forum }) => {
   });
   const { mutate: updateForum, isLoading } = useMutation({
     mutationFn: async (payload: ForumUpdatePayload) => {
-      await axios.patch("/api/forum", payload);
+      const { data } = await axios.patch("/api/forum", payload);
+      return data as Forum;
     },
     onError: async (error: unknown) => {
       if (error instanceof AxiosError) {
@@ -74,13 +75,13 @@ const EditForumForm: React.FC<EditForumFormProps> = ({ forum }) => {
         variant: "destructive",
       });
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       router.refresh();
       toast({
         title: "Forum Updated",
         description: "Your forum has been updated successfully.",
       });
-      router.push(`/d/${forum.name}`);
+      router.push(`/d/${data.name}`);
     },
   });
   const onSubmit = (data: Omit<ForumUpdatePayload, "forumId">) =>

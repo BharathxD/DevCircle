@@ -1,4 +1,6 @@
-"use client";
+/**
+ * @module PostCreationPage
+ */
 
 import { useState } from "react";
 import type { FC } from "react";
@@ -13,12 +15,15 @@ import { Button } from "@/components/UI/Button";
 import { Input } from "@/components/UI/Input";
 import { Textarea } from "@/components/UI/Textarea";
 
+/**
+ * Component for the page that allows creating a new forum/community.
+ */
 const PostCreationPage: FC = () => {
   const [input, setInput] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const router = useRouter();
 
-  const { mutate: createCommunity, isLoading } = useMutation<
+  const { mutate: createForum, isLoading } = useMutation<
     string,
     AxiosError | Error
   >({
@@ -31,7 +36,7 @@ const PostCreationPage: FC = () => {
       return data;
     },
 
-    onError: async (err: AxiosError | Error) => {
+    onError: async (error: AxiosError | Error) => {
       const errorMap: {
         [key: number]: {
           title: string;
@@ -51,8 +56,8 @@ const PostCreationPage: FC = () => {
         },
       };
 
-      if (err instanceof AxiosError) {
-        const { status = 0 } = err.response || {};
+      if (error instanceof AxiosError) {
+        const { status = 0 } = error.response || {};
         const errorToast = errorMap[status];
         setInput("");
         if (errorToast) return toast(errorToast);
@@ -62,7 +67,7 @@ const PostCreationPage: FC = () => {
 
       return toast({
         title: "There was an error",
-        description: "Could not create the Forum.",
+        description: "Could not create the forum.",
         variant: "destructive",
       });
     },
@@ -72,8 +77,8 @@ const PostCreationPage: FC = () => {
   });
 
   const handleCancelClick = () => router.back();
-  const handleCreateForumClick = () => createCommunity();
-  const isInputValid = input.length > 0 && description.length > 10;
+  const handleCreateForumClick = () => createForum();
+  const isInputValid = input.length >= 3 && description.length >= 10;
 
   return (
     <div className="mt-4 md:mt-0 md:flex md:h-[70vh] md:w-full md:items-center md:justify-center">
@@ -84,10 +89,6 @@ const PostCreationPage: FC = () => {
           </header>
           <section className="p-5">
             <div className="flex flex-col gap-2">
-              <h2 className="text-xl font-semibold">Name</h2>
-              <p className="pb-2 font-medium">
-                Community names including capitalization cannot be changed.
-              </p>
               <div className="relative">
                 <p className="absolute inset-y-0 left-0 grid w-8 place-items-center text-sm text-zinc-600">
                   d/
@@ -97,6 +98,7 @@ const PostCreationPage: FC = () => {
                   type="text"
                   onChange={(event) => setInput(event.target.value)}
                   className="pl-6"
+                  placeholder="Geopolitics"
                 />
               </div>
               <div>
@@ -111,8 +113,8 @@ const PostCreationPage: FC = () => {
                 />
               </div>
               <p className="text-zinc-500">
-                Forum/Community and description should atleast be 3 and 10
-                characters respectively
+                Forum/Community and description should be at least 3 and 10
+                characters respectively.
               </p>
             </div>
           </section>

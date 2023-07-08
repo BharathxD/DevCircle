@@ -17,7 +17,7 @@ import {
 import UserAvatar from "../UI/UserAvatar";
 
 interface UserAccountNavProps {
-  user: Pick<User, "image" | "name" | "email">;
+  user: Pick<User, "image" | "username" | "email">;
 }
 
 const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
@@ -32,7 +32,7 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <div className="flex h-full items-center justify-center  border-2 border-y-0 border-zinc-800 p-4 transition-colors hover:bg-yellow-300 dark:hover:bg-zinc-800">
-          <UserAvatar user={user} />
+          <UserAvatar user={{ name: user.username, image: user.image }} />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -41,7 +41,7 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
       >
         <div className="flex items-center justify-start gap-2 p-2 pt-3">
           <div className="flex flex-col space-y-1 leading-none">
-            {user.name && <p className="font-bold">{user.name}</p>}
+            <p className="font-bold">{user.username}</p>
             {user.email && (
               <p className="w-[200px] truncate text-sm font-medium text-zinc-700 dark:text-zinc-300">
                 {user.email}

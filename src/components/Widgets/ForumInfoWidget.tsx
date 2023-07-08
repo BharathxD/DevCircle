@@ -56,7 +56,9 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
 
         <div className="flex justify-between gap-x-4 px-6 py-4">
           <dt className="text-zinc-700 dark:text-zinc-100">Admin</dt>
-          <dd className="text-zinc-700 dark:text-zinc-50">u/{authorName}</dd>
+          <dd className="text-zinc-700 dark:text-zinc-50">
+            <Link href={`/user/${authorName as string}`}>u/{authorName}</Link>
+          </dd>
         </div>
 
         <div className="h-[2px] w-full bg-zinc-800" />

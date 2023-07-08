@@ -61,9 +61,11 @@ const PostCard: FC<PostCardProps> = ({
           </p>
         </Link>
         <span className="px-1 text-zinc-800 dark:text-zinc-50">•</span>
-        <span className="text-zinc-800 dark:text-zinc-50">
-          Posted by u/{post.author.username ?? post.author.username}
-        </span>
+        <Link href={`/user/${post.author.username as string}`}>
+          <span className="text-zinc-800 underline underline-offset-2 dark:text-zinc-50">
+            Posted by u/{post.author.username ?? post.author.username}
+          </span>
+        </Link>
       </div>
       <time>{" " + formatTimeToNow(new Date(post.createdAt))}</time>
     </div>

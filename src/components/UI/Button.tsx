@@ -14,7 +14,7 @@ const buttonVariants = cva(
         inverted:
           "text-zinc-100 bg-zinc-800 hover:bg-zinc-50 hover:text-zinc-800 rounded-lg hover:rounded-sm outline outline-2 outline-zinc-700 dark:disabled:text-zinc-600",
         destructive:
-          "text-zinc-800 text-zinc-50 hover:text-zinc-50 hover:bg-red-600 dark:hover:bg-red-400 rounded-lg hover:rounded-sm outline outline-2 outline-red-900 hover:dark:outline-red-400",
+          "text-zinc-800 hover:text-zinc-50 hover:bg-red-600 dark:hover:bg-red-400 rounded-lg hover:rounded-sm outline outline-2 outline-red-500 dark:text-zinc-50 hover:dark:outline-red-400",
         outline:
           "bg-zinc-100 text-zinc-900 hover:text-zinc-50 hover:bg-zinc-800 dark:bg-zinc-800 hover:dark:bg-zinc-700 dark:text-zinc-50 outline outline-2 outline-zinc-800 hover:cursor-pointer disabled:dark:text-zinc-600 disabled:bg-zinc-500",
         skeleton:
