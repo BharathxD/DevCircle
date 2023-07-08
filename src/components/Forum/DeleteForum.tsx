@@ -1,20 +1,35 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { useMutation } from "react-query";
 
 import { toast } from "@/hooks/useToast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/UI/AlertDialog";
 
 import { Button } from "../UI/Button";
+import { Input } from "../UI/Input";
 
 interface DeleteForumProps {
   forumId: string;
+  forumName: string;
 }
 
-const DeleteForum: React.FC<DeleteForumProps> = ({ forumId }) => {
+const DeleteForum: React.FC<DeleteForumProps> = ({ forumId, forumName }) => {
   const router = useRouter();
+  const [confirmationText, setConfirmationText] = useState<string>();
   const { mutate: deleteForum, isLoading } = useMutation<number>({
     mutationFn: async () => {
       const { status } = await axios.delete(`/api/forum/?forumId=${forumId}`);
@@ -53,14 +68,41 @@ const DeleteForum: React.FC<DeleteForumProps> = ({ forumId }) => {
   const handleForumDeletion = () => deleteForum();
 
   return (
-    <Button
-      variant="destructive"
-      onClick={handleForumDeletion}
-      isLoading={isLoading}
-      disabled={isLoading}
-    >
-      Delete
-    </Button>
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructive">Delete</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. Deleting the forum will permanently
+            remove all the associated posts, subscriptions.
+          </AlertDialogDescription>
+          <p className="text-sm">
+            To confirm, type &quot;d/{forumName}&quot; in the box below
+          </p>
+          <Input
+            value={confirmationText}
+            onChange={(event) => setConfirmationText(event.target.value)}
+          />
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction asChild>
+            <Button
+              variant="destructive"
+              onClick={handleForumDeletion}
+              isLoading={isLoading}
+              className="border-red-500"
+              disabled={isLoading || confirmationText !== `d/${forumName}`}
+            >
+              Delete
+            </Button>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 

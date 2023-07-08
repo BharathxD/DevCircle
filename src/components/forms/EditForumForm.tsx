@@ -140,7 +140,7 @@ const EditForumForm: React.FC<EditForumFormProps> = ({ forum }) => {
           <Button type="submit" disabled={isLoading} isLoading={isLoading}>
             Update Forum
           </Button>
-          <DeleteForum forumId={forum.id} />
+          <DeleteForum forumId={forum.id} forumName={forum.name} />
         </div>
       </form>
     </Form>
