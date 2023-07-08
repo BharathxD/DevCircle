@@ -7,7 +7,7 @@ This is an open-source community platform built with the latest features of Next
 > **Warning**
 > This project is still in development and is not ready for production use.
 >
-> It uses new technologies (server actions, drizzle ORM) which are subject to change and may break your application.
+> It uses new technologies (Server Actions, Prisma ORM) which are subject to change and may break your application.
 
 ## Tech Stack
 
