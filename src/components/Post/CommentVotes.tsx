@@ -90,9 +90,12 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
     [isLoggedIn, pathname, router, vote]
   );
   return (
-    <div className={cn("flex w-16 flex-col gap-4 pb-0", classNames)}>
+    <div
+      className={cn("flex w-16 flex-col items-center gap-4 pb-0", classNames)}
+    >
       <Button
         size="sm"
+        variant="outline"
         aria-label="upvote"
         onClick={() => handleVote("UP")}
         className={cn(
@@ -111,6 +114,7 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
       </p>
       <Button
         size="sm"
+        variant="outline"
         aria-label="downvote"
         onClick={() => handleVote("DOWN")}
         className={cn(

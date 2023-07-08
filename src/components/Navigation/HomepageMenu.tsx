@@ -63,11 +63,11 @@ const HomepageMenu = () => {
 
   return (
     <section
-      className="flex h-full flex-col items-center justify-between gap-2 border-r-2 border-zinc-800 py-4 pr-4"
+      className="flex h-full w-full flex-col items-center justify-between gap-2 border-r-2 border-zinc-800"
       aria-label="Desktop Navigation"
     >
       <aside className="flex h-full w-full list-none flex-col rounded-md">
-        <div className="overflow-hidden rounded-md border-2 border-zinc-800">
+        <div className="w-full overflow-hidden border-b-2 border-zinc-800">
           {navLinks.map(({ href, icon: Icon, text }) => {
             if ((href === "/profile" || href === "/subscribed") && !isLoggedIn)
               return null;
@@ -91,12 +91,6 @@ const HomepageMenu = () => {
           })}
         </div>
       </aside>
-      <Link
-        className="inline-flex w-full items-center justify-center gap-2 rounded-md border-2 border-zinc-800 bg-zinc-50 px-5 py-3 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900"
-        href="/"
-      >
-        Star me on Github <Github className="h-4 w-4" />
-      </Link>
       <Footer />
     </section>
   );

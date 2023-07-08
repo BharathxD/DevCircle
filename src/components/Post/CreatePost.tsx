@@ -76,7 +76,7 @@ const CreatePost: React.FC<CreatePostProps> = ({ forumId }) => {
       <Editor submit={mutate} isLoading={isLoading} />
       <Button
         type="submit"
-        className="h-fit w-full rounded-md bg-zinc-900 px-3 py-1 text-lg font-bold text-zinc-50 outline-2 outline-zinc-800 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+        className="h-fit w-full rounded-md border-2 border-zinc-800 bg-zinc-900 px-3 py-1 text-lg font-bold text-zinc-50 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
         form="devcircle-post-form"
         disabled={isLoading}
         isLoading={isLoading}

@@ -98,6 +98,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
     >
       <Button
         size="sm"
+        variant="outline"
         aria-label="upvote"
         onClick={() => handleVote("UP")}
         className={cn(
@@ -116,6 +117,7 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
       </p>
       <Button
         size="sm"
+        variant="outline"
         aria-label="downvote"
         onClick={() => handleVote("DOWN")}
         className={cn(

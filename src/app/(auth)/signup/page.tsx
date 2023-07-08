@@ -1,9 +1,7 @@
-import siteConfig from "@/config";
-
 import SignUp from "@/components/Auth/SignUp";
 
 export const metadata = {
-  title: `${siteConfig.name} - Sign Up`,
+  title: `Sign Up`,
   description: "Sign up for an account",
 };
 

@@ -1,5 +1,3 @@
-import siteConfig from "@/config";
-
 import SignIn from "@/components/Auth/SignIn";
 
 interface SignInPageProps {
@@ -9,7 +7,7 @@ interface SignInPageProps {
 }
 
 export const metadata = {
-  title: `${siteConfig.name} - Sign In`,
+  title: `Sign In`,
   description: "Sign in to your account",
 };
 

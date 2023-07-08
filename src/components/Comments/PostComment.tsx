@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import type { Comment, CommentVote, User, VoteType } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
-import { MoreVertical } from "lucide-react";
+import { MessageCircle, MoreVertical } from "lucide-react";
 import queryString from "query-string";
 import { BiMessageDetail } from "react-icons/bi";
 import { useMutation } from "react-query";
@@ -158,7 +158,7 @@ const PostComment: React.FC<PostCommentProps> = ({
         {comment.text}
       </p>
       <div className="flex flex-wrap items-center gap-2">
-        <div className="flex w-full flex-row gap-5 px-4 pb-3">
+        <div className="flex w-full flex-row items-center gap-5 px-4 pb-3">
           <CommentVotes
             commentId={comment.id}
             initialVoteAmount={initialCommentVoteAmount}
@@ -166,8 +166,8 @@ const PostComment: React.FC<PostCommentProps> = ({
             isLoggedIn={!!userId}
             classNames="h-10 flex-row w-min"
           />
-          <Button variant="skeleton" size="sm" onClick={toggleReplying}>
-            <BiMessageDetail size={20} />
+          <Button onClick={toggleReplying} variant="skeleton">
+            <MessageCircle className="h-4 w-4" />
           </Button>
         </div>
         {isReplying && (

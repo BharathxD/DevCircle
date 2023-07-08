@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
-import { Edit, Loader2, MoreVertical, Trash2 } from "lucide-react";
+import { Edit, MoreVertical } from "lucide-react";
 import { useMutation } from "react-query";
 
 import { toast } from "@/hooks/useToast";
@@ -11,6 +11,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/UI/DropdownMenu";
+
+import DeletePost from "../Post/DeletePost";
 
 interface PostDropdownMenuProps {
   onEdit: () => void;
@@ -70,11 +72,7 @@ const PostDropdownMenu: React.FC<PostDropdownMenuProps> = ({
           </button>
         </DropdownMenuItem>
         <DropdownMenuItem asChild className="hover:bg-red-500">
-          <button onClick={() => deletePost()} disabled={isLoading}>
-            {!isLoading && <Trash2 className="mr-2 h-4 w-4" />}
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Delete
-          </button>
+          <DeletePost postId={postId} />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

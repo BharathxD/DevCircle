@@ -14,7 +14,7 @@ const Shell: React.FC<HomepageLayoutProps> = ({
   return (
     <main
       className={cn(
-        "container grid h-[91vh] grid-cols-1 gap-y-4 md:grid-cols-4 md:gap-x-4",
+        "container grid h-[91vh] grid-cols-1 gap-y-4 md:grid-cols-4",
         className
       )}
       {...props}
