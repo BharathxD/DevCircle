@@ -5,7 +5,9 @@ import redis from "@/lib/redis";
 
 /**
  * Fetches the top communities based on member count.
- * @returns An array of objects containing the forum name and member count, or null if an error occurs.
+ *
+ * @returns {Promise<{ forumName: string; memberCount: number }[] | null>} - An array of objects containing the forum name and member count, or null if an error occurs.
+ * @throws {Error} - If an error occurs while fetching the top communities.
  */
 const getTopCommunities = async (): Promise<
   { forumName: string; memberCount: number }[] | null
@@ -48,7 +50,7 @@ const getTopCommunities = async (): Promise<
 
     return sortedCommunities;
   } catch (error) {
-    return null;
+    throw new Error("Failed to fetch the top communities.");
   }
 };
 

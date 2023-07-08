@@ -1,3 +1,5 @@
+"use server";
+
 import type { User } from "@prisma/client";
 import { getServerSession, type Session } from "next-auth";
 
@@ -10,20 +12,24 @@ import database from "@/lib/database";
 
 /**
  * Retrieves a server session using the provided authentication options.
- * @returns A promise that resolves to either a Session object or null.
+ *
+ * @returns {Promise<Session | null>} - A promise that resolves to either a Session object or null.
+ * @throws {Error} - If an error occurs while retrieving the session.
  */
 const getAuthSession = async (): Promise<Session | null> => {
   try {
     const session = await getServerSession(authOptions);
     return session ?? null;
   } catch (error) {
-    return null;
+    throw new Error("Failed to retrieve the session.");
   }
 };
 
 /**
  * Retrieves the currently authenticated user from the database based on the session's email.
- * @returns A promise that resolves to either a User object or null.
+ *
+ * @returns {Promise<User | null>} - A promise that resolves to either a User object or null.
+ * @throws {Error} - If an error occurs while retrieving the user.
  */
 const getCurrentUser = async (): Promise<User | null> => {
   try {
@@ -36,13 +42,15 @@ const getCurrentUser = async (): Promise<User | null> => {
     });
     return currentUser ?? null;
   } catch (error) {
-    return null;
+    throw new Error("Failed to retrieve the current user.");
   }
 };
 
 /**
  * Retrieves the currently authenticated user with associated social media links from the database based on the session's email.
- * @returns A promise that resolves to either a UserWithSocialLinks object or null.
+ *
+ * @returns {Promise<UserWithSocialLinks | null>} - A promise that resolves to either a UserWithSocialLinks object or null.
+ * @throws {Error} - If an error occurs while retrieving the user with social media links.
  */
 const getUserWithSocialLinks =
   async (): Promise<UserWithSocialLinks | null> => {
@@ -57,14 +65,16 @@ const getUserWithSocialLinks =
       });
       return currentUserWithSocialLinks ?? null;
     } catch (error) {
-      return null;
+      throw new Error("Failed to retrieve the user with social media links.");
     }
   };
 
 /**
  * Retrieves the currently authenticated user with associated social media links and posts from the database based on the session's email or userId.
- * @param userId - Optional user ID to retrieve user by ID instead of email
- * @returns A promise that resolves to either a UserWithSocialLinksAndPosts object or null.
+ *
+ * @param {string} [username] - Optional user ID to retrieve user by ID instead of email.
+ * @returns {Promise<UserWithSocialLinksAndPosts | null>} - A promise that resolves to either a UserWithSocialLinksAndPosts object or null.
+ * @throws {Error} - If an error occurs while retrieving the user with social media links and posts.
  */
 const getUserWithSocialLinksAndPosts = async (
   username?: string
@@ -88,7 +98,9 @@ const getUserWithSocialLinksAndPosts = async (
     });
     return currentUserWithSocialLinksAndPosts ?? null;
   } catch (error) {
-    return null;
+    throw new Error(
+      "Failed to retrieve the user with social media links and posts."
+    );
   }
 };
 

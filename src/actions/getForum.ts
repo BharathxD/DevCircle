@@ -8,8 +8,10 @@ import database from "@/lib/database";
 
 /**
  * Retrieves a forum from the database.
- * @param forumName - The name of the forum to retrieve.
- * @returns A promise that resolves to the forum object with the specified forumName, or null if not found.
+ *
+ * @param {string} forumName - The name of the forum to retrieve.
+ * @returns {Promise<Forum | null>} - A promise that resolves to the forum object with the specified forumName, or null if not found.
+ * @throws {Error} - If an error occurs while retrieving the forum.
  */
 const getForum = async (forumName: string): Promise<Forum | null> => {
   try {
@@ -18,15 +20,17 @@ const getForum = async (forumName: string): Promise<Forum | null> => {
     });
     return forum ?? null;
   } catch (error) {
-    return null;
+    throw new Error("Failed to retrieve the forum.");
   }
 };
 
 /**
  * Retrieves a forum and its associated posts from the database.
- * @param forumName - The name of the forum to retrieve.
- * @param limit - The maximum number of posts to retrieve (optional).
- * @returns A promise that resolves to the forum object with the specified forumName, or null if not found.
+ *
+ * @param {string} forumName - The name of the forum to retrieve.
+ * @param {number} [limit] - The maximum number of posts to retrieve (optional).
+ * @returns {Promise<ExtendedForum | null>} - A promise that resolves to the forum object with the specified forumName, or null if not found.
+ * @throws {Error} - If an error occurs while retrieving the forum.
  */
 const getForumWithPosts = async (
   forumName: string,
@@ -53,7 +57,7 @@ const getForumWithPosts = async (
     });
     return forum ?? null;
   } catch (error) {
-    return null;
+    throw new Error("Failed to retrieve the forum with posts.");
   }
 };
 

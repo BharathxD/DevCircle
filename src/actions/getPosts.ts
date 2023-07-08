@@ -1,15 +1,16 @@
 "use server";
 
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
-
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config"
 import type { ExtendedPost } from "@/types/database";
 import database from "@/lib/database";
 
 /**
  * Retrieves posts from the database.
- * @param tag - The tag to filter posts by (optional).
- * @param limit - The maximum number of posts to retrieve (optional).
- * @returns A promise that resolves to an array of fetched posts, or null if an error occurs.
+ *
+ * @param {string} [tag] - The tag to filter posts by (optional).
+ * @param {number} [limit] - The maximum number of posts to retrieve (optional).
+ * @returns {Promise<ExtendedPost[] | null>} - A promise that resolves to an array of fetched posts, or null if an error occurs.
+ * @throws {Error} - If an error occurs while retrieving the posts.
  */
 const getPosts = async (
   tag?: string,
@@ -33,7 +34,7 @@ const getPosts = async (
 
     return posts ?? null;
   } catch (error) {
-    return null;
+    throw new Error("Failed to retrieve the posts.");
   }
 };
 
