@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { env } from "@/env.mjs";
+
 import SignIn from "@/components/Auth/SignIn";
 
 interface SignInPageProps {
@@ -6,8 +9,9 @@ interface SignInPageProps {
   };
 }
 
-export const metadata = {
-  title: `Sign In`,
+export const metadata: Metadata = {
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+  title: "Sign In",
   description: "Sign in to your account",
 };
 
