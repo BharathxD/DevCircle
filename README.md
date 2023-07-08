@@ -1,7 +1,13 @@
 # DevCircle
 
-- This is the only project name I have come up with so far! :D
-- Kind of a Redit Clone?
+This is an open-source community platform built with the latest features of Next.js 13.
+
+![DevCircle OG](./src/app/opengraph-image.webp)
+
+> **Warning**
+> This project is still in development and is not ready for production use.
+>
+> It uses new technologies (server actions, drizzle ORM) which are subject to change and may break your application.
 
 ## Tech Stack
 

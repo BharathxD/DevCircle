@@ -51,9 +51,7 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
           </div>
           <div className="absolute bottom-10 z-10 flex h-fit w-full items-center justify-center">
             <div className="flex items-center gap-2 rounded-lg border-2 border-zinc-700 bg-zinc-900 p-2">
-              <Button onClick={handleDownload} variant="inverted">
-                Download
-              </Button>
+              <Button onClick={handleDownload}>Download</Button>
               <Button
                 onClick={() => setOpen((prev) => !prev)}
                 variant="destructive"
