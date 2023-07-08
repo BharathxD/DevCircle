@@ -3,18 +3,57 @@
 - This is the only project name I have come up with so far! :D
 - Kind of a Redit Clone?
 
-## TODO
+## Tech Stack
 
-- I̶m̶p̶l̶e̶m̶e̶n̶t̶ S̶e̶a̶r̶c̶h̶ f̶e̶a̶t̶u̶r̶e̶ f̶o̶r̶ c̶o̶m̶m̶u̶n̶i̶t̶i̶e̶s̶ ✅
-- A̶d̶d̶ a̶ /s̶e̶t̶t̶i̶n̶g̶s̶ p̶a̶g̶e̶ t̶o̶ c̶o̶n̶f̶i̶g̶u̶r̶e̶ t̶h̶e̶ f̶o̶l̶l̶o̶w̶i̶n̶g̶:̶ ✅
-  - C̶o̶o̶k̶i̶e̶s̶ ✅
-  - T̶h̶e̶m̶e̶/M̶o̶d̶e̶ ✅
-  - U̶p̶d̶a̶t̶e̶ P̶r̶o̶f̶i̶l̶e̶ ✅
-- A̶d̶d̶ a̶ n̶u̶m̶b̶e̶r̶ t̶o̶ t̶h̶e̶ c̶o̶m̶m̶e̶n̶t̶ i̶c̶o̶n̶ t̶o̶ i̶n̶d̶i̶c̶a̶t̶e̶ t̶h̶a̶t̶ i̶t̶ h̶a̶s̶ s̶o̶m̶e̶ c̶o̶m̶m̶e̶n̶t̶s̶ ✅
-  - P̶r̶o̶f̶i̶l̶e̶ P̶a̶g̶e̶
-  - A̶d̶d̶ a̶ s̶e̶c̶t̶i̶o̶n̶ t̶o̶ `̶v̶i̶e̶w̶`̶ a̶l̶l̶ t̶h̶e̶ p̶o̶s̶t̶e̶d̶ p̶o̶s̶t̶e̶d̶ a̶r̶t̶i̶c̶l̶e̶s̶ ✅
-  - A̶d̶d̶ a̶ s̶e̶c̶t̶i̶o̶n̶ w̶h̶e̶r̶e̶ u̶s̶e̶r̶s̶ c̶a̶n̶, `̶e̶d̶i̶t̶/d̶e̶l̶e̶t̶e̶`̶ t̶h̶e̶ c̶o̶m̶m̶u̶n̶i̶t̶i̶e̶s̶ t̶h̶a̶t̶ t̶h̶e̶y̶ h̶a̶v̶e̶ c̶r̶e̶a̶t̶e̶d̶
-- A̶d̶d̶ a̶ s̶e̶c̶t̶i̶o̶n̶ i̶n̶ t̶h̶e̶ p̶o̶s̶t̶ p̶a̶g̶e̶ t̶o̶ v̶i̶e̶w̶ t̶h̶e̶ d̶e̶t̶a̶i̶l̶s̶ a̶b̶o̶u̶t̶ t̶h̶e̶ `̶A̶u̶t̶h̶o̶r̶`̶
-  - C̶h̶e̶c̶k̶ u̶s̶e̶r̶ c̶l̶i̶c̶k̶s̶ o̶n̶ t̶h̶e̶ A̶u̶t̶h̶o̶r̶ n̶a̶m̶e̶ o̶r̶ p̶r̶o̶f̶i̶l̶e̶ p̶i̶c̶t̶u̶r̶e̶, h̶e̶ s̶h̶o̶u̶l̶d̶ b̶e̶ r̶e̶d̶i̶r̶e̶c̶t̶e̶d̶ t̶o̶ u̶s̶e̶r̶s̶ p̶e̶r̶s̶o̶n̶a̶l̶ p̶a̶g̶e̶ ✅
-- Add modal like in AWS/Github to delete a community
-- Use modal for signin or signup
+- [`Next.js`](https://nextjs.org/): A popular React framework for building server-rendered and static websites.
+- [`React`](https://react.dev/): A JavaScript library for building user interfaces.
+- [`TypeScript`](https://www.typescriptlang.org/): A statically-typed superset of JavaScript that enhances developer productivity and code maintainability.
+- [`TailwindCSS`](https://tailwindcss.com/): A highly customizable CSS framework that allows for rapid UI development with utility classes.
+- [`Shadcn/UI`](https://ui.shadcn.com/): Re-usable components built using Radix UI and Tailwind CSS.
+- [`Prisma`](https://www.prisma.io/): A modern database toolkit for TypeScript and Node.js that simplifies database access and management.
+- [`Uploadthing`](https://uploadthing.com/) (S3) - File Uploads For Next.js Developers
+- [`NextAuth.js`](https://next-auth.js.org/): A complete authentication solution for Next.js applications.
+- [`Editor.js`](https://editorjs.io/): A block-style editor for creating rich content with a clean and extensible API.
+- [`React Query`](https://tanstack.com/query/latest): A data fetching and caching library for React applications.
+- [`Prettier`](https://prettier.io/): A code formatter that helps maintain consistent code style.
+- [`TypeScript-ESLint`](https://typescript-eslint.io/): A pluggable and configurable linter tool for identifying and reporting code errors and enforcing code style.
+
+## Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/BharathxD/DevCircle
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Create a `.env` file
+
+Create a `.env` file in the root directory and add the environment variables as shown in the `.env.example` file.
+
+### 4. Run the application
+
+```bash
+npm run dev
+```
+
+### 5. Push database
+
+```bash
+npx prisma generate
+```
+
+## License
+
+Licensed under the MIT License. Check the [LICENSE](./LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please open an issue if you have any questions or suggestions. Your contributions will be acknowledged.
+
+See the [contributing guide](./CONTRIBUTING.md) for more information.
