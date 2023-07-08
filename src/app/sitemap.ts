@@ -28,7 +28,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         lastModified: new Date().toISOString(),
     }))
 
-    console.log([...routes, ...posts, ...forums]);
-
     return [...routes, ...posts, ...forums]
 }

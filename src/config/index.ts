@@ -5,6 +5,7 @@ const siteConfig = {
   description: "A community for all the developers out there",
   url: "http://localhost:3000",
   copyrights: 2023,
+  ogImage: "http://localhost:3000/opengraph-image.webp",
 };
 
 export default siteConfig;
