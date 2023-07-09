@@ -66,8 +66,7 @@ const CreateTags: React.FC<CreateTagsProps> = ({ tags, setTags }) => {
             placeholder="Add Tags..."
           />
           <Button
-            size={"sm"}
-            className="rounded-r-md bg-transparent px-4 hover:bg-zinc-800 dark:bg-zinc-950"
+          variant="outline"
             onClick={handleKeyAddition}
             disabled={tags.length === 5}
           >

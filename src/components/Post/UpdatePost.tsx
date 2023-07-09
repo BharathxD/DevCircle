@@ -92,16 +92,12 @@ const UpdatePost: React.FC<UpdatePostProps> = ({
         tags={tagArray}
       />
       <div className="flex w-full flex-row gap-4">
-        <Button
-          onClick={toggleEdit}
-          variant="destructive"
-          className="w-full rounded-md bg-zinc-900 px-3 py-1 text-lg font-bold"
-        >
+        <Button onClick={toggleEdit} variant="destructive" className="w-full">
           Cancel
         </Button>
         <Button
           type="submit"
-          className="w-full rounded-md bg-zinc-900 px-3 py-1 text-lg font-bold text-zinc-50 outline-2 outline-zinc-800 hover:bg-zinc-50 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+          className="w-full"
           form="devcircle-post-form"
           disabled={isLoading}
           isLoading={isLoading}

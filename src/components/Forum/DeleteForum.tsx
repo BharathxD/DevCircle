@@ -97,13 +97,15 @@ const DeleteForum: React.FC<DeleteForumProps> = ({ forumId, forumName }) => {
               Cancel
             </Button>
           </AlertDialogCancel>
-          <AlertDialogAction asChild>
+          <AlertDialogAction
+            asChild
+            className="bg-red-600 text-zinc-50 hover:bg-red-500"
+          >
             <Button
               variant="destructive"
               onClick={handleForumDeletion}
               isLoading={isLoading}
               aria-label="Delete"
-              className="border-red-500"
               disabled={isLoading || confirmationText !== `d/${forumName}`}
             >
               Delete

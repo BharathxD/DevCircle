@@ -3,7 +3,7 @@
 import { Fragment } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import type { User } from "@prisma/client";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, MessageSquareDashed } from "lucide-react";
 
 import type { ExtendedComment } from "@/types/database";
 import { cn } from "@/lib/utils";
@@ -58,6 +58,12 @@ const CommentsSection = async ({
           className="no-scrollbar flex h-[59vh] w-full flex-col gap-2 overflow-hidden overflow-y-scroll rounded-md px-4 py-5 md:h-full"
           id="comments"
         >
+          {topLevelComments.length === 0 && (
+            <div className="flex h-full w-full flex-col items-center justify-center gap-2">
+              <MessageSquareDashed className="h-10 w-10" />
+              <p>No comments</p>
+            </div>
+          )}
           {topLevelComments.length !== 0 && (
             <Fragment>
               <div className="flex flex-col gap-4">

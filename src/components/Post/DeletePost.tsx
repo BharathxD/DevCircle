@@ -57,9 +57,9 @@ const DeletePost: React.FC<PostDropdownMenuProps> = ({ postId }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <button className="inline-flex items-center p-2 hover:bg-red-500">
-          <Trash2 className="mr-2 h-4 w-4" />
-          Delete
+        <button className="inline-flex w-full items-center p-2 hover:bg-red-500 hover:text-zinc-50">
+          <Trash2 className="mr-1.5 h-4 w-4" />
+          <p>Delete</p>
         </button>
       </AlertDialogTrigger>
       <AlertDialogContent className="border-2 border-zinc-800 p-6">
@@ -75,7 +75,10 @@ const DeletePost: React.FC<PostDropdownMenuProps> = ({ postId }) => {
               Cancel
             </Button>
           </AlertDialogCancel>
-          <AlertDialogAction asChild>
+          <AlertDialogAction
+            asChild
+            className="border-2 border-red-600 bg-transparent text-zinc-800 hover:bg-red-500 hover:text-zinc-50 dark:border-0 dark:bg-red-600 dark:text-zinc-50"
+          >
             <Button
               variant="destructive"
               onClick={() => deletePost()}
