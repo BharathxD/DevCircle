@@ -37,6 +37,7 @@ const OAuthSignIn: React.FC<OAuthSignInProps> = ({
     <div className={cn("flex justify-center", className)} {...props}>
       <Button
         className="w-full"
+        variant="skeleton"
         onClick={() => SignIn()}
         isLoading={isLoading}
         disabled={isLoading}
