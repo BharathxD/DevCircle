@@ -2,8 +2,6 @@
 
 import NotFoundPage from "@/components/UI/NotFound";
 
-const NotFound = () => {
-  return <NotFoundPage />;
-};
+const NotFound = () => <NotFoundPage />;
 
 export default NotFound;

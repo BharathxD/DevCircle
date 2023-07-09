@@ -30,11 +30,17 @@ type ModifiedPost = Post & {
   tags: Tag[];
 };
 
-async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+/**
+ * Generate metadata for a page.
+ * @param params Page parameters.
+ * @returns Promise resolving to the generated metadata.
+ */
+const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { postId, forumName } = params;
-  if (!postId) return notFound();
-  const cachedPost = await getCachedPost(postId);
 
+  if (!postId || !forumName) return {};
+
+  const cachedPost = await getCachedPost(postId);
   let post: (Post & { author: User }) | null = null;
 
   if (!cachedPost) {
@@ -44,21 +50,23 @@ async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     });
   }
 
-  const url = env.NEXT_PUBLIC_APP_URL;
+  const siteUrl = env.NEXT_PUBLIC_APP_URL;
 
-  const authorName = post?.author?.username || cachedPost?.authorUsername || "DevCircle User";
-  const postTitle = post?.title || cachedPost?.title || `Post by ${authorName}`;
+  const authorName =
+    post?.author?.username || cachedPost?.authorUsername || "DevCircle User";
+  const postTitle =
+    post?.title || cachedPost?.title || `Post by u/${authorName}`;
   const description = `Check out the latest post by ${authorName} on DevCircle.`;
 
-
-  const ogUrl = new URL(`${url}/api/og`);
+  const ogUrl = new URL(`${siteUrl}/api/og`);
   ogUrl.searchParams.set("title", extractString(postTitle));
   ogUrl.searchParams.set("description", extractString(description));
 
   return {
     title: postTitle,
+    description: description,
     authors: {
-      name: post?.author.username ?? cachedPost?.authorUsername ?? "",
+      name: authorName,
     },
     openGraph: {
       title: postTitle,
@@ -80,7 +88,7 @@ async function generateMetadata({ params }: PageProps): Promise<Metadata> {
       images: [ogUrl.toString()],
     },
   };
-}
+};
 
 const PostPage = async ({ params }: PageProps) => {
   const { postId } = params;

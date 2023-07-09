@@ -14,7 +14,8 @@ export const generateCbUrl = (pathname: string) =>
     query: { callbackUrl: pathname },
   });
 
-export const absoluteUrl = (path: string) => `${env.NEXT_PUBLIC_APP_URL}${path}`;
+export const absoluteUrl = (path: string) =>
+  `${env.NEXT_PUBLIC_APP_URL}${path}`;
 
 export const extractString = (str: string) => {
   if (str.length <= 75) return str;
