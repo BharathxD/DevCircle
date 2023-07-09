@@ -78,7 +78,8 @@ const PostCreationPage: FC = () => {
 
   const handleCancelClick = () => router.back();
   const handleCreateForumClick = () => createForum();
-  const isInputValid = input.length >= 3 && description.length >= 10;
+  const isInputValid =
+    input.length >= 3 && description.length >= 10 && !/\s/.test(input);
 
   return (
     <div className="mt-4 md:mt-0 md:flex md:h-[70vh] md:w-full md:items-center md:justify-center">
@@ -101,6 +102,10 @@ const PostCreationPage: FC = () => {
                   placeholder="Geopolitics"
                 />
               </div>
+              <p className="text-zinc-500">
+                Community names should be 4-20 characters long and must not
+                contain spaces.
+              </p>
               <div>
                 <Textarea
                   value={description}
@@ -113,8 +118,7 @@ const PostCreationPage: FC = () => {
                 />
               </div>
               <p className="text-zinc-500">
-                Forum/Community and description should be at least 3 and 10
-                characters respectively.
+                Description should be at least 3 and 10 characters respectively.
               </p>
             </div>
           </section>

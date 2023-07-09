@@ -94,7 +94,7 @@ const PostCard: FC<PostCardProps> = ({
           {postMetaInfo}
           <Link
             href={`/d/${forumName}/post/${post.id}`}
-            className="pt-2 text-lg font-semibold leading-6 text-zinc-900 dark:text-zinc-50"
+            className="py-2 text-lg font-semibold leading-6 text-zinc-900 dark:text-zinc-50"
             aria-label={post.title}
           >
             {post.title}
