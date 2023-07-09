@@ -2,7 +2,7 @@
 
 This is an open-source community platform built with the latest features of Next.js 13.
 
-![DevCircle OG](./src/app/opengraph-image.webp)
+![DevCircle OG](./public/images/screenshot/DevCircle.png)
 
 > **Warning**
 > This project is still in development and is not ready for production use.

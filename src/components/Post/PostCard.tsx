@@ -37,7 +37,6 @@ const PostCard: FC<PostCardProps> = ({
   isLoggedIn,
 }) => {
   const postRef = useRef<HTMLParagraphElement>(null);
-  const isPostOverflowed = postRef.current?.clientHeight === 160;
   const postUrl = `${siteConfig.url}/d/${forumName}/post/${post.id}`;
 
   const postContent = (
@@ -46,9 +45,7 @@ const PostCard: FC<PostCardProps> = ({
       ref={postRef}
     >
       <EditorOutput content={post.content} sm />
-      {isPostOverflowed && (
-        <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent dark:from-zinc-900"></div>
-      )}
+      <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent dark:from-zinc-900"></div>
     </div>
   );
 
