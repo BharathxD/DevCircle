@@ -1,5 +1,5 @@
 import { object, string } from "zod";
-
+import type { infer as zodInfer } from "zod";
 
 const ogImageSchema = object({
     title: string(),
@@ -7,4 +7,7 @@ const ogImageSchema = object({
     description: string().optional(),
 })
 
+type OgImageParams = zodInfer<typeof ogImageSchema>
+
 export { ogImageSchema }
+export type { OgImageParams }
