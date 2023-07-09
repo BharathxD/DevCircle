@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
 import {
   Crown,
-  Github,
   Home,
   PlusSquare,
   Search,

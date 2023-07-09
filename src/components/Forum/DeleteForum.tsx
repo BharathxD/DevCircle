@@ -19,17 +19,11 @@ import {
 import { Button } from "@/components/UI/Button";
 import { Input } from "@/components/UI/Input";
 
-/**
- * Props for the DeleteForum component.
- */
 interface DeleteForumProps {
   forumId: string;
   forumName: string;
 }
 
-/**
- * Component for deleting a forum.
- */
 const DeleteForum: React.FC<DeleteForumProps> = ({ forumId, forumName }) => {
   const router = useRouter();
   const [confirmationText, setConfirmationText] = useState<string>();

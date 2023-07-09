@@ -1,4 +1,3 @@
-import { parse } from "querystring";
 import type { ServerRuntime } from "next";
 import { NextResponse } from "next/server";
 import { ImageResponse } from "@vercel/og";
@@ -15,7 +14,9 @@ import type { OgImageParams } from "@/lib/validators/imageOg";
 const generateOg = (req: Request): ImageResponse => {
   try {
     const url = new URL(req.url);
-    const parsedValues = parse(url.searchParams.toString()) as OgImageParams;
+    const parsedValues = ogImageSchema.parse(
+      Object.fromEntries(url.searchParams)
+    ) as OgImageParams;
     const { title, description } = ogImageSchema.parse(parsedValues);
 
     return new ImageResponse(

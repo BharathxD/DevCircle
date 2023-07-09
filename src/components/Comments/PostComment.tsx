@@ -7,7 +7,6 @@ import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { MessageCircle, MoreVertical } from "lucide-react";
 import queryString from "query-string";
-import { BiMessageDetail } from "react-icons/bi";
 import { useMutation } from "react-query";
 
 import formatTimeToNow from "@/lib/formatTimeToNow";
