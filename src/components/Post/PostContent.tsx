@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { Fragment, useCallback, useState } from "react";
 import Link from "next/link";
 import type { Tag } from "@prisma/client";
 import { Dot } from "lucide-react";
@@ -59,7 +59,7 @@ const PostContent: React.FC<PostContentProps> = ({
   };
 
   return (
-    <article id="post">
+    <Fragment>
       {!isEditing && (
         <header className="flex flex-col gap-4 bg-zinc-200 p-4 dark:bg-zinc-950/10">
           <Tags tags={tags} />
@@ -92,7 +92,7 @@ const PostContent: React.FC<PostContentProps> = ({
           />
         )}
       </div>
-    </article>
+    </Fragment>
   );
 };
 

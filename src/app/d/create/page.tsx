@@ -14,9 +14,6 @@ import { Button } from "@/components/UI/Button";
 import { Input } from "@/components/UI/Input";
 import { Textarea } from "@/components/UI/Textarea";
 
-/**
- * Component for the page that allows creating a new forum/community.
- */
 const PostCreationPage: FC = () => {
   const pathname = usePathname();
   const [input, setInput] = useState<string>("");

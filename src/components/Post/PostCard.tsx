@@ -64,13 +64,15 @@ const PostCard: FC<PostCardProps> = ({
           </span>
         </Link>
       </div>
-      <time>{" " + formatTimeToNow(new Date(post.createdAt))}</time>
+      <time className="absolute right-5 top-8 md:block">
+        {" " + formatTimeToNow(new Date(post.createdAt))}
+      </time>
     </div>
   );
 
   return (
     <motion.article
-      className="overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950"
+      className="relative overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950"
       initial={{ opacity: 0, backdropFilter: "blur(4px)" }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.25 }}

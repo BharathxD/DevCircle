@@ -94,7 +94,10 @@ const getUserWithSocialLinksAndPosts = async (
     }
     const currentUserWithSocialLinksAndPosts = await database.user.findUnique({
       where: whereClause,
-      include: { socialMedia: true, post: true },
+      include: {
+        socialMedia: true,
+        post: { include: { forum: true } }
+      },
     });
     return currentUserWithSocialLinksAndPosts ?? null;
   } catch (error) {

@@ -1,8 +1,9 @@
 import { getAuthSession } from "@/actions/getCurrentUser";
 
-import SignInButton from "../UI/SignInButton";
 import Logo from "../UI/Logo";
+import SignInButton from "../UI/SignInButton";
 import ThemeSwitchers from "../UI/ThemeSwitchers";
+import SearchBar from "./SearchBar";
 
 const Navbar = async () => {
   const session = await getAuthSession();
@@ -11,6 +12,7 @@ const Navbar = async () => {
       <div className="flex h-[9vh] min-h-fit max-w-7xl items-center justify-between px-4 md:container">
         <Logo />
         <div className="inline-flex h-full">
+          <SearchBar />
           <ThemeSwitchers />
           <SignInButton
             user={session?.user}

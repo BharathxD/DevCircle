@@ -28,7 +28,7 @@ type ExtendedComment = Comment & {
 type UserWithSocialLinks = User & { socialMedia: SocialMedia | null };
 type UserWithSocialLinksAndPosts = User & {
   socialMedia: SocialMedia | null;
-  post: Post[] | null;
+  post: (Post & { forum: Forum })[] | null;
 };
 
 export {
