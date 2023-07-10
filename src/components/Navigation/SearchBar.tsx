@@ -3,7 +3,6 @@
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Forum, Prisma } from "@prisma/client";
-import { DialogClose } from "@radix-ui/react-dialog";
 import axios from "axios";
 import { debounce } from "lodash";
 import { Search, Users } from "lucide-react";
@@ -39,7 +38,7 @@ const SearchBar: React.FC = () => {
         </div>
       </DialogTrigger>
       <DialogContent
-        className="top-[7.5%] rounded-md border-2 border-zinc-800 md:top-[25%]"
+        className="top-[7.5%] w-[90%] rounded-md border-2 border-zinc-800 md:top-[25%]"
         showClose={false}
       >
         <div className="flex h-full w-full flex-col items-center gap-2 pl-2">

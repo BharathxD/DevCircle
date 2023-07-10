@@ -40,7 +40,9 @@ const HomepageMenu = () => {
                 href={href}
                 className={cn(
                   "flex w-full flex-row items-center justify-center gap-4 border-r-2 border-r-zinc-800 p-4 last:border-r-0 hover:bg-zinc-800 hover:text-zinc-50 dark:hover:bg-zinc-900",
-                  href === pathname && "bg-zinc-800 text-zinc-50"
+                  href === pathname &&
+                    href !== "/home" &&
+                    "bg-zinc-800 text-zinc-50"
                 )}
                 aria-current={href === pathname ? "page" : undefined}
               >
@@ -69,9 +71,8 @@ const HomepageMenu = () => {
                 className={cn(
                   "flex w-full flex-row items-center gap-4 border-b-2 border-b-zinc-800 bg-zinc-50 p-4 last:border-b-0 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-800",
                   href === pathname &&
-                    "bg-zinc-800 text-zinc-50 dark:bg-zinc-900 dark:text-zinc-50",
-                  href === "/home" &&
-                    "bg-zinc-50 text-zinc-800 dark:bg-zinc-950 dark:text-zinc-50"
+                    href !== "/home" &&
+                    "bg-zinc-800 text-zinc-50 dark:bg-zinc-900 dark:text-zinc-50"
                 )}
                 aria-current={href === pathname ? "page" : undefined}
               >
