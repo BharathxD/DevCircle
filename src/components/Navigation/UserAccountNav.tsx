@@ -1,9 +1,8 @@
 "use client";
 
-import type { FC } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import { LogOut, PlusCircle, Settings, StretchHorizontal } from "lucide-react";
-import type { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 
 import {
@@ -17,28 +16,32 @@ import {
 import UserAvatar from "../UI/UserAvatar";
 
 interface UserAccountNavProps {
-  user: Pick<
-    Pick<Session, "user">["user"],
-    "name" | "username" | "email" | "image"
-  >;
+  user: {
+    name?: string | null;
+    username?: string | null;
+    email?: string | null;
+    image?: string | null;
+  };
 }
 
-const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
+const UserAccountNav: React.FC<UserAccountNavProps> = ({ user }) => {
   const router = useRouter();
+
   const handleSignOut = async (event: Event) => {
     event.preventDefault();
     await signOut({
       callbackUrl: `${window.location.origin}/signin`,
     });
   };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="flex h-full items-center justify-center  border-2 border-y-0 border-zinc-800 p-4 transition-colors hover:bg-yellow-300 dark:hover:bg-zinc-800">
+        <div className="flex h-full items-center justify-center border-2 border-y-0 border-zinc-800 p-4 transition-colors hover:bg-yellow-300 dark:hover:bg-zinc-800">
           <UserAvatar
             user={{
-              name: user.username ?? user.name ?? null,
-              image: user.image ?? null,
+              name: user.username || user.name || "",
+              image: user.image || null,
             }}
           />
         </div>
