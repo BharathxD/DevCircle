@@ -11,7 +11,6 @@ import database from "@/lib/database";
  * @param {string} [tag] - The tag to filter posts by (optional).
  * @param {number} [limit] - The maximum number of posts to retrieve (optional).
  * @returns {Promise<ExtendedPost[] | null>} - A promise that resolves to an array of fetched posts, or null if an error occurs.
- * @throws {Error} - If an error occurs while retrieving the posts.
  */
 const getPosts = async (
   tag?: string,
@@ -35,7 +34,7 @@ const getPosts = async (
 
     return posts ?? null;
   } catch (error) {
-    throw new Error("Failed to retrieve the posts.");
+    return null;
   }
 };
 

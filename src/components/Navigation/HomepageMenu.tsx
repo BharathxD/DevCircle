@@ -4,14 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
-import {
-  Crown,
-  Home,
-  PlusSquare,
-  Search,
-  UserCircle2,
-  Users2,
-} from "lucide-react";
+import { Crown, Home, PlusSquare, UserCircle2, Users2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
@@ -24,7 +17,6 @@ const HomepageMenu = () => {
   const pathname = usePathname();
 
   const navLinks = [
-    { href: "/search", icon: Search, text: "Search Communities" },
     { href: "/home", icon: Home, text: "Home" },
     { href: "/profile", icon: UserCircle2, text: "Profile" },
     { href: "/leaderboard", icon: Crown, text: "Leaderboards" },

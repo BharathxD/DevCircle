@@ -66,7 +66,7 @@ const CreateTags: React.FC<CreateTagsProps> = ({ tags, setTags }) => {
             placeholder="Add Tags..."
           />
           <Button
-          variant="outline"
+            variant="outline"
             onClick={handleKeyAddition}
             disabled={tags.length === 5}
           >

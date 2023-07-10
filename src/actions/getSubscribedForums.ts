@@ -8,7 +8,6 @@ import { getAuthSession } from "./getCurrentUser";
  * Retrieves the names of the forums that the current user is subscribed to.
  *
  * @returns {Promise<string[] | null>} - An array of forum names, or null if the user is not found or an error occurs.
- * @throws {Error} - If an error occurs while retrieving the subscribed forums.
  */
 const getSubscribedForums = async (): Promise<string[] | null> => {
   try {
@@ -26,7 +25,7 @@ const getSubscribedForums = async (): Promise<string[] | null> => {
 
     return subscribedForumNames;
   } catch (error) {
-    throw new Error("Failed to retrieve the subscribed forums.");
+    return null;
   }
 };
 

@@ -11,7 +11,6 @@ import database from "@/lib/database";
  *
  * @param {string} forumName - The name of the forum to retrieve.
  * @returns {Promise<Forum | null>} - A promise that resolves to the forum object with the specified forumName, or null if not found.
- * @throws {Error} - If an error occurs while retrieving the forum.
  */
 const getForum = async (forumName: string): Promise<Forum | null> => {
   try {
@@ -57,7 +56,7 @@ const getForumWithPosts = async (
     });
     return forum ?? null;
   } catch (error) {
-    throw new Error("Failed to retrieve the forum with posts.");
+    return null;
   }
 };
 

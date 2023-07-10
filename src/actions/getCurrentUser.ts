@@ -14,22 +14,13 @@ import database from "@/lib/database";
  * Retrieves a server session using the provided authentication options.
  *
  * @returns {Promise<Session | null>} - A promise that resolves to either a Session object or null.
- * @throws {Error} - If an error occurs while retrieving the session.
  */
-const getAuthSession = async (): Promise<Session | null> => {
-  try {
-    const session = await getServerSession(authOptions);
-    return session ?? null;
-  } catch (error) {
-    throw new Error("Failed to retrieve the session.");
-  }
-};
-
+const getAuthSession = async (): Promise<Session | null> =>
+  await getServerSession(authOptions);
 /**
  * Retrieves the currently authenticated user from the database based on the session's email.
  *
  * @returns {Promise<User | null>} - A promise that resolves to either a User object or null.
- * @throws {Error} - If an error occurs while retrieving the user.
  */
 const getCurrentUser = async (): Promise<User | null> => {
   try {
@@ -42,7 +33,7 @@ const getCurrentUser = async (): Promise<User | null> => {
     });
     return currentUser ?? null;
   } catch (error) {
-    throw new Error("Failed to retrieve the current user.");
+    return null;
   }
 };
 
@@ -50,7 +41,6 @@ const getCurrentUser = async (): Promise<User | null> => {
  * Retrieves the currently authenticated user with associated social media links from the database based on the session's email.
  *
  * @returns {Promise<UserWithSocialLinks | null>} - A promise that resolves to either a UserWithSocialLinks object or null.
- * @throws {Error} - If an error occurs while retrieving the user with social media links.
  */
 const getUserWithSocialLinks =
   async (): Promise<UserWithSocialLinks | null> => {
@@ -65,7 +55,7 @@ const getUserWithSocialLinks =
       });
       return currentUserWithSocialLinks ?? null;
     } catch (error) {
-      throw new Error("Failed to retrieve the user with social media links.");
+      return null;
     }
   };
 
@@ -74,7 +64,6 @@ const getUserWithSocialLinks =
  *
  * @param {string} [username] - Optional user ID to retrieve user by ID instead of email.
  * @returns {Promise<UserWithSocialLinksAndPosts | null>} - A promise that resolves to either a UserWithSocialLinksAndPosts object or null.
- * @throws {Error} - If an error occurs while retrieving the user with social media links and posts.
  */
 const getUserWithSocialLinksAndPosts = async (
   username?: string
@@ -96,14 +85,12 @@ const getUserWithSocialLinksAndPosts = async (
       where: whereClause,
       include: {
         socialMedia: true,
-        post: { include: { forum: true } }
+        post: { include: { forum: true } },
       },
     });
     return currentUserWithSocialLinksAndPosts ?? null;
   } catch (error) {
-    throw new Error(
-      "Failed to retrieve the user with social media links and posts."
-    );
+    return null;
   }
 };
 

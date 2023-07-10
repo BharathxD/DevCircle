@@ -8,7 +8,6 @@ import database from "@/lib/database";
  *
  * @param {string} postId - The ID of the post to retrieve comments for.
  * @returns {Promise<ExtendedComment[] | null>} - A promise that resolves to an array of comments for the post, or null if an error occurs.
- * @throws {Error} - If an error occurs while retrieving the comments.
  */
 const getComments = async (
   postId: string
@@ -32,7 +31,7 @@ const getComments = async (
     });
     return comments;
   } catch (error: unknown) {
-    throw new Error("Failed to retrieve the comments.");
+    return null;
   }
 };
 

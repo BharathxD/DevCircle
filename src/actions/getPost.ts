@@ -9,7 +9,6 @@ import database from "@/lib/database";
  *
  * @param {string} postId - The ID of the post to retrieve.
  * @returns {Promise<(Post & { votes: Vote[] }) | null>} - A promise that resolves to the post object with its associated votes, or null if not found.
- * @throws {Error} - If an error occurs while retrieving the post.
  */
 async function getPost(
   postId: string
@@ -21,7 +20,7 @@ async function getPost(
     });
     return post ?? null;
   } catch (error) {
-    throw new Error("Failed to retrieve the post.");
+    return null;
   }
 }
 
