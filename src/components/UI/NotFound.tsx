@@ -12,7 +12,7 @@ const NotFoundPage: React.FC<NotFoundPageProps> = ({
   return (
     <div className="flex h-[91vh] w-full flex-col items-center justify-center">
       <Image
-        src="/images/timed-out-error.svg"
+        src="/images/web-design.svg"
         alt="Not found"
         height={400}
         data-nimg={1}

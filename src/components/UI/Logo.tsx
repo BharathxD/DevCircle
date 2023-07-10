@@ -9,7 +9,7 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ className }) => {
   return (
-    <Link
+    <a
       href="/"
       className={cn("flex items-center gap-2 hover:cursor-pointer", className)}
     >
@@ -21,7 +21,7 @@ const Logo: React.FC<LogoProps> = ({ className }) => {
       >
         DevCircle
       </p>
-    </Link>
+    </a>
   );
 };
 

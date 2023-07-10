@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getCurrentUser } from "@/actions/getCurrentUser";
+import { getAuthSession, getCurrentUser } from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
@@ -15,16 +15,16 @@ import { CommentVoteValidator } from "@/lib/validators/vote";
 export async function PATCH(req: NextRequest): Promise<NextResponse> {
   try {
     // Get the current user
-    const currentUser = await getCurrentUser();
+    const session = await getAuthSession();
 
     // If no user is found, return unauthorized response
-    if (!currentUser)
+    if (!session?.user)
       return NextResponse.json(
         { message: "Authentication required. Please log in." },
         { status: StatusCodes.UNAUTHORIZED }
       );
 
-    const { id: userId } = currentUser;
+    const { id: userId } = session.user;
     const { commentId, voteType } = CommentVoteValidator.parse(
       await req.json()
     );
@@ -52,14 +52,14 @@ export async function PATCH(req: NextRequest): Promise<NextResponse> {
     const updatePromise =
       existingVote.type === voteType
         ? // If the existing vote is of the same type as the new vote, delete the vote and update vote count
-          database.commentVote.delete({
-            where: { userId_commentId: { userId, commentId } },
-          })
+        database.commentVote.delete({
+          where: { userId_commentId: { userId, commentId } },
+        })
         : // If the existing vote is of a different type, update the vote and update vote count
-          database.commentVote.update({
-            where: { userId_commentId: { userId, commentId } },
-            data: { type: voteType },
-          });
+        database.commentVote.update({
+          where: { userId_commentId: { userId, commentId } },
+          data: { type: voteType },
+        });
 
     await updatePromise;
 

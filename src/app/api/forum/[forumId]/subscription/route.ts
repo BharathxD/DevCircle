@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getCurrentUser } from "@/actions/getCurrentUser";
+import { getAuthSession } from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 
 import database from "@/lib/database";
@@ -14,8 +14,8 @@ interface searchParams {
 export async function PATCH(_: NextRequest, searchParams: searchParams) {
   try {
     // Check if the request comes from authenticated source
-    const currentUser = await getCurrentUser();
-    if (!currentUser)
+    const session = await getAuthSession();
+    if (!session?.user)
       return NextResponse.json(
         { message: "This action requires authentication" },
         { status: StatusCodes.UNAUTHORIZED }
@@ -31,11 +31,11 @@ export async function PATCH(_: NextRequest, searchParams: searchParams) {
         { status: StatusCodes.NOT_FOUND }
       );
     const subscriptionExists = await database.subscription.findFirst({
-      where: { forumId, userId: currentUser.id },
+      where: { forumId, userId: session.user.id },
     });
     if (!subscriptionExists) {
       await database.subscription.create({
-        data: { forumId, userId: currentUser.id },
+        data: { forumId, userId: session.user.id },
       });
       return NextResponse.json(
         { message: "Unsubscribed" },
@@ -43,7 +43,7 @@ export async function PATCH(_: NextRequest, searchParams: searchParams) {
       );
     }
     await database.subscription.delete({
-      where: { userId_forumId: { forumId, userId: currentUser.id } },
+      where: { userId_forumId: { forumId, userId: session.user.id } },
     });
     return NextResponse.json("Unsubscribed", { status: StatusCodes.ACCEPTED });
   } catch (error: unknown) {

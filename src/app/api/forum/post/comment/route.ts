@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getCurrentUser } from "@/actions/getCurrentUser";
+import { getAuthSession, getCurrentUser } from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
@@ -18,9 +18,9 @@ import {
  */
 const PATCH = async (req: NextRequest): Promise<NextResponse> => {
   try {
-    const currentUser = await getCurrentUser();
+    const session = await getAuthSession();
 
-    if (!currentUser) {
+    if (!session?.user) {
       return NextResponse.json(
         { message: "This action requires authentication" },
         { status: StatusCodes.UNAUTHORIZED }
@@ -33,7 +33,7 @@ const PATCH = async (req: NextRequest): Promise<NextResponse> => {
 
     await database.comment.create({
       data: {
-        authorId: currentUser.id,
+        authorId: session.user.id,
         postId,
         text,
         replyToId,
@@ -149,9 +149,9 @@ const DELETE = async (req: NextRequest): Promise<NextResponse> => {
  */
 const POST = async (req: NextRequest): Promise<NextResponse> => {
   try {
-    const currentUser = await getCurrentUser();
+    const session = await getAuthSession();
 
-    if (!currentUser) {
+    if (!session?.user) {
       return NextResponse.json(
         { message: "This action requires authentication" },
         { status: StatusCodes.UNAUTHORIZED }
@@ -164,7 +164,7 @@ const POST = async (req: NextRequest): Promise<NextResponse> => {
     const comment = await database.comment.findFirst({
       where: {
         id: commentId,
-        authorId: currentUser.id,
+        authorId: session.user.id,
       },
       include: {
         replies: true,

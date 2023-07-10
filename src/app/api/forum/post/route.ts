@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getCurrentUser } from "@/actions/getCurrentUser";
+import { getAuthSession, getCurrentUser } from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
@@ -21,10 +21,10 @@ import {
 const createPost = async (req: NextRequest): Promise<NextResponse> => {
   try {
     // Retrieve the current user
-    const currentUser = await getCurrentUser();
+    const session = await getAuthSession();
 
     // Check if the user is authenticated
-    if (!currentUser) {
+    if (!session?.user) {
       return NextResponse.json(
         { message: "This action requires authentication" },
         { status: StatusCodes.UNAUTHORIZED }
@@ -47,7 +47,7 @@ const createPost = async (req: NextRequest): Promise<NextResponse> => {
     const subscription = await database.subscription.findFirst({
       where: {
         forumId,
-        userId: currentUser.id,
+        userId: session.user.id,
       },
     });
     if (!subscription) {
@@ -61,7 +61,7 @@ const createPost = async (req: NextRequest): Promise<NextResponse> => {
     const post = await database.post.create({
       data: {
         forumId,
-        authorId: currentUser.id,
+        authorId: session.user.id,
         title,
         content,
         tags: {

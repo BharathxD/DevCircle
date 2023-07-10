@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getCurrentUser } from "@/actions/getCurrentUser";
+import { getAuthSession, getCurrentUser } from "@/actions/getCurrentUser";
 import { getForumWithPosts } from "@/actions/getForum";
 
 import type { ExtendedForum } from "@/types/database";
@@ -19,7 +19,7 @@ interface ForumPageProps {
 const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
   const { forumName } = params;
   const { tag } = searchParams;
-  const currentUser = await getCurrentUser();
+  const session = await getAuthSession();
   const forum: ExtendedForum | null = await getForumWithPosts(forumName);
   if (!forum) return notFound();
   return (
@@ -34,7 +34,7 @@ const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
         ) : (
           <PostFeed
             forumName={forum.name}
-            userId={currentUser?.id}
+            userId={session?.user.id}
             initialPosts={forum.posts}
             filters={{ tag }}
           />

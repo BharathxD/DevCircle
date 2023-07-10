@@ -19,8 +19,8 @@ import {
 const createForum = async (req: NextRequest): Promise<NextResponse> => {
   try {
     // Check if the request comes from an authenticated source
-    const currentUser = await getCurrentUser();
-    if (!currentUser) {
+    const session = await getAuthSession();
+    if (!session?.user) {
       // Return unauthorized response
       return NextResponse.json(
         { message: "This action requires authentication." },
@@ -47,12 +47,12 @@ const createForum = async (req: NextRequest): Promise<NextResponse> => {
 
     // Create the new forum
     const forum = await database.forum.create({
-      data: { name, creatorId: currentUser.id, description },
+      data: { name, creatorId: session?.user.id, description },
     });
 
     // Create a subscription for the current user
     await database.subscription.create({
-      data: { userId: currentUser.id, forumId: forum.id },
+      data: { userId: session?.user.id, forumId: forum.id },
     });
 
     // Return the forum name as the response

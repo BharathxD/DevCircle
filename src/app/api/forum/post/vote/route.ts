@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getCurrentUser } from "@/actions/getCurrentUser";
+import { getAuthSession } from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
@@ -16,16 +16,16 @@ import { PostVoteValidator } from "@/lib/validators/vote";
 const patchVotes = async (req: NextRequest): Promise<NextResponse> => {
   try {
     // Get the current user
-    const currentUser = await getCurrentUser();
+    const session = await getAuthSession();
 
     // If no user is found, return unauthorized response
-    if (!currentUser)
+    if (!session?.user)
       return NextResponse.json(
         { message: "Authentication required. Please log in." },
         { status: StatusCodes.UNAUTHORIZED }
       );
 
-    const { id: userId } = currentUser;
+    const { id: userId } = session.user;
     const { postId, voteType } = PostVoteValidator.parse(await req.json());
 
     // Retrieve the post with author and votes details
@@ -71,20 +71,20 @@ const patchVotes = async (req: NextRequest): Promise<NextResponse> => {
     const updatePromise =
       existingVote.type === voteType
         ? // If the existing vote is of the same type as the new vote, delete the vote and update vote count
-          Promise.all([
-            database.vote.delete({
-              where: { userId_postId: { userId, postId } },
-            }),
-            updateVoteCount({ id: postId, voteType: null, post }),
-          ])
+        Promise.all([
+          database.vote.delete({
+            where: { userId_postId: { userId, postId } },
+          }),
+          updateVoteCount({ id: postId, voteType: null, post }),
+        ])
         : // If the existing vote is of a different type, update the vote and update vote count
-          Promise.all([
-            database.vote.update({
-              where: { userId_postId: { userId, postId } },
-              data: { type: voteType },
-            }),
-            updateVoteCount({ id: postId, voteType, post }),
-          ]);
+        Promise.all([
+          database.vote.update({
+            where: { userId_postId: { userId, postId } },
+            data: { type: voteType },
+          }),
+          updateVoteCount({ id: postId, voteType, post }),
+        ]);
 
     await updatePromise;
 

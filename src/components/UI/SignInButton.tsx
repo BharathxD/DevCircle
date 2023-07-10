@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import type { User } from "@prisma/client";
+import type { Session } from "next-auth";
 
 import { cn } from "@/lib/utils";
 
 import UserAccountNav from "../Navigation/UserAccountNav";
 
 interface SignInButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
-  user: User | null;
+  user?: Session["user"];
 }
 
 const SignInButton: React.FC<SignInButtonProps> = ({

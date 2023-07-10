@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import { Badge } from "./Badge";
 
 interface TagProps {
@@ -13,9 +11,9 @@ const Tags: React.FC<TagProps> = ({ tags }) => {
   return (
     <div className="flex flex-row gap-1">
       {tags.map((tag, index) => (
-        <Link key={index} href={`?tag=${tag.name}`}>
+        <a key={index} href={`?tag=${tag.name}`}>
           <Badge variant="secondary">{tag.name}</Badge>
-        </Link>
+        </a>
       ))}
     </div>
   );

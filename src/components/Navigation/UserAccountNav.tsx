@@ -2,8 +2,8 @@
 
 import type { FC } from "react";
 import { useRouter } from "next/navigation";
-import type { User } from "@prisma/client";
 import { LogOut, PlusCircle, Settings, StretchHorizontal } from "lucide-react";
+import type { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 
 import {
@@ -17,7 +17,10 @@ import {
 import UserAvatar from "../UI/UserAvatar";
 
 interface UserAccountNavProps {
-  user: Pick<User, "image" | "username" | "email">;
+  user: Pick<
+    Pick<Session, "user">["user"],
+    "name" | "username" | "email" | "image"
+  >;
 }
 
 const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
@@ -32,7 +35,12 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <div className="flex h-full items-center justify-center  border-2 border-y-0 border-zinc-800 p-4 transition-colors hover:bg-yellow-300 dark:hover:bg-zinc-800">
-          <UserAvatar user={{ name: user.username, image: user.image }} />
+          <UserAvatar
+            user={{
+              name: user.username ?? user.name ?? null,
+              image: user.image ?? null,
+            }}
+          />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
