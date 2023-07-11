@@ -1,6 +1,5 @@
 "use client";
 
-import { Fragment } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import type { User } from "@prisma/client";
 import { MessageSquare, MessageSquareDashed } from "lucide-react";
@@ -55,7 +54,7 @@ const CommentsSection = async ({
           <SheetTitle>Top Comments ({comments.length})</SheetTitle>
         </SheetHeader>
         <section
-          className="no-scrollbar flex h-[59vh] w-full flex-col gap-2 overflow-hidden overflow-y-scroll rounded-md px-4 py-5 md:h-full"
+          className="no-scrollbar flex h-[50vh] w-full flex-col gap-2 overflow-hidden overflow-y-scroll rounded-md px-4 py-5 md:h-full"
           id="comments"
         >
           {topLevelComments.length === 0 && (
@@ -65,47 +64,45 @@ const CommentsSection = async ({
             </div>
           )}
           {topLevelComments.length !== 0 && (
-            <Fragment>
-              <div className="flex flex-col gap-4">
-                {topLevelComments.map((topLevelComment) => {
-                  const topLevelCommentAmount = topLevelComment.votes.reduce(
-                    (accumulator, vote) => {
-                      if (vote.type === "UP") accumulator++;
-                      if (vote.type === "DOWN") accumulator--;
-                      return accumulator as number;
-                    },
-                    0
-                  );
-                  const topLevelCommentVote = topLevelComment.votes.find(
-                    (vote) => vote.userId === userId
-                  );
-                  const hasReplies = topLevelComment.replies.length !== 0;
-                  return (
-                    <div key={topLevelComment.id} className="flex flex-col">
-                      <div className={cn(hasReplies && "mb-2")}>
-                        <PostComment
-                          comment={topLevelComment}
-                          initialCommentVoteAmount={topLevelCommentAmount}
-                          initialCommentVote={topLevelCommentVote?.type}
-                          userId={userId}
-                          postId={postId}
-                          isDeletable={!hasReplies}
-                          isAdmin={isAdmin}
-                        />
-                      </div>
-                      {hasReplies && (
-                        <CommentReplies
-                          postId={postId}
-                          topLevelComment={topLevelComment}
-                          userId={userId}
-                          isAdmin={isAdmin}
-                        />
-                      )}
+            <div className="flex flex-col gap-4">
+              {topLevelComments.map((topLevelComment) => {
+                const topLevelCommentAmount = topLevelComment.votes.reduce(
+                  (accumulator, vote) => {
+                    if (vote.type === "UP") accumulator++;
+                    if (vote.type === "DOWN") accumulator--;
+                    return accumulator as number;
+                  },
+                  0
+                );
+                const topLevelCommentVote = topLevelComment.votes.find(
+                  (vote) => vote.userId === userId
+                );
+                const hasReplies = topLevelComment.replies.length !== 0;
+                return (
+                  <div key={topLevelComment.id} className="flex flex-col">
+                    <div className={cn(hasReplies && "mb-2")}>
+                      <PostComment
+                        comment={topLevelComment}
+                        initialCommentVoteAmount={topLevelCommentAmount}
+                        initialCommentVote={topLevelCommentVote?.type}
+                        userId={userId}
+                        postId={postId}
+                        isDeletable={!hasReplies}
+                        isAdmin={isAdmin}
+                      />
                     </div>
-                  );
-                })}
-              </div>
-            </Fragment>
+                    {hasReplies && (
+                      <CommentReplies
+                        postId={postId}
+                        topLevelComment={topLevelComment}
+                        userId={userId}
+                        isAdmin={isAdmin}
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           )}
         </section>
         <div className="border-t-2 border-zinc-800 bg-zinc-50 px-3 py-5 dark:bg-zinc-900">

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getAuthSession, getCurrentUser } from "@/actions/getCurrentUser";
+import { getAuthSession } from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
@@ -93,7 +93,7 @@ const editForum = async (req: NextRequest): Promise<NextResponse> => {
 
     // Parse the request body and validate it using the forumUpdateValidator schema
     const requestBody = await req.json();
-    const { forumId, forumName, description } =
+    const { forumId, forumName, description, moderators } =
       forumUpdateValidator.parse(requestBody);
 
     // Convert the forum name to lowercase
@@ -129,6 +129,11 @@ const editForum = async (req: NextRequest): Promise<NextResponse> => {
       data: {
         name,
         description,
+        moderator: {
+          createMany: {
+            data: moderators
+          }
+        }
       },
     });
 

@@ -1,7 +1,7 @@
 "use server";
 
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
-import type { Forum } from "@prisma/client";
+import type { Forum, Moderator } from "@prisma/client";
 
 import type { ExtendedForum } from "@/types/database";
 import database from "@/lib/database";
@@ -12,10 +12,11 @@ import database from "@/lib/database";
  * @param {string} forumName - The name of the forum to retrieve.
  * @returns {Promise<Forum | null>} - A promise that resolves to the forum object with the specified forumName, or null if not found.
  */
-const getForum = async (forumName: string): Promise<Forum | null> => {
+const getForum = async (forumName: string): Promise<Forum & { moderator: Moderator[] } | null> => {
   try {
     const forum = await database.forum.findFirst({
       where: { name: forumName },
+      include: { moderator: true }
     });
     return forum ?? null;
   } catch (error) {
@@ -52,9 +53,9 @@ const getForumWithPosts = async (
           take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
         },
         creator: true,
-      },
+      }
     });
-    return forum ?? null;
+    return forum;
   } catch (error) {
     return null;
   }

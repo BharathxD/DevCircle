@@ -1,4 +1,4 @@
-import { object, string } from "zod";
+import { array, object, string } from "zod";
 import type { infer as zodInfer } from "zod";
 
 const forumValidator = object({
@@ -19,6 +19,7 @@ const forumUpdateValidator = object({
     .max(21, {
       message: "Forum name must contain at most 21 characters",
     }),
+  moderators: array(object({ userId: string({ required_error: "UserId is required" }) })),
   description: string({ required_error: "Description is required" })
     .min(10, { message: "Description must contain atleast 10 characters" })
     .max(75, { message: "Description must contain atmost 75 characters" }),

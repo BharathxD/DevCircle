@@ -29,11 +29,6 @@ type ModifiedPost = Post & {
   tags: Tag[];
 };
 
-/**
- * Generates the metadata for the post page.
- * @param {PageProps} params - The parameters for the page.
- * @returns {Promise<Metadata>} The metadata for the page.
- */
 const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { postId, forumName } = params;
 
@@ -121,11 +116,11 @@ const PostPage = async ({ params }: PageProps) => {
     username: post?.author?.username || cachedPost?.authorUsername || "",
     isAuthor:
       (post?.authorId || cachedPost?.authorId) === currentUser?.id ||
-      currentUser?.role === "admin",
+      currentUser?.userRole?.type === "ADMIN",
   };
   return (
     <div className="relative flex flex-col items-start gap-2 pt-2 md:flex-row">
-      <div className="flex w-full items-center justify-between gap-4 rounded-xl border-2 border-zinc-800 bg-zinc-50 bg-gradient-to-b from-muted/30 to-muted/30 p-1.5 pl-2.5 shadow-inner dark:bg-zinc-950 dark:from-background/10 dark:to-background/80 md:w-fit md:flex-col md:pl-1.5 md:pt-2.5">
+      <div className="flex w-full items-center justify-between gap-2 rounded-2xl border-2 border-zinc-800 bg-zinc-50 bg-gradient-to-b from-muted/30 to-muted/30 p-1.5 shadow-inner dark:bg-zinc-950 dark:from-background/10 dark:to-background/80 md:w-fit md:flex-col md:p-1.5">
         <Suspense fallback={<PostVoteShell />}>
           <PostVoteServer postId={postId} getData={() => getPost(postId)} />
         </Suspense>
@@ -135,7 +130,7 @@ const PostPage = async ({ params }: PageProps) => {
             postId={postId}
             comments={comments}
             userId={currentUser?.id}
-            isAdmin={currentUser?.role === "admin"}
+            isAdmin={currentUser?.userRole?.type === "ADMIN"}
           />
         </div>
       </div>

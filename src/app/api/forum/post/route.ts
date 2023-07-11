@@ -106,7 +106,7 @@ const editPost = async (req: NextRequest): Promise<NextResponse> => {
       );
     }
 
-    const isAdmin = currentUser.role === "admin";
+    const isAdmin = currentUser.userRole?.type === "ADMIN";
 
     // Parse the request body
     const body = await req.json();
@@ -199,7 +199,7 @@ const deletePost = async (req: NextRequest): Promise<NextResponse> => {
       );
     }
 
-    const isAdmin = currentUser.role === "admin";
+    const isAdmin = currentUser.userRole?.type === "ADMIN";
 
     // Parse the request body
     const url = new URL(req.url);

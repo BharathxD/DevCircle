@@ -45,7 +45,7 @@ model User {
   email         String?        @unique
   emailVerified DateTime?
   bio           String?
-  role          String?
+  roleId        String?        @unique
   createdforums Forum[]        @relation("CreatedBy")
   votes         Vote[]
   subscriptions Subscription[]
@@ -58,7 +58,22 @@ model User {
   commentVote   CommentVote[]
   socialMedia   SocialMedia?
 
-  socialMediaId String? @unique
+  socialMediaId String?     @unique
+  userRoleId    String?
+  userRole      UserRole?   @relation(fields: [userRoleId], references: [id])
+  Moderator     Moderator[]
+
+  @@index([userRoleId])
+}
+
+enum RoleType {
+  ADMIN
+}
+
+model UserRole {
+  id    String   @id @default(cuid())
+  type  RoleType
+  users User[]
 }
 
 model SocialMedia {
@@ -79,6 +94,7 @@ model Forum {
   creatorId   String?
   posts       Post[]
   subscribers Subscription[]
+  moderator   Moderator[]
   description String
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
@@ -87,6 +103,18 @@ model Forum {
 
   @@index([name])
   @@index([creatorId])
+}
+
+model Moderator {
+  userId  String
+  forumId String
+
+  user  User  @relation(fields: [userId], references: [id])
+  forum Forum @relation(fields: [forumId], references: [id])
+
+  @@id([userId, forumId])
+  @@index([userId])
+  @@index([forumId])
 }
 
 model Subscription {
@@ -114,8 +142,8 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  author  User      @relation(fields: [authorId], references: [id])
-  forum   Forum     @relation(fields: [forumId], references: [id])
+  author   User      @relation(fields: [authorId], references: [id])
+  forum    Forum     @relation(fields: [forumId], references: [id])
   comments Comment[]
 
   @@index([authorId])

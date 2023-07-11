@@ -1,6 +1,6 @@
 "use server";
 
-import type { User } from "@prisma/client";
+import type { User, UserRole } from "@prisma/client";
 import { getServerSession, type Session } from "next-auth";
 
 import type {
@@ -22,7 +22,7 @@ const getAuthSession = async (): Promise<Session | null> =>
  *
  * @returns {Promise<User | null>} - A promise that resolves to either a User object or null.
  */
-const getCurrentUser = async (): Promise<User | null> => {
+const getCurrentUser = async (): Promise<User & { userRole: UserRole | null } | null> => {
   try {
     const session = await getAuthSession();
     if (!session?.user?.email) {
@@ -30,6 +30,7 @@ const getCurrentUser = async (): Promise<User | null> => {
     }
     const currentUser = await database.user.findUnique({
       where: { email: session.user.email },
+      include: { userRole: true }
     });
     return currentUser ?? null;
   } catch (error) {

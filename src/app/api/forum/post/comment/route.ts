@@ -76,7 +76,7 @@ const DELETE = async (req: NextRequest): Promise<NextResponse> => {
       );
     }
 
-    const isAdmin = currentUser.role === "admin";
+    const isAdmin = currentUser.userRole?.type === "ADMIN";
 
     const url = new URL(req.url);
     const { commentId } = DeleteCommentValidator.parse({

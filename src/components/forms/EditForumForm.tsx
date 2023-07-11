@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { Forum } from "@prisma/client";
+import type { Forum, Moderator } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { useForm } from "react-hook-form";
@@ -30,7 +30,7 @@ import DeleteForum from "../Forum/DeleteForum";
 import { Button } from "../UI/Button";
 
 interface EditForumFormProps {
-  forum: Forum;
+  forum: Forum & { moderator: Moderator[] };
 }
 
 const EditForumForm: React.FC<EditForumFormProps> = ({ forum }) => {
@@ -94,6 +94,7 @@ const EditForumForm: React.FC<EditForumFormProps> = ({ forum }) => {
       return toast({
         title: "No changes detected",
         description: "The forum will only be updated if there are any changes.",
+        variant: "destructive",
       });
     }
     return updateForum({

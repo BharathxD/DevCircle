@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, type ChangeEvent } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FiGlobe } from "react-icons/fi";
 
 import { cn } from "@/lib/utils";
