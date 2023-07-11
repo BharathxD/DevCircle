@@ -125,7 +125,10 @@ const PostPage = async ({ params }: PageProps) => {
           <PostVoteServer postId={postId} getData={() => getPost(postId)} />
         </Suspense>
         <div className="flex flex-row gap-2 md:flex-col">
-          <ShareButton className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-300" />
+          <ShareButton
+            className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-300"
+            title={post?.title || cachedPost?.title || ""}
+          />
           <CommentsSection
             postId={postId}
             comments={comments}
@@ -134,7 +137,7 @@ const PostPage = async ({ params }: PageProps) => {
           />
         </div>
       </div>
-      <article className="no-scrollbar max-h-[80vh] w-full overflow-hidden overflow-y-scroll rounded-lg border-2 border-zinc-800 bg-gradient-to-b from-muted/30 to-muted/30 shadow-inner dark:from-background/10 dark:to-background/80">
+      <article className="no-scrollbar relative max-h-[80vh] w-full overflow-hidden overflow-y-scroll rounded-lg border-2 border-zinc-800 bg-gradient-to-b from-muted/30 to-muted/30 shadow-inner dark:from-background/10 dark:to-background/80">
         <PostContent {...postContentProps} />
       </article>
     </div>

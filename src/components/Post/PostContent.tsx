@@ -39,7 +39,7 @@ const PostContent: React.FC<PostContentProps> = ({
 }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const toggleEditing = useCallback(() => setIsEditing((prev) => !prev), []);
-  const renderUserInfo = () => {
+  const RenderUserInfo = () => {
     if (isEditing) return null;
     return (
       <div className="flex flex-row items-center gap-2">
@@ -63,16 +63,16 @@ const PostContent: React.FC<PostContentProps> = ({
       {!isEditing && (
         <header className="flex flex-col gap-4 bg-zinc-200 p-4 dark:bg-zinc-950/10">
           <Tags tags={tags} />
+          {isAuthor && (
+            <PostDropdownMenu onEdit={toggleEditing} postId={postId} />
+          )}
           <div
             className={cn(
               "flex w-full justify-between",
               isEditing && "justify-end"
             )}
           >
-            {renderUserInfo()}
-            {isAuthor && (
-              <PostDropdownMenu onEdit={toggleEditing} postId={postId} />
-            )}
+            <RenderUserInfo />
           </div>
           <h1 className="py-1 text-4xl font-extrabold text-zinc-800 dark:text-zinc-100 sm:text-2xl md:text-3xl md:leading-6 lg:text-4xl">
             {title}

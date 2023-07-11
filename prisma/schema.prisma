@@ -58,10 +58,9 @@ model User {
   commentVote   CommentVote[]
   socialMedia   SocialMedia?
 
-  socialMediaId String?     @unique
+  socialMediaId String?   @unique
   userRoleId    String?
-  userRole      UserRole?   @relation(fields: [userRoleId], references: [id])
-  Moderator     Moderator[]
+  userRole      UserRole? @relation(fields: [userRoleId], references: [id])
 
   @@index([userRoleId])
 }
@@ -94,7 +93,6 @@ model Forum {
   creatorId   String?
   posts       Post[]
   subscribers Subscription[]
-  moderator   Moderator[]
   description String
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
@@ -103,18 +101,6 @@ model Forum {
 
   @@index([name])
   @@index([creatorId])
-}
-
-model Moderator {
-  userId  String
-  forumId String
-
-  user  User  @relation(fields: [userId], references: [id])
-  forum Forum @relation(fields: [forumId], references: [id])
-
-  @@id([userId, forumId])
-  @@index([userId])
-  @@index([forumId])
 }
 
 model Subscription {

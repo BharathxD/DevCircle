@@ -1,7 +1,7 @@
 "use server";
 
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
-import type { Forum, Moderator, User } from "@prisma/client";
+import type { Forum, User } from "@prisma/client";
 
 import type { ExtendedForum } from "@/types/database";
 import database from "@/lib/database";
@@ -12,15 +12,15 @@ import database from "@/lib/database";
  * @param {string} forumName - The name of the forum to retrieve.
  * @returns {Promise<Forum | null>} - A promise that resolves to the forum object with the specified forumName, or null if not found.
  */
-const getForum = async (forumName: string): Promise<Forum & { moderator: Moderator[], creator: User | null } | null> => {
+const getForum = async (forumName: string): Promise<Forum & { creator: User | null } | null> => {
   try {
     const forum = await database.forum.findFirst({
       where: { name: forumName },
-      include: { moderator: true, creator: true }
+      include: { creator: true }
     });
     return forum;
   } catch (error) {
-    throw new Error("Failed to retrieve the forum.");
+    return null;
   }
 };
 
@@ -30,7 +30,6 @@ const getForum = async (forumName: string): Promise<Forum & { moderator: Moderat
  * @param {string} forumName - The name of the forum to retrieve.
  * @param {number} [limit] - The maximum number of posts to retrieve (optional).
  * @returns {Promise<ExtendedForum | null>} - A promise that resolves to the forum object with the specified forumName, or null if not found.
- * @throws {Error} - If an error occurs while retrieving the forum.
  */
 const getForumWithPosts = async (
   forumName: string,

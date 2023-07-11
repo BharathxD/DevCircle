@@ -21,7 +21,7 @@ const PostDropdownMenu: React.FC<PostDropdownMenuProps> = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="absolute right-5 top-7 hover:opacity-75">
+        <button className="absolute right-4 top-4 outline-none hover:opacity-75">
           <MoreVertical size={20} />
         </button>
       </DropdownMenuTrigger>

@@ -37,7 +37,6 @@ const PostCard: FC<PostCardProps> = ({
   isLoggedIn,
 }) => {
   const postRef = useRef<HTMLParagraphElement>(null);
-  const postUrl = `${siteConfig.url}/d/${forumName}/post/${post.id}`;
 
   const postContent = (
     <div
@@ -109,15 +108,13 @@ const PostCard: FC<PostCardProps> = ({
           <BiMessageAltDetail size={25} /> {commentAmount}{" "}
           <p className="hidden md:inline-block">comments</p>
         </Link>
-        <div className="flex h-full w-full flex-row items-center justify-end">
-          <div className="no-scrollbar flex h-full max-w-full flex-row items-center gap-2 overflow-hidden overflow-x-scroll px-2">
-            <Tags tags={post.tags} />
-          </div>
-          <ShareButton
-            url={postUrl}
-            className="border-0 border-l-2 border-l-zinc-800"
-          />
+        <div className="no-scrollbar flex h-full w-full flex-row items-center justify-start gap-2 overflow-x-scroll px-2 md:justify-end">
+          <Tags tags={post.tags} />
         </div>
+        <ShareButton
+          title={post.title}
+          className="border-0 border-l-2 border-l-zinc-800"
+        />
       </div>
     </motion.article>
   );

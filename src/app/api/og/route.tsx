@@ -22,10 +22,22 @@ const generateOg = (req: Request): ImageResponse => {
     return new ImageResponse(
       (
         <div
-          tw={`h-full w-full flex flex-col items-center justify-center bg-zinc-900 overflow-hidden border-[0.5rem] border-zinc-900 shadow-inner p-0`}
+          tw={`h-full w-full flex flex-col items-center justify-center overflow-hidden border-[0.5rem] border-zinc-900 shadow-inner p-0`}
+          style={{
+            backgroundColor: "#1c1917",
+            opacity: 1,
+            backgroundImage:
+              "linear-gradient(30deg, #d4d4d8 12%, transparent 12.5%, transparent 87%, #d4d4d8 87.5%, #d4d4d8), linear-gradient(150deg, #d4d4d8 12%, transparent 12.5%, transparent 87%, #d4d4d8 87.5%, #d4d4d8), linear-gradient(30deg, #d4d4d8 12%, transparent 12.5%, transparent 87%, #d4d4d8 87.5%, #d4d4d8), linear-gradient(150deg, #d4d4d8 12%, transparent 12.5%, transparent 87%, #d4d4d8 87.5%, #d4d4d8), linear-gradient(60deg, #d4d4d877 25%, transparent 25.5%, transparent 75%, #d4d4d877 75%, #d4d4d877), linear-gradient(60deg, #d4d4d877 25%, transparent 25.5%, transparent 75%, #d4d4d877 75%, #d4d4d877)",
+            backgroundSize: "80px 140px",
+            backgroundPosition:
+              "0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px",
+          }}
         >
-          <div tw="relative flex flex-col justify-center items-center bg-zinc-800 py-6 px-10 rounded-2xl shadow shadow-4xl">
-            <div tw="absolute top-4 left-4 flex flex-row gap-4">
+          <div
+            tw="relative flex flex-col justify-center items-center bg-zinc-900 py-6 px-10 rounded-2xl"
+            style={{ backgroundColor: "#18181b", zIndex: "10px" }}
+          >
+            <div tw="absolute top-4 left-4 flex flex-row">
               <div tw="h-5 w-5 rounded-full bg-red-500 mr-2"></div>
               <div tw="h-5 w-5 rounded-full bg-yellow-500 mr-2"></div>
               <div tw="h-5 w-5 rounded-full bg-green-500"></div>
@@ -64,7 +76,7 @@ const generateOg = (req: Request): ImageResponse => {
               <div tw="text-5xl text-center font-bold tracking-tight leading-tight text-zinc-50 px-8">
                 {title}
               </div>
-              <div tw="p-2 w-fit mb-5 text-3xl text-zinc-400 text-center font-normal tracking-tight leading-tight px-20">
+              <div tw="p-2 mb-5 text-3xl text-zinc-400 text-center font-normal tracking-tight leading-tight px-20">
                 {description}
               </div>
               <div tw="flex rounded-md shadow">

@@ -15,7 +15,7 @@ const getUsers = async (req: NextRequest): Promise<NextResponse> => {
     try {
         const url = new URL(req.url);
         const queryParam = string().parse(url.searchParams.get("query"));
-        const posts = await database.$queryRaw(Prisma.sql`SELECT P.id, P.title, P.createdAt, F.id, F.name as forumName FROM Post P JOIN Forum F ON P.forumId = F.id WHERE P.title LIKE ${`%${queryParam}%`}`)
+        const posts = await database.$queryRaw(Prisma.sql`SELECT P.id as postId, P.title as postTitle, P.createdAt, F.id as forumId, F.name as forumName FROM Post P JOIN Forum F ON P.forumId = F.id WHERE P.title LIKE ${`%${queryParam}%`}`)
         return NextResponse.json(posts, { status: StatusCodes.OK });
     } catch (error: unknown) {
         if (error instanceof ZodError) {

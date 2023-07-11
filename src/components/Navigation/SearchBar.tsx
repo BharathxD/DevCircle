@@ -10,12 +10,15 @@ import { useQuery } from "react-query";
 import type { SearchResults } from "@/types/database";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/UI/Dialog";
 
+import { Skeleton } from "../UI/Skeleton";
+
 const SearchBar: React.FC = () => {
   const router = useRouter();
   const [searchInput, setSearchInput] = useState<string>("");
   const {
     data: queryResults,
     refetch,
+    isFetching,
     isFetched,
   } = useQuery({
     queryFn: async () => {
@@ -50,30 +53,31 @@ const SearchBar: React.FC = () => {
               setSearchInput(event.target.value);
               await debounceRequest();
             }}
-            placeholder="Search for a community"
+            placeholder="Search posts"
           />
           {searchInput.length > 0 && (
             <div className="absolute inset-x-0 top-[110%] h-fit w-full rounded-md border-2 border-zinc-800 bg-zinc-50/75 shadow backdrop-blur-sm dark:bg-zinc-950/75">
-              {isFetched && !queryResults && (
-                <p className="inline-flex h-fit w-full items-center justify-center gap-2 p-5 text-lg">
-                  No results found.
-                </p>
-              )}
+              {isFetching && <Skeleton className="w-full rounded-none p-8" />}
+              {isFetched &&
+                !isFetching &&
+                (queryResults?.length ?? 0) === 0 && (
+                  <p className="inline-flex h-fit w-full items-center justify-center gap-2 p-5 text-lg">
+                    No results found.
+                  </p>
+                )}
               {(queryResults?.length ?? 0) > 0 && (
                 <ul className="list-none">
                   {queryResults?.map((post) => (
                     <li
                       className="inline-flex h-fit w-full items-center gap-2 p-5 text-lg hover:bg-zinc-800 hover:text-zinc-50"
                       onClick={() => {
-                        router.push(`/d/${post.forumName}/${post.id}`);
+                        router.push(`/d/${post.forumName}/post/${post.postId}`);
                         router.refresh();
                       }}
-                      key={post.id}
+                      key={post.postId}
                     >
                       <Users className="mr-2 h-4 w-4" />
-                      <a href={`/d/${post.forumName}/${post.id}`}>
-                        {post.title}
-                      </a>
+                      <p>{post.postTitle}</p>
                     </li>
                   ))}
                 </ul>

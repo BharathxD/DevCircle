@@ -93,7 +93,7 @@ const editForum = async (req: NextRequest): Promise<NextResponse> => {
 
     // Parse the request body and validate it using the forumUpdateValidator schema
     const requestBody = await req.json();
-    const { forumId, forumName, description, moderators } =
+    const { forumId, forumName, description } =
       forumUpdateValidator.parse(requestBody);
 
     // Convert the forum name to lowercase
@@ -129,11 +129,6 @@ const editForum = async (req: NextRequest): Promise<NextResponse> => {
       data: {
         name,
         description,
-        moderator: {
-          createMany: {
-            data: moderators
-          }
-        }
       },
     });
 

@@ -9,9 +9,10 @@ type ExtendedPost = Post & {
 };
 
 type SearchResults = {
-  id: string
-  title: string
+  postId: string
+  postTitle: string
   createdAt: Date;
+  forumId: string
   forumName: string
 }
 

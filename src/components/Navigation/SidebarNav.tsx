@@ -4,7 +4,14 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMediaQuery } from "@mantine/hooks";
-import { Crown, Home, PlusSquare, UserCircle2, Users2 } from "lucide-react";
+import {
+  Crown,
+  Home,
+  PlusSquare,
+  Settings,
+  UserCircle2,
+  Users2,
+} from "lucide-react";
 import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
@@ -17,11 +24,32 @@ const SidebarNav = () => {
   const pathname = usePathname();
 
   const navLinks = [
-    { href: "/home", icon: Home, text: "Home" },
-    { href: "/profile", icon: UserCircle2, text: "Profile" },
-    { href: "/leaderboard", icon: Crown, text: "Leaderboards" },
-    { href: "/subscribed", icon: Users2, text: "Subscribed Communities" },
-    { href: "/d/create", icon: PlusSquare, text: "Create Community" },
+    { href: "/home", icon: Home, text: "Home", requireAuth: false },
+    { href: "/profile", icon: UserCircle2, text: "Profile", requireAuth: true },
+    {
+      href: "/leaderboard",
+      icon: Crown,
+      text: "Leaderboards",
+      requireAuth: true,
+    },
+    {
+      href: "/subscribed",
+      icon: Users2,
+      text: "Subscribed Communities",
+      requireAuth: true,
+    },
+    {
+      href: "/d/create",
+      icon: PlusSquare,
+      text: "Create Community",
+      requireAuth: false,
+    },
+    {
+      href: "/settings",
+      icon: Settings,
+      text: "Settings",
+      requireAuth: false,
+    },
   ];
 
   if (!isDesktopScreen) {
@@ -33,7 +61,7 @@ const SidebarNav = () => {
         {navLinks
           .filter(({ href }) => href !== "/d/create")
           .map(({ href, icon: Icon }) => {
-            if (href === "/profile" && !isLoggedIn) return null;
+            if (!isLoggedIn) return null;
             return (
               <Link
                 key={href}
@@ -61,8 +89,8 @@ const SidebarNav = () => {
     >
       <aside className="flex h-full w-full list-none flex-col rounded-md">
         <div className="w-full overflow-hidden border-b-2 border-zinc-800">
-          {navLinks.map(({ href, icon: Icon, text }) => {
-            if ((href === "/profile" || href === "/subscribed") && !isLoggedIn)
+          {navLinks.map(({ href, icon: Icon, text, requireAuth }) => {
+            if ((requireAuth && !isLoggedIn) || href === "/settings")
               return null;
             return (
               <Link
