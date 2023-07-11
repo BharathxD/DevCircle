@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getAuthSession, getCurrentUser } from "@/actions/getCurrentUser";
+import { getAuthSession } from "@/actions/getCurrentUser";
 import { getForumWithPosts } from "@/actions/getForum";
 
 import type { ExtendedForum } from "@/types/database";
@@ -16,6 +16,11 @@ interface ForumPageProps {
   };
 }
 
+/**
+ * Component for displaying a forum page with posts.
+ * @param {ForumPageProps} params - The parameters for the component.
+ * @returns {JSX.Element} The JSX element for the forum page.
+ */
 const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
   const { forumName } = params;
   const { tag } = searchParams;
@@ -27,7 +32,10 @@ const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
       <MiniCreatePost />
       <ScrollArea className="no-scrollbar fixed max-h-[70vh] w-full overflow-hidden overflow-y-auto pb-4">
         {forum.posts.length === 0 ? (
-          <div className="w-full rounded-md border-2 border-zinc-800 bg-yellow-300 p-2 text-center font-medium text-zinc-800 dark:bg-zinc-900 dark:text-zinc-50">
+          <div
+            className="w-full rounded-md border-2 border-zinc-800 bg-yellow-300 p-2 text-center font-medium text-zinc-800 dark:bg-zinc-900 dark:text-zinc-50"
+            role="alert"
+          >
             Be the first to post! No posts found. Why not be the first one to
             share your thoughts?
           </div>

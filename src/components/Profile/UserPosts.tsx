@@ -11,9 +11,7 @@ interface UserPostsProps {
 
 const UserPosts: React.FC<UserPostsProps> = ({ posts }) => {
   return (
-    <div
-      className={`mx-auto my-4 flex max-w-5xl flex-col items-start justify-start gap-4 px-4 py-2 sm:px-6 lg:px-8`}
-    >
+    <div className="mx-auto my-4 flex max-w-5xl flex-col items-start justify-start gap-4 px-4 py-2 sm:px-6 lg:px-8">
       {posts?.length !== 0 ? (
         <Fragment>
           <h1 className="text-lg font-bold">Published Posts</h1>

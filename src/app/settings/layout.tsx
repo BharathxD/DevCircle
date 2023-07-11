@@ -1,4 +1,4 @@
-import SettingsMenu from "@/components/Navigation/SettingsMenu";
+import SettingsMenu from "@/components/Navigation/SettingsNav";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (

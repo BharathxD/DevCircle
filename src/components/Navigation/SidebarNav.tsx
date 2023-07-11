@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 import Footer from "../Widgets/Footer";
 
-const HomepageMenu = () => {
+const SidebarNav = () => {
   const isLoggedIn = useSession().status === "authenticated";
   const isDesktopScreen = useMediaQuery("(min-width: 640px)");
   const pathname = usePathname();
@@ -88,4 +88,4 @@ const HomepageMenu = () => {
   );
 };
 
-export default HomepageMenu;
+export default SidebarNav;

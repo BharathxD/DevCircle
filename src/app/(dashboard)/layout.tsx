@@ -1,4 +1,4 @@
-import HomepageMenu from "@/components/Navigation/HomepageMenu";
+import SidebarNav from "@/components/Navigation/SidebarNav";
 import Shell from "@/components/UI/Shell";
 
 interface rootProps {
@@ -10,7 +10,7 @@ export default async function RootLayout({ children }: rootProps) {
   return (
     <Shell>
       {children}
-      <HomepageMenu />
+      <SidebarNav />
     </Shell>
   );
 }

@@ -15,7 +15,7 @@ import {
 } from "../UI/DropdownMenu";
 import UserAvatar from "../UI/UserAvatar";
 
-interface UserAccountNavProps {
+interface UserNavProps {
   user: {
     name?: string | null;
     username?: string | null;
@@ -24,7 +24,7 @@ interface UserAccountNavProps {
   };
 }
 
-const UserAccountNav: React.FC<UserAccountNavProps> = ({ user }) => {
+const UserNav: React.FC<UserNavProps> = ({ user }) => {
   const router = useRouter();
 
   const handleSignOut = async (event: Event) => {
@@ -87,4 +87,4 @@ const UserAccountNav: React.FC<UserAccountNavProps> = ({ user }) => {
   );
 };
 
-export default UserAccountNav;
+export default UserNav;

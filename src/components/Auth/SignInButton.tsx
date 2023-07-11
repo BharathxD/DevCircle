@@ -5,7 +5,7 @@ import type { Session } from "next-auth";
 
 import { cn } from "@/lib/utils";
 
-import UserAccountNav from "../Navigation/UserAccountNav";
+import UserNav from "../Navigation/UserNav";
 
 interface SignInButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
   user?: Session["user"];
@@ -16,7 +16,7 @@ const SignInButton: React.FC<SignInButtonProps> = ({
   className,
   ...props
 }) => {
-  if (user) return <UserAccountNav user={user} />;
+  if (user) return <UserNav user={user} />;
   return (
     <Link
       href="/signin"

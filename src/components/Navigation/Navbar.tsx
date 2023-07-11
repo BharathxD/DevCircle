@@ -1,7 +1,7 @@
 import { getAuthSession } from "@/actions/getCurrentUser";
 
+import SignInButton from "../Auth/SignInButton";
 import Logo from "../UI/Logo";
-import SignInButton from "../UI/SignInButton";
 import ThemeSwitchers from "../UI/ThemeSwitchers";
 import SearchBar from "./SearchBar";
 

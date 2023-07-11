@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import { getForumWithPosts } from "@/actions/getForum";
@@ -7,16 +6,13 @@ import database from "@/lib/database";
 import ForumInfoWidget from "@/components/Widgets/ForumInfoWidget";
 
 interface LayoutProps {
-  children: ReactNode;
+  children: React.ReactNode;
   params: {
     forumName: string;
   };
 }
 
-const Layout = async ({
-  children,
-  params: { forumName: forumName },
-}: LayoutProps) => {
+const Layout = async ({ children, params: { forumName } }: LayoutProps) => {
   const [currentUser, forum] = await Promise.all([
     getCurrentUser(),
     getForumWithPosts(forumName),
@@ -32,10 +28,10 @@ const Layout = async ({
 
   const isSubscribed = !!subscription;
 
-  // Get the count of forum members
   const memberCount = await database.subscription.count({
     where: { forum: { name: forumName } },
   });
+
   return (
     <div className="h-full pb-0 pt-3 font-medium">
       <div className="grid grid-cols-1 gap-y-4 md:grid-cols-4 md:gap-x-4">

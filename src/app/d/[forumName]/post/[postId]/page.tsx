@@ -14,7 +14,6 @@ import CommentsSection from "@/components/Comments/CommentsSection";
 import PostContent from "@/components/Post/PostContent";
 import PostVoteServer from "@/components/Post/PostVoteServer";
 import PostVoteShell from "@/components/UI/PostVoteShell";
-import { ScrollArea } from "@/components/UI/ScrollArea";
 import ShareButton from "@/components/UI/ShareButton";
 
 interface PageProps {
@@ -31,9 +30,9 @@ type ModifiedPost = Post & {
 };
 
 /**
- * Generate metadata for a page.
- * @param params Page parameters.
- * @returns Promise resolving to the generated metadata.
+ * Generates the metadata for the post page.
+ * @param {PageProps} params - The parameters for the page.
+ * @returns {Promise<Metadata>} The metadata for the page.
  */
 const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { postId, forumName } = params;

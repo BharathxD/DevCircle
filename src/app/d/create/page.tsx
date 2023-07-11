@@ -1,7 +1,4 @@
-"use client";
-
-import { useState } from "react";
-import type { FC } from "react";
+import { useState, type ChangeEvent } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
@@ -14,7 +11,7 @@ import { Button } from "@/components/UI/Button";
 import { Input } from "@/components/UI/Input";
 import { Textarea } from "@/components/UI/Textarea";
 
-const PostCreationPage: FC = () => {
+const CreatePostPage: React.FC = () => {
   const pathname = usePathname();
   const [input, setInput] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -32,7 +29,6 @@ const PostCreationPage: FC = () => {
       const { data } = await axios.post<string>("/api/forum", payload);
       return data;
     },
-
     onError: async (error: AxiosError | Error) => {
       const errorMap: {
         [key: number]: {
@@ -94,7 +90,9 @@ const PostCreationPage: FC = () => {
                 <Input
                   value={input}
                   type="text"
-                  onChange={(event) => setInput(event.target.value)}
+                  onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                    setInput(event.target.value)
+                  }
                   className="pl-6"
                   placeholder="Geopolitics"
                 />
@@ -106,7 +104,9 @@ const PostCreationPage: FC = () => {
               <div>
                 <Textarea
                   value={description}
-                  onChange={(event) => setDescription(event.target.value)}
+                  onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+                    setDescription(event.target.value)
+                  }
                   className="resize-none border-zinc-700 outline-none"
                   rows={2}
                   minLength={10}
@@ -142,4 +142,4 @@ const PostCreationPage: FC = () => {
   );
 };
 
-export default PostCreationPage;
+export default CreatePostPage;
