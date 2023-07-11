@@ -23,7 +23,13 @@ export const extractString = (str: string) => {
   return str.slice(0, 75) + "...";
 };
 
-export const generateShareUrl = ({ title, url }: { title: string, url: string }) => {
+export const generateShareUrl = ({
+  title,
+  url,
+}: {
+  title: string;
+  url: string;
+}) => {
   const twitter = queryString.stringifyUrl({
     url: "https://twitter.com/intent/tweet",
     query: { url, text: title },
@@ -34,7 +40,11 @@ export const generateShareUrl = ({ title, url }: { title: string, url: string })
   });
   const facebook = queryString.stringifyUrl({
     url: "https://www.facebook.com/dialog/share",
-    query: { href: url, display: "popup", app_id: env.NEXT_PUBLIC_FB_APP_ID }
-  })
-  return [{ url: twitter, icon: FaTwitter }, { url: linkedIn, icon: FaLinkedin }, { url: facebook, icon: FaFacebook }]
-}
+    query: { href: url, display: "popup", app_id: env.NEXT_PUBLIC_FB_APP_ID },
+  });
+  return [
+    { url: twitter, icon: FaTwitter },
+    { url: linkedIn, icon: FaLinkedin },
+    { url: facebook, icon: FaFacebook },
+  ];
+};

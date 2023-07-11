@@ -9,12 +9,12 @@ type ExtendedPost = Post & {
 };
 
 type SearchResults = {
-  postId: string
-  postTitle: string
+  postId: string;
+  postTitle: string;
   createdAt: Date;
-  forumId: string
-  forumName: string
-}
+  forumId: string;
+  forumName: string;
+};
 
 type ExtendedForum = Forum & {
   posts: ExtendedPost[];

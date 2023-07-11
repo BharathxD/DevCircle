@@ -22,7 +22,9 @@ const getAuthSession = async (): Promise<Session | null> =>
  *
  * @returns {Promise<User | null>} - A promise that resolves to either a User object or null.
  */
-const getCurrentUser = async (): Promise<User & { userRole: UserRole | null } | null> => {
+const getCurrentUser = async (): Promise<
+  (User & { userRole: UserRole | null }) | null
+> => {
   try {
     const session = await getAuthSession();
     if (!session?.user?.email) {
@@ -30,7 +32,7 @@ const getCurrentUser = async (): Promise<User & { userRole: UserRole | null } | 
     }
     const currentUser = await database.user.findUnique({
       where: { email: session.user.email },
-      include: { userRole: true }
+      include: { userRole: true },
     });
     return currentUser ?? null;
   } catch (error) {

@@ -12,11 +12,13 @@ import database from "@/lib/database";
  * @param {string} forumName - The name of the forum to retrieve.
  * @returns {Promise<Forum | null>} - A promise that resolves to the forum object with the specified forumName, or null if not found.
  */
-const getForum = async (forumName: string): Promise<Forum & { creator: User | null } | null> => {
+const getForum = async (
+  forumName: string
+): Promise<(Forum & { creator: User | null }) | null> => {
   try {
     const forum = await database.forum.findFirst({
       where: { name: forumName },
-      include: { creator: true }
+      include: { creator: true },
     });
     return forum;
   } catch (error) {
@@ -52,7 +54,7 @@ const getForumWithPosts = async (
           take: limit ?? INFINITE_SCROLL_PAGINATION_RESULTS,
         },
         creator: true,
-      }
+      },
     });
     return forum;
   } catch (error) {
