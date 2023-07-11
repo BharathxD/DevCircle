@@ -116,7 +116,7 @@ const editForum = async (req: NextRequest): Promise<NextResponse> => {
     if (!isCreator) {
       // Return forbidden response if the user is unauthorized
       return NextResponse.json(
-        { message: "Only creator of this forum can make changes to the forum" },
+        { message: "This action requires authorization." },
         { status: StatusCodes.FORBIDDEN }
       );
     }
@@ -196,7 +196,7 @@ const deleteForum = async (req: NextRequest): Promise<NextResponse> => {
     if (!isCreator) {
       // Return forbidden response if the user is unauthorized
       return NextResponse.json(
-        { message: "Only creator of this forum can make changes to the forum" },
+        { message: "This action requires authorization." },
         { status: StatusCodes.FORBIDDEN }
       );
     }

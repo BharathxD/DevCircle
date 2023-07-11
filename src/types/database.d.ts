@@ -8,6 +8,13 @@ type ExtendedPost = Post & {
   tags: Tag[];
 };
 
+type SearchResults = {
+  id: string
+  title: string
+  createdAt: Date;
+  forumName: string
+}
+
 type ExtendedForum = Forum & {
   posts: ExtendedPost[];
   author?: User;
@@ -33,6 +40,7 @@ type UserWithSocialLinksAndPosts = User & {
 
 export {
   ExtendedPost,
+  SearchResults,
   ExtendedForum,
   ExtendedComment,
   UserWithSocialLinks,

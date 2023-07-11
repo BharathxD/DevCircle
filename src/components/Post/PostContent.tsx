@@ -50,7 +50,7 @@ const PostContent: React.FC<PostContentProps> = ({
           }}
         />
         <p className="mt-1 flex max-h-40 items-center truncate text-zinc-500 dark:text-zinc-300">
-          <Link href={`/user/${username}`}>Posted by u/{username}</Link>
+          <Link href={`/u/${username}`}>Posted by u/{username}</Link>
           <Dot />
           {formatTimeToNow(new Date(createdAt))}
         </p>

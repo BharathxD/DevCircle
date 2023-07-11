@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/actions/getCurrentUser";
-import { getForumWithPosts } from "@/actions/getForum";
+import { getForum } from "@/actions/getForum";
 
 import database from "@/lib/database";
 import ForumInfoWidget from "@/components/Widgets/ForumInfoWidget";
@@ -15,7 +15,7 @@ interface LayoutProps {
 const Layout = async ({ children, params: { forumName } }: LayoutProps) => {
   const [currentUser, forum] = await Promise.all([
     getCurrentUser(),
-    getForumWithPosts(forumName),
+    getForum(forumName),
   ]);
 
   if (!forum) return notFound();
