@@ -88,7 +88,6 @@
     "react-spinners": "^0.13.8",
     "react-textarea-autosize": "^8.5.0",
     "server-only": "^0.0.1",
-    "sharp": "^0.32.1",
     "tailwind-merge": "^1.13.2",
     "tailwindcss-animate": "^1.0.6",
     "uploadthing": "^5.0.0",

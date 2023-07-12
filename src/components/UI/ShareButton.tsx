@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import siteConfig from "@/config";
@@ -34,16 +34,16 @@ const ShareButton: React.FC<ShareButtonProps> = ({
   const clipboard = useClipboard({ timeout: 500 });
   const [onMount, setOnMount] = useState<boolean>(false);
   const pathName = usePathname();
+
   const data = {
     title: `Check out my new post on DevCircle: \n${title}`,
     url: siteConfig.url + pathName,
   };
+
   const handleShare = async () => {
-    // Only triggers if the site origin has SSL enabled
-    if (navigator.share) {
-      await navigator.share(data);
-    }
+    if (navigator.share) await navigator.share(data);
   };
+
   const handleCopy = async () => {
     clipboard.copy(data.url);
     toast({
@@ -51,10 +51,11 @@ const ShareButton: React.FC<ShareButtonProps> = ({
       description: "You can share this link with anyone.",
     });
   };
-  useEffect(() => {
-    setOnMount(true);
-  }, []);
-  if (!onMount) return;
+
+  useEffect(() => setOnMount(true), []);
+
+  if (!onMount) return null;
+
   if (!isDesktopScreen) {
     return (
       <button
@@ -69,6 +70,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
       </button>
     );
   }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -88,21 +90,22 @@ const ShareButton: React.FC<ShareButtonProps> = ({
         </DialogHeader>
         <DialogDescription className="flex flex-col items-center gap-4 overflow-hidden md:flex-row md:gap-2">
           <div className="inline-flex flex-row items-center gap-2">
-            {generateShareUrl(data).map((social) => {
-              return (
-                <Link
-                  href={social.url}
-                  className="rounded-full border-2 border-zinc-800 p-2 hover:bg-zinc-700"
-                  referrerPolicy="no-referrer"
-                  target="_blank"
-                >
-                  <social.icon className="h-8 w-8 text-zinc-50" />
-                </Link>
-              );
-            })}
+            {generateShareUrl(data).map((social, index) => (
+              <Link
+                key={index}
+                href={social.url}
+                className="rounded-full border-2 border-zinc-800 p-2 hover:bg-zinc-700"
+                referrerPolicy="no-referrer"
+                target="_blank"
+              >
+                <social.icon className="h-8 w-8 text-zinc-50" />
+              </Link>
+            ))}
           </div>
           <div className="inline-flex flex-row items-center gap-2">
-            <div className="flex max-w-[200px] items-center truncate rounded-full border-2 border-zinc-800 p-2 text-lg">{`${siteConfig.url}${pathName}`}</div>
+            <div className="flex max-w-[200px] items-center truncate rounded-full border-2 border-zinc-800 p-2 text-lg">
+              {`${siteConfig.url}${pathName}`}
+            </div>
             <Button
               className="h-max rounded-full px-4"
               variant="outline"
