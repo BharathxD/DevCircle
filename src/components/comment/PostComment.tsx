@@ -177,6 +177,7 @@ const PostComment: React.FC<PostCommentProps> = ({
                 id="comment"
                 autoFocus
                 onFocus={(event) =>
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
                   event.currentTarget.setSelectionRange(
                     event.currentTarget.value.length,
                     event.currentTarget.value.length
