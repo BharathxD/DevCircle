@@ -3,12 +3,20 @@
 import type { FC } from "react";
 import dynamic from "next/dynamic";
 
-import CustomCodeRenderer from "../Renderers/CustomCodeRenderer";
-import CustomImageRenderer from "../Renderers/CustomImageRenderer";
-import CustomTableRenderer from "../Renderers/CustomTableRenderer";
-
 const Output = dynamic(
   async () => (await import("editorjs-react-renderer")).default,
+  { ssr: false }
+);
+const CustomCodeRenderer = dynamic(
+  async () => (await import("../Renderers/CustomCodeRenderer")).default,
+  { ssr: false }
+);
+const CustomImageRenderer = dynamic(
+  async () => (await import("../Renderers/CustomImageRenderer")).default,
+  { ssr: false }
+);
+const CustomTableRenderer = dynamic(
+  async () => (await import("../Renderers/CustomTableRenderer")).default,
   { ssr: false }
 );
 
