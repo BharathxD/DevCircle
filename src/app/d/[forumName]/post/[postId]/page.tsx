@@ -10,11 +10,11 @@ import type { Post, Tag, User, Vote } from "@prisma/client";
 
 import database from "@/lib/database";
 import { absoluteUrl, extractString } from "@/lib/utils";
-import PostVoteShell from "@/components/ui/PostVoteShell";
-import ShareButton from "@/components/ui/ShareButton";
 import CommentsSection from "@/components/comments/CommentsSection";
 import PostContent from "@/components/post/PostContent";
 import PostVoteServer from "@/components/post/PostVoteServer";
+import PostVoteShell from "@/components/ui/PostVoteShell";
+import ShareButton from "@/components/ui/ShareButton";
 
 interface PageProps {
   params: {
