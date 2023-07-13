@@ -44,7 +44,7 @@ const CommunityLeaderboard: React.FC<CommunityLeaderboardProps> = ({
                 <AiOutlineInfoCircle size={20} className="text-zinc-400" />
               </TooltipTrigger>
               <TooltipContent sideOffset={10}>
-                <p>Leaderboard gets updated every 12h</p>
+                <p>Leaderboard gets updated every 24h</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
