@@ -2,12 +2,12 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
-import siteConfig from "@/config";
 
 import RtkProvider from "@/providers/RtkProvider";
 import Session from "@/providers/SessionProviders";
 import ThemeProvider from "@/providers/ThemeProvider";
 import { Toaster } from "@/providers/Toaster";
+import siteConfig from "@/config/site";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navigation/Navbar";
 
@@ -70,14 +70,14 @@ export default async function RootLayout({ children, userModal }: rootProps) {
     <html lang="en" className={cn("antialiased", montserrat.className)}>
       <Session>
         <RtkProvider>
-          <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-neutral-950 dark:text-zinc-50">
-            <ThemeProvider>
+          <ThemeProvider>
+            <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-neutral-950 dark:text-zinc-50">
               <Navbar />
               {userModal}
               {children}
               <Toaster />
-            </ThemeProvider>
-          </body>
+            </body>
+          </ThemeProvider>
         </RtkProvider>
       </Session>
     </html>

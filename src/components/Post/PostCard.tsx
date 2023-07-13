@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import type { FC } from "react";
 import Link from "next/link";
-import siteConfig from "@/config";
 import type { Post, Tag, User, Vote } from "@prisma/client";
 import { motion } from "framer-motion";
 import { BiMessageAltDetail } from "react-icons/bi";

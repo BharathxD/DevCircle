@@ -1,9 +1,9 @@
 "use server";
 
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 import type { Forum, User } from "@prisma/client";
 
 import type { ExtendedForum } from "@/types/database";
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config/site";
 import database from "@/lib/database";
 
 /**

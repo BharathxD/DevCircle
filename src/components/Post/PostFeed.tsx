@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 import { useIntersection } from "@mantine/hooks";
 import type { Forum, User } from "@prisma/client";
 import axios from "axios";
@@ -13,6 +12,7 @@ import { useInfiniteQuery } from "react-query";
 import { PulseLoader } from "react-spinners";
 
 import type { ExtendedPost } from "@/types/database";
+import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 import PostCard from "./PostCard";

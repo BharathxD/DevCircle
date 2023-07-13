@@ -1,4 +1,4 @@
-import { array, object, string } from "zod";
+import { object, string } from "zod";
 import type { infer as zodInfer } from "zod";
 
 const forumValidator = object({

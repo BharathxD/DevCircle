@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import siteConfig from "@/config";
 import { motion } from "framer-motion";
 import { TbSmartHome } from "react-icons/tb";
+
+import siteConfig from "@/config/site";
 
 const CreateCommunity = () => {
   return (

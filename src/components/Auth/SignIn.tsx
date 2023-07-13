@@ -2,8 +2,9 @@
 
 import type { FC } from "react";
 import Link from "next/link";
-import siteConfig from "@/config";
 import { FiGlobe } from "react-icons/fi";
+
+import siteConfig from "@/config/site";
 
 import {
   Card,

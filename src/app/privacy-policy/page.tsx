@@ -1,5 +1,4 @@
-import siteConfig from "@/config";
-
+import siteConfig from "@/config/site";
 import Typography from "@/components/UI/Typography";
 
 const PrivacyPolicyPage = () => {
@@ -145,9 +144,9 @@ const PrivacyPolicyPage = () => {
               request access to the personal information we hold about you.
             </p>
             <p>
-              <span className="text-base font-semibold">Correction:</span>You can
-              request that we correct or update your personal information if it
-              is inaccurate or incomplete. Deletion: You can request the
+              <span className="text-base font-semibold">Correction:</span>You
+              can request that we correct or update your personal information if
+              it is inaccurate or incomplete. Deletion: You can request the
               deletion of your personal information.
             </p>
             <p>

@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import siteConfig from "@/config";
 import { Copyright } from "lucide-react";
+
+import siteConfig from "@/config/site";
 
 import { Card, CardFooter, CardHeader } from "../UI/Card";
 

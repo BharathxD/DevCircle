@@ -1,5 +1,4 @@
-import siteConfig from "@/config";
-
+import siteConfig from "@/config/site";
 import Typography from "@/components/UI/Typography";
 
 const TermsPage = () => {

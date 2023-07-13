@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import siteConfig from "@/config";
 import { useClipboard, useMediaQuery } from "@mantine/hooks";
 import { Copy } from "lucide-react";
 import { FiShare2 } from "react-icons/fi";
 
+import siteConfig from "@/config/site";
 import { cn, generateShareUrl } from "@/lib/utils";
 import { toast } from "@/hooks/useToast";
 import {

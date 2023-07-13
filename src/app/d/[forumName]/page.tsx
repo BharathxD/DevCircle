@@ -4,10 +4,10 @@ import Head from "next/head";
 import { notFound } from "next/navigation";
 import { getAuthSession } from "@/actions/getCurrentUser";
 import { getForumWithPosts } from "@/actions/getForum";
-import siteConfig from "@/config";
 import { env } from "@/env.mjs";
 
 import type { ExtendedForum } from "@/types/database";
+import siteConfig from "@/config/site";
 import { capitalizeString, extractString } from "@/lib/utils";
 import MiniCreatePost from "@/components/Post/MiniCreatePost";
 import PostFeed from "@/components/Post/PostFeed";

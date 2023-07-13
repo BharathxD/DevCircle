@@ -84,7 +84,7 @@ const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   };
 };
 
-const PostPage = async ({ params }: PageProps) => {
+async function PostPage({ params }: PageProps) {
   const { postId } = params;
   if (!postId) return notFound();
   const cachedPost = await getCachedPost(postId);
@@ -142,7 +142,7 @@ const PostPage = async ({ params }: PageProps) => {
       </article>
     </div>
   );
-};
+}
 
 export { generateMetadata };
 export default PostPage;
