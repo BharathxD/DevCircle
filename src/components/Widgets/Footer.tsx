@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
         </p>
       </CardHeader>
       <CardFooter className="flex flex-row gap-2 pb-4 text-sm">
-        <Link href="/privacy">Privacy & Policy</Link>
+        <Link href="/privacy-policy">Privacy & Policy</Link>
         <Link href="/terms">Terms</Link>
       </CardFooter>
     </Card>
