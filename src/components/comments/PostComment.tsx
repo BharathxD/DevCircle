@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import type { Comment, CommentVote, User, VoteType } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
-import { MessageCircle, MoreVertical } from "lucide-react";
+import { MessageCircle, MessageSquare, MoreVertical } from "lucide-react";
 import queryString from "query-string";
 import { useMutation } from "react-query";
 
@@ -165,8 +165,12 @@ const PostComment: React.FC<PostCommentProps> = ({
             isLoggedIn={!!userId}
             classNames="h-10 flex-row w-min"
           />
-          <Button onClick={toggleReplying} variant="skeleton">
-            <MessageCircle className="h-4 w-4" />
+          <Button
+            onClick={toggleReplying}
+            variant="noDisableOutline"
+            className="h-11 rounded-xl bg-zinc-50 px-3 text-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:text-zinc-50"
+          >
+            <MessageSquare className="h-5 w-5" />
           </Button>
         </div>
         {isReplying && (
@@ -196,7 +200,6 @@ const PostComment: React.FC<PostCommentProps> = ({
                   Cancel
                 </Button>
                 <Button
-                  variant="outline"
                   disabled={replyIsLoading || input.length === 0}
                   isLoading={replyIsLoading}
                   onClick={handleReply}

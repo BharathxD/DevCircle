@@ -91,15 +91,15 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
   );
   return (
     <div
-      className={cn("flex w-16 flex-col items-center gap-4 pb-0", classNames)}
+      className={cn("flex h-full w-auto flex-row items-center gap-4")}
     >
       <Button
         size="sm"
-        variant="outline"
+        variant="noDisableOutline"
         aria-label="upvote"
         onClick={() => handleVote("UP")}
         className={cn(
-          "text-zinc-800 hover:bg-green-300 hover:text-zinc-800 hover:outline-2 hover:outline-green-500 dark:text-zinc-50 dark:hover:bg-green-500 dark:hover:text-zinc-50",
+          "h-11 rounded-xl bg-zinc-50 text-zinc-800 hover:bg-green-300 hover:text-zinc-800 hover:outline-2 hover:outline-green-500 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:bg-green-500 dark:hover:text-zinc-50",
           {
             "bg-green-300 dark:bg-green-500 dark:outline-green-600":
               currentVote === "UP",
@@ -114,11 +114,11 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
       </p>
       <Button
         size="sm"
-        variant="outline"
+        variant="noDisableOutline"
         aria-label="downvote"
         onClick={() => handleVote("DOWN")}
         className={cn(
-          "text-zinc-800 hover:bg-red-300 hover:text-zinc-800 hover:outline-2 hover:outline-red-500 dark:text-zinc-50 dark:hover:bg-red-500 dark:hover:text-zinc-50",
+          "h-11 rounded-xl bg-zinc-50 text-zinc-800 hover:bg-red-300 hover:text-zinc-800 hover:outline-2 hover:outline-red-500 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:bg-red-500 dark:hover:text-zinc-50",
           {
             "bg-red-300 dark:bg-red-500 dark:outline-red-600":
               currentVote === "DOWN",

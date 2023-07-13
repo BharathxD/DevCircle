@@ -15,6 +15,17 @@ const nextConfig = {
       },
     ];
   },
+  headers: async () => [
+    {
+      source: "/home",
+      headers: [
+        {
+          key: "Cache-Control",
+          value: "no-store",
+        },
+      ],
+    },
+  ],
   images: {
     domains: [
       "uploadthing.com",

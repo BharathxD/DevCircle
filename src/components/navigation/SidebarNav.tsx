@@ -47,8 +47,7 @@ const navLinks = [
   },
 ];
 
-const SidebarNav = () => {
-  const isLoggedIn = useSession().status === "authenticated";
+const SidebarNav = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const isDesktopScreen = useMediaQuery("(min-width: 640px)");
   const pathname = usePathname();
 
@@ -82,28 +81,38 @@ const SidebarNav = () => {
     );
   }
 
+  if (!isLoggedIn) return null;
+
   return (
     <section
-      className="flex h-full w-full flex-col items-center justify-between gap-2 border-r-2 border-zinc-800"
+      className="flex h-full w-full flex-col items-center justify-between gap-2"
       aria-label="Desktop Navigation"
     >
       <aside className="flex h-full w-full list-none flex-col rounded-md">
         <div className="w-full overflow-hidden border-b-2 border-zinc-800">
-          {navLinks.map(({ href, icon: Icon, text, requireAuth }) => {
+          {navLinks.map(({ href, icon: Icon, text, requireAuth }, index) => {
             if ((requireAuth && !isLoggedIn) || href === "/settings")
               return null;
+            const attributes = {
+              key: index,
+              href: href,
+              className: cn(
+                "flex w-full flex-row items-center gap-4 border-b-2 border-b-zinc-800 bg-zinc-50 p-4 last:border-b-0 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-800",
+                href === pathname &&
+                  href !== "/home" &&
+                  "bg-zinc-800 text-zinc-50 dark:bg-zinc-900 dark:text-zinc-50"
+              ),
+              ariaCurrent: href === pathname ? "page" : undefined,
+            };
+            if (href === "/home")
+              return (
+                <a {...attributes}>
+                  <Icon />
+                  <p>{text}</p>
+                </a>
+              );
             return (
-              <Link
-                key={href}
-                href={href}
-                className={cn(
-                  "flex w-full flex-row items-center gap-4 border-b-2 border-b-zinc-800 bg-zinc-50 p-4 last:border-b-0 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-800",
-                  href === pathname &&
-                    href !== "/home" &&
-                    "bg-zinc-800 text-zinc-50 dark:bg-zinc-900 dark:text-zinc-50"
-                )}
-                aria-current={href === pathname ? "page" : undefined}
-              >
+              <Link {...attributes}>
                 <Icon />
                 <p>{text}</p>
               </Link>
