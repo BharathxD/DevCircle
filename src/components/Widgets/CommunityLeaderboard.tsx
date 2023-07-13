@@ -10,7 +10,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/UI/Tooltip";
+} from "@/components/ui/Tooltip";
 
 interface CommunityLeaderboardProps {
   topCommunities:

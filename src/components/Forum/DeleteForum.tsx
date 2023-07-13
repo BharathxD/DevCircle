@@ -17,9 +17,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/UI/AlertDialog";
-import { Button } from "@/components/UI/Button";
-import { Input } from "@/components/UI/Input";
+} from "@/components/ui/AlertDialog";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
 
 interface DeleteForumProps {
   forumId: string;

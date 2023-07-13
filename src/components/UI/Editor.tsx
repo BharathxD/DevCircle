@@ -21,7 +21,7 @@ import { CreatePostValidator } from "@/lib/validators/post";
 import type { PostCreationRequest } from "@/lib/validators/post";
 import { useEditor } from "@/hooks/useEditor";
 
-import CreateTags from "../Post/CreateTags";
+import CreateTags from "../post/CreateTags";
 import { ScrollArea } from "./ScrollArea";
 
 interface EditorProps {

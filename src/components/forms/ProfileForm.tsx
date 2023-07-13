@@ -11,7 +11,7 @@ import { generateCbUrl } from "@/lib/utils";
 import { profileFormSchema } from "@/lib/validators/profile";
 import type { ProfileFormValues } from "@/lib/validators/profile";
 import { toast } from "@/hooks/useToast";
-import { Button } from "@/components/UI/Button";
+import { Button } from "@/components/ui/Button";
 import {
   Form,
   FormControl,
@@ -20,9 +20,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/UI/Form";
-import { Input } from "@/components/UI/Input";
-import { Textarea } from "@/components/UI/Textarea";
+} from "@/components/ui/Form";
+import { Input } from "@/components/ui/Input";
+import { Textarea } from "@/components/ui/Textarea";
 
 interface ProfileFormProps {
   username?: string;

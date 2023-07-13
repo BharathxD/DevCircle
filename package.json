@@ -2,8 +2,7 @@
   "name": "devcircle",
   "version": "0.1.0",
   "private": true,
-  "description": "A community for developers",
-  "main": "next.config.js",
+  "description": "DevCircle is an open-source community platform built for developers. It serves as a space for mutual guidance, sharing tips and tricks, and staying updated on the latest developments in the world of developers. Join this vibrant community to connect with fellow developers, share knowledge, and explore the exciting world of coding.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BharathxD/DevCircle.git"

@@ -5,9 +5,9 @@ import { notFound } from "next/navigation";
 
 import { getAuthSession } from "../../../actions/getCurrentUser";
 import { getForumWithPosts } from "../../../actions/getForum";
-import MiniCreatePost from "../../../components/Post/MiniCreatePost";
-import PostFeed from "../../../components/Post/PostFeed";
-import { ScrollArea } from "../../../components/UI/ScrollArea";
+import MiniCreatePost from "../../../components/post/MiniCreatePost";
+import PostFeed from "../../../components/post/PostFeed";
+import { ScrollArea } from "../../../components/ui/ScrollArea";
 import siteConfig from "../../../config/site";
 import { env } from "../../../env.mjs";
 import { capitalizeString, extractString } from "../../../lib/utils";

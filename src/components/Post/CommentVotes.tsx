@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import type { CommentVoteRequest } from "@/lib/validators/vote";
 import { toast } from "@/hooks/useToast";
 
-import { Button } from "../UI/Button";
+import { Button } from "../ui/Button";
 
 interface CommentVotesProps {
   commentId: string;

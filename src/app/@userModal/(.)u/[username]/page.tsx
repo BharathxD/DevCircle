@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import { getUserWithSocialLinksAndPosts } from "@/actions/getCurrentUser";
 
-import UserPosts from "@/components/Profile/UserPosts";
-import UserProfile from "@/components/Profile/UserProfile";
-import ModalClose from "@/components/UI/ModalClose";
+import ModalClose from "@/components/ui/ModalClose";
+import UserPosts from "@/components/profile/UserPosts";
+import UserProfile from "@/components/profile/UserProfile";
 
 interface UserInterceptorArgs {
   params: {

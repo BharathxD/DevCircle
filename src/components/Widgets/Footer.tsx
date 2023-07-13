@@ -5,7 +5,7 @@ import { Copyright } from "lucide-react";
 
 import siteConfig from "@/config/site";
 
-import { Card, CardFooter, CardHeader } from "../UI/Card";
+import { Card, CardFooter, CardHeader } from "../ui/Card";
 
 const Footer: React.FC = () => {
   return (

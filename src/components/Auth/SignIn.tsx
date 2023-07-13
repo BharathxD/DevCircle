@@ -13,7 +13,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../UI/Card";
+} from "../ui/Card";
 import OAuthSignIn from "./OAuthSignIn";
 
 interface SignInProps {

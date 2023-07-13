@@ -23,11 +23,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/UI/Form";
-import { Input } from "@/components/UI/Input";
+} from "@/components/ui/Form";
+import { Input } from "@/components/ui/Input";
 
-import DeleteForum from "../Forum/DeleteForum";
-import { Button } from "../UI/Button";
+import DeleteForum from "../forum/DeleteForum";
+import { Button } from "../ui/Button";
 
 interface EditForumFormProps {
   forum: Forum;

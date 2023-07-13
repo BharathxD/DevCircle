@@ -12,8 +12,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "../UI/DropdownMenu";
-import UserAvatar from "../UI/UserAvatar";
+} from "../ui/DropdownMenu";
+import UserAvatar from "../ui/UserAvatar";
 
 interface UserNavProps {
   user: {

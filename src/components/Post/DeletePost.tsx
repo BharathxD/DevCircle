@@ -15,9 +15,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/UI/AlertDialog";
+} from "@/components/ui/AlertDialog";
 
-import { Button } from "../UI/Button";
+import { Button } from "../ui/Button";
 
 interface PostDropdownMenuProps {
   postId: string;

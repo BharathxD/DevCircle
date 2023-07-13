@@ -16,7 +16,7 @@ import {
   DialogDescription,
   DialogTitle,
   DialogTrigger,
-} from "@/components/UI/Dialog";
+} from "@/components/ui/Dialog";
 
 import { Button } from "./Button";
 import { DialogHeader } from "./Dialog";

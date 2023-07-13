@@ -20,9 +20,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/UI/AlertDialog";
+} from "@/components/ui/AlertDialog";
 
-import { Textarea } from "../UI/Textarea";
+import { Textarea } from "../ui/Textarea";
 
 interface EditCommentProps {
   commentId: string;

@@ -16,7 +16,7 @@ import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 
-import Footer from "../Widgets/Footer";
+import Footer from "../widgets/Footer";
 
 const navLinks = [
   { href: "/home", icon: Home, text: "Home", requireAuth: false },

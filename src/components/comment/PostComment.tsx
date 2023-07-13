@@ -19,12 +19,12 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/UI/DropdownMenu";
+} from "@/components/ui/DropdownMenu";
 
-import CommentVotes from "../Post/CommentVotes";
-import { Button } from "../UI/Button";
-import { Textarea } from "../UI/Textarea";
-import UserAvatar from "../UI/UserAvatar";
+import CommentVotes from "../post/CommentVotes";
+import { Button } from "../ui/Button";
+import { Textarea } from "../ui/Textarea";
+import UserAvatar from "../ui/UserAvatar";
 import DeleteComment from "./DeleteComment";
 import EditComment from "./EditComment";
 

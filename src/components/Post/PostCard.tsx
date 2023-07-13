@@ -9,8 +9,8 @@ import { BiMessageAltDetail } from "react-icons/bi";
 
 import formatTimeToNow from "@/lib/formatTimeToNow";
 
-import ShareButton from "../UI/ShareButton";
-import Tags from "../UI/Tags";
+import ShareButton from "../ui/ShareButton";
+import Tags from "../ui/Tags";
 import EditorOutput from "./EditorOutput";
 import PostVoteClient from "./PostVoteClient";
 

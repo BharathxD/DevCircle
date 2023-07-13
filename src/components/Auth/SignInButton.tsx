@@ -5,7 +5,7 @@ import type { Session } from "next-auth";
 
 import { cn } from "@/lib/utils";
 
-import UserNav from "../Navigation/UserNav";
+import UserNav from "../navigation/UserNav";
 
 interface SignInButtonProps extends React.HTMLAttributes<HTMLAnchorElement> {
   user?: Session["user"];

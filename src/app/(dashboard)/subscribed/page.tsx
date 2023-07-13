@@ -1,7 +1,7 @@
 import getSubscribedForums from "@/actions/getSubscribedForums";
 
-import DashboardContentShell from "@/components/UI/DashboarContentShell";
-import SubscribedCommunities from "@/components/Widgets/SubscribedCommunities";
+import DashboardContentShell from "@/components/ui/DashboarContentShell";
+import SubscribedCommunities from "@/components/widgets/SubscribedCommunities";
 
 const SubscribedCommunitesPage = async () => {
   const joinedCommunities = await getSubscribedForums();

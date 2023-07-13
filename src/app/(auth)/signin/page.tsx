@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { env } from "@/env.mjs";
 
-import SignIn from "@/components/Auth/SignIn";
+import SignIn from "@/components/auth/SignIn";
 
 interface SignInPageProps {
   searchParams: {

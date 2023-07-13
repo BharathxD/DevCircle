@@ -5,9 +5,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/UI/DropdownMenu";
+} from "@/components/ui/DropdownMenu";
 
-import DeletePost from "../Post/DeletePost";
+import DeletePost from "../post/DeletePost";
 
 interface PostDropdownMenuProps {
   onEdit: () => void;

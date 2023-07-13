@@ -3,9 +3,9 @@
 import { Fragment, useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 
-import { Label } from "@/components/UI/Label";
+import { Label } from "@/components/ui/Label";
 
-import { Switch } from "../UI/Switch";
+import { Switch } from "../ui/Switch";
 
 const CookiesForm = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);

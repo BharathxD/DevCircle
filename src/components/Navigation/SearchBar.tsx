@@ -8,9 +8,9 @@ import { Search, Users } from "lucide-react";
 import { useQuery } from "react-query";
 
 import type { SearchResults } from "@/types/database";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/UI/Dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/Dialog";
 
-import { Skeleton } from "../UI/Skeleton";
+import { Skeleton } from "../ui/Skeleton";
 
 const SearchBar: React.FC = () => {
   const router = useRouter();

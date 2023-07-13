@@ -12,7 +12,7 @@ import { generateCbUrl } from "@/lib/utils";
 import type { CommentPayload } from "@/lib/validators/comments";
 import { toast } from "@/hooks/useToast";
 
-import { Textarea } from "../UI/Textarea";
+import { Textarea } from "../ui/Textarea";
 
 interface CreateCommentProps {
   postId: string;

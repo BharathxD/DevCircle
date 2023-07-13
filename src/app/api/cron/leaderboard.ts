@@ -1,9 +1,9 @@
 import database from "@/lib/database";
 import redis from "@/lib/redis";
 
-const GET = async (): Promise<
+export default async function handler(): Promise<
   { forumName: string; memberCount: number }[] | null
-> => {
+> {
   try {
     const forums = await database.forum.findMany({
       include: { subscribers: true },
@@ -31,6 +31,4 @@ const GET = async (): Promise<
   } catch (error: unknown) {
     return null;
   }
-};
-
-export { GET };
+}

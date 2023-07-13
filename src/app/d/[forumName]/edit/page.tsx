@@ -5,8 +5,8 @@ import { getForum } from "@/actions/getForum";
 import { IoIosArrowBack } from "react-icons/io";
 
 import { cn } from "@/lib/utils";
-import EditForumForm from "@/components/Forms/EditForumForm";
-import { buttonVariants } from "@/components/UI/Button";
+import { buttonVariants } from "@/components/ui/Button";
+import EditForumForm from "@/components/forms/EditForumForm";
 
 interface EditForumPageArgs {
   params: {

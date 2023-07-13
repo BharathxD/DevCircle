@@ -11,8 +11,8 @@ import type { UserWithSocialLinks } from "@/types/database";
 import { getGradient } from "@/lib/gradients";
 import { cn } from "@/lib/utils";
 
-import { BlurImage } from "../UI/BlurImage";
-import { Button } from "../UI/Button";
+import { BlurImage } from "../ui/BlurImage";
+import { Button } from "../ui/Button";
 
 interface UserProfileProps {
   user: UserWithSocialLinks;

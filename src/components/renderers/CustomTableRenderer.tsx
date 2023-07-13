@@ -9,7 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../UI/Table";
+} from "../ui/Table";
 
 const TableHeaderRow = ({ headers }: { headers: string[] }) => (
   <TableRow>

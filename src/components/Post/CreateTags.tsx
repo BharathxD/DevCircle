@@ -6,8 +6,8 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import { toast } from "@/hooks/useToast";
 
-import { Button } from "../UI/Button";
-import { Input } from "../UI/Input";
+import { Button } from "../ui/Button";
+import { Input } from "../ui/Input";
 
 interface CreateTagsProps {
   tags: string[];

@@ -9,7 +9,7 @@ import ThemeProvider from "@/providers/ThemeProvider";
 import { Toaster } from "@/providers/Toaster";
 import siteConfig from "@/config/site";
 import { cn } from "@/lib/utils";
-import Navbar from "@/components/Navigation/Navbar";
+import Navbar from "@/components/navigation/Navbar";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 

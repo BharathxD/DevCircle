@@ -9,8 +9,8 @@ import { useMutation } from "react-query";
 import type { PostCreationRequest } from "@/lib/validators/post";
 import { toast } from "@/hooks/useToast";
 
-import { Button } from "../UI/Button";
-import Editor from "../UI/Editor";
+import { Button } from "../ui/Button";
+import Editor from "../ui/Editor";
 
 interface CreatePostProps {
   forumId: string;

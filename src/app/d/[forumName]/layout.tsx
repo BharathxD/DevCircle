@@ -3,7 +3,7 @@ import { getCurrentUser } from "@/actions/getCurrentUser";
 import { getForum } from "@/actions/getForum";
 
 import database from "@/lib/database";
-import ForumInfoWidget from "@/components/Widgets/ForumInfoWidget";
+import ForumInfoWidget from "@/components/widgets/ForumInfoWidget";
 
 interface LayoutProps {
   children: React.ReactNode;

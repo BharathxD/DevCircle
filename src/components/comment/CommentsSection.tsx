@@ -13,7 +13,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "../UI/sheet";
+} from "../ui/sheet";
 import CommentReplies from "./CommentReplies";
 import CreateComment from "./CreateComment";
 import PostComment from "./PostComment";

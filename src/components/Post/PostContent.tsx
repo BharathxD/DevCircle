@@ -8,9 +8,9 @@ import { Dot } from "lucide-react";
 import formatTimeToNow from "@/lib/formatTimeToNow";
 import { cn } from "@/lib/utils";
 
-import PostDropdownMenu from "../UI/PostDropdownMenu";
-import Tags from "../UI/Tags";
-import UserAvatar from "../UI/UserAvatar";
+import PostDropdownMenu from "../ui/PostDropdownMenu";
+import Tags from "../ui/Tags";
+import UserAvatar from "../ui/UserAvatar";
 import EditorOutput from "./EditorOutput";
 import UpdatePost from "./UpdatePost";
 

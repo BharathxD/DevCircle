@@ -1,7 +1,7 @@
 import getTopCommunities from "@/actions/getTopCommunities";
 
-import DashboardContentShell from "@/components/UI/DashboarContentShell";
-import CommunityLeaderboard from "@/components/Widgets/CommunityLeaderboard";
+import DashboardContentShell from "@/components/ui/DashboarContentShell";
+import CommunityLeaderboard from "@/components/widgets/CommunityLeaderboard";
 
 const LeaderboardPage = async () => {
   const topCommunities = await getTopCommunities();

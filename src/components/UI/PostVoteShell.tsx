@@ -2,7 +2,7 @@ import { Loader2 } from "lucide-react";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/UI/Button";
+import { buttonVariants } from "@/components/ui/Button";
 
 const PostVoteShell = () => {
   return (

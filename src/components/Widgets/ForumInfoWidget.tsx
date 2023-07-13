@@ -5,7 +5,7 @@ import Link from "next/link";
 import { format } from "date-fns";
 import { Edit2 } from "lucide-react";
 
-import SubscribeLeaveToggle from "../Forum/SubscribeLeaveToggle";
+import SubscribeLeaveToggle from "../forum/SubscribeLeaveToggle";
 
 interface ForumInfoWidgetProps {
   forumId: string;

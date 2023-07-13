@@ -13,7 +13,7 @@ import { cn, generateCbUrl } from "@/lib/utils";
 import type { PostVoteRequest } from "@/lib/validators/vote";
 import { toast } from "@/hooks/useToast";
 
-import { Button } from "../UI/Button";
+import { Button } from "../ui/Button";
 
 interface PostVoteClientProps {
   postId: string;

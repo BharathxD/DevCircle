@@ -7,9 +7,9 @@ import { IoMdImage } from "react-icons/io";
 
 import { generateCbUrl } from "@/lib/utils";
 
-import { Button } from "../UI/Button";
-import { Input } from "../UI/Input";
-import UserAvatar from "../UI/UserAvatar";
+import { Button } from "../ui/Button";
+import { Input } from "../ui/Input";
+import UserAvatar from "../ui/UserAvatar";
 
 const MiniCreatePost: React.FC = () => {
   const router = useRouter();

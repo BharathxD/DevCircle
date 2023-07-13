@@ -1,5 +1,5 @@
-import SidebarNav from "@/components/Navigation/SidebarNav";
-import Shell from "@/components/UI/Shell";
+import Shell from "@/components/ui/Shell";
+import SidebarNav from "@/components/navigation/SidebarNav";
 
 interface rootProps {
   children: React.ReactNode;

@@ -8,7 +8,7 @@ import { useMutation } from "react-query";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/useToast";
 
-import { Button } from "../UI/Button";
+import { Button } from "../ui/Button";
 
 type OAuthSignInProps = HTMLAttributes<HTMLDivElement> & {
   redirectUrl?: string;

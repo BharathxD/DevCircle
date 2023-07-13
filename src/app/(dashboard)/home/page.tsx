@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 
-import GeneralFeed from "@/components/Post/GeneralFeed";
-import DashboardContentShell from "@/components/UI/DashboarContentShell";
-import FeedSkeleton from "@/components/UI/FeedSkeleton";
+import DashboardContentShell from "@/components/ui/DashboarContentShell";
+import FeedSkeleton from "@/components/ui/FeedSkeleton";
+import GeneralFeed from "@/components/post/GeneralFeed";
 
 interface HomeProps {
   searchParams: { tag: string };

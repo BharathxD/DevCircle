@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { ImCancelCircle } from "react-icons/im";
 
-import { BlurImage } from "../UI/BlurImage";
-import { Button } from "../UI/Button";
+import { BlurImage } from "../ui/BlurImage";
+import { Button } from "../ui/Button";
 
 function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
   const isHomepage = usePathname() === "/";

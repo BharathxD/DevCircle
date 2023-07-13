@@ -1,8 +1,8 @@
 import { getAuthSession } from "@/actions/getCurrentUser";
 
-import SignInButton from "../Auth/SignInButton";
-import Logo from "../UI/Logo";
-import ThemeSwitchers from "../UI/ThemeSwitchers";
+import SignInButton from "../auth/SignInButton";
+import Logo from "../ui/Logo";
+import ThemeSwitchers from "../ui/ThemeSwitchers";
 import SearchBar from "./SearchBar";
 
 const Navbar = async () => {
