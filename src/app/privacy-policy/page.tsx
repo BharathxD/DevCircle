@@ -31,24 +31,40 @@ const PrivacyPolicyPage = () => {
             We may collect certain personal information from you when you use
             the Application. The types of information we may collect include:
           </Typography>
-          Contact Information: When you contact us through the email provided by
-          the developer (
-          <Typography email="contact@bharathbandi.me" type="email">
-            contact@bharathbandi.me
-          </Typography>
-          ), we may collect your email address or any other contact information
-          you provide. Usage Information: We may collect information about your
-          use of the Application, such as the actions you take while using the
-          Application, the communities you join or create, and the posts you
-          publish. Device Information: We may collect information about the
-          device you use to access the Application, including the device type,
-          operating system, browser type, and IP address. Cookies: We may use
-          cookies and similar technologies to collect information about your use
-          of the Application. Cookies are small files stored on your device that
-          allow us to recognize your device and enhance your user experience.
-          You have the option to disable cookies in your browser settings, but
-          please note that some features of the Application may not function
-          properly if cookies are disabled.
+          <p>
+            <span className="text-base font-semibold">
+              Contact Information:{" "}
+            </span>
+            When you contact us through the email provided by the developer (
+            <Typography email="contact@bharathbandi.me" type="email">
+              contact@bharathbandi.me
+            </Typography>
+            ), we may collect your email address or any other contact
+            information you provide.
+          </p>
+          <p>
+            <span className="text-base font-semibold">Usage Information: </span>
+            We may collect information about your use of the Application, such
+            as the actions you take while using the Application, the communities
+            you join or create, and the posts you publish.
+          </p>
+          <p>
+            <span className="text-base font-semibold">
+              Device Information:{" "}
+            </span>
+            We may collect information about the device you use to access the
+            Application, including the device type, operating system, browser
+            type, and IP address.
+          </p>
+          <p>
+            <span className="text-base font-semibold">Cookies:</span> We may use
+            cookies and similar technologies to collect information about your
+            use of the Application. Cookies are small files stored on your
+            device that allow us to recognize your device and enhance your user
+            experience. You have the option to disable cookies in your browser
+            settings, but please note that some features of the Application may
+            not function properly if cookies are disabled.
+          </p>
         </div>
         <div>
           <Typography type="subheading" className="font-bold">
@@ -73,20 +89,36 @@ const PrivacyPolicyPage = () => {
           </Typography>
           <Typography type="paragraph">
             We may share your personal information in the following
-            circumstances: Service Providers: We may share your information with
-            third-party service providers that help us operate and improve the
-            Application, such as hosting providers, analytics providers, and
-            email service providers. These service providers are bound by
-            confidentiality obligations and are not permitted to use your
-            information for any purpose other than to provide services to us.
-            Legal Compliance: We may disclose your information if required by
-            law or if we believe that such action is necessary to comply with a
-            legal obligation or protect our rights or the rights of others.
-            Business Transfers: In the event of a merger, acquisition, or sale
-            of all or a portion of our assets, your information may be
-            transferred as part of the transaction. We will notify you via email
-            or a prominent notice on the Application of any change in ownership
-            or uses of your personal information.
+            circumstances:
+            <p className="inline-block">
+              <span className="text-base font-semibold">
+                Service Providers:{" "}
+              </span>
+              We may share your information with third-party service providers
+              that help us operate and improve the Application, such as hosting
+              providers, analytics providers, and email service providers. These
+              service providers are bound by confidentiality obligations and are
+              not permitted to use your information for any purpose other than
+              to provide services to us.
+            </p>
+            <p>
+              <span className="text-base font-semibold">
+                Legal Compliance:{" "}
+              </span>
+              We may disclose your information if required by law or if we
+              believe that such action is necessary to comply with a legal
+              obligation or protect our rights or the rights of others.
+            </p>
+            <p>
+              <span className="text-base font-semibold">
+                Business Transfers:{" "}
+              </span>
+              In the event of a merger, acquisition, or sale of all or a portion
+              of our assets, your information may be transferred as part of the
+              transaction. We will notify you via email or a prominent notice on
+              the Application of any change in ownership or uses of your
+              personal information.
+            </p>
           </Typography>
         </div>
         <div>
@@ -107,16 +139,27 @@ const PrivacyPolicyPage = () => {
           </Typography>
           <Typography type="paragraph">
             You have certain rights regarding your personal information, subject
-            to applicable law. These rights may include: Access: You can request
-            access to the personal information we hold about you. Correction:
-            You can request that we correct or update your personal information
-            if it is inaccurate or incomplete. Deletion: You can request the
-            deletion of your personal information. Objecting to Processing: You
-            can object to the processing of your personal information for
-            certain purposes. Please note that we may ask you to verify your
-            identity before responding to such requests. To exercise your
-            rights, please contact us using the contact information provided at
-            the end of this Privacy Policy.
+            to applicable law. These rights may include:
+            <p>
+              <span className="text-base font-semibold">Access: </span>You can
+              request access to the personal information we hold about you.
+            </p>
+            <p>
+              <span className="text-base font-semibold">Correction:</span>You can
+              request that we correct or update your personal information if it
+              is inaccurate or incomplete. Deletion: You can request the
+              deletion of your personal information.
+            </p>
+            <p>
+              <span className="text-base font-semibold">
+                Objecting to Processing:
+              </span>{" "}
+              You can object to the processing of your personal information for
+              certain purposes. Please note that we may ask you to verify your
+              identity before responding to such requests. To exercise your
+              rights, please contact us using the contact information provided
+              at the end of this Privacy Policy.
+            </p>
           </Typography>
         </div>
         <div>
