@@ -16,6 +16,7 @@ const nextConfig = {
     ];
   },
   images: {
+    minimumCacheTTL: 60 * 60 * 24 * 30, // One Month
     domains: [
       "uploadthing.com",
       "lh3.googleusercontent.com",

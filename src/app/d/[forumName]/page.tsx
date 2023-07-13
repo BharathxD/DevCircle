@@ -2,16 +2,16 @@ import { Fragment } from "react";
 import { type Metadata } from "next";
 import Head from "next/head";
 import { notFound } from "next/navigation";
-import { getAuthSession } from "@/actions/getCurrentUser";
-import { getForumWithPosts } from "@/actions/getForum";
-import { env } from "@/env.mjs";
 
-import type { ExtendedForum } from "@/types/database";
-import siteConfig from "@/config/site";
-import { capitalizeString, extractString } from "@/lib/utils";
-import MiniCreatePost from "@/components/Post/MiniCreatePost";
-import PostFeed from "@/components/Post/PostFeed";
-import { ScrollArea } from "@/components/UI/ScrollArea";
+import { getAuthSession } from "../../../actions/getCurrentUser";
+import { getForumWithPosts } from "../../../actions/getForum";
+import MiniCreatePost from "../../../components/Post/MiniCreatePost";
+import PostFeed from "../../../components/Post/PostFeed";
+import { ScrollArea } from "../../../components/UI/ScrollArea";
+import siteConfig from "../../../config/site";
+import { env } from "../../../env.mjs";
+import { capitalizeString, extractString } from "../../../lib/utils";
+import type { ExtendedForum } from "../../../types/database";
 
 interface ForumPageProps {
   params: {
