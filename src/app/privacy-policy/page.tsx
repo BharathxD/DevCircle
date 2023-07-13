@@ -14,12 +14,12 @@ const PrivacyPolicyPage = () => {
           <Typography type="paragraph">
             This Privacy Policy describes how {siteConfig.name}
             (&#34;we,&#34; &#34;us,&#34; or &#34;our&#34;) collects, uses, and
-            shares your personal information when you use our web application
-            [DevCircle] (the &#34;Application&#34;). Please read this Privacy
-            Policy carefully. By accessing or using the Application, you agree
-            to the collection, use, and sharing of your information as described
-            in this Privacy Policy. If you do not agree with the practices
-            described in this Privacy Policy, you should not use the
+            shares your personal information when you use our web application [
+            {siteConfig.name}] (the &#34;Application&#34;). Please read this
+            Privacy Policy carefully. By accessing or using the Application, you
+            agree to the collection, use, and sharing of your information as
+            described in this Privacy Policy. If you do not agree with the
+            practices described in this Privacy Policy, you should not use the
             Application.
           </Typography>
         </div>
