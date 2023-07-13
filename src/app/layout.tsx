@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteConfig.url,
+    url: `${siteConfig.url}/opengraph-image.webp`,
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
