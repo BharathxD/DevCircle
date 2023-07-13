@@ -18,39 +18,39 @@ import { cn } from "@/lib/utils";
 
 import Footer from "../Widgets/Footer";
 
+const navLinks = [
+  { href: "/home", icon: Home, text: "Home", requireAuth: false },
+  { href: "/profile", icon: UserCircle2, text: "Profile", requireAuth: true },
+  {
+    href: "/leaderboard",
+    icon: Crown,
+    text: "Leaderboards",
+    requireAuth: true,
+  },
+  {
+    href: "/subscribed",
+    icon: Users2,
+    text: "Subscribed Communities",
+    requireAuth: true,
+  },
+  {
+    href: "/d/create",
+    icon: PlusSquare,
+    text: "Create Community",
+    requireAuth: false,
+  },
+  {
+    href: "/settings",
+    icon: Settings,
+    text: "Settings",
+    requireAuth: false,
+  },
+];
+
 const SidebarNav = () => {
   const isLoggedIn = useSession().status === "authenticated";
   const isDesktopScreen = useMediaQuery("(min-width: 640px)");
   const pathname = usePathname();
-
-  const navLinks = [
-    { href: "/home", icon: Home, text: "Home", requireAuth: false },
-    { href: "/profile", icon: UserCircle2, text: "Profile", requireAuth: true },
-    {
-      href: "/leaderboard",
-      icon: Crown,
-      text: "Leaderboards",
-      requireAuth: true,
-    },
-    {
-      href: "/subscribed",
-      icon: Users2,
-      text: "Subscribed Communities",
-      requireAuth: true,
-    },
-    {
-      href: "/d/create",
-      icon: PlusSquare,
-      text: "Create Community",
-      requireAuth: false,
-    },
-    {
-      href: "/settings",
-      icon: Settings,
-      text: "Settings",
-      requireAuth: false,
-    },
-  ];
 
   if (!isDesktopScreen) {
     return (

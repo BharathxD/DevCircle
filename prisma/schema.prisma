@@ -134,6 +134,7 @@ model Post {
 
   @@index([authorId])
   @@index([forumId])
+  @@index([title])
 }
 
 model Tag {

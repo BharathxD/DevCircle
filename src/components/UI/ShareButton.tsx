@@ -98,7 +98,9 @@ const ShareButton: React.FC<ShareButtonProps> = ({
                 referrerPolicy="no-referrer"
                 target="_blank"
               >
-                <social.icon className="h-8 w-8 text-zinc-50" />
+                <social.icon
+                  className="h-8 w-8 text-zinc-50"
+                />
               </Link>
             ))}
           </div>

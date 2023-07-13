@@ -121,9 +121,11 @@ async function PostPage({ params }: PageProps) {
   return (
     <div className="relative flex flex-col items-start gap-2 pt-2 md:flex-row">
       <div className="flex w-full items-center justify-between gap-2 rounded-2xl border-2 border-zinc-800 bg-zinc-50 bg-gradient-to-b from-muted/30 to-muted/30 p-1.5 shadow-inner dark:bg-zinc-950 dark:from-background/10 dark:to-background/80 md:w-fit md:flex-col md:p-1.5">
+        {/* Post Vote */}
         <Suspense fallback={<PostVoteShell />}>
           <PostVoteServer postId={postId} getData={() => getPost(postId)} />
         </Suspense>
+        {/* Share Button and Comments Section */}
         <div className="flex flex-row gap-2 md:flex-col">
           <ShareButton
             className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-300"
@@ -137,6 +139,7 @@ async function PostPage({ params }: PageProps) {
           />
         </div>
       </div>
+      {/* Post Content */}
       <article className="no-scrollbar relative max-h-[80vh] w-full overflow-hidden overflow-y-scroll rounded-lg border-2 border-zinc-800 bg-gradient-to-b from-muted/30 to-muted/30 shadow-inner dark:from-background/10 dark:to-background/80">
         <PostContent {...postContentProps} />
       </article>
