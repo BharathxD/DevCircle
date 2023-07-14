@@ -2,7 +2,7 @@
 
 import { startTransition, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { Loader2 } from "lucide-react";
 import { useMutation } from "react-query";
@@ -18,11 +18,13 @@ interface Forum {
 interface SubscribeLeaveToggleProps {
   isSubscribed: boolean;
   forum: Forum;
+  isLoggedIn?: boolean;
 }
 
 const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
   isSubscribed,
   forum,
+  isLoggedIn,
 }) => {
   const pathname = usePathname();
   const router = useRouter();
@@ -34,7 +36,7 @@ const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
       return response.status;
     },
     onError: async (error) => {
-      if (axios.isAxiosError(error)) {
+      if (error instanceof AxiosError) {
         const { response } = error;
         if (response?.status === StatusCodes.UNAUTHORIZED) {
           router.push(generateCbUrl(pathname));
@@ -71,6 +73,7 @@ const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
   });
 
   const handleToggleSubscription = () => {
+    if (!isLoggedIn) return router.push(generateCbUrl(pathname));
     patchSubscription();
   };
 

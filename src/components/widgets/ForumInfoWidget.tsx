@@ -18,6 +18,7 @@ interface ForumInfoWidgetProps {
   isCreator: boolean;
   isSubscribed: boolean;
   authorName?: string | null;
+  isLoggedIn?: boolean;
 }
 
 const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
@@ -29,6 +30,7 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
   isSubscribed,
   forumCreationDate,
   authorName,
+  isLoggedIn,
 }) => {
   const isDesktopScreen = useMediaQuery("(min-width: 640px)");
   if (!isDesktopScreen) {
@@ -43,6 +45,7 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
           isSubscribed,
           forumCreationDate,
           authorName,
+          isLoggedIn,
         }}
       />
     );
@@ -104,6 +107,7 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
               <SubscribeLeaveToggle
                 isSubscribed={isSubscribed}
                 forum={{ id: forumId, name: forumName }}
+                isLoggedIn={isLoggedIn}
               />
             </div>
           </Fragment>

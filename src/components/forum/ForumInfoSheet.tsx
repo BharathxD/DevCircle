@@ -16,6 +16,7 @@ interface ForumInfoModalProps {
   isCreator: boolean;
   isSubscribed: boolean;
   authorName?: string | null;
+  isLoggedIn?: boolean;
 }
 
 const ForumInfoModal: React.FC<ForumInfoModalProps> = ({
@@ -27,6 +28,7 @@ const ForumInfoModal: React.FC<ForumInfoModalProps> = ({
   forumId,
   isCreator,
   memberCount,
+  isLoggedIn,
 }) => {
   return (
     <Dialog>
@@ -92,6 +94,7 @@ const ForumInfoModal: React.FC<ForumInfoModalProps> = ({
                 <SubscribeLeaveToggle
                   isSubscribed={isSubscribed}
                   forum={{ id: forumId, name: forumName }}
+                  isLoggedIn={isLoggedIn}
                 />
               </div>
             </Fragment>

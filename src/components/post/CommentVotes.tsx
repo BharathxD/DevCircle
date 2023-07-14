@@ -28,7 +28,6 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
   initialVoteAmount,
   initialCommentVote,
   isLoggedIn,
-  classNames,
 }) => {
   const router = useRouter();
   const pathname = usePathname();

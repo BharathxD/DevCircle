@@ -52,7 +52,7 @@ const PostCard: FC<PostCardProps> = ({
       <div className="inline-flex">
         <Link
           href={`/d/${forumName}`}
-          className="p-1 text-zinc-800 underline underline-offset-2 dark:text-zinc-50"
+          className="p-1 pl-0 text-zinc-800 underline underline-offset-2 dark:text-zinc-50"
         >
           d/{forumName}
         </Link>

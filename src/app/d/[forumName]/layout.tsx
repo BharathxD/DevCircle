@@ -51,6 +51,7 @@ const Layout = async ({ children, params: { forumName } }: LayoutProps) => {
             authorName={forum.creator?.username}
             isCreator={forum.creatorId === session?.user?.id}
             isSubscribed={isSubscribed}
+            isLoggedIn={!!session?.user}
           />
         </div>
       </div>
