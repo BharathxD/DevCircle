@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 
@@ -8,17 +9,21 @@ const ThemeSwitcher: React.FC = ({}) => {
   const [isMounted, setIsMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
-  const toggleMode = useCallback(() => {
+  const toggleMode = () => {
     const updatedTheme = theme === "dark" ? "light" : "dark";
     setTheme(updatedTheme);
-  }, [setTheme, theme]);
+  };
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   if (!isMounted) {
-    return null;
+    return (
+      <div className="flex items-center justify-center border-l-2 border-zinc-800 px-5 hover:cursor-pointer hover:bg-pink-300 dark:hover:bg-zinc-800">
+        <Loader2 size={25} className="animate-spin text-yellow-500" />
+      </div>
+    );
   }
 
   return (
