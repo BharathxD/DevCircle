@@ -35,10 +35,10 @@ const SearchBar: React.FC = () => {
   const debounceRequest = useCallback(() => request(), [request]);
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <div className="relative flex items-center justify-center gap-2 border-l-2 border-zinc-800 px-5 hover:cursor-pointer">
+      <DialogTrigger asChild aria-label="Search">
+        <button className="relative flex items-center justify-center gap-2 border-l-2 border-zinc-800 px-5 hover:cursor-pointer">
           <Search />
-        </div>
+        </button>
       </DialogTrigger>
       <DialogContent
         className="top-[7.5%] w-[90%] rounded-md border-2 border-zinc-800 md:top-[25%]"

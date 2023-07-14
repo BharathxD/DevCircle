@@ -18,7 +18,7 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isLoggedIn }) => {
   ];
   const pathname = usePathname();
   return (
-    <aside className="border-zinc-800 md:border-b-2 md:border-r-2">
+    <aside className="border-b-2 border-zinc-800 md:border-r-2">
       <div className="flex flex-row justify-evenly overflow-hidden rounded-none border-b-2 border-zinc-800 last:border-b-0 md:flex-col">
         {navLinks.map((data, index) => {
           if (data.href === "/settings" && !isLoggedIn) return null;

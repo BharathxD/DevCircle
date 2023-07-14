@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { redirect } from "next/navigation";
 import { getUserWithSocialLinks } from "@/actions/getCurrentUser";
 

@@ -1,5 +1,6 @@
 import { FiGlobe } from "react-icons/fi";
 
+import siteConfig from "@/config/site";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
@@ -11,6 +12,7 @@ const Logo: React.FC<LogoProps> = ({ className }) => {
     <a
       href="/"
       className={cn("flex items-center gap-2 hover:cursor-pointer", className)}
+      aria-label={`${siteConfig.name} logotype`}
     >
       <FiGlobe size={40} className="text-zinc-800 dark:text-zinc-300" />
       <p

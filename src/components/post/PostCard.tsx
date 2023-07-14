@@ -50,16 +50,18 @@ const PostCard: FC<PostCardProps> = ({
   const postMetaInfo = (
     <div className="mt-1 flex max-h-40 flex-row justify-between gap-1 text-sm text-zinc-500">
       <div className="inline-flex">
-        <Link href={`/d/${forumName}`}>
-          <p className="text-zinc-800 underline underline-offset-2 dark:text-zinc-50">
-            d/{forumName}
-          </p>
+        <Link
+          href={`/d/${forumName}`}
+          className="p-1 text-zinc-800 underline underline-offset-2 dark:text-zinc-50"
+        >
+          d/{forumName}
         </Link>
-        <span className="px-1 text-zinc-800 dark:text-zinc-50">•</span>
-        <Link href={`/u/${post.author.username as string}`}>
-          <span className="text-zinc-800 underline underline-offset-2 dark:text-zinc-50">
-            Posted by u/{post.author.username ?? post.author.username}
-          </span>
+        <span className="p-1 text-zinc-800 dark:text-zinc-50">•</span>
+        <Link
+          href={`/u/${post.author.username as string}`}
+          className="p-1 text-zinc-800 underline underline-offset-2 dark:text-zinc-50"
+        >
+          Posted by u/{post.author.username ?? post.author.username}
         </Link>
       </div>
       <time className="absolute right-5 top-8 md:block">
@@ -91,7 +93,7 @@ const PostCard: FC<PostCardProps> = ({
           {postMetaInfo}
           <Link
             href={`/d/${forumName}/post/${post.id}`}
-            className="py-2 text-lg font-semibold leading-6 text-zinc-900 dark:text-zinc-50"
+            className="p-2 text-lg font-semibold leading-6 text-zinc-900 dark:text-zinc-50"
             aria-label={post.title}
           >
             {post.title}

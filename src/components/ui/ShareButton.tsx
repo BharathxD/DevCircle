@@ -65,6 +65,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
         )}
         onClick={handleShare}
         {...props}
+        aria-label="Share"
       >
         <FiShare2 size={20} />
       </button>
@@ -80,6 +81,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
             className
           )}
           {...props}
+          aria-label="Share"
         >
           <FiShare2 size={20} />
         </button>
