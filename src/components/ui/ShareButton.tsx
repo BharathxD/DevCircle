@@ -23,11 +23,13 @@ import { DialogHeader } from "./Dialog";
 
 interface ShareButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   title: string;
+  url: string;
 }
 
 const ShareButton: React.FC<ShareButtonProps> = ({
   className,
   title,
+  url,
   ...props
 }) => {
   const isDesktopScreen = useMediaQuery("(min-width: 640px)");
@@ -37,7 +39,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
 
   const data = {
     title: `Check out my new post on DevCircle: \n${title}`,
-    url: siteConfig.url + pathName,
+    url: url,
   };
 
   const handleShare = async () => {

@@ -7,6 +7,7 @@ import type { Post, Tag, User, Vote } from "@prisma/client";
 import { motion } from "framer-motion";
 import { BiMessageAltDetail } from "react-icons/bi";
 
+import siteConfig from "@/config/site";
 import formatTimeToNow from "@/lib/formatTimeToNow";
 
 import ShareButton from "../ui/ShareButton";
@@ -72,7 +73,7 @@ const PostCard: FC<PostCardProps> = ({
 
   return (
     <motion.article
-      className="relative overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950"
+      className="relative overflow-hidden rounded-xl border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950"
       initial={{ opacity: 0, backdropFilter: "blur(4px)" }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.25 }}
@@ -113,6 +114,7 @@ const PostCard: FC<PostCardProps> = ({
           <Tags tags={post.tags} />
         </div>
         <ShareButton
+          url={`${siteConfig.url}/d/${forumName}/post/${post.id}`}
           title={post.title}
           className="border-0 border-l-2 border-l-zinc-800"
         />

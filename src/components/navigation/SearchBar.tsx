@@ -54,7 +54,7 @@ const SearchBar: React.FC = () => {
             placeholder="Search posts"
           />
           {searchInput.length > 0 && (
-            <div className="absolute inset-x-0 top-[110%] h-fit w-full rounded-md border-2 border-zinc-800 bg-zinc-50/75 shadow backdrop-blur-sm dark:bg-zinc-950/75">
+            <div className="absolute inset-x-0 top-[110%] h-fit max-h-[60vh] w-full overflow-hidden overflow-y-scroll rounded-md border-2 border-zinc-800 bg-zinc-50/75 shadow backdrop-blur-sm dark:bg-zinc-950/75">
               {isFetching && <Skeleton className="w-full rounded-none p-8" />}
               {isFetched &&
                 !isFetching &&

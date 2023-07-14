@@ -88,7 +88,7 @@ const SidebarNav = ({
 
   return (
     <section
-      className="flex h-full w-full flex-col items-center justify-between gap-2"
+      className="flex h-full w-full flex-col items-center justify-between gap-2 bg-zinc-50 backdrop-blur-sm dark:bg-zinc-950/50"
       aria-label="Desktop Navigation"
     >
       <aside className="flex h-full w-full list-none flex-col rounded-md">
@@ -97,7 +97,7 @@ const SidebarNav = ({
             if ((requireAuth && !isLoggedIn) || href === "/settings")
               return null;
             const className = cn(
-              "flex w-full flex-row items-center gap-4 border-b-2 border-b-zinc-800 bg-zinc-50 p-4 last:border-b-0 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-800",
+              "flex w-full flex-row items-center gap-4 border-b-2 border-b-zinc-800 bg-zinc-50 p-4 backdrop-blur-sm last:border-b-0 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950/50 dark:hover:bg-zinc-800",
               href === pathname &&
                 href !== "/home" &&
                 "bg-zinc-800 text-zinc-50 dark:bg-zinc-900 dark:text-zinc-50"

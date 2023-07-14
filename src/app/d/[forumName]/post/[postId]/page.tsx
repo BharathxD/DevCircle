@@ -8,6 +8,7 @@ import getPost from "@/actions/getPost";
 import { env } from "@/env.mjs";
 import type { Post, Tag, User, Vote } from "@prisma/client";
 
+import siteConfig from "@/config/site";
 import database from "@/lib/database";
 import { absoluteUrl, extractString } from "@/lib/utils";
 import PostVoteShell from "@/components/ui/PostVoteShell";
@@ -85,7 +86,7 @@ const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
 };
 
 async function PostPage({ params }: PageProps) {
-  const { postId } = params;
+  const { postId, forumName } = params;
   if (!postId) return notFound();
   const cachedPost = await getCachedPost(postId);
   const comments = await getComments(postId);
@@ -119,7 +120,7 @@ async function PostPage({ params }: PageProps) {
       currentUser?.userRole?.type === "ADMIN",
   };
   return (
-    <div className="relative flex flex-col items-start gap-2 pt-2 md:flex-row">
+    <div className="relative flex h-[91vh] flex-col items-start gap-2 pt-2 md:flex-row">
       <div className="flex w-full items-center justify-between gap-2 rounded-2xl border-2 border-zinc-800 bg-zinc-50 bg-gradient-to-b from-muted/30 to-muted/30 p-1.5 shadow-inner dark:bg-zinc-950 dark:from-background/10 dark:to-background/80 md:w-fit md:flex-col md:p-1.5">
         {/* Post Vote */}
         <Suspense fallback={<PostVoteShell />}>
@@ -128,6 +129,7 @@ async function PostPage({ params }: PageProps) {
         {/* Share Button and Comments Section */}
         <div className="flex flex-row gap-2 md:flex-col">
           <ShareButton
+            url={`${siteConfig.url}d/${forumName}/post/${postId}`}
             className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-300"
             title={post?.title || cachedPost?.title || ""}
           />

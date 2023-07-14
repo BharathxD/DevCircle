@@ -68,7 +68,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children, userModal }: rootProps) {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
-      <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-neutral-950 dark:text-zinc-50">
+      <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-gradient-to-t dark:from-zinc-950 dark:to-[#111] dark:text-zinc-50">
         <Session>
           <RtkProvider>
             <ThemeProvider>
