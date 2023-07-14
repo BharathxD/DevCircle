@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/opengraph-image.webp`],
+    images: [siteConfig.url],
     creator: "@Bharath_uwu",
   },
   icons: {
