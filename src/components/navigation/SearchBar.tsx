@@ -1,10 +1,9 @@
 "use client";
 
 import { useCallback, useState } from "react";
-import { useRouter } from "next/navigation";
 import axios, { type AxiosResponse } from "axios";
 import { debounce } from "lodash";
-import { Search, Users } from "lucide-react";
+import { Layers, Search } from "lucide-react";
 import { useQuery } from "react-query";
 
 import type { SearchResults } from "@/types/database";
@@ -13,7 +12,6 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/Dialog";
 import { Skeleton } from "../ui/Skeleton";
 
 const SearchBar: React.FC = () => {
-  const router = useRouter();
   const [searchInput, setSearchInput] = useState<string>("");
   const {
     data: queryResults,
@@ -68,16 +66,14 @@ const SearchBar: React.FC = () => {
               {(queryResults?.length ?? 0) > 0 && (
                 <ul className="list-none">
                   {queryResults?.map((post) => (
-                    <li
-                      className="inline-flex h-fit w-full items-center gap-2 p-5 text-lg hover:bg-zinc-800 hover:text-zinc-50"
-                      onClick={() => {
-                        router.push(`/d/${post.forumName}/post/${post.postId}`);
-                        router.refresh();
-                      }}
-                      key={post.postId}
-                    >
-                      <Users className="mr-2 h-4 w-4" />
-                      <p>{post.postTitle}</p>
+                    <li key={post.postId}>
+                      <a
+                        className="inline-flex h-fit w-full items-center gap-2 p-5 text-lg hover:bg-zinc-800 hover:text-zinc-50"
+                        href={`/d/${post.forumName}/post/${post.postId}`}
+                      >
+                        <Layers className="mr-2 h-10 w-10" />
+                        <p>{post.postTitle}</p>
+                      </a>
                     </li>
                   ))}
                 </ul>
