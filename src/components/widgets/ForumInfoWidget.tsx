@@ -2,9 +2,11 @@
 
 import { Fragment } from "react";
 import Link from "next/link";
+import { useMediaQuery } from "@mantine/hooks";
 import { format } from "date-fns";
 import { Edit2 } from "lucide-react";
 
+import ForumInfoModal from "../forum/ForumInfoSheet";
 import SubscribeLeaveToggle from "../forum/SubscribeLeaveToggle";
 
 interface ForumInfoWidgetProps {
@@ -28,6 +30,33 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
   forumCreationDate,
   authorName,
 }) => {
+  const props = {
+    forumId,
+    forumName,
+    isCreator,
+    description,
+    memberCount,
+    isSubscribed,
+    forumCreationDate,
+    authorName,
+  };
+  const isDesktopScreen = useMediaQuery("(min-width: 640px)");
+  if (!isDesktopScreen) {
+    return (
+      <ForumInfoModal
+        {...{
+          forumId,
+          forumName,
+          isCreator,
+          description,
+          memberCount,
+          isSubscribed,
+          forumCreationDate,
+          authorName,
+        }}
+      />
+    );
+  }
   return (
     <div className="order-first mt-14 hidden h-fit overflow-hidden rounded-lg border-2 border-zinc-800 md:order-last md:block">
       <div className="bg-green-100 px-6 py-4 dark:bg-zinc-900">

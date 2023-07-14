@@ -68,7 +68,7 @@ const EditComment: React.FC<EditCommentProps> = ({ commentId, text }) => {
           Edit Comment
         </button>
       </AlertDialogTrigger>
-      <AlertDialogContent className="border-2 border-zinc-800 shadow-none">
+      <AlertDialogContent className="rounded-xl border-zinc-800">
         <AlertDialogHeader>
           <AlertDialogTitle>Edit the comment</AlertDialogTitle>
           <AlertDialogDescription>
@@ -85,8 +85,8 @@ const EditComment: React.FC<EditCommentProps> = ({ commentId, text }) => {
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+        <AlertDialogFooter className="flex-row justify-end gap-2 md:gap-0">
+          <AlertDialogCancel className="mt-0">Cancel</AlertDialogCancel>
           <AlertDialogAction
             disabled={isLoading || input.length === 0}
             onClick={() => {

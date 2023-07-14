@@ -1,8 +1,10 @@
+import { Fragment } from "react";
+
 import CookiesForm from "@/components/forms/CookiesForm";
 
 export default function SettingsCookiesPage() {
   return (
-    <section>
+    <Fragment>
       <div className="px-4 py-2">
         <h3 className="text-xl font-bold">Cookies</h3>
         <p className="text-sm text-muted-foreground">
@@ -12,6 +14,6 @@ export default function SettingsCookiesPage() {
       <div className="px-4 py-2">
         <CookiesForm />
       </div>
-    </section>
+    </Fragment>
   );
 }

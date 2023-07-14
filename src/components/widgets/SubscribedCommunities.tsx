@@ -18,7 +18,7 @@ const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
       <div className="flex h-full w-full items-center justify-center">
         <h1>
           Discover and join vibrant communities and forums! Click{" "}
-          <Link href="/search" className="border-b-2 border-zinc-300">
+          <Link href="/leaderboard" className="border-b-2 border-zinc-300">
             here
           </Link>{" "}
           to explore.

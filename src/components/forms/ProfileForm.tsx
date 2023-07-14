@@ -87,7 +87,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ username, bio, urls }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 py-4 md:pt-0 lg:max-w-2xl"
+        className="flex h-fit flex-col gap-2 p-4 pt-0 lg:max-w-2xl"
       >
         <FormField
           control={form.control}
@@ -176,7 +176,12 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ username, bio, urls }) => {
             )}
           />
         </div>
-        <Button type="submit" disabled={isLoading} isLoading={isLoading}>
+        <Button
+          type="submit"
+          className="mt-2"
+          disabled={isLoading}
+          isLoading={isLoading}
+        >
           Update profile
         </Button>
       </form>
