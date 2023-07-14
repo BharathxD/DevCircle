@@ -30,16 +30,6 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
   forumCreationDate,
   authorName,
 }) => {
-  const props = {
-    forumId,
-    forumName,
-    isCreator,
-    description,
-    memberCount,
-    isSubscribed,
-    forumCreationDate,
-    authorName,
-  };
   const isDesktopScreen = useMediaQuery("(min-width: 640px)");
   if (!isDesktopScreen) {
     return (

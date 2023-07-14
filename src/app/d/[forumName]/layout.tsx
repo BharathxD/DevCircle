@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getCurrentUser } from "@/actions/getCurrentUser";
+import { getAuthSession } from "@/actions/getCurrentUser";
 import { getForum } from "@/actions/getForum";
 
 import database from "@/lib/database";
@@ -13,16 +13,16 @@ interface LayoutProps {
 }
 
 const Layout = async ({ children, params: { forumName } }: LayoutProps) => {
-  const [currentUser, forum] = await Promise.all([
-    getCurrentUser(),
+  const [session, forum] = await Promise.all([
+    getAuthSession(),
     getForum(forumName),
   ]);
 
   if (!forum) return notFound();
 
-  const subscription = currentUser
+  const subscription = session?.user
     ? await database.subscription.findFirst({
-        where: { forumId: forum.id, userId: currentUser.id },
+        where: { forumId: forum.id, userId: session.user.id },
       })
     : undefined;
 
@@ -49,7 +49,7 @@ const Layout = async ({ children, params: { forumName } }: LayoutProps) => {
             forumCreationDate={forum.createdAt}
             memberCount={memberCount}
             authorName={forum.creator?.username}
-            isCreator={forum.creatorId === currentUser?.id}
+            isCreator={forum.creatorId === session?.user?.id}
             isSubscribed={isSubscribed}
           />
         </div>

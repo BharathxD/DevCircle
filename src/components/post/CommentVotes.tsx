@@ -90,9 +90,7 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
     [isLoggedIn, pathname, router, vote]
   );
   return (
-    <div
-      className={cn("flex h-full w-auto flex-row items-center gap-4")}
-    >
+    <div className={cn("flex h-full w-auto flex-row items-center gap-4")}>
       <Button
         size="sm"
         variant="noDisableOutline"

@@ -12,7 +12,6 @@ import {
   UserCircle2,
   Users2,
 } from "lucide-react";
-import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 
@@ -47,7 +46,11 @@ const navLinks = [
   },
 ];
 
-const SidebarNav = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+const SidebarNav = ({
+  isLoggedIn,
+}: {
+  isLoggedIn: boolean;
+}): JSX.Element | null => {
   const isDesktopScreen = useMediaQuery("(min-width: 640px)");
   const pathname = usePathname();
 
@@ -90,29 +93,35 @@ const SidebarNav = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
     >
       <aside className="flex h-full w-full list-none flex-col rounded-md">
         <div className="w-full overflow-hidden border-b-2 border-zinc-800">
-          {navLinks.map(({ href, icon: Icon, text, requireAuth }, index) => {
+          {navLinks.map(({ href, icon: Icon, text, requireAuth }) => {
             if ((requireAuth && !isLoggedIn) || href === "/settings")
               return null;
-            const attributes = {
-              key: index,
-              href: href,
-              className: cn(
-                "flex w-full flex-row items-center gap-4 border-b-2 border-b-zinc-800 bg-zinc-50 p-4 last:border-b-0 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-800",
-                href === pathname &&
-                  href !== "/home" &&
-                  "bg-zinc-800 text-zinc-50 dark:bg-zinc-900 dark:text-zinc-50"
-              ),
-              ariaCurrent: href === pathname ? "page" : undefined,
-            };
-            if (href === "/home")
+            const className = cn(
+              "flex w-full flex-row items-center gap-4 border-b-2 border-b-zinc-800 bg-zinc-50 p-4 last:border-b-0 hover:bg-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-800",
+              href === pathname &&
+                href !== "/home" &&
+                "bg-zinc-800 text-zinc-50 dark:bg-zinc-900 dark:text-zinc-50"
+            );
+            if (href === "/home") {
               return (
-                <a {...attributes}>
+                <a
+                  href={href}
+                  key={href}
+                  className={className}
+                  aria-current={href === pathname ? "page" : undefined}
+                >
                   <Icon />
                   <p>{text}</p>
                 </a>
               );
+            }
             return (
-              <Link {...attributes}>
+              <Link
+                href={href}
+                key={href}
+                className={className}
+                aria-current={href === pathname ? "page" : undefined}
+              >
                 <Icon />
                 <p>{text}</p>
               </Link>

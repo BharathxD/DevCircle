@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import type { Comment, CommentVote, User, VoteType } from "@prisma/client";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
-import { MessageCircle, MessageSquare, MoreVertical } from "lucide-react";
+import { MessageSquare, MoreVertical } from "lucide-react";
 import queryString from "query-string";
 import { useMutation } from "react-query";
 
@@ -110,7 +110,7 @@ const PostComment: React.FC<PostCommentProps> = ({
   });
   return (
     <div
-      className="flex flex-col gap-3 overflow-hidden rounded-md border-2 border-zinc-800 dark:border-zinc-800 dark:bg-zinc-900/50"
+      className="flex flex-col gap-3 overflow-hidden rounded-xl border-2 border-zinc-800 dark:border-zinc-800 dark:bg-zinc-900/50"
       ref={commentRef}
     >
       <div className="flex items-center px-4 pt-3">
@@ -168,7 +168,7 @@ const PostComment: React.FC<PostCommentProps> = ({
           <Button
             onClick={toggleReplying}
             variant="noDisableOutline"
-            className="h-11 rounded-xl bg-zinc-50 px-3 text-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:text-zinc-50"
+            className="h-[2.875rem] rounded-xl bg-zinc-50 px-3 text-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:text-zinc-50"
           >
             <MessageSquare className="h-5 w-5" />
           </Button>

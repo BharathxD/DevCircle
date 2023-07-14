@@ -24,6 +24,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({
           src={user.image}
           alt={`${user.name ?? "User"}'s profile picture`}
           className="rounded-full border-2 border-zinc-800 selection:bg-transparent"
+          sizes="100%"
           referrerPolicy="no-referrer"
         />
       </div>

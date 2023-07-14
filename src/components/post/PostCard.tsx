@@ -89,11 +89,11 @@ const PostCard: FC<PostCardProps> = ({
             isLoggedIn={isLoggedIn}
           />
         </div>
-        <div className="flex w-full flex-col gap-2">
+        <div className="flex w-full flex-col gap-1">
           {postMetaInfo}
           <Link
             href={`/d/${forumName}/post/${post.id}`}
-            className="p-2 text-lg font-semibold leading-6 text-zinc-900 dark:text-zinc-50"
+            className="p-1 pl-0 text-lg font-semibold leading-6 text-zinc-900 dark:text-zinc-50"
             aria-label={post.title}
           >
             {post.title}
