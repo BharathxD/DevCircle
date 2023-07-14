@@ -1,6 +1,4 @@
-import { Fragment } from "react";
 import { type Metadata } from "next";
-import Head from "next/head";
 import { notFound } from "next/navigation";
 import { getAuthSession } from "@/actions/getCurrentUser";
 import { getForumWithPosts } from "@/actions/getForum";
@@ -72,7 +70,7 @@ const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
   return (
     <section className="flex flex-col gap-4 pt-2">
       <MiniCreatePost />
-      <ScrollArea className="no-scrollbar fixed max-h-[70vh] w-full">
+      <ScrollArea className="no-scrollbar fixed max-h-[70vh] w-fit">
         {forum.posts.length === 0 ? (
           <div className="w-full rounded-md border-2 border-zinc-800 bg-yellow-300 p-2 text-center font-medium text-zinc-800 dark:bg-zinc-900 dark:text-zinc-50">
             Be the first to post! No posts found. Why not be the first one to

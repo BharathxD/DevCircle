@@ -10,7 +10,7 @@ const UserProfilePage = async () => {
   if (!user) return notFound();
   return (
     <DashboardContentShell className="md:py-4">
-      <div className="h-full overflow-hidden rounded-xl border-2 border-zinc-800">
+      <div className="no-scrollbar h-full overflow-auto rounded-xl border-2 border-zinc-800">
         <UserProfile user={user} />
         <div className="h-[2px] w-full bg-zinc-800" />
         <UserPosts posts={user.post} />

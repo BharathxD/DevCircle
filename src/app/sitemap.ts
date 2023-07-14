@@ -26,7 +26,7 @@ export default async function generateSitemap(): Promise<MetadataRoute.Sitemap> 
 
   // Generate URLs and last modified dates for additional routes
   const additionalRoutes = ["", "/home", "/leaderboard"].map((route) => ({
-    url: `${siteConfig.url}${route}`,
+    url: siteConfig.url + route,
     lastModified: new Date().toISOString(),
   }));
 

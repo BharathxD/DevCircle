@@ -21,7 +21,10 @@ const ThemeSwitcher: React.FC = ({}) => {
   if (!isMounted) {
     return (
       <div className="flex items-center justify-center border-l-2 border-zinc-800 px-5 hover:cursor-pointer hover:bg-pink-300 dark:hover:bg-zinc-800">
-        <Loader2 size={25} className="animate-spin text-yellow-500" />
+        <Loader2
+          size={25}
+          className="animate-spin text-zinc-800 dark:text-zinc-50"
+        />
       </div>
     );
   }

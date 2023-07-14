@@ -123,7 +123,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
         </>
       )}
       <div
-        className={`${profileWidth} my-4 flex flex-row items-center justify-start gap-4 px-4 py-2 md:mb-0`}
+        className={`${profileWidth} my-2 flex flex-row items-center justify-evenly gap-4 md:my-4 md:mb-0 md:justify-start`}
       >
         {socialButtons.map(renderSocialButton)}
       </div>
