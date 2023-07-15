@@ -33,7 +33,7 @@ const Layout = async ({ children, params: { forumName } }: LayoutProps) => {
   });
 
   return (
-    <div className="h-full pb-0 pt-3 font-medium">
+    <div className="h-[91vh] pb-0 pt-3 font-medium">
       <div className="grid grid-cols-1 gap-y-4 md:grid-cols-4 md:gap-x-4">
         <div className="col-span-3 flex flex-col gap-2">
           <h1 className="py-4 text-4xl font-extrabold leading-6 text-zinc-800 dark:bg-gradient-to-br dark:from-zinc-200 dark:to-zinc-400 dark:bg-clip-text dark:text-transparent sm:text-2xl md:py-0 md:text-3xl lg:text-4xl">

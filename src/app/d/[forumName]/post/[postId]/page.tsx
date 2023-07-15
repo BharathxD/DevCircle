@@ -120,7 +120,7 @@ async function PostPage({ params }: PageProps) {
       currentUser?.userRole?.type === "ADMIN",
   };
   return (
-    <div className="relative flex h-[91vh] flex-col items-start gap-2 pt-2 md:flex-row">
+    <div className="relative flex flex-col items-start gap-2 pt-2 md:flex-row">
       <div className="flex w-full items-center justify-between gap-2 rounded-2xl border-2 border-zinc-800 bg-zinc-50 bg-gradient-to-b from-muted/30 to-muted/30 p-1.5 shadow-inner dark:bg-zinc-950 dark:from-background/10 dark:to-background/80 md:w-fit md:flex-col md:p-1.5">
         {/* Post Vote */}
         <Suspense fallback={<PostVoteShell />}>
