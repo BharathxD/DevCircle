@@ -46,11 +46,7 @@ const navLinks = [
   },
 ];
 
-const SidebarNav = ({
-  isLoggedIn,
-}: {
-  isLoggedIn: boolean;
-}): JSX.Element | null => {
+const SidebarNav: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
   const isDesktopScreen = useMediaQuery("(min-width: 640px)");
   const pathname = usePathname();
 
@@ -87,11 +83,11 @@ const SidebarNav = ({
   if (!isLoggedIn) return null;
 
   return (
-    <section
+    <nav
       className="flex h-full w-full flex-col items-center justify-between gap-2 bg-zinc-50 backdrop-blur-sm dark:bg-zinc-950/50"
       aria-label="Desktop Navigation"
     >
-      <aside className="flex h-full w-full list-none flex-col rounded-md">
+      <section className="flex h-full w-full list-none flex-col rounded-md">
         <div className="w-full overflow-hidden border-b-2 border-zinc-800">
           {navLinks.map(({ href, icon: Icon, text, requireAuth }) => {
             if ((requireAuth && !isLoggedIn) || href === "/settings")
@@ -128,9 +124,9 @@ const SidebarNav = ({
             );
           })}
         </div>
-      </aside>
+      </section>
       <Footer />
-    </section>
+    </nav>
   );
 };
 

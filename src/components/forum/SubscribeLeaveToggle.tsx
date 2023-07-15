@@ -21,15 +21,15 @@ interface SubscribeLeaveToggleProps {
   isLoggedIn?: boolean;
 }
 
-const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
+const SubscribeLeaveToggle: React.VFC<SubscribeLeaveToggleProps> = ({
   isSubscribed,
   forum,
-  isLoggedIn,
+  isLoggedIn = false,
 }) => {
+  const { id, name } = forum;
   const pathname = usePathname();
   const router = useRouter();
   const [subscribed, setSubscribed] = useState<boolean>(isSubscribed);
-  const { id, name } = forum;
   const { mutate: patchSubscription, isLoading } = useMutation<number>({
     mutationFn: async () => {
       const response = await axios.patch(`/api/forum/${id}/subscription`);
@@ -78,7 +78,7 @@ const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
   };
 
   const buttonClassName = cn(
-    `flex h-full w-full items-center justify-center px-6 py-4 text-center text-zinc-50 dark:bg-zinc-900`,
+    "flex h-full w-full items-center justify-center px-6 py-4 text-center text-zinc-50 dark:bg-zinc-900",
     subscribed
       ? "bg-red-100 text-zinc-800 hover:bg-red-500 hover:text-zinc-50 dark:border-red-500 dark:text-zinc-50 hover:dark:bg-red-500"
       : "bg-green-100 text-zinc-800 hover:bg-green-500 hover:text-zinc-50 dark:border-green-500 dark:text-zinc-50 hover:dark:bg-green-500"
@@ -89,6 +89,8 @@ const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
       className={buttonClassName}
       onClick={handleToggleSubscription}
       disabled={isLoading}
+      aria-label={subscribed ? "Subscribe" : "Leave"}
+      aria-pressed={subscribed}
     >
       {isLoading && <Loader2 className="animate-spin" />}
       {!isLoading && (subscribed ? "Leave Community" : "Join Community")}
