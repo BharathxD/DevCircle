@@ -1,0 +1,46 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }},
+      NEXT_PUBLIC_FB_APP_ID: ${{ secrets.NEXT_PUBLIC_FB_APP_ID }},
+      GOOGLE_ANALYTICS_MEASUREMENT_ID: ${{ secrets.GOOGLE_ANALYTICS_MEASUREMENT_ID }},
+      NODE_ENV: ${{ secrets.NODE_ENV }},
+      DATABASE_URL: ${{ secrets.DATABASE_URL }},
+      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }},
+      UPLOADTHING_SECRET: ${{ secrets.UPLOADTHING_SECRET }},
+      UPLOADTHING_APP_ID: ${{ secrets.UPLOADTHING_APP_ID }},
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }},
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }},
+      REDIS_URL: ${{ secrets.REDIS_URL }},
+      REDIS_SECRET: ${{ secrets.REDIS_SECRET }},
+      AWS_ACCESS_KEYID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          npx prisma generate
+          npx sst deploy --stage prod
