@@ -3,14 +3,13 @@
 import { Fragment, useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 
-import useAnalytics from "@/hooks/useCookies";
+import useAnalytics from "@/hooks/useAnalytics";
 import { Label } from "@/components/ui/Label";
 
 import { Switch } from "../ui/Switch";
 
-const CookiesForm = (): JSX.Element => {
+const CookiesForm = () => {
   const { consent, setConsent } = useAnalytics();
-
   return (
     <Fragment>
       <div className="flex items-center justify-between space-x-2 rounded-t-md border-2 border-zinc-800 p-4">
