@@ -1,6 +1,5 @@
 import "server-only";
 
-import { env } from "@/env.mjs";
 import { PrismaClient } from "@prisma/client";
 
 declare global {
@@ -13,7 +12,7 @@ declare global {
  * one based on the current environment.
  * @returns The function `getPrismaClient` returns an instance of `PrismaClient`. If the `NODE_ENV`
  * environment variable is set to "production", a new instance of `PrismaClient` is returned.
- * Otherwise, if `global.cachedPrisma` is not defined, a new instance of `PrismaClient` is created and
+ * Otherwise, if `global.cachedPrisma` is not defined, a new instance of `e` is created and
  * stored in `global.cachedPrisma`. finally returns that instance.
  */
 const getPrismaClient = () => {

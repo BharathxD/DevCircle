@@ -1,18 +1,34 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { SSTConfig } from "sst";
 import { NextjsSite } from "sst/constructs";
+import * as cdk from "aws-cdk-lib"
+import * as cf from "aws-cdk-lib/aws-cloudfront";
 
 export default {
   config(_input) {
     return {
       name: "devcircle",
-      region: "us-east-1",
+      region: "ap-south-1",
     };
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
+      const serverCachePolicy = new cf.CachePolicy(stack, "serverCache", {
+        queryStringBehavior: cf.CacheQueryStringBehavior.all(),
+        headerBehavior: cf.CacheCookieBehavior.none(),
+        cookieBehavior: cf.CacheCookieBehavior.none(),
+        defaultTtl: cdk.Duration.days(0),
+        maxTtl: cdk.Duration.days(365),
+        minTtl: cdk.Duration.days(0),
+        enableAcceptEncodingBrotli: true, 
+        enableAcceptEncodingGzip: true
+      })
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const site = new NextjsSite(stack, "site", {
+        cdk: {
+          serverCachePolicy
+        },
+        timeout: "30 seconds",
         environment: {
           NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL!,
           NEXT_PUBLIC_FB_APP_ID: process.env.NEXT_PUBLIC_FB_APP_ID!,
