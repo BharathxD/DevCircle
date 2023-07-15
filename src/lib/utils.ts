@@ -48,3 +48,10 @@ export const generateShareUrl = ({
     { url: facebook, icon: FaFacebook },
   ];
 };
+
+export const pageview = (GA_MEASUREMENT_ID: string, url: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  window.gtag("config", GA_MEASUREMENT_ID, {
+    page_path: url,
+  });
+};

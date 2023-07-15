@@ -16,6 +16,7 @@ export const env = createEnv({
     GOOGLE_CLIENT_SECRET: z.string(),
     REDIS_URL: z.string(),
     REDIS_SECRET: z.string(),
+    GOOGLE_ANALYTICS_MEASUREMENT_ID: z.string(),
   },
 
   client: {
@@ -30,6 +31,8 @@ export const env = createEnv({
   runtimeEnv: {
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_FB_APP_ID: process.env.NEXT_PUBLIC_FB_APP_ID,
+    GOOGLE_ANALYTICS_MEASUREMENT_ID:
+      process.env.GOOGLE_ANALYTICS_MEASUREMENT_ID,
     NODE_ENV: process.env.NODE_ENV,
     DATABASE_URL: process.env.DATABASE_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,

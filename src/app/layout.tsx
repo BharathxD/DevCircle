@@ -2,6 +2,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+import { env } from "@/env.mjs";
 
 import RtkProvider from "@/providers/RtkProvider";
 import Session from "@/providers/SessionProviders";
@@ -9,6 +10,7 @@ import ThemeProvider from "@/providers/ThemeProvider";
 import { Toaster } from "@/providers/Toaster";
 import siteConfig from "@/config/site";
 import { cn } from "@/lib/utils";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import Navbar from "@/components/navigation/Navbar";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -68,6 +70,9 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children, userModal }: rootProps) {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
+      <GoogleAnalytics
+        GA_MEASUREMENT_ID={env.GOOGLE_ANALYTICS_MEASUREMENT_ID}
+      />
       <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-zinc-950 dark:bg-gradient-to-t dark:from-zinc-950 dark:to-[#111] dark:text-zinc-50">
         <Session>
           <RtkProvider>
