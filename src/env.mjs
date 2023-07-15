@@ -8,7 +8,6 @@ export const env = createEnv({
    */
   server: {
     DATABASE_URL: z.string(),
-    NODE_ENV: z.enum(["development", "test", "production"]),
     NEXTAUTH_SECRET: z.string(),
     UPLOADTHING_SECRET: z.string(),
     UPLOADTHING_APP_ID: z.string(),
@@ -33,7 +32,6 @@ export const env = createEnv({
     NEXT_PUBLIC_FB_APP_ID: process.env.NEXT_PUBLIC_FB_APP_ID,
     GOOGLE_ANALYTICS_MEASUREMENT_ID:
       process.env.GOOGLE_ANALYTICS_MEASUREMENT_ID,
-    NODE_ENV: process.env.NODE_ENV,
     DATABASE_URL: process.env.DATABASE_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
