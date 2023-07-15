@@ -55,3 +55,11 @@ export const pageview = (GA_MEASUREMENT_ID: string, url: string) => {
     page_path: url,
   });
 };
+
+export const getLocalStorage = <T>(key: string, defaultValue: T): T => {
+  const stickyValue = localStorage.getItem(key);
+  const parsedValue = stickyValue !== null && stickyValue !== 'undefined' ? JSON.parse(stickyValue) : defaultValue;
+  return parsedValue as T;
+};
+
+export const setLocalStorage = (key: string, value: unknown) => localStorage.setItem(key, JSON.stringify(value));

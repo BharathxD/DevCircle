@@ -10,6 +10,7 @@ import ThemeProvider from "@/providers/ThemeProvider";
 import { Toaster } from "@/providers/Toaster";
 import siteConfig from "@/config/site";
 import { cn } from "@/lib/utils";
+import CookieBanner from "@/components/analytics/CookiesBanner";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import Navbar from "@/components/navigation/Navbar";
 
@@ -81,6 +82,7 @@ export default async function RootLayout({ children, userModal }: rootProps) {
               {userModal}
               {children}
               <Toaster />
+              <CookieBanner />
             </ThemeProvider>
           </RtkProvider>
         </Session>

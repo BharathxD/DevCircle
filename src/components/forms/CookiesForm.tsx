@@ -3,24 +3,13 @@
 import { Fragment, useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 
+import useAnalytics from "@/hooks/useCookies";
 import { Label } from "@/components/ui/Label";
 
 import { Switch } from "../ui/Switch";
 
 const CookiesForm = (): JSX.Element => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isChecked, setIsChecked] = useState<boolean>(true);
-
-  useEffect(() => {
-    const consentState = localStorage.getItem("cookie_consent");
-    setIsChecked(consentState === "true");
-    setIsLoading(false);
-  }, []);
-
-  const toggleCookieConfiguration = (value: boolean): void => {
-    setIsChecked(value);
-    localStorage.setItem("cookie_consent", value.toString());
-  };
+  const { consent, setConsent } = useAnalytics();
 
   return (
     <Fragment>
@@ -32,18 +21,11 @@ const CookiesForm = (): JSX.Element => {
             functionality.
           </span>
         </Label>
-        {isLoading ? (
-          <div className="flex items-center">
-            <Loader2 className="animate-spin" />
-            <span className="ml-2">Loading...</span>
-          </div>
-        ) : (
-          <Switch
-            id="functional"
-            onCheckedChange={toggleCookieConfiguration}
-            checked={isChecked}
-          />
-        )}
+        <Switch
+          id="functional"
+          onCheckedChange={(checked: boolean) => setConsent(checked)}
+          checked={consent ? true : false}
+        />
       </div>
       <div className="flex items-center justify-between space-x-2 rounded-b-md border-2 border-t-0 border-zinc-800 px-4 py-2">
         <p className="text-zinc-400">
