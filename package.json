@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/BharathxD/DevCircle#readme",
   "scripts": {
-    "dev": "next dev",
+    "dev": "sst bind next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -118,6 +118,9 @@
     "prettier-plugin-tailwindcss": "^0.3.0",
     "prisma": "^4.16.2",
     "tailwindcss": "^3.3.2",
-    "typescript": "^5.1.0"
+    "typescript": "^5.1.0",
+    "sst": "^2.21.7",
+    "aws-cdk-lib": "2.84.0",
+    "constructs": "10.1.156"
   }
 }
