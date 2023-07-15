@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { getAuthSession } from "@/actions/getCurrentUser";
 
 import Shell from "@/components/ui/Shell";
