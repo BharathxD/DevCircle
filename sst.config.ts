@@ -3,6 +3,7 @@ import type { SSTConfig } from "sst";
 import { NextjsSite } from "sst/constructs";
 import * as cdk from "aws-cdk-lib"
 import * as cf from "aws-cdk-lib/aws-cloudfront";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
 
 export default {
   config(_input) {
@@ -20,8 +21,14 @@ export default {
         defaultTtl: cdk.Duration.days(0),
         maxTtl: cdk.Duration.days(365),
         minTtl: cdk.Duration.days(0),
-        enableAcceptEncodingBrotli: true, 
+        enableAcceptEncodingBrotli: true,
         enableAcceptEncodingGzip: true
+      })
+      const certificate = new acm.Certificate(this, "Certificate", {
+        domainName: "*.devcircle.live",
+        subjectAlternativeNames: ["devcircle.live"],
+        certificateName: "DevCircle",
+        validation: acm.CertificateValidation.fromDns()
       })
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const site = new NextjsSite(stack, "site", {
@@ -29,6 +36,13 @@ export default {
           serverCachePolicy
         },
         timeout: "30 seconds",
+        customDomain: {
+          isExternalDomain: true,
+          domainName: "www.devcircle.live",
+          cdk: {
+            certificate
+          }
+        },
         environment: {
           NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL!,
           NEXT_PUBLIC_FB_APP_ID: process.env.NEXT_PUBLIC_FB_APP_ID!,
