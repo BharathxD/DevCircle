@@ -1,15 +1,26 @@
+"use client";
+
 import { useEffect } from "react";
 import { type OutputData } from "@editorjs/editorjs";
 import type EditorJS from "@editorjs/editorjs";
 
 import { uploadFiles } from "@/lib/uploadFiles";
 
+/**
+ * Custom hook for managing the EditorJS editor instance.
+ * @param editorRef - Mutable ref object for storing the editor instance.
+ * @param titleRef - Mutable ref object for the title textarea element.
+ * @param blocks - Initial blocks data for the editor.
+ */
 export const useEditor = (
   editorRef: React.MutableRefObject<EditorJS | null>,
   titleRef: React.MutableRefObject<HTMLTextAreaElement | null>,
   blocks?: OutputData["blocks"]
 ) => {
   useEffect(() => {
+    /**
+     * Initializes the EditorJS instance and sets up the editor.
+     */
     const initializeEditor = async () => {
       const EditorJS = (await import("@editorjs/editorjs")).default;
       const Header = (await import("@editorjs/header")).default;

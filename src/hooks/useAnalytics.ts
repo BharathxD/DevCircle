@@ -3,12 +3,16 @@
 import { useEffect, useState } from "react";
 import { getLocalStorage, setLocalStorage } from "@/lib/utils";
 
+/**
+ * Custom hook for managing analytics consent.
+ * @returns Object with consent state and setter function.
+ */
 const useAnalytics = () => {
     const [consent, setConsent] = useState<boolean | null>(null);
 
     useEffect(() => {
-        const storedconsent = getLocalStorage("cookie_consent", true);
-        setConsent(storedconsent);
+        const storedConsent = getLocalStorage("cookie_consent", true);
+        setConsent(storedConsent);
     }, []);
 
     useEffect(() => {
