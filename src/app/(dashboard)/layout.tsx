@@ -13,9 +13,7 @@ export default async function RootLayout({ children }: rootProps) {
   const session = await getAuthSession();
   return (
     <Shell isLoggedIn={!!session?.user}>
-      <Suspense fallback={<div className="h-full w-full bg-red-500"></div>}>
-        {children}
-      </Suspense>
+      {children}
       <SidebarNav isLoggedIn={!!session?.user} />
     </Shell>
   );
