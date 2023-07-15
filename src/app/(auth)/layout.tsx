@@ -16,7 +16,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         <BlurImage
           src="/images/auth-bg.jpeg"
           alt="An abstract art"
-          className="absolute inset-0 bg-zinc-300 object-cover dark:bg-zinc-700"
+          className="absolute inset-0 rounded-none bg-zinc-300 object-cover dark:bg-zinc-700"
           priority
           fill
         />

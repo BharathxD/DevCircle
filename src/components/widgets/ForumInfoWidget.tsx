@@ -97,7 +97,7 @@ const ForumInfoWidget: React.FC<ForumInfoWidgetProps> = ({
               <p className="text-zinc-500">Edit this community</p>
               <a
                 href={`/d/${forumName}/edit`}
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-zinc-700 bg-zinc-900 p-2 hover:text-zinc-500"
+                className="inline-flex items-center gap-2 rounded-xl border-2 border-zinc-700 bg-zinc-50 p-2 hover:text-zinc-500 dark:bg-zinc-900"
               >
                 <Edit2 className="h-4 w-4" />
               </a>

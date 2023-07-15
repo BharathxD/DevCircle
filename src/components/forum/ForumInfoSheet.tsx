@@ -33,7 +33,7 @@ const ForumInfoModal: React.FC<ForumInfoModalProps> = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="absolute right-4 top-[12vh] inline-flex items-center gap-2 rounded-lg border-2 border-zinc-700 bg-zinc-50 p-2 backdrop-blur-md dark:bg-zinc-900 md:hidden">
+        <button className="absolute right-4 top-[12vh] inline-flex items-center gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-2 backdrop-blur-md dark:bg-zinc-950 md:hidden">
           <p>About</p>
           <BiChevronDownCircle className="h-5 w-5" />
         </button>
