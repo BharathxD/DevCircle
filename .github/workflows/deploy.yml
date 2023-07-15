@@ -23,6 +23,7 @@ jobs:
       REDIS_SECRET: ${{ secrets.REDIS_SECRET }},
       AWS_ACCESS_KEYID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      CDK_CERTIFICATE_ARN: ${{ secrets.CDK_CERTIFICATE_ARN }}
 
     steps:
       - name: Checkout code

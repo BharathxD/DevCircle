@@ -24,12 +24,7 @@ export default {
         enableAcceptEncodingBrotli: true,
         enableAcceptEncodingGzip: true
       })
-      const certificate = new acm.Certificate(this, "Certificate", {
-        domainName: "*.devcircle.live",
-        subjectAlternativeNames: ["devcircle.live"],
-        certificateName: "DevCircle",
-        validation: acm.CertificateValidation.fromDns()
-      })
+      const certificate = acm.Certificate.fromCertificateArn(stack, "Certificate", process.env.CDK_CERTIFICATE_ARN!)
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const site = new NextjsSite(stack, "site", {
         cdk: {
