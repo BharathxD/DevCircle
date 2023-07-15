@@ -1,6 +1,7 @@
 import { env } from "@/env.mjs";
 import { clsx, type ClassValue } from "clsx";
 import queryString from "query-string";
+import type { IconType } from "react-icons";
 import { FaFacebook, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
 
@@ -59,7 +60,7 @@ export const generateShareUrl = ({
 }: {
   title: string;
   url: string;
-}): { url: string; icon: React.ComponentType }[] => {
+}): { url: string; icon: IconType }[] => {
   const twitter = queryString.stringifyUrl({
     url: "https://twitter.com/intent/tweet",
     query: { url, text: title },

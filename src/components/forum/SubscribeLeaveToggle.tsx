@@ -78,10 +78,10 @@ const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
   };
 
   const buttonClassName = cn(
-    `flex h-full w-full items-center justify-center bg-zinc-50 px-6 py-4 text-center text-zinc-800 dark:bg-zinc-950`,
+    `flex h-full w-full items-center justify-center px-6 py-4 text-center text-zinc-50 dark:bg-zinc-900`,
     subscribed
-      ? "hover:bg-red-500 hover:text-zinc-50 dark:border-red-500 dark:text-zinc-50 hover:dark:bg-red-500"
-      : "hover:bg-green-500 hover:text-zinc-50 dark:border-green-500 dark:text-zinc-50 hover:dark:bg-green-500"
+      ? "bg-red-100 text-zinc-800 hover:bg-red-500 hover:text-zinc-50 dark:border-red-500 dark:text-zinc-50 hover:dark:bg-red-500"
+      : "bg-green-100 text-zinc-800 hover:bg-green-500 hover:text-zinc-50 dark:border-green-500 dark:text-zinc-50 hover:dark:bg-green-500"
   );
 
   return (

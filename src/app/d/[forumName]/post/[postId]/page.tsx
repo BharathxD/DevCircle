@@ -85,7 +85,7 @@ const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   };
 };
 
-async function PostPage({ params }: PageProps) {
+const PostPage = async ({ params }: PageProps) => {
   const { postId, forumName } = params;
   if (!postId) return notFound();
   const cachedPost = await getCachedPost(postId);
@@ -147,7 +147,7 @@ async function PostPage({ params }: PageProps) {
       </article>
     </div>
   );
-}
+};
 
 export { generateMetadata };
 export default PostPage;

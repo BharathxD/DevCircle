@@ -1,7 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
+import { Fragment } from "react";
 
 import useAnalytics from "@/hooks/useAnalytics";
 import { Label } from "@/components/ui/Label";

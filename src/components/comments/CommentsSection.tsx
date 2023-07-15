@@ -37,7 +37,10 @@ const CommentsSection = async ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="relative flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 hover:bg-pink-300 dark:hover:border-zinc-300 dark:hover:bg-zinc-900">
+        <button
+          className="relative flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 hover:bg-pink-300 dark:hover:border-zinc-300 dark:hover:bg-zinc-900"
+          aria-label="Comments"
+        >
           <MessageSquare size={20} />
           {comments.length !== 0 && (
             <div className="absolute -right-1.5 -top-1.5 flex h-6 w-6 items-center justify-center overflow-hidden rounded-full border border-zinc-800 bg-green-500 p-1 text-zinc-50">

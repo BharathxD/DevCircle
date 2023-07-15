@@ -94,15 +94,15 @@ const ShareButton: React.FC<ShareButtonProps> = ({
         </DialogHeader>
         <DialogDescription className="flex flex-col items-center gap-4 overflow-hidden md:flex-row md:gap-2">
           <div className="inline-flex flex-row items-center gap-2">
-            {generateShareUrl(data).map((social, index) => (
+            {generateShareUrl(data).map(({ url, icon: Icon }, index) => (
               <Link
                 key={index}
-                href={social.url}
+                href={url}
                 className="rounded-full border-2 border-zinc-800 p-2 hover:bg-zinc-700"
                 referrerPolicy="no-referrer"
                 target="_blank"
               >
-                <social.icon className="h-8 w-8 text-zinc-50" />
+                <Icon className="h-8 w-8 text-zinc-50" />
               </Link>
             ))}
           </div>
