@@ -17,7 +17,7 @@ declare global {
  * stored in `global.cachedPrisma`. finally returns that instance.
  */
 const getPrismaClient = () => {
-  if (env["NODE_ENV"] === "production") return new PrismaClient();
+  if (process.env.NODE_ENV === "production") return new PrismaClient();
   if (!global.cachedPrisma) global.cachedPrisma = new PrismaClient();
   return global.cachedPrisma;
 };
