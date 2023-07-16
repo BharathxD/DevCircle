@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getAuthSession, getCurrentUser } from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
-import { ZodError } from "zod";
+import { ZodError, object, string } from "zod";
 
 import database from "@/lib/database";
 import {
@@ -9,6 +9,42 @@ import {
   DeleteCommentValidator,
   EditCommentValidator,
 } from "@/lib/validators/comments";
+import getComments from "@/actions/getComments";
+
+/**
+ * Handles the GET request for fetching comments for the posts.
+ *
+ * @param req - The NextRequest object representing the HTTP request.
+ * @returns A NextResponse object representing the HTTP response.
+ */
+const GET = async (req: NextRequest): Promise<NextResponse> => {
+  try {
+    const url = new URL(req.url)
+
+    const { postId } = object({ postId: string() }).parse({ postId: url.searchParams.get("postId") });
+
+    const comments = await getComments(postId);
+
+    if (!comments) return NextResponse.json({ message: "Comments not found with the given postId" }, { status: StatusCodes.NOT_FOUND });
+
+    return NextResponse.json(comments, { status: StatusCodes.OK });
+  } catch (error: unknown) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        { message: `Invalid request parameters: ${error.message}` },
+        { status: StatusCodes.BAD_REQUEST }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        message:
+          "Something went wrong, the comment cannot be posted at the moment",
+      },
+      { status: StatusCodes.INTERNAL_SERVER_ERROR }
+    );
+  }
+};
 
 /**
  * Handles the PATCH request for creating a comment.
@@ -206,4 +242,4 @@ const POST = async (req: NextRequest): Promise<NextResponse> => {
   }
 };
 
-export { PATCH, POST, DELETE };
+export { GET, PATCH, POST, DELETE };

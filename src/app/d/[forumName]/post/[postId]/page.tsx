@@ -5,15 +5,16 @@ import getCachedPost from "@/actions/getCachedPost";
 import getComments from "@/actions/getComments";
 import { getCurrentUser } from "@/actions/getCurrentUser";
 import getPost from "@/actions/getPost";
+import getPostLikes from "@/actions/getPostLikes";
 import { env } from "@/env.mjs";
 import type { Post, Tag, User, Vote } from "@prisma/client";
 
 import siteConfig from "@/config/site";
-import database from "@/lib/database";
 import { absoluteUrl, extractString } from "@/lib/utils";
 import PostVoteShell from "@/components/ui/PostVoteShell";
 import ShareButton from "@/components/ui/ShareButton";
-import CommentsSection from "@/components/comments/CommentsSection";
+import CommentButtonShell from "@/components/comments/CommentButtonShell";
+import CommentServer from "@/components/comments/CommentServer";
 import PostContent from "@/components/post/PostContent";
 import PostVoteServer from "@/components/post/PostVoteServer";
 
@@ -36,14 +37,8 @@ const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   if (!postId || !forumName) return {};
 
   const cachedPost = await getCachedPost(postId);
-  let post: (Post & { author: User }) | null = null;
-
-  if (!cachedPost) {
-    post = await database.post.findFirst({
-      where: { id: postId },
-      include: { author: true },
-    });
-  }
+  let post: ModifiedPost | null = null;
+  if (!cachedPost) post = await getPost(postId);
 
   const siteUrl = env.NEXT_PUBLIC_APP_URL;
 
@@ -89,23 +84,11 @@ const PostPage = async ({ params }: PageProps) => {
   const { postId, forumName } = params;
   if (!postId) return notFound();
   const cachedPost = await getCachedPost(postId);
-  const comments = await getComments(postId);
   const currentUser = await getCurrentUser();
 
   let post: ModifiedPost | null = null;
+  if (!cachedPost) post = await getPost(postId);
 
-  if (!cachedPost) {
-    post = await database.post.findFirst({
-      where: {
-        id: postId,
-      },
-      include: {
-        votes: true,
-        author: true,
-        tags: true,
-      },
-    });
-  }
   if (!post && !cachedPost) return notFound();
   const postContentProps = {
     postId,
@@ -135,7 +118,10 @@ const PostPage = async ({ params }: PageProps) => {
       <div className="flex w-full items-center justify-between gap-2 rounded-2xl border-2 border-zinc-800 bg-zinc-50 bg-gradient-to-b from-muted/30 to-muted/30 p-1.5 shadow-inner dark:bg-zinc-950 dark:from-background/10 dark:to-background/80 md:w-fit md:flex-col md:p-1.5">
         {/* Post Vote */}
         <Suspense fallback={<PostVoteShell />}>
-          <PostVoteServer postId={postId} getData={() => getPost(postId)} />
+          <PostVoteServer
+            postId={postId}
+            getData={() => getPostLikes(postId)}
+          />
         </Suspense>
         {/* Share Button and Comments Section */}
         <div className="flex flex-row gap-2 md:flex-col">
@@ -144,12 +130,14 @@ const PostPage = async ({ params }: PageProps) => {
             className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-300"
             title={post?.title || cachedPost?.title || ""}
           />
-          <CommentsSection
-            postId={postId}
-            comments={comments}
-            userId={currentUser?.id}
-            isAdmin={currentUser?.userRole?.type === "ADMIN"}
-          />
+          <Suspense fallback={<CommentButtonShell />}>
+            <CommentServer
+              postId={postId}
+              getData={() => getComments(postId)}
+              userId={currentUser?.id}
+              isAdmin={currentUser?.userRole?.type === "ADMIN"}
+            />
+          </Suspense>
         </div>
       </div>
       {/* Post Content */}

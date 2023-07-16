@@ -11,9 +11,9 @@ import {
   TableRow,
 } from "../ui/Table";
 
-const TableHeaderRow = ({ headers }: { headers: string[] }) => (
+const TableHeaderRow = ({ headers }: { headers?: string[] }) => (
   <TableRow>
-    {headers.map((header) => (
+    {headers?.map((header) => (
       <TableHead key={header}>{header}</TableHead>
     ))}
   </TableRow>
