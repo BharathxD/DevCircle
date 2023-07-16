@@ -73,7 +73,7 @@ const PostCard: FC<PostCardProps> = ({
 
   return (
     <motion.article
-      className="relative overflow-hidden rounded-xl border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950"
+      className="relative max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950"
       initial={{ opacity: 0, backdropFilter: "blur(4px)" }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.25 }}

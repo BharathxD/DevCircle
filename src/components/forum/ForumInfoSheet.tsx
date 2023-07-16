@@ -37,7 +37,7 @@ const CommunityInfoModal: React.FC<ForumInfoModalProps> = ({
           className="absolute right-4 top-[12vh] inline-flex items-center gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-2 backdrop-blur-md dark:bg-zinc-950 md:hidden"
           aria-label="Show Community Information"
         >
-          <span>About</span>
+          <span>{isSubscribed ? "About" : "Join now"}</span>
           <BiChevronDownCircle className="h-5 w-5" />
         </button>
       </DialogTrigger>
