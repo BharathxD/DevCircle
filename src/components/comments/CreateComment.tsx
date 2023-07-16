@@ -36,13 +36,6 @@ const CreateComment: React.FC<CreateCommentProps> = ({ postId, replyToId }) => {
       );
       return data;
     },
-    onMutate: () => {
-      toast({
-        title: replyToId
-          ? "Replying to the comment..."
-          : "Adding comment to the post..",
-      });
-    },
     onError: async (error: unknown) => {
       if (
         error instanceof AxiosError &&
@@ -57,9 +50,6 @@ const CreateComment: React.FC<CreateCommentProps> = ({ postId, replyToId }) => {
       });
     },
     onSuccess: () => {
-      toast({
-        title: `${replyToId ? "Reply" : "Comment"} added successfully`,
-      });
       router.refresh();
       setInput("");
     },
