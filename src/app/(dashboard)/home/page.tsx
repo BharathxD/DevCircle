@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import DashboardContentShell from "@/components/ui/DashboarContentShell";
-import FeedSkeleton from "@/components/ui/FeedSkeleton";
+import FeedSkeletons from "@/components/ui/FeedSkeleton";
 import GeneralFeed from "@/components/post/GeneralFeed";
 
 interface HomeProps {
@@ -12,7 +12,7 @@ const HomePage = async ({ searchParams }: HomeProps) => {
   const { tag } = searchParams;
   return (
     <DashboardContentShell>
-      <Suspense fallback={<FeedSkeleton />}>
+      <Suspense fallback={<FeedSkeletons />}>
         <GeneralFeed tag={tag} filters={searchParams} />
       </Suspense>
     </DashboardContentShell>

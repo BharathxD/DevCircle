@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { User } from "@prisma/client";
 import type { AvatarProps } from "@radix-ui/react-avatar";
 import { FaUserCircle } from "react-icons/fa";
@@ -17,8 +18,11 @@ const UserAvatar: React.FC<UserAvatarProps> = ({
   ...props
 }) => (
   <Avatar {...props} className={cn(className)}>
-    {user.image ? (
-      <div className="relative aspect-square h-full w-full">
+    {user.image && user.name ? (
+      <Link
+        className="relative aspect-square h-full w-full"
+        href={`/u/${user.name}`}
+      >
         <Image
           fill
           src={user.image}
@@ -27,7 +31,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({
           sizes="100%"
           referrerPolicy="no-referrer"
         />
-      </div>
+      </Link>
     ) : (
       <AvatarFallback>
         <span className="sr-only">{user?.name}</span>

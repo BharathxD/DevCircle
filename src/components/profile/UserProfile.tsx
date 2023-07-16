@@ -89,8 +89,11 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
     <div className="md:pb-4">
       <div>
         <div
-          className={`h-28 w-full rounded-none border-b-2 border-zinc-800 md:h-40 md:border-2 md:border-x-0 md:border-t-0
-          ${getGradient(user?.username ?? user?.name ?? undefined)}`}
+          className={cn(
+            "h-28 w-full rounded-none border-b-2 border-zinc-800 md:h-40 md:border-2 md:border-x-0 md:border-t-0",
+            (user?.username || user?.name) ??
+              getGradient(user.username || user.name || undefined)
+          )}
         />
         <div
           className={`${profileWidth} -mt-12 flex items-center justify-between space-x-5 border-b-2 border-zinc-800 pb-4 md:-mt-16`}
