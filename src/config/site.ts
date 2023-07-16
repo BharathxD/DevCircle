@@ -4,9 +4,9 @@ const siteConfig = {
   name: "DevCircle",
   description:
     "DevCircle is an open-source community platform built for developers. It serves as a space for mutual guidance, sharing tips and tricks, and staying updated on the latest developments in the world of developers. Join this vibrant community to connect with fellow developers, share knowledge, and explore the exciting world of coding.",
-  url: "https://www.devcircle.live",
+  url: "https://devcircle.live",
   copyrights: 2023,
-  ogImage: "https://www.devcircle.live/opengraph-image.webp",
+  ogImage: "https://devcircle.live/opengraph-image.webp",
 };
 
 export default siteConfig;
