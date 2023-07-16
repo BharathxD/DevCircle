@@ -119,6 +119,17 @@ const PostPage = async ({ params }: PageProps) => {
       (post?.authorId || cachedPost?.authorId) === currentUser?.id ||
       currentUser?.userRole?.type === "ADMIN",
   };
+  const siteUrl = env.NEXT_PUBLIC_APP_URL;
+
+  const authorName =
+    post?.author?.username || cachedPost?.authorUsername || "DevCircle User";
+  const postTitle =
+    post?.title || cachedPost?.title || `Post by u/${authorName}`;
+  const description = `Check out the latest post by ${authorName} on DevCircle.`;
+
+  const ogUrl = new URL(`${siteUrl}/api/og`);
+  ogUrl.searchParams.set("title", extractString(postTitle));
+  ogUrl.searchParams.set("description", extractString(description));
   return (
     <div className="relative flex flex-col items-start gap-2 pt-2 md:flex-row">
       <div className="flex w-full items-center justify-between gap-2 rounded-2xl border-2 border-zinc-800 bg-zinc-50 bg-gradient-to-b from-muted/30 to-muted/30 p-1.5 shadow-inner dark:bg-zinc-950 dark:from-background/10 dark:to-background/80 md:w-fit md:flex-col md:p-1.5">
