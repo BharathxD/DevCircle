@@ -21,7 +21,7 @@ jobs:
       GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }},
       REDIS_URL: ${{ secrets.REDIS_URL }},
       REDIS_SECRET: ${{ secrets.REDIS_SECRET }},
-      AWS_ACCESS_KEYID: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+      AWS_ACCESS_KEYID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       CDK_CERTIFICATE_ARN: ${{ secrets.CDK_CERTIFICATE_ARN }}
 
@@ -44,4 +44,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           npx prisma generate
-          npx sst deploy --stage prod
+          # Deploy the application to aws using Serverless Stack Toolkit (sst.dev)
+          # npx sst deploy --stage prod

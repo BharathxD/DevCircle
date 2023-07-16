@@ -14,6 +14,16 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
+      const serverCachePolicy = new cf.CachePolicy(stack, "serverCache", {
+        queryStringBehavior: cf.CacheQueryStringBehavior.all(),
+        headerBehavior: cf.CacheCookieBehavior.none(),
+        cookieBehavior: cf.CacheCookieBehavior.none(),
+        defaultTtl: cdk.Duration.days(0),
+        maxTtl: cdk.Duration.days(365),
+        minTtl: cdk.Duration.days(0),
+        enableAcceptEncodingBrotli: true,
+        enableAcceptEncodingGzip: true,
+      });
       const certificate = acm.Certificate.fromCertificateArn(
         stack,
         "Certificate",
@@ -21,7 +31,9 @@ export default {
       );
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const site = new NextjsSite(stack, "site", {
-        timeout: "30 seconds",
+        cdk: {
+          serverCachePolicy,
+        },
         customDomain: {
           isExternalDomain: true,
           domainName: "www.devcircle.live",
