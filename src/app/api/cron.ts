@@ -2,6 +2,10 @@ import redis from "@/lib/redis";
 import database from "@/lib/database";
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+export const config = {
+  runtime: 'edge',
+}
+
 export default async function handler(_: NextApiRequest,
   response: NextApiResponse) {
   try {
