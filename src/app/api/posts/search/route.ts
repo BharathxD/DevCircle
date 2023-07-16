@@ -29,7 +29,10 @@ const getUsers = async (req: NextRequest): Promise<NextResponse> => {
     }
     // Return a JSON response with a 500 status code for other errors
     return NextResponse.json(
-      { message: "Something went wrong. The users cannot be retrieved at the moment." },
+      {
+        message:
+          "Something went wrong. The users cannot be retrieved at the moment.",
+      },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }

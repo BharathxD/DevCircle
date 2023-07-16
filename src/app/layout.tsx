@@ -25,6 +25,11 @@ export const metadata: Metadata = {
     default: siteConfig.name,
     template: `%s - ${siteConfig.name}`,
   },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon-32x32.png",
+  },
   description: siteConfig.description,
   keywords: [
     "Developer Circle",
@@ -61,9 +66,6 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [`${siteConfig.url}/images/og.jpg`],
     creator: "@Bharath_uwu",
-  },
-  icons: {
-    icon: "/favicon.ico",
   },
 };
 

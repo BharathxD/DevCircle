@@ -129,7 +129,7 @@ const PostPage = async ({ params }: PageProps) => {
         {/* Share Button and Comments Section */}
         <div className="flex flex-row gap-2 md:flex-col">
           <ShareButton
-            url={`${siteConfig.url}d/${forumName}/post/${postId}`}
+            url={`${siteConfig.url}/d/${forumName}/post/${postId}`}
             className="flex items-center justify-center rounded-xl border-2 border-zinc-800 p-3 dark:hover:border-zinc-300"
             title={post?.title || cachedPost?.title || ""}
           />

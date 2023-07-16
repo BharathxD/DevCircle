@@ -18,7 +18,11 @@ interface UpdateVoteCountParams {
  * @param params - Update vote count parameters.
  * @returns Updated vote amount.
  */
-const updateVoteCount = async ({ id, voteType, post }: UpdateVoteCountParams) => {
+const updateVoteCount = async ({
+  id,
+  voteType,
+  post,
+}: UpdateVoteCountParams) => {
   const voteAmount = post.votes.reduce((acc, vote) => {
     if (vote.type === "UP") return acc + 1;
     if (vote.type === "DOWN") return acc - 1;
@@ -43,6 +47,6 @@ const updateVoteCount = async ({ id, voteType, post }: UpdateVoteCountParams) =>
   }
 
   return voteAmount;
-}
+};
 
 export default updateVoteCount;

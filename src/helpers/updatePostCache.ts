@@ -7,11 +7,13 @@ import redis from "@/lib/redis";
  * Updates the cached post information.
  * @param post - Post data to update the cache.
  */
-async function updatePostCache(post: Post & {
-  votes: Vote[];
-  author: User;
-  tags: Tag[];
-}) {
+async function updatePostCache(
+  post: Post & {
+    votes: Vote[];
+    author: User;
+    tags: Tag[];
+  }
+) {
   const existingCachedPayload: CachedPost | null = await redis.hgetall(
     `post:${post.id}`
   );

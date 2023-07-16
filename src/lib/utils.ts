@@ -36,7 +36,8 @@ export const generateCbUrl = (pathname: string): string =>
  * @param path - The path to be appended to the app URL.
  * @returns Absolute URL string.
  */
-export const absoluteUrl = (path: string): string => env.NEXT_PUBLIC_APP_URL + path;
+export const absoluteUrl = (path: string): string =>
+  env.NEXT_PUBLIC_APP_URL + path;
 
 /**
  * Extracts a substring from a string and appends ellipsis if the string is longer than 75 characters.
@@ -98,12 +99,12 @@ export const pageview = (GA_MEASUREMENT_ID: string, url: string): void => {
  * @param defaultValue - The default value to be returned if the key does not exist in local storage.
  * @returns The retrieved value from local storage or the default value if not found.
  */
-export const getLocalStorage = <T>(
-  key: string,
-  defaultValue: T
-): T => {
+export const getLocalStorage = <T>(key: string, defaultValue: T): T => {
   const stickyValue = localStorage.getItem(key);
-  const parsedValue = stickyValue !== null && stickyValue !== 'undefined' ? JSON.parse(stickyValue) : defaultValue;
+  const parsedValue =
+    stickyValue !== null && stickyValue !== "undefined"
+      ? JSON.parse(stickyValue)
+      : defaultValue;
   return parsedValue as T;
 };
 

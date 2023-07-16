@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import * as cdk from "aws-cdk-lib";
+import * as acm from "aws-cdk-lib/aws-certificatemanager";
+import * as cf from "aws-cdk-lib/aws-cloudfront";
 import type { SSTConfig } from "sst";
 import { NextjsSite } from "sst/constructs";
-import * as cdk from "aws-cdk-lib"
-import * as cf from "aws-cdk-lib/aws-cloudfront";
-import * as acm from "aws-cdk-lib/aws-certificatemanager";
 
 export default {
   config(_input) {
@@ -22,21 +22,25 @@ export default {
         maxTtl: cdk.Duration.days(365),
         minTtl: cdk.Duration.days(0),
         enableAcceptEncodingBrotli: true,
-        enableAcceptEncodingGzip: true
-      })
-      const certificate = acm.Certificate.fromCertificateArn(stack, "Certificate", process.env.CDK_CERTIFICATE_ARN!)
+        enableAcceptEncodingGzip: true,
+      });
+      const certificate = acm.Certificate.fromCertificateArn(
+        stack,
+        "Certificate",
+        process.env.CDK_CERTIFICATE_ARN!
+      );
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const site = new NextjsSite(stack, "site", {
         cdk: {
-          serverCachePolicy
+          serverCachePolicy,
         },
         timeout: "30 seconds",
         customDomain: {
           isExternalDomain: true,
           domainName: "www.devcircle.live",
           cdk: {
-            certificate
-          }
+            certificate,
+          },
         },
         environment: {
           NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL!,
@@ -52,7 +56,7 @@ export default {
           GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET!,
           REDIS_URL: process.env.REDIS_URL!,
           REDIS_SECRET: process.env.REDIS_SECRET!,
-        }
+        },
       });
 
       stack.addOutputs({
