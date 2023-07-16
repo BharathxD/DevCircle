@@ -1,9 +1,9 @@
-import database from "@/lib/database";
 import redis from "@/lib/redis";
+import database from "@/lib/database";
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(): Promise<
-  { forumName: string; memberCount: number }[] | null
-> {
+export default async function handler(_: NextApiRequest,
+  response: NextApiResponse) {
   try {
     const forums = await database.forum.findMany({
       include: { subscribers: true },
@@ -27,7 +27,7 @@ export default async function handler(): Promise<
 
     await redis.hset(`leaderboard:forums`, leaderboardData);
 
-    return topFiveForums;
+    response.status(200).json({ success: true });
   } catch (error: unknown) {
     return null;
   }
