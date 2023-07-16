@@ -59,7 +59,7 @@ const SidebarNav: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
         {navLinks
           .filter(({ href }) => href !== "/d/create")
           .map(({ href, icon: Icon }) => {
-            if (!isLoggedIn) return null;
+            if (!isLoggedIn || href === "/settings") return null;
             return (
               <Link
                 key={href}
