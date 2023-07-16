@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { FiGlobe } from "react-icons/fi";
 
 import siteConfig from "@/config/site";
 import { cn } from "@/lib/utils";
