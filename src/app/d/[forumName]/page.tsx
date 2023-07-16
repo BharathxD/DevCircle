@@ -25,7 +25,12 @@ export const generateMetadata = async ({
 }: ForumPageProps): Promise<Metadata> => {
   const { forumName } = params;
   const forum: ExtendedForum | null = await getForumWithPosts(forumName);
-  if (!forum) return {};
+  if (!forum)
+    return {
+      title: "Not Found - Forum Not Found",
+      description:
+        "We're sorry, but the forum you are looking for could not be found.",
+    };
   const ogTitle = `Check out d/${forum.name} community on ${siteConfig.name}`;
   const ogDescription = forum.description;
   const siteUrl = env.NEXT_PUBLIC_APP_URL;
@@ -70,7 +75,7 @@ const ForumPage = async ({ params, searchParams }: ForumPageProps) => {
   return (
     <section className="flex flex-col gap-4 pt-2">
       <MiniCreatePost />
-      <ScrollArea className="no-scrollbar fixed max-h-[70vh] w-fit">
+      <ScrollArea className="no-scrollbar fixed flex max-h-[70vh] w-fit flex-col items-center justify-center">
         {forum.posts.length === 0 ? (
           <div className="w-full rounded-md border-2 border-zinc-800 bg-yellow-300 p-2 text-center font-medium text-zinc-800 dark:bg-zinc-900 dark:text-zinc-50">
             Be the first to post! No posts found. Why not be the first one to

@@ -34,7 +34,12 @@ type ModifiedPost = Post & {
 const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { postId, forumName } = params;
 
-  if (!postId || !forumName) return {};
+  if (!postId || !forumName)
+    return {
+      title: "Not Found - Post Not Found",
+      description:
+        "We apologize, but the post you are searching for could not be found.",
+    };
 
   const cachedPost = await getCachedPost(postId);
   let post: ModifiedPost | null = null;

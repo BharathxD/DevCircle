@@ -6,10 +6,9 @@ import { debounce } from "lodash";
 import { Layers, Search } from "lucide-react";
 import { useQuery } from "react-query";
 
-import type { SearchResults } from "@/types/database";
+import { type SearchResults } from "@/types/database";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/Dialog";
-
-import { Skeleton } from "../ui/Skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 const SearchBar: React.FC = () => {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -18,7 +17,7 @@ const SearchBar: React.FC = () => {
     refetch,
     isFetching,
     isFetched,
-  } = useQuery({
+  } = useQuery<SearchResults[]>({
     queryFn: async () => {
       if (searchInput.length === 0) return [];
       const response: AxiosResponse<SearchResults[]> = await axios.get(
@@ -27,7 +26,7 @@ const SearchBar: React.FC = () => {
       return response.data;
     },
     queryKey: ["search-query"],
-    enabled: false,
+    enabled: searchInput.length > 0,
   });
   const request = debounce(() => refetch());
   const debounceRequest = useCallback(() => request(), [request]);
@@ -44,6 +43,7 @@ const SearchBar: React.FC = () => {
       >
         <div className="flex h-full w-full flex-col items-center gap-2 pl-2">
           <input
+            type="text"
             className="h-[90%] w-full bg-transparent text-lg outline-none"
             value={searchInput}
             autoFocus
@@ -71,7 +71,7 @@ const SearchBar: React.FC = () => {
                         className="inline-flex h-fit w-full items-center gap-2 p-5 text-lg hover:bg-zinc-800 hover:text-zinc-50"
                         href={`/d/${post.forumName}/post/${post.postId}`}
                       >
-                        <Layers className="mr-2 h-10 w-10" />
+                        <Layers className="mr-2 h-8 w-8" />
                         <p>{post.postTitle}</p>
                       </a>
                     </li>
