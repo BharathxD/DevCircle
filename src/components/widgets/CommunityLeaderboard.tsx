@@ -53,16 +53,14 @@ const CommunityLeaderboard: React.FC<CommunityLeaderboardProps> = ({
       </div>
       <div className="flex flex-col">
         {topCommunities.map((community, index) => (
-          <div
+          <Link
+            href={`/d/${community.forumName}`}
             key={index}
             className="flex w-full flex-row items-center justify-between border-b-2 border-zinc-800 font-medium last:border-b-0"
           >
-            <Link
-              className="px-5 py-3 text-lg font-bold"
-              href={`/d/${community.forumName}`}
-            >
+            <p className="px-5 py-3 text-lg font-bold">
               d/{capitalizeString(community.forumName)}
-            </Link>
+            </p>
             <div className="flex flex-row gap-2">
               <span className="min-w-[175px] border-zinc-800 p-[auto] px-5 py-3 text-center">
                 <div className="rounded-md border-2 border-zinc-800 p-1 text-zinc-800 dark:text-zinc-50">
@@ -71,7 +69,7 @@ const CommunityLeaderboard: React.FC<CommunityLeaderboardProps> = ({
                 </div>
               </span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </motion.div>

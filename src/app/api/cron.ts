@@ -33,6 +33,7 @@ export default async function handler(_: NextApiRequest,
 
     response.status(200).json({ success: true });
   } catch (error: unknown) {
+    console.error(error)
     return null;
   }
 }
