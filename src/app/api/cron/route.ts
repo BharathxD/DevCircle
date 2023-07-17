@@ -1,6 +1,8 @@
 import redis from "@/lib/redis";
 import database from "@/lib/database";
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { StatusCodes } from "http-status-codes";
+import { NextResponse } from "next/server";
 
 export const config = {
   runtime: 'edge',
@@ -31,9 +33,11 @@ export default async function handler(_: NextApiRequest,
 
     await redis.hset(`leaderboard:forums`, leaderboardData);
 
-    response.status(200).json({ success: true });
+    return NextResponse.json({ success: true }, { status: StatusCodes.OK });
   } catch (error: unknown) {
     console.error(error)
     return null;
   }
 }
+
+export { handler as GET };
