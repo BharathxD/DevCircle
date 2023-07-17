@@ -51,10 +51,9 @@ const PostComment: React.FC<PostCommentProps> = ({
   isAdmin,
 }) => {
   const pathname = usePathname();
+  const initialReplyInput = `@${comment.author?.username ?? "reply"} `;
   const [isReplying, setIsReplying] = useState<boolean>(false);
-  const [input, setInput] = useState<string>(
-    `@${comment.author?.username ?? "reply"} `
-  );
+  const [input, setInput] = useState<string>(initialReplyInput);
   const commentRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   useOnClickOutside(commentRef, () => setIsReplying(false));
@@ -103,7 +102,7 @@ const PostComment: React.FC<PostCommentProps> = ({
     onSuccess: () => {
       setIsReplying(false);
       router.refresh();
-      setInput("");
+      setInput(initialReplyInput);
     },
   });
   return (
@@ -187,9 +186,9 @@ const PostComment: React.FC<PostCommentProps> = ({
                 onChange={handleInputChange}
                 rows={1}
                 className="border-2 border-zinc-800"
-                placeholder={`What do you think about u/${
+                placeholder={`Reply to u/${
                   comment.author.username || comment.author.username || ""
-                }'s comment?`}
+                }'s comment`}
               />
               <div className="flex justify-end gap-3 pl-3 pt-5">
                 <Button variant="destructive" onClick={toggleReplying}>
