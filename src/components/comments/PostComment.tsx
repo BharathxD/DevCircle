@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type { Comment, CommentVote, User, VoteType } from "@prisma/client";
 import axios, { AxiosError } from "axios";
@@ -114,9 +115,13 @@ const PostComment: React.FC<PostCommentProps> = ({
         <UserAvatar user={comment.author} className="h-6 w-6" />
         <div className="ml-2 flex w-full items-center justify-between">
           <div>
-            <p className="font-medium text-zinc-800 dark:text-zinc-50">
+            <a
+              className="font-medium text-zinc-800 dark:text-zinc-50"
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              href={`/u/${comment.author.username!}`}
+            >
               u/{comment.author.username ?? comment.author.username}
-            </p>
+            </a>
             <p className="max-h-40 truncate text-sm text-zinc-500">
               {formatTimeToNow(new Date(comment.createdAt))}
             </p>

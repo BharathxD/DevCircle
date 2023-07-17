@@ -20,12 +20,13 @@ body,
   padding-left: 2px;
   padding-right: 2px;
   border: 1px solid #797979;
+  display: inline-block;
+  white-space: nowrap;
 }
 
 #editor-content a:hover {
   background-color: #404040;
 }
-
 
 @media (prefers-color-scheme: light) {
   #editor-content a {
