@@ -49,7 +49,7 @@ const PostCard: FC<PostCardProps> = ({
   );
 
   const postMetaInfo = (
-    <div className="mt-1 flex max-h-40 flex-row justify-between gap-1 text-sm text-zinc-500">
+    <div className="mt-1 flex max-h-40 flex-row justify-between gap-1 truncate text-sm text-zinc-500">
       <div className="inline-flex">
         <Link
           href={`/d/${forumName}`}

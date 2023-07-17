@@ -60,8 +60,6 @@ const CommentReplies: React.FC<CommentRepliesProps> = ({
                   initialCommentVote={replyVote?.type}
                   initialCommentVoteAmount={replyVotesAmount}
                   userId={userId}
-                  // Replies can be deleted
-                  isDeletable={true}
                   isAdmin={isAdmin}
                 />
               </div>

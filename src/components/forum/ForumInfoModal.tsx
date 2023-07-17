@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { Edit2, Info, PlusCircle } from "lucide-react";
-import { BiChevronDownCircle } from "react-icons/bi";
 
 import { cn } from "@/lib/utils";
 
@@ -41,7 +40,7 @@ const CommunityInfoModal: React.FC<ForumInfoModalProps> = ({
             {
               "bg-gradient-to-br from-green-400 to-green-700 p-3 text-green-100":
                 !isSubscribed,
-              "bg-gradient-to-br from-zinc-700 to-zinc-900 p-3 text-zinc-100":
+              "bg-gradient-to-br from-zinc-700/50 to-zinc-900/50 p-3 text-zinc-100":
                 isSubscribed,
             }
           )}

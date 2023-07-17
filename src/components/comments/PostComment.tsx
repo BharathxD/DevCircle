@@ -39,7 +39,6 @@ interface PostCommentProps {
   initialCommentVote?: VoteType;
   userId?: string;
   postId: string;
-  isDeletable: boolean;
   isAdmin?: boolean;
 }
 
@@ -49,7 +48,6 @@ const PostComment: React.FC<PostCommentProps> = ({
   initialCommentVote,
   userId,
   postId,
-  isDeletable,
   isAdmin,
 }) => {
   const pathname = usePathname();
@@ -141,11 +139,9 @@ const PostComment: React.FC<PostCommentProps> = ({
                     <DropdownMenuItem asChild>
                       <EditComment commentId={comment.id} text={comment.text} />
                     </DropdownMenuItem>
-                    {isDeletable && (
-                      <DropdownMenuItem asChild>
-                        <DeleteComment commentId={comment.id} />
-                      </DropdownMenuItem>
-                    )}
+                    <DropdownMenuItem asChild>
+                      <DeleteComment commentId={comment.id} />
+                    </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </Fragment>

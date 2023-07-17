@@ -90,7 +90,6 @@ const CommentsSection = async ({
                         initialCommentVote={topLevelCommentVote?.type}
                         userId={userId}
                         postId={postId}
-                        isDeletable={!hasReplies}
                         isAdmin={isAdmin}
                       />
                     </div>
