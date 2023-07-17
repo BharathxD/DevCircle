@@ -4,7 +4,7 @@ export const config = {
   matcher: [
     "/d/:forumId/edit",
     "/d/:forumId/submit",
-    "/d/create",
+    "/d/new",
     "/subscribed",
     "/profile",
     "/api/forum/:forumId/subscription",

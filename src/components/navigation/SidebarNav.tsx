@@ -33,7 +33,7 @@ const navLinks = [
     requireAuth: true,
   },
   {
-    href: "/d/create",
+    href: "/d/new",
     icon: PlusSquare,
     text: "Create Community",
     requireAuth: false,
@@ -57,7 +57,7 @@ const SidebarNav: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
         aria-label="Mobile Navigation"
       >
         {navLinks
-          .filter(({ href }) => href !== "/d/create")
+          .filter(({ href }) => href !== "/d/new")
           .map(({ href, icon: Icon }) => {
             if (!isLoggedIn || href === "/settings") return null;
             return (
