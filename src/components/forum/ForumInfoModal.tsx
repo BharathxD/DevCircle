@@ -1,8 +1,10 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import { format } from "date-fns";
-import { Edit2 } from "lucide-react";
+import { Edit2, Info, PlusCircle } from "lucide-react";
 import { BiChevronDownCircle } from "react-icons/bi";
+
+import { cn } from "@/lib/utils";
 
 import { Dialog, DialogContent, DialogTrigger } from "../ui/Dialog";
 import SubscribeLeaveToggle from "./SubscribeLeaveToggle";
@@ -34,11 +36,22 @@ const CommunityInfoModal: React.FC<ForumInfoModalProps> = ({
     <Dialog aria-label="Community Information">
       <DialogTrigger asChild>
         <button
-          className="absolute right-4 top-[12vh] inline-flex items-center gap-2 rounded-lg border-2 border-zinc-800 bg-zinc-50 p-2 backdrop-blur-md dark:bg-zinc-950 md:hidden"
+          className={cn(
+            "absolute right-4 top-[11.5vh] inline-flex items-center gap-2 rounded-full border-2 border-zinc-800 backdrop-blur-md md:hidden",
+            {
+              "bg-gradient-to-br from-green-400 to-green-700 p-3 text-green-100":
+                !isSubscribed,
+              "bg-gradient-to-br from-zinc-700 to-zinc-900 p-3 text-zinc-100":
+                isSubscribed,
+            }
+          )}
           aria-label="Show Community Information"
         >
-          <span>{isSubscribed ? "About" : "Join now"}</span>
-          <BiChevronDownCircle className="h-5 w-5" />
+          {isSubscribed ? (
+            <Info className="h-5 w-5" />
+          ) : (
+            <PlusCircle className="h-5 w-5" />
+          )}
         </button>
       </DialogTrigger>
       <DialogContent className="h-max w-[90%] gap-0 overflow-hidden overflow-y-scroll rounded-xl border-2 border-zinc-800 p-0">

@@ -80,13 +80,10 @@ const EditorOutput: FC<EditorOutputProps> = ({ content, sm }) => {
     header: {
       disableDefaultStyle: true,
     },
-    linkTool: {
-      disableDefaultStyle: true,
-    },
   };
   return (
     <Output
-      key={"any"}
+      key="editor-js"
       style={sm ? undefined : style}
       data={content}
       renderers={renderers}

@@ -6,7 +6,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { format } from "date-fns";
 import { Edit2 } from "lucide-react";
 
-import ForumInfoModal from "../forum/ForumInfoSheet";
+import ForumInfoModal from "../forum/ForumInfoModal";
 import SubscribeLeaveToggle from "../forum/SubscribeLeaveToggle";
 
 interface ForumInfoWidgetProps {

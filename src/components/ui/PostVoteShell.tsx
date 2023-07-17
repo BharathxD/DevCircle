@@ -9,8 +9,8 @@ const PostVoteShell = () => {
     <div className="flex h-full w-auto flex-row items-center gap-4 md:w-11 md:flex-col md:gap-0">
       <div
         className={cn(
-          buttonVariants(),
-          "h-9 w-full animate-pulse px-2 text-zinc-800 dark:text-zinc-700"
+          buttonVariants({ variant: "ghost", size: "sm" }),
+          "h-11 w-full animate-pulse rounded-xl border-2 border-zinc-800 px-2 text-zinc-800 dark:text-zinc-700"
         )}
       >
         <AiOutlineArrowUp className={"h-5 w-5"} />
@@ -23,8 +23,8 @@ const PostVoteShell = () => {
       </div>
       <div
         className={cn(
-          buttonVariants(),
-          "h-9 w-full animate-pulse px-2 text-zinc-800 dark:text-zinc-700"
+          buttonVariants({ variant: "ghost", size: "sm" }),
+          "h-11 w-full animate-pulse rounded-xl border-2 border-zinc-800 px-2 text-zinc-800 dark:text-zinc-700"
         )}
       >
         <AiOutlineArrowDown className={"h-5 w-5"} />
