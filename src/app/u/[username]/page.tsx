@@ -12,7 +12,8 @@ interface ProfilePageArgs {
 
 const UserProfilePage = async ({ params }: ProfilePageArgs) => {
   const { username } = params;
-  const user = await getUserWithSocialLinksAndPosts(username);
+  const decodedUsername = decodeURIComponent(username);
+  const user = await getUserWithSocialLinksAndPosts(decodedUsername);
   if (!user) return notFound();
   return (
     <section className="no-scrollbar container relative h-[91vh] w-fit overflow-hidden overflow-y-scroll py-4 md:col-span-3 md:px-4">

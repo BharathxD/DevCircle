@@ -39,8 +39,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ username, bio, urls }) => {
   const router = useRouter();
   const defaultValues: Partial<ProfileFormValues> = {
     username,
-    bio:
-      bio ?? "I'm in a college which doesn't teach anything except bakchodi.",
+    bio,
     urls,
   };
   const form = useForm<ProfileFormValues>({

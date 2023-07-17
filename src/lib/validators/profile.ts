@@ -5,7 +5,7 @@ const profileFormSchema = object({
   username: string()
     .min(2, { message: "Username must be at least 2 characters." })
     .max(32, { message: "Username must not exceed 30 characters." })
-    .regex(/^[a-zA-Z0-9_]+$/)
+    .regex(/^[a-zA-Z0-9_]+$/, "Username can only contain alphanumeric characters and underscores.")
     .optional(),
   bio: string()
     .min(4, { message: "Bio must be at least 4 characters." })
