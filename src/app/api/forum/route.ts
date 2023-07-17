@@ -10,6 +10,8 @@ import {
   forumUpdateValidator,
   forumValidator,
 } from "@/lib/validators/forum";
+import axios from "axios";
+import siteConfig from "@/config/site";
 
 /**
  * Creates a new forum based on the provided request.
@@ -54,6 +56,9 @@ const createForum = async (req: NextRequest): Promise<NextResponse> => {
     await database.subscription.create({
       data: { userId: session?.user.id, forumId: forum.id },
     });
+
+    // Update the leaderboard
+    await axios.get(`${siteConfig.url}/api/cron`);
 
     // Return the forum name as the response
     return NextResponse.json(forum.name, { status: StatusCodes.CREATED });
@@ -209,6 +214,9 @@ const deleteForum = async (req: NextRequest): Promise<NextResponse> => {
 
     // Delete the forum
     await database.forum.delete({ where: { id: forumId } });
+
+    // Update the leaderboard
+    await axios.get(`${siteConfig.url}/api/cron`);
 
     // Return the forum name as the response
     return NextResponse.json(
