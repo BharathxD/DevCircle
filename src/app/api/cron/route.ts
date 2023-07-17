@@ -1,15 +1,17 @@
-import redis from "@/lib/redis";
-import database from "@/lib/database";
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { StatusCodes } from "http-status-codes";
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { StatusCodes } from 'http-status-codes';
 
-export const config = {
-  runtime: 'edge',
-}
+import database from '@/lib/database';
+import redis from '@/lib/redis';
 
-export default async function handler(_: NextApiRequest,
-  response: NextApiResponse) {
+/**
+ * Retrieves the top five forums with the highest number of subscribers
+ * and updates the leaderboard data in Redis.
+ *
+ * @param req The Next.js API request object
+ * @returns The Next.js API response
+ */
+async function handler(): Promise<NextResponse> {
   try {
     const forums = await database.forum.findMany({
       include: { subscribers: true },
@@ -31,13 +33,13 @@ export default async function handler(_: NextApiRequest,
       leaderboardData[`forum_${index}`] = JSON.stringify(forum);
     });
 
-    await redis.hset(`leaderboard:forums`, leaderboardData);
+    await redis.hset('leaderboard:forums', leaderboardData);
 
     return NextResponse.json({ success: true }, { status: StatusCodes.OK });
   } catch (error: unknown) {
-    console.error(error)
-    return null;
+    console.error(`Error updating leaderboard data: `, error);
+    return NextResponse.json({ success: false }, { status: StatusCodes.INTERNAL_SERVER_ERROR });
   }
 }
 
-export { handler as GET };
+export default handler;

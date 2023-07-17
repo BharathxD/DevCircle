@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
+import getSitemapData from "@/actions/getSiteMapData";
 
 import siteConfig from "@/config/site";
-import getSitemapData from "@/actions/getSiteMapData";
 
 /**
  * Generates the sitemap for the website.

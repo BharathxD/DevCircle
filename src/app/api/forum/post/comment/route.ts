@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
+import getComments from "@/actions/getComments";
 import { getAuthSession, getCurrentUser } from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
-import { ZodError, object, string } from "zod";
+import { object, string, ZodError } from "zod";
 
 import database from "@/lib/database";
 import {
@@ -9,7 +10,6 @@ import {
   DeleteCommentValidator,
   EditCommentValidator,
 } from "@/lib/validators/comments";
-import getComments from "@/actions/getComments";
 
 /**
  * Handles the GET request for fetching comments for the posts.
@@ -19,13 +19,19 @@ import getComments from "@/actions/getComments";
  */
 const GET = async (req: NextRequest): Promise<NextResponse> => {
   try {
-    const url = new URL(req.url)
+    const url = new URL(req.url);
 
-    const { postId } = object({ postId: string() }).parse({ postId: url.searchParams.get("postId") });
+    const { postId } = object({ postId: string() }).parse({
+      postId: url.searchParams.get("postId"),
+    });
 
     const comments = await getComments(postId);
 
-    if (!comments) return NextResponse.json({ message: "Comments not found with the given postId" }, { status: StatusCodes.NOT_FOUND });
+    if (!comments)
+      return NextResponse.json(
+        { message: "Comments not found with the given postId" },
+        { status: StatusCodes.NOT_FOUND }
+      );
 
     return NextResponse.json(comments, { status: StatusCodes.OK });
   } catch (error: unknown) {
