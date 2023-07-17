@@ -42,4 +42,4 @@ async function handler(): Promise<NextResponse> {
   }
 }
 
-export default handler;
+export { handler as GET };
