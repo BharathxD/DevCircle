@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback } from "./Avatar";
 
 interface UserAvatarProps extends AvatarProps {
-  user: Pick<User, "image" | "name">;
+  user: Pick<User, "image" | "name" | "username">;
 }
 
 const UserAvatar: React.FC<UserAvatarProps> = ({
@@ -21,7 +21,8 @@ const UserAvatar: React.FC<UserAvatarProps> = ({
     {user.image && user.name ? (
       <Link
         className="relative aspect-square h-full w-full"
-        href={`/u/${user.name}`}
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        href={`/u/${user?.username}`}
       >
         <Image
           fill
