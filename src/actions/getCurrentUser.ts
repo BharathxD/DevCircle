@@ -1,6 +1,6 @@
 "use server";
 
-import type { User, UserRole } from "@prisma/client";
+import type { Prisma, User, UserRole } from "@prisma/client";
 import { getServerSession, type Session } from "next-auth";
 
 import type {
@@ -72,7 +72,7 @@ const getUserWithSocialLinksAndPosts = async (
   username?: string
 ): Promise<UserWithSocialLinksAndPosts | null> => {
   try {
-    let whereClause: { username?: string; email?: string } = {};
+    let whereClause: Prisma.UserWhereUniqueInput;
     if (username) {
       whereClause = {
         username: username,

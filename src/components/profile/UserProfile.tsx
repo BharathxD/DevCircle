@@ -91,8 +91,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
         <div
           className={cn(
             "h-28 w-full rounded-none border-b-2 border-zinc-800 md:h-40 md:border-2 md:border-x-0 md:border-t-0",
-            (user?.username || user?.name) ??
-              getGradient(user.username || user.name || undefined)
+            getGradient(user.username ?? user.name ?? undefined)
           )}
         />
         <div
