@@ -4,6 +4,8 @@ import { StatusCodes } from 'http-status-codes';
 import database from '@/lib/database';
 import redis from '@/lib/redis';
 
+export const dynamic = 'force-dynamic'
+
 /**
  * Retrieves the top five forums with the highest number of subscribers
  * and updates the leaderboard data in Redis.
