@@ -40,7 +40,8 @@ const UserNav: React.FC<UserNavProps> = ({ user }) => {
         <div className="flex h-full items-center justify-center border-2 border-y-0 border-zinc-800 p-4 transition-colors hover:bg-yellow-300 dark:hover:bg-zinc-800">
           <UserAvatar
             user={{
-              name: user.username || user.name || "",
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              username: user.username!,
               image: user.image || null,
             }}
           />

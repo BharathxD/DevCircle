@@ -28,7 +28,7 @@ const MiniCreatePost: React.FC = () => {
         <div className="relative">
           <UserAvatar
             user={{
-              name: data?.user.username || null,
+              username: data?.user.username || null,
               image: data?.user.image || null,
             }}
           />

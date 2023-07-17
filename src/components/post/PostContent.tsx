@@ -45,7 +45,7 @@ const PostContent: React.FC<PostContentProps> = ({
       <div className="flex flex-row items-center gap-2">
         <UserAvatar
           user={{
-            name: username,
+            username: username,
             image: userimage,
           }}
         />
