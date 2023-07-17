@@ -35,7 +35,7 @@ const CommentReplies: React.FC<CommentRepliesProps> = ({
       >
         {showReplies
           ? "Hide Replies"
-          : `${topLevelComment.replies.length} replies`}
+          : `${topLevelComment.replies.length} reply(ies)`}
       </div>
       {showReplies &&
         topLevelComment.replies
