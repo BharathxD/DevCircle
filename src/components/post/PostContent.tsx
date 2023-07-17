@@ -79,7 +79,7 @@ const PostContent: React.FC<PostContentProps> = ({
           </h1>
         </header>
       )}
-      <div className="flex flex-col gap-4 p-4 dark:bg-zinc-900">
+      <div className="flex flex-col gap-4 p-4 dark:bg-zinc-900" id="editor-content">
         {!isEditing ? (
           <EditorOutput content={content} />
         ) : (

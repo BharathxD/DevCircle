@@ -2,12 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+html,
+body,
+:root {
   -webkit-tap-highlight-color: transparent;
+  color-scheme: dark;
 }
 
 *::selection {
   background-color: #ef4444a2;
+}
+
+#editor-content a {
+  border-bottom: 1px solid #fafafa;
+  line-height: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  #editor-content a {
+    border-bottom: 1px solid #27272a;
+  }
 }
 
 @layer utilities {
