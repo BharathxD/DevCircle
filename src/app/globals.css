@@ -14,9 +14,18 @@ body,
 }
 
 #editor-content a {
-  border-bottom: 1px solid #fafafa;
-  line-height: 0;
+  background-color: rgba(39, 39, 42, 0.5);
+  border-radius: 4px;
+  color: #fafafa;
+  padding-left: 2px;
+  padding-right: 2px;
+  border: 1px solid #797979;
 }
+
+#editor-content a:hover {
+  background-color: #404040;
+}
+
 
 @media (prefers-color-scheme: light) {
   #editor-content a {
