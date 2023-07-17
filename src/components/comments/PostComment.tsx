@@ -1,7 +1,6 @@
 "use client";
 
 import { Fragment, useRef, useState } from "react";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import type { Comment, CommentVote, User, VoteType } from "@prisma/client";
 import axios, { AxiosError } from "axios";

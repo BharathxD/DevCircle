@@ -1,3 +1,5 @@
+"use client";
+
 import useAnalytics from "@/hooks/useAnalytics";
 
 const CookieBanner = () => {
