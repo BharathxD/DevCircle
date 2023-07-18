@@ -25,11 +25,12 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
 
   return (
     <>
-      <div className="relative min-h-[30rem] w-full">
+      <div className="relative flex h-fit w-full items-center justify-center p-4">
         <BlurImage
           alt="image"
-          className="cursor-pointer rounded-lg border-2 border-zinc-800 bg-zinc-50 object-contain p-1 dark:border dark:bg-zinc-950/20"
-          fill
+          className="aspect-video h-full w-full cursor-pointer rounded-lg border-2 border-zinc-700 bg-zinc-50 object-contain dark:border dark:bg-zinc-950/20"
+          height={800}
+          width={800}
           src={src}
           onClick={() => setOpen((prev) => !isHomepage ?? !prev)}
         />
@@ -37,7 +38,7 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
       {open && (
         <motion.div
           key="backdrop"
-          className="fixed inset-0 h-full cursor-default overflow-hidden bg-zinc-50 backdrop-blur-md dark:bg-zinc-800/50"
+          className="fixed inset-0 z-10 h-full cursor-default overflow-hidden bg-zinc-50 backdrop-blur-md dark:bg-zinc-800/50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
