@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import CookiesForm from "@/components/forms/CookiesForm";
+import CookiesForm from "@/components/forms/cookies-form";
 
 export default function SettingsCookiesPage() {
   return (

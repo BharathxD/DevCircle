@@ -3,7 +3,7 @@ import { getAuthSession } from "@/actions/getCurrentUser";
 import { getForum } from "@/actions/getForum";
 
 import database from "@/lib/database";
-import ForumInfoWidget from "@/components/widgets/ForumInfoWidget";
+import ForumWidget from "@/components/widgets/forum-widget";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -42,7 +42,7 @@ const Layout = async ({ children, params: { forumName } }: LayoutProps) => {
           <div className="flex flex-col gap-4">{children}</div>
         </div>
         <div className="flex flex-col gap-4">
-          <ForumInfoWidget
+          <ForumWidget
             forumId={forum.id}
             forumName={forum.name}
             description={forum?.description}

@@ -4,8 +4,8 @@ import { IoIosArrowBack } from "react-icons/io";
 
 import database from "@/lib/database";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/Button";
-import CreatePost from "@/components/post/CreatePost";
+import { buttonVariants } from "@/components/ui/button";
+import CreatePost from "@/components/post/create-post";
 
 interface PageProps {
   params: {

@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { getUserWithSocialLinks } from "@/actions/getCurrentUser";
 
-import ProfileForm from "@/components/forms/ProfileForm";
+import ProfileForm from "@/components/forms/profile-form";
 
 const SettingsProfilePage = async () => {
   const user = await getUserWithSocialLinks();

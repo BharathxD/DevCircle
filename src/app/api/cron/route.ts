@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server';
-import { StatusCodes } from 'http-status-codes';
+import { NextResponse } from "next/server";
+import { StatusCodes } from "http-status-codes";
 
-import database from '@/lib/database';
-import redis from '@/lib/redis';
+import database from "@/lib/database";
+import redis from "@/lib/redis";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 /**
  * Retrieves the top five forums with the highest number of subscribers
@@ -35,12 +35,15 @@ async function handler(): Promise<NextResponse> {
       leaderboardData[`forum_${index}`] = JSON.stringify(forum);
     });
 
-    await redis.hset('leaderboard:forums', leaderboardData);
+    await redis.hset("leaderboard:forums", leaderboardData);
 
     return NextResponse.json({ success: true }, { status: StatusCodes.OK });
   } catch (error: unknown) {
     console.error(`Error updating leaderboard data: `, error);
-    return NextResponse.json({ success: false }, { status: StatusCodes.INTERNAL_SERVER_ERROR });
+    return NextResponse.json(
+      { success: false },
+      { status: StatusCodes.INTERNAL_SERVER_ERROR }
+    );
   }
 }
 

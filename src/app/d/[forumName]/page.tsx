@@ -7,9 +7,9 @@ import { env } from "@/env.mjs";
 import type { ExtendedForum } from "@/types/database";
 import siteConfig from "@/config/site";
 import { capitalizeString, cn, extractString } from "@/lib/utils";
-import { ScrollArea } from "@/components/ui/ScrollArea";
-import MiniCreatePost from "@/components/post/MiniCreatePost";
-import PostFeed from "@/components/post/PostFeed";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import MiniCreatePost from "@/components/post/mini-create-post";
+import PostFeed from "@/components/post/post-feed";
 
 interface ForumPageProps {
   params: {

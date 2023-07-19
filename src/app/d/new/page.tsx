@@ -8,10 +8,10 @@ import { useMutation } from "react-query";
 
 import { generateCbUrl } from "@/lib/utils";
 import type { CreateForumPayload } from "@/lib/validators/forum";
-import { toast } from "@/hooks/useToast";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Textarea } from "@/components/ui/Textarea";
+import { toast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 const CreatePostPage: React.FC = () => {
   const pathname = usePathname();

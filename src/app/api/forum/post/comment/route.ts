@@ -150,7 +150,7 @@ const DELETE = async (req: NextRequest): Promise<NextResponse> => {
 
     if (comment.replies.length > 0) {
       const replyIds = comment.replies.map((reply) => reply.id);
-      await database.comment.deleteMany({ where: { id: { in: replyIds } } })
+      await database.comment.deleteMany({ where: { id: { in: replyIds } } });
     }
 
     await database.comment.delete({

@@ -11,12 +11,12 @@ import type { Post, Tag, User, Vote } from "@prisma/client";
 
 import siteConfig from "@/config/site";
 import { absoluteUrl, extractString } from "@/lib/utils";
-import PostVoteShell from "@/components/ui/PostVoteShell";
-import ShareButton from "@/components/ui/ShareButton";
-import CommentButtonShell from "@/components/comments/CommentButtonShell";
-import CommentServer from "@/components/comments/CommentServer";
-import PostContent from "@/components/post/PostContent";
-import PostVoteServer from "@/components/post/PostVoteServer";
+import PostVoteShell from "@/components/ui/post-vote-shell";
+import ShareButton from "@/components/ui/share-button";
+import CommentButtonShell from "@/components/comments/comment-button-shell";
+import CommentServer from "@/components/comments/comment-server";
+import PostContent from "@/components/post/post-content";
+import PostVoteServer from "@/components/post/post-vote-server";
 
 interface PageProps {
   params: {

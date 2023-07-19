@@ -1,6 +1,6 @@
 import { getAuthSession } from "@/actions/getCurrentUser";
 
-import SettingsMenu from "@/components/navigation/SettingsNav";
+import SettingsMenu from "@/components/navigation/settings-nav";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await getAuthSession();

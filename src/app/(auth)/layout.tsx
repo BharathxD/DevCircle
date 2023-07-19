@@ -2,8 +2,8 @@ import Link from "next/link";
 import { FiGlobe } from "react-icons/fi";
 
 import siteConfig from "@/config/site";
-import AspectRatio from "@/components/ui/AspectRatio";
-import { BlurImage } from "@/components/ui/BlurImage";
+import AspectRatio from "@/components/ui/aspect-ratio";
+import { BlurImage } from "@/components/ui/blur-image";
 
 interface AuthLayoutProps {
   children: React.ReactNode;

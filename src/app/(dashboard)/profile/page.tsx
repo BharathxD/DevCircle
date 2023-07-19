@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import { getUserWithSocialLinksAndPosts } from "@/actions/getCurrentUser";
 
-import DashboardContentShell from "@/components/ui/DashboarContentShell";
-import UserPosts from "@/components/profile/UserPosts";
-import UserProfile from "@/components/profile/UserProfile";
+import DashboardContentShell from "@/components/ui/dashboard-content-shell";
+import UserPosts from "@/components/profile/user-posts";
+import UserProfile from "@/components/profile/user-profile";
 
 const UserProfilePage = async () => {
   const user = await getUserWithSocialLinksAndPosts();

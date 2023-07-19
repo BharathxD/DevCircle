@@ -1,5 +1,5 @@
 import siteConfig from "@/config/site";
-import Typography from "@/components/ui/Typography";
+import Typography from "@/components/ui/typography";
 
 const PrivacyPolicyPage = () => {
   return (

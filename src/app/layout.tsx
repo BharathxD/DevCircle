@@ -4,15 +4,15 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { env } from "@/env.mjs";
 
-import RtkProvider from "@/providers/RtkProvider";
-import Session from "@/providers/SessionProviders";
-import ThemeProvider from "@/providers/ThemeProvider";
-import { Toaster } from "@/providers/Toaster";
+import RtkProvider from "@/providers/rtk-provider";
+import Session from "@/providers/session-provider";
+import ThemeProvider from "@/providers/theme-provider";
+import { Toaster } from "@/providers/toaster";
 import siteConfig from "@/config/site";
 import { cn } from "@/lib/utils";
-import CookieBanner from "@/components/analytics/CookieBanner";
-import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
-import Navbar from "@/components/navigation/Navbar";
+import CookieBanner from "@/components/analytics/cookie-behavior";
+import GoogleAnalytics from "@/components/analytics/google-analytics";
+import Navbar from "@/components/navigation/navbar";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 

@@ -4,8 +4,8 @@ import { getAuthSession, getCurrentUser } from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
-import deletePostCache from "@/helpers/deletePostCache";
-import updatePostCache from "@/helpers/updatePostCache";
+import deletePostCache from "@/helpers/delete-post-cache";
+import updatePostCache from "@/helpers/update-post-cache";
 import database from "@/lib/database";
 import {
   CreatePostValidator,

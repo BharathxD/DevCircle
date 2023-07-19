@@ -1,17 +1,17 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getAuthSession } from "@/actions/getCurrentUser";
+import axios from "axios";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
+import siteConfig from "@/config/site";
 import database from "@/lib/database";
 import {
   forumDeleteValidator,
   forumUpdateValidator,
   forumValidator,
 } from "@/lib/validators/forum";
-import axios from "axios";
-import siteConfig from "@/config/site";
 
 /**
  * Creates a new forum based on the provided request.

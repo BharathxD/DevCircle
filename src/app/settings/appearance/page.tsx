@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import AppearanceForm from "@/components/forms/AppearanceForm";
+import AppearanceForm from "@/components/forms/appearance-form";
 
 const SettingsAppearancePage = () => {
   return (

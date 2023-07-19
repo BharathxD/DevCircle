@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { getUserWithSocialLinksAndPosts } from "@/actions/getCurrentUser";
 
-import UserPosts from "@/components/profile/UserPosts";
-import UserProfile from "@/components/profile/UserProfile";
+import UserPosts from "@/components/profile/user-posts";
+import UserProfile from "@/components/profile/user-profile";
 
 interface ProfilePageArgs {
   params: {
