@@ -5,7 +5,6 @@ import type { User } from "@prisma/client";
 import { MessageSquare, MessageSquareDashed } from "lucide-react";
 
 import type { ExtendedComment } from "@/types/database";
-import { cn } from "@/lib/utils";
 
 import {
   Sheet,
@@ -14,9 +13,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import CommentReplies from "./comment-replies";
+import Comment from "./comment";
 import CreateComment from "./create-comment";
-import PostComment from "./post-comment";
 
 interface CommentsSectionProps {
   postId?: string;
@@ -68,42 +66,15 @@ const CommentsSection = async ({
           )}
           {topLevelComments.length !== 0 && (
             <div className="flex flex-col gap-4">
-              {topLevelComments.map((topLevelComment) => {
-                const topLevelCommentAmount = topLevelComment.votes.reduce(
-                  (accumulator, vote) => {
-                    if (vote.type === "UP") accumulator++;
-                    if (vote.type === "DOWN") accumulator--;
-                    return accumulator as number;
-                  },
-                  0
-                );
-                const topLevelCommentVote = topLevelComment.votes.find(
-                  (vote) => vote.userId === userId
-                );
-                const hasReplies = topLevelComment.replies.length !== 0;
-                return (
-                  <div key={topLevelComment.id} className="flex flex-col">
-                    <div className={cn(hasReplies && "mb-2")}>
-                      <PostComment
-                        comment={topLevelComment}
-                        initialCommentVoteAmount={topLevelCommentAmount}
-                        initialCommentVote={topLevelCommentVote?.type}
-                        userId={userId}
-                        postId={postId}
-                        isAdmin={isAdmin}
-                      />
-                    </div>
-                    {hasReplies && (
-                      <CommentReplies
-                        postId={postId}
-                        topLevelComment={topLevelComment}
-                        userId={userId}
-                        isAdmin={isAdmin}
-                      />
-                    )}
-                  </div>
-                );
-              })}
+              {topLevelComments.map((topLevelComment) => (
+                <Comment
+                  key={topLevelComment.id}
+                  comment={topLevelComment}
+                  userId={userId}
+                  postId={postId}
+                  isAdmin={isAdmin}
+                />
+              ))}
             </div>
           )}
         </section>
