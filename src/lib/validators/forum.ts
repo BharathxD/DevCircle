@@ -79,9 +79,6 @@ type ForumUpdatePayload = zodInfer<typeof forumUpdateValidator>;
  */
 type ForumDeletePayload = zodInfer<typeof forumDeleteValidator>;
 
-/**
- * Export the validator schemas and payload types so that they can be used in other parts of the application.
- */
 export {
   forumValidator,
   forumSubscriptionValidator,

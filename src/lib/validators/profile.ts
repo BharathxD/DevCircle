@@ -1,6 +1,21 @@
+/**
+ * Zod is a TypeScript-first schema validation library that helps define
+ * and validate data schemas. It ensures that the data conforms to the specified
+ * schema before processing it further.
+ *
+ * This code defines a validator schema and a payload type for handling profile form
+ * values in a NextJS application.
+ *
+ * @see https://github.com/colinhacks/zod
+ */
+
 import { object, string } from "zod";
 import type { infer as zodInfer } from "zod";
 
+/**
+ * Validator schema for validating the profile form values.
+ * It specifies the expected shape of the incoming data for user profiles.
+ */
 const profileFormSchema = object({
   username: string()
     .min(2, { message: "Username must be at least 2 characters." })
@@ -21,6 +36,10 @@ const profileFormSchema = object({
   }).optional(),
 });
 
+/**
+ * Type declaration for the payload of profile form values.
+ * It represents the data that should be sent in the request body for user profiles.
+ */
 type ProfileFormValues = zodInfer<typeof profileFormSchema>;
 
 export { profileFormSchema };
