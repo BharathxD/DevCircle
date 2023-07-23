@@ -56,11 +56,6 @@ const forumDeleteValidator = object({
 });
 
 /**
- * The following type declarations are inferred from the validator schemas using
- * the `zodInfer` utility provided by Zod.
- */
-
-/**
  * Type declaration for the payload of a "CreateForum" request.
  * It represents the data that should be sent in the request body when creating a new forum.
  */
