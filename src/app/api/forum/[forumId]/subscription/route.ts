@@ -42,9 +42,7 @@ export async function PATCH(_: NextRequest, searchParams: searchParams) {
         { status: StatusCodes.OK }
       );
     }
-    await database.subscription.delete({
-      where: { userId_forumId: { forumId, userId: session.user.id } },
-    });
+    await database.subscription.delete({ where: { userId_forumId: { forumId, userId: session.user.id } } });
     return NextResponse.json("Unsubscribed", { status: StatusCodes.ACCEPTED });
   } catch (error: unknown) {
     return NextResponse.json(

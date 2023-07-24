@@ -201,19 +201,16 @@ const deleteForum = async (req: NextRequest): Promise<NextResponse> => {
       );
     }
 
-    // Define the promises for deleting posts and subscriptions
-    const deletePostsPromise = database.post.deleteMany({
-      where: { forumId: forumId },
-    });
-    const deleteSubscriptionsPromise = database.subscription.deleteMany({
-      where: { forumId: forumId },
-    });
-
-    // Use Promise.all to execute both promises in parallel
-    await Promise.all([deletePostsPromise, deleteSubscriptionsPromise]);
-
-    // Delete the forum
-    await database.forum.delete({ where: { id: forumId } });
+    // Use transaction to delete all the related data atomically
+    await database.$transaction(async () => {
+      await database.post.deleteMany({
+        where: { forumId: forumId },
+      });
+      await database.subscription.deleteMany({
+        where: { forumId: forumId },
+      });
+      await database.forum.delete({ where: { id: forumId } });
+    })
 
     // Update the leaderboard
     await axios.get(`${siteConfig.url}/api/cron`);
