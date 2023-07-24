@@ -163,7 +163,7 @@ const DELETE = async (req: NextRequest): Promise<NextResponse> => {
 
     return NextResponse.json({ message: "OK" }, { status: StatusCodes.OK });
   } catch (error: unknown) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError || error instanceof ZodError) {
       return NextResponse.json(
         { message: `Invalid request parameters: ${error.message}` },
         { status: StatusCodes.BAD_REQUEST }
