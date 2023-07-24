@@ -10,6 +10,7 @@ import {
   DeleteCommentValidator,
   EditCommentValidator,
 } from "@/lib/validators/comments";
+import { Prisma } from "@prisma/client";
 
 /**
  * Handles the GET request for fetching comments for the posts.
@@ -148,20 +149,21 @@ const DELETE = async (req: NextRequest): Promise<NextResponse> => {
       );
     }
 
-    if (comment.replies.length > 0) {
-      const replyIds = comment.replies.map((reply) => reply.id);
-      await database.comment.deleteMany({ where: { id: { in: replyIds } } });
-    }
-
-    await database.comment.delete({
-      where: {
-        id: comment.id,
-      },
+    await database.$transaction(async () => {
+      if (comment.replies.length > 0) {
+        const replyIds = comment.replies.map((reply) => reply.id);
+        await database.comment.deleteMany({ where: { id: { in: replyIds } } });
+      }
+      await database.comment.delete({
+        where: {
+          id: comment.id,
+        },
+      });
     });
 
     return NextResponse.json({ message: "OK" }, { status: StatusCodes.OK });
   } catch (error: unknown) {
-    if (error instanceof ZodError) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
       return NextResponse.json(
         { message: `Invalid request parameters: ${error.message}` },
         { status: StatusCodes.BAD_REQUEST }
@@ -169,14 +171,12 @@ const DELETE = async (req: NextRequest): Promise<NextResponse> => {
     }
 
     return NextResponse.json(
-      {
-        message:
-          "Something went wrong, the comment cannot be deleted at the moment",
-      },
+      { message: "Something went wrong, the comment cannot be deleted at the moment" },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
 };
+
 
 /**
  * Handles the EDIT request for editing a comment.
