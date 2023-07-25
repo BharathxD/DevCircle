@@ -11,6 +11,10 @@ interface searchParams {
   };
 }
 
+/**
+ * This function handles the PATCH request for forum subscriptions.
+ * @returns {NextResponse} - The response object containing the JSON response and HTTP status code.
+ */
 export async function PATCH(_: NextRequest, searchParams: searchParams) {
   try {
     // Check if the request comes from authenticated source
