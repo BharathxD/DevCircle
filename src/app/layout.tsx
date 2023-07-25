@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
+import type { NextFont } from "next/dist/compiled/@next/font";
 import { Montserrat } from "next/font/google";
 import { env } from "@/env.mjs";
 
@@ -16,10 +17,9 @@ import Navbar from "@/components/navigation/navbar";
 
 /**
  * Font options for the Montserrat font from Google Fonts.
- * @type {import("next/font").GoogleFontOptions}
- * @see {@link https://nextjs.org/docs/advanced-features/custom-fonts#google-fonts}
+ * @type {NextFont}
  */
-const montserrat = Montserrat({ subsets: ["latin"] });
+const montserrat: NextFont = Montserrat({ subsets: ["latin"] });
 
 interface rootProps {
   children: React.ReactNode;
