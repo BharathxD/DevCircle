@@ -1,5 +1,18 @@
+/**
+ * The number of results to be fetched per page in infinite scroll pagination.
+ * @type {number}
+ */
 export const INFINITE_SCROLL_PAGINATION_RESULTS = 4;
 
+/**
+ * Configuration object for the DevCircle website.
+ * @type {Object}
+ * @property {string} name - The name of the website (e.g., "DevCircle").
+ * @property {string} description - A brief description of the website.
+ * @property {string} url - The URL of the website (e.g., "https://devcircle.live").
+ * @property {number} copyrights - The copyright year for the website content.
+ * @property {string} ogImage - The URL of the OpenGraph image for social media sharing.
+ */
 const siteConfig = {
   name: "DevCircle",
   description:
