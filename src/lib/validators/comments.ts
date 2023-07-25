@@ -19,7 +19,7 @@ import type { infer as ZodInfer } from "zod";
 const GetCommentsValidator = object({
   postId: string(), // postId should be a string.
   limit: string(), // limit should be a string.
-  page: string(),  // page should be a string.
+  page: string(), // page should be a string.
 });
 
 /**
@@ -27,8 +27,8 @@ const GetCommentsValidator = object({
  * It specifies the expected shape of the incoming data when creating a new comment.
  */
 const CommentValidator = object({
-  postId: string({}),   // postId should be a string.
-  text: string(),       // text should be a string.
+  postId: string({}), // postId should be a string.
+  text: string(), // text should be a string.
   replyToId: string().optional(), // replyToId is an optional string, used for replies to a specific comment.
 });
 
@@ -38,7 +38,7 @@ const CommentValidator = object({
  */
 const EditCommentValidator = object({
   commentId: string({}), // commentId should be a string.
-  text: string(),        // text should be a string.
+  text: string(), // text should be a string.
 });
 
 /**

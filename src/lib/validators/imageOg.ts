@@ -19,7 +19,7 @@ import type { infer as zodInfer } from "zod";
 const ogImageSchema = object({
   title: string({ required_error: "Title is required for og:image" }),
   author: string().optional(),
-  description: string().optional()
+  description: string().optional(),
 });
 
 /**

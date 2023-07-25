@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import getComments from "@/actions/getComments";
 import { getAuthSession, getCurrentUser } from "@/actions/getCurrentUser";
+import { Prisma } from "@prisma/client";
 import { StatusCodes } from "http-status-codes";
 import { object, string, ZodError } from "zod";
 
@@ -10,7 +11,6 @@ import {
   DeleteCommentValidator,
   EditCommentValidator,
 } from "@/lib/validators/comments";
-import { Prisma } from "@prisma/client";
 
 /**
  * Handles the GET request for fetching comments for the posts.
@@ -163,7 +163,10 @@ const DELETE = async (req: NextRequest): Promise<NextResponse> => {
 
     return NextResponse.json({ message: "OK" }, { status: StatusCodes.OK });
   } catch (error: unknown) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError || error instanceof ZodError) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError ||
+      error instanceof ZodError
+    ) {
       return NextResponse.json(
         { message: `Invalid request parameters: ${error.message}` },
         { status: StatusCodes.BAD_REQUEST }
@@ -171,12 +174,14 @@ const DELETE = async (req: NextRequest): Promise<NextResponse> => {
     }
 
     return NextResponse.json(
-      { message: "Something went wrong, the comment cannot be deleted at the moment" },
+      {
+        message:
+          "Something went wrong, the comment cannot be deleted at the moment",
+      },
       { status: StatusCodes.INTERNAL_SERVER_ERROR }
     );
   }
 };
-
 
 /**
  * Handles the EDIT request for editing a comment.

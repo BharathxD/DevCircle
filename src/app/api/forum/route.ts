@@ -210,7 +210,7 @@ const deleteForum = async (req: NextRequest): Promise<NextResponse> => {
         where: { forumId: forumId },
       });
       await database.forum.delete({ where: { id: forumId } });
-    })
+    });
 
     // Update the leaderboard
     await axios.get(`${siteConfig.url}/api/cron`);

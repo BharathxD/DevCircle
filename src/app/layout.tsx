@@ -14,6 +14,11 @@ import CookieBanner from "@/components/analytics/cookie-behavior";
 import GoogleAnalytics from "@/components/analytics/google-analytics";
 import Navbar from "@/components/navigation/navbar";
 
+/**
+ * Font options for the Montserrat font from Google Fonts.
+ * @type {import("next/font").GoogleFontOptions}
+ * @see {@link https://nextjs.org/docs/advanced-features/custom-fonts#google-fonts}
+ */
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 interface rootProps {
@@ -21,17 +26,24 @@ interface rootProps {
   userModal: React.ReactNode;
 }
 
+/**
+ * Metadata object for the Next.js page.
+ * @type {Metadata}
+ * @see {@link https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function}
+ */
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
     template: `%s - ${siteConfig.name}`,
   },
+  // Icon URLs for various platforms
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
     shortcut: "/favicon-32x32.png",
   },
   description: siteConfig.description,
+  // Keywords relevant to the website's content
   keywords: [
     "Developer Circle",
     "Community for Developers",
@@ -42,6 +54,7 @@ export const metadata: Metadata = {
     "Tailwind CSS",
     "Server Components",
   ],
+  // Authors and creator information
   authors: [
     {
       name: "BharathxD",
@@ -49,10 +62,12 @@ export const metadata: Metadata = {
     },
   ],
   creator: "BharathxD",
+  // Theme color options based on user's color scheme preference
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
+  // OpenGraph metadata for social media sharing
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -61,6 +76,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
+  // Twitter card metadata for Twitter sharing
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
@@ -70,6 +86,13 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * The root layout component that wraps the entire application.
+ * @async
+ * @function RootLayout
+ * @param {rootProps} - The props containing the main content and user modal component.
+ * @returns {React.ReactNode} - The rendered HTML with global styles and common components.
+ */
 export default async function RootLayout({ children, userModal }: rootProps) {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
