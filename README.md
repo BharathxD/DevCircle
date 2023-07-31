@@ -1,4 +1,11 @@
-# DevCircle
+```bash
+  ____              ____ _          _
+ |  _ \  _____   __/ ___(_)_ __ ___| | ___
+ | | | |/ _ \ \ / / |   | | '__/ __| |/ _ \
+ | |_| |  __/\ V /| |___| | | | (__| |  __/
+ |____/ \___| \_/  \____|_|_|  \___|_|\___|
+```
+---
 
 This is an open-source community platform built with the latest features of Next.js 13.
 
