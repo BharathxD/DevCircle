@@ -41,7 +41,7 @@ git clone https://github.com/BharathxD/DevCircle
 ### 2. Install dependencies
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 3. Create a `.env` file
@@ -51,7 +51,7 @@ Create a `.env` file in the root directory and add the environment variables as 
 ### 4. Run the application
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ### 5. Push database
