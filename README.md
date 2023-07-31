@@ -5,7 +5,6 @@
  | |_| |  __/\ V /| |___| | | | (__| |  __/
  |____/ \___| \_/  \____|_|_|  \___|_|\___|
 ```
----
 
 This is an open-source community platform built with the latest features of Next.js 13.
 
