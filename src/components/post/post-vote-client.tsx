@@ -40,10 +40,10 @@ const PostVoteClient: React.FC<PostVoteClientProps> = ({
   }, [initialVote]);
   const { mutate: vote, isLoading } = useMutation({
     mutationFn: async (type: VoteType) => {
-      const payload: PostVoteRequest = {
+      const payload = {
         postId,
         voteType: type,
-      };
+      } satisfies PostVoteRequest;
       await axios.patch("/api/forum/post/vote", payload);
     },
 

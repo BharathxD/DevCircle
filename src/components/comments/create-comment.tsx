@@ -25,11 +25,11 @@ const CreateComment: React.FC<CreateCommentProps> = ({ postId, replyToId }) => {
   const [input, setInput] = useState<string>("");
   const { mutate: comment, isLoading } = useMutation({
     mutationFn: async ({ postId, text, replyToId }: CommentPayload) => {
-      const payload = {
+      const payload: CommentPayload = {
         postId,
         text,
         replyToId,
-      } satisfies CommentPayload;
+      };
       const { data }: AxiosResponse<{ message: string }> = await axios.patch(
         `/api/forum/post/comment`,
         payload

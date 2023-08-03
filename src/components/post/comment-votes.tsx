@@ -40,10 +40,10 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
   }, [initialCommentVote]);
   const { mutate: vote, isLoading } = useMutation({
     mutationFn: async (type: VoteType) => {
-      const payload: CommentVoteRequest = {
+      const payload = {
         commentId,
         voteType: type,
-      };
+      } satisfies CommentVoteRequest;
       await axios.patch("/api/forum/post/comment/vote", payload);
     },
 
