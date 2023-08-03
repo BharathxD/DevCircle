@@ -100,8 +100,7 @@ const CreatePostPage: React.FC = () => {
                 />
               </div>
               <p className="text-zinc-500">
-                Community names should be 4-20 characters long and must not
-                contain spaces.
+                Community names should be 4-20 characters long and must not contain spaces.
               </p>
               <div>
                 <Textarea
