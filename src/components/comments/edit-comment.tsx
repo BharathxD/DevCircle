@@ -35,10 +35,10 @@ const EditComment: React.FC<EditCommentProps> = ({ commentId, text }) => {
   const [input, setInput] = useState<string>(text);
   const { mutate: editComment, isLoading } = useMutation({
     mutationFn: async ({ text }: Omit<EditCommentPayload, "commentId">) => {
-      const payload: EditCommentPayload = {
+      const payload = {
         commentId: commentId,
         text,
-      };
+      } satisfies EditCommentPayload;
       const { data } = await axios.post(`/api/forum/post/comment `, payload);
       return data as { message: string };
     },

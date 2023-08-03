@@ -97,10 +97,11 @@ const EditForumForm: React.FC<EditForumFormProps> = ({ forum }) => {
         variant: "destructive",
       });
     }
-    return updateForum({
+    const payload = {
       ...data,
       forumId: forum.id,
-    });
+    } satisfies ForumUpdatePayload;
+    return updateForum(payload);
   };
   useEffect(() => {
     if (Object.keys(form.formState.errors).length) {

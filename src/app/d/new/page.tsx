@@ -24,10 +24,10 @@ const CreatePostPage: React.FC = () => {
     AxiosError | Error
   >({
     mutationFn: async () => {
-      const payload: CreateForumPayload = {
+      const payload = {
         forumName: input,
         description,
-      };
+      } satisfies CreateForumPayload;
       const { data } = await axios.post<string>("/api/forum", payload);
       return data;
     },

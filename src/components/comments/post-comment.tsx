@@ -78,11 +78,11 @@ const PostComment: React.FC<PostCommentProps> = ({
   };
   const { mutate: reply, isLoading: replyIsLoading } = useMutation({
     mutationFn: async ({ postId, text, replyToId }: CommentPayload) => {
-      const payload: CommentPayload = {
+      const payload = {
         postId,
         text,
         replyToId,
-      };
+      } satisfies CommentPayload;
       const { data } = await axios.patch(`/api/forum/post/comment `, payload);
       return data as { message: string };
     },
