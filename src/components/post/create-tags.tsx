@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { Fragment, useCallback, useEffect, useRef } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 
 import { cn } from "@/lib/utils";
@@ -58,7 +58,7 @@ const CreateTags: React.FC<CreateTagsProps> = ({ tags, setTags }) => {
   return (
     <div className="no-scrollbar flex h-min w-full flex-row items-center justify-start gap-2">
       {tags.length !== 5 && (
-        <>
+        <Fragment>
           <Input
             className={cn("w-[100px] py-1")}
             ref={tagRef}
@@ -72,7 +72,7 @@ const CreateTags: React.FC<CreateTagsProps> = ({ tags, setTags }) => {
           >
             <AiOutlinePlus />
           </Button>
-        </>
+        </Fragment>
       )}
       {tags && tags.length !== 0 && (
         <div className="no-scrollbar flex flex-row gap-2 overflow-hidden overflow-x-scroll rounded-md">

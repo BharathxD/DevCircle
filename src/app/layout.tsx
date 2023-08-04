@@ -88,8 +88,6 @@ export const metadata: Metadata = {
 
 /**
  * The root layout component that wraps the entire application.
- * @async
- * @function RootLayout
  * @param {rootProps} - The props containing the main content and user modal component.
  * @returns {React.ReactNode} - The rendered HTML with global styles and common components.
  */
