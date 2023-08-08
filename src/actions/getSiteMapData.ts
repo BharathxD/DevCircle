@@ -17,9 +17,10 @@ const getSitemapData = async (): Promise<{
 }> => {
   const postsData = await database.post.findMany({ include: { forum: true } });
   const forumData = await database.forum.findMany();
-  const userData = (await database.$queryRaw`SELECT username FROM User`) satisfies {
-    username: string;
-  }[];
+  const userData =
+    (await database.$queryRaw`SELECT username FROM User`) satisfies {
+      username: string;
+    }[];
 
   return {
     posts: postsData.map((post) => ({

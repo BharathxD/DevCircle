@@ -4,7 +4,7 @@ type SiteConfig = {
   url: string;
   copyrights: number;
   ogImage: string;
-}
+};
 
 /**
  * The number of results to be fetched per page in infinite scroll pagination.
