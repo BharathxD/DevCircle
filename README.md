@@ -66,6 +66,18 @@ npx prisma generate
 npx sst remove
 ```
 
+### For production env
+
+```bash
+npx ssh remove --prod
+```
+
+### For development env
+
+```bash
+npx ssh remove --dev
+```
+
 ## License
 
 Licensed under the MIT License. Check the [LICENSE](./LICENSE) file for details.
