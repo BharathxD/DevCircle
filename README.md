@@ -60,6 +60,12 @@ pnpm dev
 npx prisma generate
 ```
 
+## Remove provisioned resources from AWS
+
+```bash
+npx sst remove
+```
+
 ## License
 
 Licensed under the MIT License. Check the [LICENSE](./LICENSE) file for details.
