@@ -1,5 +1,6 @@
 import "./globals.css";
 
+import type { PropsWithChildren, ReactNode } from "react";
 import type { Metadata } from "next";
 import type { NextFont } from "next/dist/compiled/@next/font";
 import { Montserrat } from "next/font/google";
@@ -22,7 +23,6 @@ import Navbar from "@/components/navigation/navbar";
 const montserrat: NextFont = Montserrat({ subsets: ["latin"] });
 
 interface rootProps {
-  children: React.ReactNode;
   userModal: React.ReactNode;
 }
 
@@ -91,7 +91,10 @@ export const metadata: Metadata = {
  * @param {rootProps} - The props containing the main content and user modal component.
  * @returns {React.ReactNode} - The rendered HTML with global styles and common components.
  */
-export default async function RootLayout({ children, userModal }: rootProps) {
+const RootLayout = ({
+  children,
+  userModal,
+}: PropsWithChildren & rootProps): ReactNode => {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
       <GoogleAnalytics
@@ -112,4 +115,6 @@ export default async function RootLayout({ children, userModal }: rootProps) {
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

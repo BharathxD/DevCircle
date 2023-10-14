@@ -1,14 +1,14 @@
+import type { PropsWithChildren } from "react";
 import { getAuthSession } from "@/actions/getCurrentUser";
 
 import Shell from "@/components/ui/shell";
 import SidebarNav from "@/components/navigation/sidebar-nav";
 
 interface rootProps {
-  children: React.ReactNode;
   authModal: React.ReactNode;
 }
 
-export default async function RootLayout({ children }: rootProps) {
+const RootLayout = async ({ children }: PropsWithChildren & rootProps) => {
   const session = await getAuthSession();
   return (
     <Shell isLoggedIn={!!session?.user}>
@@ -16,4 +16,6 @@ export default async function RootLayout({ children }: rootProps) {
       <SidebarNav isLoggedIn={!!session?.user} />
     </Shell>
   );
-}
+};
+
+export default RootLayout;
