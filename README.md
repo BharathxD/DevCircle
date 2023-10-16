@@ -6,7 +6,7 @@
  |____/ \___| \_/  \____|_|_|  \___|_|\___|
 ```
 
-This is an open-source community platform built with the latest features of Next.js 13.
+This is an open-source community platform built with the latest features of [`Next.js 13`](https://nextjs.org/blog/next-13).
 
 ![DevCircle OG](./public/images/screenshot/DevCircle.png)
 
