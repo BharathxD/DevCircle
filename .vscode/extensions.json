@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    // markdown linting
+    "DavidAnson.vscode-markdownlint",
+    // nicer markdown support
+    "yzhang.markdown-all-in-one",
+    // prettier plugin
+    "esbenp.prettier-vscode",
+    // eslint plugin
+    "dbaeumer.vscode-eslint",
+    // hinting / autocompletion for tailwind
+    "bradlc.vscode-tailwindcss",
+    // Shell-Format / formatting tool for dotenv
+    "foxundermoon.shell-format"
+  ]
+}
