@@ -16,6 +16,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "useUnknownInCatchVariables": true,
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"]
