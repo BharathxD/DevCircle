@@ -32,6 +32,7 @@ interface rootProps {
  * @see {@link https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function}
  */
 export const metadata: Metadata = {
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: {
     default: siteConfig.name,
     template: `%s - ${siteConfig.name}`,

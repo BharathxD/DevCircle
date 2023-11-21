@@ -4,11 +4,7 @@ import { getAuthSession } from "@/actions/getCurrentUser";
 import Shell from "@/components/ui/shell";
 import SidebarNav from "@/components/navigation/sidebar-nav";
 
-interface RootProps {
-  authModal: React.ReactNode;
-}
-
-const RootLayout = async ({ children }: PropsWithChildren & RootProps) => {
+const RootLayout = async ({ children }: PropsWithChildren) => {
   const session = await getAuthSession();
   return (
     <Shell isLoggedIn={!!session?.user}>
