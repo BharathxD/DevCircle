@@ -1,8 +1,8 @@
+import { Fragment } from "react";
 import { redirect } from "next/navigation";
 import { getUserWithSocialLinks } from "@/actions/getCurrentUser";
 
 import ProfileForm from "@/components/forms/profile-form";
-import { Fragment } from "react";
 
 const SettingsProfilePage = async () => {
   const user = await getUserWithSocialLinks();
