@@ -98,11 +98,11 @@ const ShareButton: React.FC<ShareButtonProps> = ({
               <Link
                 key={index}
                 href={url}
-                className="rounded-full border-2 border-zinc-800 p-2 hover:bg-zinc-700"
+                className="rounded-full border-2 border-zinc-800 p-2 text-zinc-800 transition-all hover:bg-zinc-800 hover:text-zinc-50 dark:text-zinc-50"
                 referrerPolicy="no-referrer"
                 target="_blank"
               >
-                <Icon className="h-8 w-8 text-zinc-50" />
+                <Icon className="h-8 w-8" />
               </Link>
             ))}
           </div>

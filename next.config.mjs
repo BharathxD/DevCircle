@@ -27,10 +27,10 @@ const nextConfig = {
     },
   ],
   images: {
-    domains: [
-      "uploadthing.com",
-      "lh3.googleusercontent.com",
-      "source.unsplash.com",
+    remotePatterns: [
+      { protocol: "https", hostname: "uploadthing.com" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "source.unsplash.com" },
     ],
   },
 };

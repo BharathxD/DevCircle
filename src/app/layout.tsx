@@ -100,7 +100,7 @@ const RootLayout = ({
       <GoogleAnalytics
         GA_MEASUREMENT_ID={env.GOOGLE_ANALYTICS_MEASUREMENT_ID}
       />
-      <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition will-change-auto duration-200 ease-in-out dark:bg-zinc-950 dark:bg-gradient-to-t dark:from-zinc-950 dark:to-[#111] dark:text-zinc-50">
+      <body className="no-scrollbar bg-zinc-50 text-zinc-800 transition duration-200 ease-in-out will-change-auto dark:bg-zinc-950 dark:bg-gradient-to-t dark:from-zinc-950 dark:to-[#111] dark:text-zinc-50">
         <Session>
           <RtkProvider>
             <ThemeProvider>
