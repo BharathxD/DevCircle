@@ -28,7 +28,6 @@ export default {
         "Certificate",
         process.env.CDK_CERTIFICATE_ARN!
       );
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const site = new NextjsSite(stack, "site", {
         cdk: {
           serverCachePolicy,

@@ -62,11 +62,6 @@ export const metadata: Metadata = {
     },
   ],
   creator: "BharathxD",
-  // Theme color options based on user's color scheme preference
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
   // OpenGraph metadata for social media sharing
   openGraph: {
     type: "website",

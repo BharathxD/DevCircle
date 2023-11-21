@@ -23,7 +23,7 @@ interface CommentsSectionProps {
   isAdmin?: boolean;
 }
 
-const CommentsSection = async ({
+const CommentsSection = ({
   postId,
   userId,
   comments,
