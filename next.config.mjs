@@ -33,10 +33,6 @@ const nextConfig = {
       "source.unsplash.com",
     ],
   },
-  experimental: {
-    appDir: true,
-    serverActions: true,
-  },
 };
 
 export default nextConfig;
