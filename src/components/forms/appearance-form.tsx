@@ -52,7 +52,6 @@ const AppearanceForm = () => {
               </FormDescription>
               <FormMessage />
               <RadioGroup
-                // @ts-expect-error: The types are compatible, but TypeScript throws an error
                 onValueChange={field.onChange}
                 defaultValue={field.value}
                 className="grid w-full grid-cols-2 gap-8 pt-2"
