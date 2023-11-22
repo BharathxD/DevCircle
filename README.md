@@ -10,7 +10,7 @@
 
 This is an open-source community platform built with the latest features of [`Next.js 13`](https://nextjs.org/blog/next-13).
 
-![DevCircle OG](./public/images/screenshot/DevCircle.png)
+![DevCircle OG](https://i.postimg.cc/xfXRQXKB/devcircle-login.png)
 
 > **Warning**
 > This project is still in development and is not ready for production use.
