@@ -6,11 +6,11 @@ import Script from "next/script";
 
 import { pageview } from "@/lib/utils";
 
-export default function GoogleAnalytics({
+const GoogleAnalytics = ({
   GA_MEASUREMENT_ID,
 }: {
   GA_MEASUREMENT_ID: string;
-}) {
+}) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -48,4 +48,6 @@ export default function GoogleAnalytics({
       />
     </>
   );
-}
+};
+
+export default GoogleAnalytics;
