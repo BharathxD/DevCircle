@@ -22,8 +22,8 @@ import Navbar from "@/components/navigation/navbar";
  */
 const montserrat: NextFont = Montserrat({ subsets: ["latin"] });
 
-interface rootProps {
-  userModal: React.ReactNode;
+interface Props {
+  userModal: ReactNode;
 }
 
 /**
@@ -84,13 +84,13 @@ export const metadata: Metadata = {
 
 /**
  * The root layout component that wraps the entire application.
- * @param {rootProps} - The props containing the main content and user modal component.
- * @returns {React.ReactNode} - The rendered HTML with global styles and common components.
+ * @param {Props} - The props containing the main content and user modal component.
+ * @returns {ReactNode} - The rendered HTML with global styles and common components.
  */
 const RootLayout = ({
   children,
   userModal,
-}: PropsWithChildren & rootProps): ReactNode => {
+}: PropsWithChildren & Props): ReactNode => {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
       <GoogleAnalytics

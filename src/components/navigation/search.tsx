@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import axios, { type AxiosResponse } from "axios";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import { Layers, Search } from "lucide-react";
 import { useQuery } from "react-query";
 
