@@ -1,35 +1,63 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState, type ChangeEvent } from "react";
 import axios, { type AxiosResponse } from "axios";
-import debounce from "lodash/debounce";
-import { Layers, Search } from "lucide-react";
-import { useQuery } from "react-query";
+import { Search } from "lucide-react";
 
 import { type SearchResults } from "@/types/database";
+import useDebounce from "@/hooks/use-debonce";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import SearchItem from "./serach-list";
+
 const SearchBar = () => {
-  const [searchInput, setSearchInput] = useState<string>("");
-  const {
-    data: queryResults,
-    refetch,
-    isFetching,
-    isFetched,
-  } = useQuery<SearchResults[]>({
-    queryFn: async () => {
-      if (searchInput.length === 0) return [];
+  const [query, setQuery] = useState<string>("");
+  const [data, setData] = useState<SearchResults[]>([]);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+
+  const fetchResults = useCallback(async () => {
+    try {
       const response: AxiosResponse<SearchResults[]> = await axios.get(
-        `/api/posts/search/?query=${searchInput}`
+        "/api/posts/search",
+        { params: { query } }
       );
-      return response.data;
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching search results", error);
+    } finally {
+      setIsFetching(false);
+    }
+  }, [query]);
+
+  const debouncedRequest = useDebounce(fetchResults);
+
+  const content = useMemo(() => {
+    return isFetching ? (
+      <Skeleton className="w-full rounded-none p-8" />
+    ) : data.length === 0 ? (
+      <p className="inline-flex h-fit w-full items-center justify-center gap-2 p-5 text-lg">
+        No results found.
+      </p>
+    ) : (
+      <ul className="list-none">
+        {data.map((post) => (
+          <SearchItem key={post.postId} post={post} />
+        ))}
+      </ul>
+    );
+  }, [isFetching, data]);
+
+  const handleInputChange = useCallback(
+    async (event: ChangeEvent<HTMLInputElement>) => {
+      setData([]);
+      setIsFetching(true);
+      setQuery(event.target.value);
+      debouncedRequest();
     },
-    queryKey: ["search-query"],
-    enabled: searchInput.length > 0,
-  });
-  const request = debounce(() => refetch());
-  const debounceRequest = useCallback(() => request(), [request]);
+    [setData, setIsFetching, setQuery, debouncedRequest]
+  );
+
   return (
     <Dialog>
       <DialogTrigger asChild aria-label="Search">
@@ -45,39 +73,14 @@ const SearchBar = () => {
           <input
             type="text"
             className="h-[90%] w-full bg-transparent text-lg outline-none"
-            value={searchInput}
+            value={query}
             autoFocus
-            onChange={async (event) => {
-              setSearchInput(event.target.value);
-              await debounceRequest();
-            }}
+            onChange={handleInputChange}
             placeholder="Search posts"
           />
-          {searchInput.length > 0 && (
+          {query.length > 0 && (
             <div className="absolute inset-x-0 top-[110%] h-fit max-h-[60vh] w-full overflow-hidden overflow-y-scroll rounded-md border-2 border-zinc-800 bg-zinc-50/75 shadow backdrop-blur-sm dark:bg-zinc-950/75">
-              {isFetching && <Skeleton className="w-full rounded-none p-8" />}
-              {isFetched &&
-                !isFetching &&
-                (queryResults?.length ?? 0) === 0 && (
-                  <p className="inline-flex h-fit w-full items-center justify-center gap-2 p-5 text-lg">
-                    No results found.
-                  </p>
-                )}
-              {(queryResults?.length ?? 0) > 0 && (
-                <ul className="list-none">
-                  {queryResults?.map((post) => (
-                    <li key={post.postId}>
-                      <a
-                        className="inline-flex h-fit w-full items-center gap-2 p-5 text-lg hover:bg-zinc-800 hover:text-zinc-50"
-                        href={`/d/${post.forumName}/post/${post.postId}`}
-                      >
-                        <Layers className="mr-2 h-8 w-8" />
-                        <p>{post.postTitle}</p>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
+              {content}
             </div>
           )}
         </div>

@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef } from "react";
 import { debounce } from "lodash";
 
-type Props = () => void;
+type Props<T> = (options: T) => void;
 
-const useDebounce = (cb: Props) => {
+const useDebounce = <T>(cb: Props<T>) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>();
 
