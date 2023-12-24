@@ -31,7 +31,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
         <div className="absolute bottom-5 flex w-full items-center justify-center px-5 text-center md:justify-start md:text-left">
           <Link
             href="https://optimizex.vercel.app"
-            className="w-max rounded-md border-2 border-zinc-600 bg-zinc-50 px-4 py-1 text-sm font-medium text-zinc-800 transition-colors hover:text-zinc-700 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200 hover:dark:bg-zinc-800 hover:dark:text-zinc-200 md:px-4 md:py-1"
+            className="w-max rounded-md border-2 border-zinc-600 bg-zinc-50 px-4 py-1 text-sm font-medium text-zinc-800 transition-colors hover:text-zinc-700 md:px-4 md:py-1 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200 hover:dark:bg-zinc-800 hover:dark:text-zinc-200"
             target="_blank"
           >
             Optimized by OptimizeX

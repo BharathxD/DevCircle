@@ -25,7 +25,7 @@ const SignUp: FC<SignInProps> = () => {
     <Card className="flex flex-col justify-center border-2 border-zinc-800 text-center backdrop-blur-sm dark:bg-zinc-950/80">
       <CardHeader className="flex flex-col gap-2">
         <FiGlobe size={75} className="mx-auto dark:text-zinc-300" />
-        <CardTitle className="h-full bg-clip-text text-4xl font-semibold tracking-tight text-zinc-800 dark:bg-gradient-to-br dark:from-zinc-200 dark:to-zinc-400 dark:text-transparent md:text-4xl">
+        <CardTitle className="h-full bg-clip-text text-4xl font-semibold tracking-tight text-zinc-800 md:text-4xl dark:bg-gradient-to-br dark:from-zinc-200 dark:to-zinc-400 dark:text-transparent">
           Register Now
         </CardTitle>
         <CardDescription className="mx-auto max-w-xs text-lg tracking-tighter">

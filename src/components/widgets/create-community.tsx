@@ -9,7 +9,7 @@ import siteConfig from "@/config/site";
 const CreateCommunity = () => {
   return (
     <motion.div
-      className="order-first h-fit overflow-hidden rounded-md border-2 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 md:order-last"
+      className="order-first h-fit overflow-hidden rounded-md border-2 bg-zinc-50 md:order-last dark:border-zinc-800 dark:bg-zinc-950"
       initial="hidden"
       animate="show"
       variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}

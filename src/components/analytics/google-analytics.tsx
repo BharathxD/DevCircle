@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
-import { env } from "@/env.mjs";
 
 import { pageview } from "@/lib/utils";
 

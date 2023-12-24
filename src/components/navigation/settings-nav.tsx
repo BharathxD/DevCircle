@@ -27,7 +27,7 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isLoggedIn }) => {
               href={data.href}
               key={index}
               className={cn(
-                "inline-flex w-full items-center justify-center gap-2 border-zinc-800 bg-zinc-50 p-2 dark:bg-zinc-950/20 md:w-[300px] md:justify-start md:border-b-2",
+                "inline-flex w-full items-center justify-center gap-2 border-zinc-800 bg-zinc-50 p-2 md:w-[300px] md:justify-start md:border-b-2 dark:bg-zinc-950/20",
                 pathname === data.href &&
                   pathname !== "/settings" &&
                   "bg-zinc-800 text-zinc-50 dark:bg-zinc-800"

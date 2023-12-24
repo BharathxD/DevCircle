@@ -37,5 +37,5 @@
     "tailwind.config.ts",
     "src/lib/constants"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "sst.config.ts"]
 }

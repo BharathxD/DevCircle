@@ -53,7 +53,7 @@ const SidebarNav: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
   if (!isDesktopScreen) {
     return (
       <nav
-        className="fixed inset-x-0 -bottom-0.5 flex flex-row items-center justify-center overflow-hidden border-t-2 border-t-zinc-800 bg-zinc-50/50 backdrop-blur-md dark:bg-zinc-950/50 md:hidden"
+        className="fixed inset-x-0 -bottom-0.5 flex flex-row items-center justify-center overflow-hidden border-t-2 border-t-zinc-800 bg-zinc-50/50 backdrop-blur-md md:hidden dark:bg-zinc-950/50"
         aria-label="Mobile Navigation"
       >
         {navLinks

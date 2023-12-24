@@ -49,7 +49,7 @@ const PostContent: React.FC<PostContentProps> = ({
             image: userimage,
           }}
         />
-        <p className="mt-1 flex max-h-40 items-center truncate text-sm text-zinc-800 dark:text-zinc-300 md:text-base">
+        <p className="mt-1 flex max-h-40 items-center truncate text-sm text-zinc-800 md:text-base dark:text-zinc-300">
           <Link href={`/u/${username}`}>Posted by u/{username}</Link>
           <Dot />
           {formatTimeToNow(new Date(createdAt))}
@@ -74,7 +74,7 @@ const PostContent: React.FC<PostContentProps> = ({
           >
             <RenderUserInfo />
           </div>
-          <h1 className="py-1 text-2xl font-extrabold text-zinc-900 dark:text-zinc-100 md:text-3xl md:leading-6 lg:text-4xl">
+          <h1 className="py-1 text-2xl font-extrabold text-zinc-900 md:text-3xl md:leading-6 lg:text-4xl dark:text-zinc-100">
             {title}
           </h1>
         </header>

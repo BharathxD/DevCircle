@@ -1,16 +1,16 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import axios, { type AxiosResponse } from "axios";
-import debounce from "lodash/debounce";
 import { Layers, Search } from "lucide-react";
 import { useQuery } from "react-query";
 
 import { type SearchResults } from "@/types/database";
+import useDebounce from "@/hooks/use-debonce";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const SearchBar: React.FC = () => {
+const SearchBar = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const {
     data: queryResults,
@@ -28,8 +28,7 @@ const SearchBar: React.FC = () => {
     queryKey: ["search-query"],
     enabled: searchInput.length > 0,
   });
-  const request = debounce(() => refetch());
-  const debounceRequest = useCallback(() => request(), [request]);
+  const debouncedRequest = useDebounce(refetch);
   return (
     <Dialog>
       <DialogTrigger asChild aria-label="Search">
@@ -49,7 +48,7 @@ const SearchBar: React.FC = () => {
             autoFocus
             onChange={async (event) => {
               setSearchInput(event.target.value);
-              await debounceRequest();
+              await debouncedRequest();
             }}
             placeholder="Search posts"
           />

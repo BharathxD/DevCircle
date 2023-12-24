@@ -13,9 +13,7 @@ import {
 
 const TableHeaderRow = ({ headers }: { headers?: string[] }) => (
   <TableRow>
-    {headers?.map((header) => (
-      <TableHead key={header}>{header}</TableHead>
-    ))}
+    {headers?.map((header) => <TableHead key={header}>{header}</TableHead>)}
   </TableRow>
 );
 
