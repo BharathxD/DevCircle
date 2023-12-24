@@ -9,13 +9,20 @@ import useDebounce from "@/hooks/use-debonce";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import SearchItem from "./serach-list";
+import SearchItem from "./serach-item";
 
 const SearchBar = () => {
   const [query, setQuery] = useState<string>("");
   const [data, setData] = useState<SearchResults[]>([]);
   const [isFetching, setIsFetching] = useState<boolean>(false);
 
+  /**
+   * There are two reasons why I'm using this approach:
+   * First, I wanted to try out the useDebounce hook.
+   * Second, I could have used useQuery from react-query, but the reason is react-query and `@tanstack-query` are different.
+   * When I initially started developing this application, I was using react-query, but I had to switch to `@tanstack-query`.
+   * That would be a huge overhead for now, as I need to migrate all the queries to `@tanstack-query`.
+   */
   const fetchResults = useCallback(async () => {
     try {
       const response: AxiosResponse<SearchResults[]> = await axios.get(
