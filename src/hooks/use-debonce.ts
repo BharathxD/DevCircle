@@ -1,20 +1,24 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { debounce } from "lodash";
 
 type Props = () => void;
 
 const useDebounce = (cb: Props) => {
-  const ref = useRef(cb);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ref = useRef<any>();
 
   useEffect(() => {
     ref.current = cb;
   }, [cb]);
 
-  const debouncedCb = () => {
-    const func = () => ref.current();
+  const debouncedCb = useMemo(() => {
+    const func = () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      ref.current?.();
+    };
 
-    return debounce(func);
-  };
+    return debounce(func, 1000);
+  }, []);
 
   return debouncedCb;
 };
