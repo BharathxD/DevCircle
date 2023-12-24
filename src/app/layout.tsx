@@ -2,7 +2,6 @@ import "./globals.css";
 
 import type { PropsWithChildren, ReactNode } from "react";
 import type { Metadata } from "next";
-import type { NextFont } from "next/dist/compiled/@next/font";
 import { Montserrat } from "next/font/google";
 import { env } from "@/env.mjs";
 
@@ -20,7 +19,7 @@ import Navbar from "@/components/navigation/navbar";
  * Font options for the Montserrat font from Google Fonts.
  * @type {NextFont}
  */
-const montserrat: NextFont = Montserrat({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 interface Props {
   userModal: ReactNode;

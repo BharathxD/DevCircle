@@ -3,14 +3,15 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
+import { env } from "@/env.mjs";
 
 import { pageview } from "@/lib/utils";
 
-const GoogleAnalytics = ({
-  GA_MEASUREMENT_ID,
-}: {
+interface Props {
   GA_MEASUREMENT_ID: string;
-}) => {
+}
+
+const GoogleAnalytics = ({ GA_MEASUREMENT_ID }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 

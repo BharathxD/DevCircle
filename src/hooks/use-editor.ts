@@ -53,14 +53,13 @@ const useEditor = (
               config: {
                 uploader: {
                   async uploadByFile(file: File) {
-                    const [res] = await uploadFiles({
+                    const [res] = await uploadFiles("imageUploader", {
                       files: [file],
-                      endpoint: "imageUploader",
                     });
                     return {
                       success: 1,
                       file: {
-                        url: res?.fileUrl,
+                        url: res?.url,
                       },
                     };
                   },
