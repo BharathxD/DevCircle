@@ -1,6 +1,13 @@
 "use client";
 
-import { Fragment, useCallback, useEffect, useRef } from "react";
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type FC,
+} from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 
 import { cn } from "@/lib/utils";
@@ -9,12 +16,18 @@ import { toast } from "@/hooks/use-toast";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
-interface CreateTagsProps {
-  tags: string[];
-  setTags: React.Dispatch<React.SetStateAction<string[]>>;
+interface CreateTagProps {
+  onAddTag: (tagsToAdd: string[]) => void;
+  onDelete: (tagToDelete: string) => void;
+  initialTags?: string[];
 }
 
-const CreateTags: React.FC<CreateTagsProps> = ({ tags, setTags }) => {
+const CreateTags: FC<CreateTagProps> = ({
+  onAddTag,
+  onDelete,
+  initialTags,
+}) => {
+  const [tags, setTags] = useState<string[]>(initialTags);
   const tagRef = useRef<HTMLInputElement>(null);
 
   const handleKeyAddition = useCallback(() => {
@@ -40,9 +53,13 @@ const CreateTags: React.FC<CreateTagsProps> = ({ tags, setTags }) => {
       return;
     }
 
-    setTags((prevTags) => [...prevTags, lowerCaseTag]);
+    setTags((prevTags) => {
+      const updatedTags = [...prevTags, lowerCaseTag];
+      onAddTag(updatedTags);
+      return updatedTags;
+    });
     tagRef.current.value = "";
-  }, [setTags, tags]);
+  }, [onAddTag, tags]);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -54,6 +71,14 @@ const CreateTags: React.FC<CreateTagsProps> = ({ tags, setTags }) => {
       document.removeEventListener("keydown", handleKeyPress);
     };
   }, [handleKeyAddition, tags]);
+
+  const removeTag = useCallback(
+    (tag: string) => {
+      setTags((prevTags) => prevTags.filter((prevTag) => prevTag !== tag));
+      onDelete(tag);
+    },
+    [onDelete]
+  );
 
   return (
     <div className="no-scrollbar flex h-min w-full flex-row items-center justify-start gap-2">
@@ -80,11 +105,7 @@ const CreateTags: React.FC<CreateTagsProps> = ({ tags, setTags }) => {
             <div
               className="flex flex-row items-center justify-between gap-1 rounded-md border-2 border-zinc-800 bg-zinc-800 px-4 py-1.5 text-zinc-50 hover:cursor-pointer hover:border-red-500 hover:bg-red-500 dark:text-zinc-300"
               key={index}
-              onClick={() =>
-                setTags((prevTags) =>
-                  prevTags.filter((prevTag) => prevTag !== tag)
-                )
-              }
+              onClick={() => removeTag(tag)}
             >
               <p>{tag}</p>
             </div>
