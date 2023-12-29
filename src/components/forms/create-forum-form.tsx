@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Fragment,
   useCallback,
@@ -5,8 +7,7 @@ import {
   useState,
   type ChangeEvent,
 } from "react";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
 import { useMutation } from "react-query";
