@@ -40,16 +40,16 @@ const PostCard: FC<PostCardProps> = ({
 
   const postContent = (
     <div
-      className="relative z-10 max-h-40 w-full overflow-hidden text-sm"
+      className="relative z-10 h-full w-full overflow-hidden rounded-t-xl p-1 text-sm"
       ref={postRef}
     >
       <EditorOutput content={post.content} sm />
-      <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent dark:from-zinc-900"></div>
+      <div className="absolute bottom-0 left-0 h-full min-h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent dark:from-zinc-900"></div>
     </div>
   );
 
   const postMetaInfo = (
-    <div className="mt-1 flex max-h-40 flex-row justify-between gap-1 truncate text-sm text-zinc-500">
+    <div className="mt-1 flex h-fit min-h-8 flex-row justify-between gap-1 truncate text-sm text-zinc-500">
       <div className="inline-flex">
         <Link
           href={`/d/${forumName}`}
@@ -90,7 +90,7 @@ const PostCard: FC<PostCardProps> = ({
             isLoggedIn={isLoggedIn}
           />
         </div>
-        <div className="flex w-full flex-col gap-1">
+        <div className="flex max-h-40 w-full flex-col gap-1">
           {postMetaInfo}
           <Link
             href={`/d/${forumName}/post/${post.id}`}
