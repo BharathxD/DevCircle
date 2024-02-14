@@ -27,7 +27,7 @@ const CreateTags: FC<CreateTagProps> = ({
   onDelete,
   initialTags,
 }) => {
-  const [tags, setTags] = useState<string[]>(initialTags);
+  const [tags, setTags] = useState<string[]>(initialTags ?? []);
   const tagRef = useRef<HTMLInputElement>(null);
 
   const handleKeyAddition = useCallback(() => {
