@@ -85,8 +85,6 @@ const Editor: FC<EditorProps> = ({
     };
   });
 
-  useEffect(() => console.info("RE-RENDER"));
-
   useEffect(() => {
     if (Object.keys(errors).length) {
       for (const [, value] of Object.entries(errors)) {
