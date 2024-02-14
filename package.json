@@ -14,15 +14,16 @@
   "license": "ISC",
   "author": "BharathxD",
   "scripts": {
-    "build": "next build",
-    "dev": "next dev",
-    "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
-    "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
-    "postinstall": "prisma generate",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "build": "contentlayer build && next build",
+    "check": "pnpm lint && pnpm typecheck && pnpm format:check",
+    "clean": "rm -rf node_modules .next .contentlayer pnpm-lock.yaml",
+    "dev": "next dev  --experimental-https",
+    "fmc": "prettier --check \"**/*.{ts,tsx,mdx}\"",
+    "fmw": "prettier --write \"**/*.{ts,tsx,mdx}\"",
+    "lnt": "next lint",
+    "shadcn:add": "pnpm dlx shadcn-ui@latest add",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "tc": "tsc --noEmit"
   },
   "dependencies": {
     "@editorjs/code": "^2.9.0",
