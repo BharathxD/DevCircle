@@ -58,7 +58,7 @@ const DeletePost: React.FC<PostDropdownMenuProps> = ({ postId }) => {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <button className="inline-flex w-full items-center p-2 hover:bg-red-500 hover:text-zinc-50">
-          <Trash2 className="mr-1.5 h-4 w-4" />
+          <Trash2 className="mr-1.5 size-4" />
           <p>Delete</p>
         </button>
       </AlertDialogTrigger>
@@ -84,7 +84,7 @@ const DeletePost: React.FC<PostDropdownMenuProps> = ({ postId }) => {
               onClick={() => deletePost()}
               disabled={isLoading}
             >
-              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isLoading && <Loader2 className="mr-2 size-4 animate-spin" />}
               Delete
             </Button>
           </AlertDialogAction>

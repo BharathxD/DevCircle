@@ -40,11 +40,11 @@ const PostCard: FC<PostCardProps> = ({
 
   const postContent = (
     <div
-      className="relative z-10 h-full w-full overflow-hidden rounded-t-xl p-1 text-sm"
+      className="relative z-10 size-full overflow-hidden rounded-t-xl p-1 text-sm"
       ref={postRef}
     >
       <EditorOutput content={post.content} sm />
-      <div className="absolute bottom-0 left-0 h-full min-h-24 w-full bg-gradient-to-t from-zinc-50 to-transparent dark:from-zinc-900"></div>
+      <div className="absolute bottom-0 left-0 size-full min-h-24 bg-gradient-to-t from-zinc-50 to-transparent dark:from-zinc-900"></div>
     </div>
   );
 
@@ -110,7 +110,7 @@ const PostCard: FC<PostCardProps> = ({
           <BiMessageAltDetail size={25} /> {commentAmount}{" "}
           <p className="hidden md:inline-block">comments</p>
         </Link>
-        <div className="no-scrollbar flex h-full w-full flex-row items-center justify-start gap-2 overflow-x-scroll px-2 md:justify-end">
+        <div className="no-scrollbar flex size-full flex-row items-center justify-start gap-2 overflow-x-scroll px-2 md:justify-end">
           <Tags tags={post.tags} />
         </div>
         <ShareButton

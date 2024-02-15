@@ -93,7 +93,7 @@ const EditComment: React.FC<EditCommentProps> = ({ commentId, text }) => {
               return editComment({ text: input });
             }}
           >
-            {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+            {isLoading && <Loader2 className="size-4 animate-spin" />}
             Edit
           </AlertDialogAction>
         </AlertDialogFooter>

@@ -32,8 +32,9 @@ const PostVoteServer = async ({
       return accumulator;
     }, 0);
 
-    currentVote = post.votes.find((vote) => vote.userId === currentUser?.id)
-      ?.type;
+    currentVote = post.votes.find(
+      (vote) => vote.userId === currentUser?.id
+    )?.type;
   } else if (initialVote && initialVotesAmount) {
     votesAmount = initialVotesAmount;
     currentVote = initialVote;

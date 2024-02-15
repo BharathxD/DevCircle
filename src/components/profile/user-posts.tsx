@@ -27,7 +27,7 @@ const UserPosts: React.FC<UserPostsProps> = ({ posts }) => {
                   href={`/d/${post.forum.name}/post/${post.id}`}
                 >
                   <h2 className="px-4 py-2">{post.title}</h2>
-                  <time className="hidden h-full items-center justify-center bg-zinc-300 px-4 py-2 md:flex dark:bg-zinc-800">
+                  <time className="hidden h-full items-center justify-center bg-zinc-300 px-4 py-2 dark:bg-zinc-800 md:flex">
                     {formatTimeToNow(post.createdAt)}
                   </time>
                 </a>

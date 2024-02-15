@@ -108,7 +108,7 @@ const Editor: FC<EditorProps> = ({
   };
 
   return (
-    <div className="flex h-full w-full flex-col gap-3">
+    <div className="flex size-full flex-col gap-3">
       <CreateTags
         onAddTag={addTags}
         onDelete={deleteTags}

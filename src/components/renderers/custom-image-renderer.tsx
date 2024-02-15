@@ -28,7 +28,7 @@ function CustomImageRenderer({ data }: { data: { file: { url: string } } }) {
       <div className="relative flex h-fit w-full items-center justify-center p-4">
         <BlurImage
           alt="image"
-          className="aspect-video h-full w-full cursor-pointer rounded-lg border-2 border-zinc-700 bg-zinc-50 object-contain dark:border dark:bg-zinc-950/20"
+          className="aspect-video size-full cursor-pointer rounded-lg border-2 border-zinc-700 bg-zinc-50 object-contain dark:border dark:bg-zinc-950/20"
           height={800}
           width={800}
           src={src}

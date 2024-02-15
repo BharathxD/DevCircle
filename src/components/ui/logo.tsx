@@ -23,7 +23,7 @@ const Logo: React.FC<LogoProps> = ({ className }) => {
       />
       <p
         className={cn(
-          "hidden text-4xl font-bold text-zinc-800 md:block dark:bg-gradient-to-tr dark:from-zinc-200 dark:to-zinc-400 dark:bg-clip-text dark:text-transparent"
+          "hidden text-4xl font-bold text-zinc-800 dark:bg-gradient-to-tr dark:from-zinc-200 dark:to-zinc-400 dark:bg-clip-text dark:text-transparent md:block"
         )}
       >
         DevCircle

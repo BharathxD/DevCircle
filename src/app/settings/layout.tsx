@@ -6,7 +6,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await getAuthSession();
   return (
     <main className="container flex h-[91vh] py-4">
-      <div className="no-scrollbar h-full w-full flex-col gap-4 overflow-hidden overflow-y-scroll rounded-xl border-2 border-zinc-800 md:overflow-y-hidden">
+      <div className="no-scrollbar size-full flex-col gap-4 overflow-hidden overflow-y-scroll rounded-xl border-2 border-zinc-800 md:overflow-y-hidden">
         <header className="border-b-2 border-zinc-800 px-4 py-2">
           <h2 className="text-4xl font-bold tracking-tight">Settings</h2>
           <p className="mt-2 text-muted-foreground">

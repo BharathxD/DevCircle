@@ -28,7 +28,7 @@ const CommunityLeaderboard: React.FC<CommunityLeaderboardProps> = ({
   if (!topCommunities) return null;
   return (
     <motion.div
-      className="order-first h-fit overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 md:order-last dark:bg-zinc-950"
+      className="order-first h-fit overflow-hidden rounded-md border-2 border-zinc-800 bg-zinc-50 dark:bg-zinc-950 md:order-last"
       initial="hidden"
       animate="show"
       variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}

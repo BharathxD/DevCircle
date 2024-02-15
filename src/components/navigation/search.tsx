@@ -76,7 +76,7 @@ const SearchBar = () => {
         className="top-[7.5%] w-[90%] rounded-md border-2 border-zinc-800 md:top-[25%]"
         showClose={false}
       >
-        <div className="flex h-full w-full flex-col items-center gap-2 pl-2">
+        <div className="flex size-full flex-col items-center gap-2 pl-2">
           <input
             type="text"
             className="h-[90%] w-full bg-transparent text-lg outline-none"

@@ -42,7 +42,7 @@ const OAuthSignIn: React.FC<OAuthSignInProps> = ({
         isLoading={isLoading}
         disabled={isLoading}
       >
-        {!isLoading && <FcGoogle className="mr-2 h-4 w-4" />}
+        {!isLoading && <FcGoogle className="mr-2 size-4" />}
         Google
       </Button>
     </div>

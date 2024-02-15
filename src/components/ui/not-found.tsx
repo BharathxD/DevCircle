@@ -10,7 +10,7 @@ const NotFoundPage: React.FC<NotFoundPageProps> = ({
   context = "Blimey! You've found a page that doesn't exist.",
 }) => {
   return (
-    <div className="fixed inset-0 flex h-full w-full flex-col items-center justify-center bg-zinc-50 text-center dark:bg-zinc-900">
+    <div className="fixed inset-0 flex size-full flex-col items-center justify-center bg-zinc-50 text-center dark:bg-zinc-900">
       <Image
         src="/images/web-design.svg"
         alt="Not found"

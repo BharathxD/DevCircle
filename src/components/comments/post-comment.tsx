@@ -111,7 +111,7 @@ const PostComment: React.FC<PostCommentProps> = ({
       ref={commentRef}
     >
       <div className="flex items-center px-4 pt-3">
-        <UserAvatar user={comment.author} className="h-6 w-6" />
+        <UserAvatar user={comment.author} className="size-6" />
         <div className="ml-2 flex w-full items-center justify-between">
           <div>
             <a
@@ -169,7 +169,7 @@ const PostComment: React.FC<PostCommentProps> = ({
             variant="noDisableOutline"
             className="h-[2.875rem] rounded-xl bg-zinc-50 px-3 text-zinc-800 hover:text-zinc-50 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:text-zinc-50"
           >
-            <MessageSquare className="h-5 w-5" />
+            <MessageSquare className="size-5" />
           </Button>
         </div>
         {isReplying && (

@@ -100,7 +100,7 @@ const ForumWidget: React.FC<ForumWidgetProps> = ({
                   href={`/d/${forumName}/edit`}
                   className="inline-flex items-center gap-2 rounded-xl border-2 border-zinc-700 bg-zinc-50 p-2 hover:text-zinc-500 dark:bg-zinc-900"
                 >
-                  <Edit2 className="h-4 w-4" />
+                  <Edit2 className="size-4" />
                 </a>
               </dd>
             </div>
@@ -108,7 +108,7 @@ const ForumWidget: React.FC<ForumWidgetProps> = ({
         ) : (
           <Fragment>
             <div className="h-[2px] w-full bg-zinc-800" />
-            <div className="flex h-full w-full justify-between gap-x-4">
+            <div className="flex size-full justify-between gap-x-4">
               <SubscribeLeaveToggle
                 isSubscribed={isSubscribed}
                 forum={{ id: forumId, name: forumName }}

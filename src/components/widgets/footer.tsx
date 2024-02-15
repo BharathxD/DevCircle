@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
         {siteConfig.name}
         <p className="inline-flex items-center gap-1 text-sm">
           {siteConfig.copyrights}
-          <Copyright className="h-3 w-3 font-bold" />
+          <Copyright className="size-3 font-bold" />
         </p>
       </CardHeader>
       <CardFooter className="flex flex-row gap-2 pb-4 text-sm">

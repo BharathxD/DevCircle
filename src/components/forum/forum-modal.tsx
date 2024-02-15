@@ -47,9 +47,9 @@ const CommunityInfoModal: React.FC<ForumModalProps> = ({
           aria-label="Show Community Information"
         >
           {isSubscribed ? (
-            <Info className="h-5 w-5" />
+            <Info className="size-5" />
           ) : (
-            <PlusCircle className="h-5 w-5" />
+            <PlusCircle className="size-5" />
           )}
         </button>
       </DialogTrigger>
@@ -100,7 +100,7 @@ const CommunityInfoModal: React.FC<ForumModalProps> = ({
                   href={`/d/${forumName}/edit`}
                   className="inline-flex items-center gap-2 rounded-xl border-2 border-zinc-700 bg-zinc-900 p-2 hover:text-zinc-500"
                 >
-                  <Edit2 className="h-4 w-4" />
+                  <Edit2 className="size-4" />
                 </a>
               </div>
             </Fragment>

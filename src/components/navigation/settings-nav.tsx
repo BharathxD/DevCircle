@@ -27,13 +27,13 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ isLoggedIn }) => {
               href={data.href}
               key={index}
               className={cn(
-                "inline-flex w-full items-center justify-center gap-2 border-zinc-800 bg-zinc-50 p-2 md:w-[300px] md:justify-start md:border-b-2 dark:bg-zinc-950/20",
+                "inline-flex w-full items-center justify-center gap-2 border-zinc-800 bg-zinc-50 p-2 dark:bg-zinc-950/20 md:w-[300px] md:justify-start md:border-b-2",
                 pathname === data.href &&
                   pathname !== "/settings" &&
                   "bg-zinc-800 text-zinc-50 dark:bg-zinc-800"
               )}
             >
-              <data.icon className="h-6 w-6 md:h-4 md:w-4" />
+              <data.icon className="size-6 md:size-4" />
               <p>{data.text}</p>
             </Link>
           );

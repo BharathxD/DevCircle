@@ -29,7 +29,7 @@ const UserAvatar: React.FC<UserAvatarProps> = ({
     <Avatar {...props} className={cn(className)}>
       {user.image && user.username ? (
         <div
-          className="relative aspect-square h-full w-full"
+          className="relative aspect-square size-full"
           onClick={redirectHandler}
         >
           <Image

@@ -41,7 +41,7 @@ const CommentsSection = ({
         >
           <MessageSquare size={20} />
           {comments.length !== 0 && (
-            <div className="absolute -right-1.5 -top-1.5 flex h-6 w-6 items-center justify-center overflow-hidden rounded-full border border-zinc-800 bg-green-500 p-1 text-zinc-50">
+            <div className="absolute -right-1.5 -top-1.5 flex size-6 items-center justify-center overflow-hidden rounded-full border border-zinc-800 bg-green-500 p-1 text-zinc-50">
               <p>{comments.length > 10 ? "10+" : comments.length}</p>
             </div>
           )}
@@ -59,8 +59,8 @@ const CommentsSection = ({
           id="comments"
         >
           {topLevelComments.length === 0 && (
-            <div className="flex h-full w-full flex-col items-center justify-center gap-2">
-              <MessageSquareDashed className="h-10 w-10" />
+            <div className="flex size-full flex-col items-center justify-center gap-2">
+              <MessageSquareDashed className="size-10" />
               <p>No comments</p>
             </div>
           )}

@@ -24,7 +24,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
   const profileWidth = "max-w-5xl mx-auto px-4 sm:px-6 lg:px-8";
 
   const avatarImage = user?.image ? (
-    <div className="relative aspect-square h-full w-full">
+    <div className="relative aspect-square size-full">
       <BlurImage
         width={300}
         height={300}
@@ -97,7 +97,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
         <div
           className={`${profileWidth} -mt-12 flex items-center justify-between space-x-5 border-b-2 border-zinc-800 pb-4 md:-mt-16`}
         >
-          <div className="group relative h-24 w-24 overflow-hidden rounded-full sm:h-32 sm:w-32">
+          <div className="group relative size-24 overflow-hidden rounded-full sm:size-32">
             {avatarImage}
           </div>
           <div className="flex min-w-0 flex-1 items-center justify-end space-x-6 pb-1 md:mt-4">

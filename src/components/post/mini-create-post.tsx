@@ -32,7 +32,7 @@ const MiniCreatePost: React.FC = () => {
               image: data?.user.image || null,
             }}
           />
-          <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-100 outline outline-2 outline-zinc-800" />
+          <span className="absolute bottom-0 right-0 size-3 rounded-full bg-green-100 outline outline-2 outline-zinc-800" />
         </div>
         <Input
           onClick={handleCreatePostClick}
@@ -44,14 +44,14 @@ const MiniCreatePost: React.FC = () => {
           variant="skeleton"
           className="text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100"
         >
-          <IoMdImage className="h-5 w-5 md:h-6 md:w-6" />
+          <IoMdImage className="size-5 md:size-6" />
         </Button>
         <Button
           onClick={() => router.push(pathname + "/")}
           variant="skeleton"
           className="text-zinc-600 hover:bg-zinc-800 hover:text-zinc-100"
         >
-          <FiLink2 className="h-5 w-5 md:h-6 md:w-6" />
+          <FiLink2 className="size-5 md:size-6" />
         </Button>
       </div>
     </li>

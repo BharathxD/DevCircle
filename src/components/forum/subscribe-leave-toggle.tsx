@@ -80,7 +80,7 @@ const SubscribeLeaveToggle: React.VFC<SubscribeLeaveToggleProps> = ({
   return (
     <button
       className={cn(
-        "flex h-full w-full items-center justify-center px-6 py-4 text-center text-zinc-50 dark:bg-zinc-900",
+        "flex size-full items-center justify-center px-6 py-4 text-center text-zinc-50 dark:bg-zinc-900",
         subscribed &&
           "bg-red-100 text-zinc-800 hover:bg-red-500 hover:text-zinc-50 dark:border-red-500 dark:text-zinc-50 hover:dark:bg-red-500",
         !subscribed &&

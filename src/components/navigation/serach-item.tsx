@@ -15,7 +15,7 @@ const SearchItem = ({ post }: Props) => {
         className="inline-flex h-fit w-full items-center gap-2 p-5 text-lg hover:bg-zinc-800 hover:text-zinc-50"
         href={`/d/${forumName}/post/${postId}`}
       >
-        <Layers className="mr-2 h-8 w-8" />
+        <Layers className="mr-2 size-8" />
         <p>{postTitle}</p>
       </a>
     </li>

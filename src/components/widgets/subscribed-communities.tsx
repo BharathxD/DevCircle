@@ -15,7 +15,7 @@ const SubscribedCommunities: React.FC<SubscribedCommunitiesProps> = ({
 }) => {
   if (!forums || forums.length === 0)
     return (
-      <div className="flex h-full w-full items-center justify-center">
+      <div className="flex size-full items-center justify-center">
         <h1>
           Discover and join vibrant communities and forums! Click{" "}
           <Link href="/leaderboard" className="border-b-2 border-zinc-300">

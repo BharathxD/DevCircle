@@ -7,11 +7,11 @@ const FeedSkeleton = () => {
     <div className="h-60 w-full animate-pulse overflow-hidden rounded-xl border-2 border-zinc-300 dark:border-muted">
       <div className="flex h-48 flex-row pt-2">
         <div className="flex h-full w-24 flex-col items-center justify-start gap-2 pl-4 pt-4">
-          <div className="aspect-square h-12 w-12 rounded-xl bg-muted"></div>
+          <div className="aspect-square size-12 rounded-xl bg-muted"></div>
           <div className="h-4 w-8 rounded-lg bg-muted"></div>
-          <div className="aspect-square h-12 w-12 rounded-xl bg-muted"></div>
+          <div className="aspect-square size-12 rounded-xl bg-muted"></div>
         </div>
-        <div className="flex h-full w-full flex-col gap-2 p-4 pb-0 pl-0">
+        <div className="flex size-full flex-col gap-2 p-4 pb-0 pl-0">
           <div className="flex w-full flex-row items-center justify-start gap-2">
             <div className="h-4 w-20 rounded-lg bg-muted"></div>
             <div className="h-4 w-24 rounded-lg bg-muted"></div>

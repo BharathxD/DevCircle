@@ -13,7 +13,7 @@ const PostVoteShell = () => {
           "h-11 w-full animate-pulse rounded-xl border-2 border-zinc-800 px-2 text-zinc-800 dark:text-zinc-700"
         )}
       >
-        <AiOutlineArrowUp className={"h-5 w-5"} />
+        <AiOutlineArrowUp className={"size-5"} />
       </div>
       <div className="py-3 text-center text-sm font-medium">
         <Loader2
@@ -27,7 +27,7 @@ const PostVoteShell = () => {
           "h-11 w-full animate-pulse rounded-xl border-2 border-zinc-800 px-2 text-zinc-800 dark:text-zinc-700"
         )}
       >
-        <AiOutlineArrowDown className={"h-5 w-5"} />
+        <AiOutlineArrowDown className={"size-5"} />
       </div>
     </div>
   );

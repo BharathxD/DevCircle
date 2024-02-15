@@ -104,7 +104,7 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
         )}
         disabled={isLoading && currentVote === "UP"}
       >
-        <AiOutlineArrowUp className={"h-5 w-5"} />
+        <AiOutlineArrowUp className={"size-5"} />
       </Button>
       <p className="py-2 text-center text-sm font-medium text-zinc-900 dark:text-zinc-50">
         {commentsAmount}
@@ -123,7 +123,7 @@ const CommentVotes: React.FC<CommentVotesProps> = ({
         )}
         disabled={isLoading && currentVote === "DOWN"}
       >
-        <AiOutlineArrowDown className={"h-5 w-5"} />
+        <AiOutlineArrowDown className={"size-5"} />
       </Button>
     </div>
   );

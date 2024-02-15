@@ -68,19 +68,19 @@ const AppearanceForm = () => {
                           <div className="h-2 w-[100px] rounded-lg bg-zinc-300" />
                         </div>
                         <div className="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
-                          <div className="h-4 w-4 rounded-full bg-zinc-300" />
+                          <div className="size-4 rounded-full bg-zinc-300" />
                           <div className="h-2 w-[100px] rounded-lg bg-zinc-300" />
                         </div>
                         <div className="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
-                          <div className="h-4 w-4 rounded-full bg-zinc-300" />
+                          <div className="size-4 rounded-full bg-zinc-300" />
                           <div className="h-2 w-[100px] rounded-lg bg-zinc-300" />
                         </div>
                         <div className="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
-                          <div className="h-4 w-4 rounded-full bg-zinc-300" />
+                          <div className="size-4 rounded-full bg-zinc-300" />
                           <div className="h-2 w-[100px] rounded-lg bg-zinc-300" />
                         </div>
                         <div className="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
-                          <div className="h-4 w-4 rounded-full bg-zinc-300" />
+                          <div className="size-4 rounded-full bg-zinc-300" />
                           <div className="h-2 w-[100px] rounded-lg bg-zinc-300" />
                         </div>
                       </div>
@@ -102,19 +102,19 @@ const AppearanceForm = () => {
                           <div className="h-2 w-[100px] rounded-lg bg-slate-400" />
                         </div>
                         <div className="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">
-                          <div className="h-4 w-4 rounded-full bg-slate-400" />
+                          <div className="size-4 rounded-full bg-slate-400" />
                           <div className="h-2 w-[100px] rounded-lg bg-slate-400" />
                         </div>
                         <div className="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">
-                          <div className="h-4 w-4 rounded-full bg-slate-400" />
+                          <div className="size-4 rounded-full bg-slate-400" />
                           <div className="h-2 w-[100px] rounded-lg bg-slate-400" />
                         </div>
                         <div className="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">
-                          <div className="h-4 w-4 rounded-full bg-slate-400" />
+                          <div className="size-4 rounded-full bg-slate-400" />
                           <div className="h-2 w-[100px] rounded-lg bg-slate-400" />
                         </div>
                         <div className="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">
-                          <div className="h-4 w-4 rounded-full bg-slate-400" />
+                          <div className="size-4 rounded-full bg-slate-400" />
                           <div className="h-2 w-[100px] rounded-lg bg-slate-400" />
                         </div>
                       </div>

@@ -32,7 +32,7 @@ const PostDropdownMenu: React.FC<PostDropdownMenuProps> = ({
       >
         <DropdownMenuItem onClick={onEdit}>
           <button className="inline-flex w-full items-center">
-            <Edit className="mr-2 h-4 w-4" />
+            <Edit className="mr-2 size-4" />
             Edit
           </button>
         </DropdownMenuItem>

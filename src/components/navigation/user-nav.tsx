@@ -64,15 +64,15 @@ const UserNav: React.FC<UserNavProps> = ({ user }) => {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => router.push("/")}>
-          <StretchHorizontal className="mr-2 h-4 w-4" />
+          <StretchHorizontal className="mr-2 size-4" />
           Feed
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => router.push("/d/new")}>
-          <PlusCircle className="mr-2 h-4 w-4" />
+          <PlusCircle className="mr-2 size-4" />
           Create Community
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => router.push("/settings")}>
-          <Settings className="mr-2 h-4 w-4" />
+          <Settings className="mr-2 size-4" />
           Settings
         </DropdownMenuItem>
         <DropdownMenuSeparator />
@@ -80,7 +80,7 @@ const UserNav: React.FC<UserNavProps> = ({ user }) => {
           className="cursor-pointer transition-colors hover:bg-red-500 hover:text-red-50"
           onSelect={handleSignOut}
         >
-          <LogOut className="mr-2 h-4 w-4" />
+          <LogOut className="mr-2 size-4" />
           Sign Out
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
