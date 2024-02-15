@@ -2,6 +2,7 @@ import "./globals.css";
 
 import type { PropsWithChildren, ReactNode } from "react";
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Montserrat } from "next/font/google";
 import { env } from "@/env.mjs";
 
@@ -81,6 +82,8 @@ export const metadata: Metadata = {
   },
 };
 
+const TopLoader = dynamic(() => import("@/components/ui/top-loader"));
+
 /**
  * The root layout component that wraps the entire application.
  * @param {Props} - The props containing the main content and user modal component.
@@ -99,6 +102,7 @@ const RootLayout = ({
         <Session>
           <RtkProvider>
             <ThemeProvider>
+              <TopLoader />
               <CookieBanner />
               <Navbar />
               {userModal}
