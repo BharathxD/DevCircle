@@ -21,6 +21,7 @@
     "fmc": "prettier --check \"**/*.{ts,tsx,mdx}\"",
     "fmw": "prettier --write \"**/*.{ts,tsx,mdx}\"",
     "lnt": "next lint",
+    "postinstall": "prisma generate",
     "shadcn:add": "pnpm dlx shadcn-ui@latest add",
     "start": "next start",
     "tc": "tsc --noEmit"
