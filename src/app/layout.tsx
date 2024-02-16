@@ -55,6 +55,16 @@ export const metadata: Metadata = {
     "Tailwind CSS",
     "Server Components",
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   // Authors and creator information
   authors: [
     {
