@@ -21,7 +21,7 @@ interface SubscribeLeaveToggleProps {
   isLoggedIn?: boolean;
 }
 
-const SubscribeLeaveToggle: React.VFC<SubscribeLeaveToggleProps> = ({
+const SubscribeLeaveToggle: React.FC<SubscribeLeaveToggleProps> = ({
   isSubscribed,
   forum,
   isLoggedIn = false,
