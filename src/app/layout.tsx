@@ -55,6 +55,9 @@ export const metadata: Metadata = {
     "Tailwind CSS",
     "Server Components",
   ],
+  alternates: {
+    canonical: "/",
+  },
   robots: {
     index: true,
     follow: true,
