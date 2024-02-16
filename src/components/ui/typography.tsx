@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
@@ -82,4 +83,6 @@ const Typography: React.FC<TypographyProps> = ({
   }
 };
 
-export default Typography;
+Typography.displayName = "Typography";
+
+export default memo(Typography);

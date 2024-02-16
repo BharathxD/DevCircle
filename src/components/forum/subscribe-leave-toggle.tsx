@@ -1,6 +1,6 @@
 "use client";
 
-import { startTransition, useState } from "react";
+import { startTransition, useCallback, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { StatusCodes } from "http-status-codes";
@@ -72,10 +72,10 @@ const SubscribeLeaveToggle: React.VFC<SubscribeLeaveToggleProps> = ({
     },
   });
 
-  const handleToggleSubscription = () => {
+  const handleToggleSubscription = useCallback(() => {
     if (!isLoggedIn) return router.push(generateCbUrl(pathname));
     patchSubscription();
-  };
+  }, [isLoggedIn, patchSubscription, router, pathname]);
 
   return (
     <button

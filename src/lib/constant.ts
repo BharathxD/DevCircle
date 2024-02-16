@@ -3,7 +3,10 @@ import {
   Home,
   PlusSquare,
   Settings,
+  Settings2,
+  Sparkle,
   UserCircle2,
+  UserCog,
   Users2,
 } from "lucide-react";
 
@@ -36,4 +39,10 @@ const NAV_LINKS = [
   },
 ] as const;
 
-export { NAV_LINKS };
+const SETTINGS_NAV_LINKS = [
+  { icon: UserCog, href: "/settings", text: "Profile" },
+  { icon: Sparkle, href: "/settings/appearance", text: "Appearance" },
+  { icon: Settings2, href: "/settings/cookies", text: "Cookies" },
+];
+
+export { NAV_LINKS, SETTINGS_NAV_LINKS };
