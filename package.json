@@ -14,7 +14,7 @@
   "license": "ISC",
   "author": "BharathxD",
   "scripts": {
-    "build": "contentlayer build && next build",
+    "build": "next build",
     "check": "pnpm lint && pnpm typecheck && pnpm format:check",
     "clean": "rm -rf node_modules .next .contentlayer pnpm-lock.yaml",
     "dev": "next dev  --experimental-https",
