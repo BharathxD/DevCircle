@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState, type ChangeEvent } from "react";
+import { memo, useCallback, useMemo, useState, type ChangeEvent } from "react";
 import axios, { type AxiosResponse } from "axios";
 import { Search } from "lucide-react";
 
@@ -96,4 +96,6 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+SearchBar.displayName = "SearchBar";
+
+export default memo(SearchBar);
