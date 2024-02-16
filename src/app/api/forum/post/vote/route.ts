@@ -4,7 +4,7 @@ import { getAuthSession } from "@/actions/getCurrentUser";
 import { StatusCodes } from "http-status-codes";
 import { ZodError } from "zod";
 
-import updateVoteCount from "@/helpers/cote-count-updater";
+import updateVoteCount from "@/helpers/vote-count-updater";
 import database from "@/lib/database";
 import { PostVoteValidator } from "@/lib/validators/vote";
 
