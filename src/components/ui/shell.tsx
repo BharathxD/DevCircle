@@ -2,8 +2,9 @@ import type { HTMLAttributes } from "react";
 
 import { cn } from "@/lib/utils";
 
-interface HomepageLayoutProps extends HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
+interface HomepageLayoutProps
+  extends HTMLAttributes<HTMLDivElement>,
+    React.PropsWithChildren {
   isLoggedIn?: boolean;
 }
 

@@ -5,11 +5,7 @@ import siteConfig from "@/config/site";
 import AspectRatio from "@/components/ui/aspect-ratio";
 import { BlurImage } from "@/components/ui/blur-image";
 
-interface AuthLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function AuthLayout({ children }: AuthLayoutProps) {
+export default function AuthLayout({ children }: React.PropsWithChildren) {
   return (
     <div className="absolute inset-0 grid min-h-screen w-full grid-cols-1 overflow-hidden md:grid-cols-2">
       <AspectRatio ratio={16 / 9}>

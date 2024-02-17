@@ -5,8 +5,12 @@ import { cn } from "@/lib/utils";
 
 interface TypographyProps
   extends React.HTMLAttributes<
-    HTMLParagraphElement | HTMLHeadingElement | HTMLDivElement | HTMLLinkElement
-  > {
+      | HTMLParagraphElement
+      | HTMLHeadingElement
+      | HTMLDivElement
+      | HTMLLinkElement
+    >,
+    React.PropsWithChildren {
   type?:
     | "heading"
     | "subheading"
@@ -17,7 +21,6 @@ interface TypographyProps
     | "lightweight";
   email?: string;
   href?: string;
-  children: React.ReactNode;
 }
 
 const Typography: React.FC<TypographyProps> = ({

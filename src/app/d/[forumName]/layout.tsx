@@ -6,8 +6,7 @@ import { getForum } from "@/actions/getForum";
 import database from "@/lib/database";
 import ForumWidget from "@/components/widgets/forum-widget";
 
-interface LayoutProps {
-  children: React.ReactNode;
+interface LayoutProps extends React.PropsWithChildren {
   params: {
     forumName: string;
   };

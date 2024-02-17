@@ -2,7 +2,7 @@ import { getAuthSession } from "@/actions/getCurrentUser";
 
 import SettingsMenu from "@/components/navigation/settings-nav";
 
-const Layout = async ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({ children }: React.PropsWithChildren) => {
   const session = await getAuthSession();
   return (
     <main className="container flex h-[91vh] py-4">

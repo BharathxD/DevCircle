@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 
-interface DashboardContentProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-}
+interface DashboardContentProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    React.PropsWithChildren {}
 
 const DashboardContentShell = ({
   children,
