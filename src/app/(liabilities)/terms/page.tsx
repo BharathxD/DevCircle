@@ -143,8 +143,8 @@ const TermsPage = () => {
           <Typography type="paragraph">
             If you have any questions or concerns about these Terms, please
             contact us at
-            <Typography email="contact@bharathbandi.me" type="email">
-              contact@bharathbandi.me
+            <Typography email="bharathxxd@gmail.com" type="email">
+              bharathxxd@gmail.com
             </Typography>
             .
           </Typography>

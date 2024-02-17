@@ -35,8 +35,8 @@ const PrivacyPolicyPage = () => {
               Contact Information:{" "}
             </span>
             When you contact us through the email provided by the developer (
-            <Typography email="contact@bharathbandi.me" type="email">
-              contact@bharathbandi.me
+            <Typography email="bharathxxd@gmail.com" type="email">
+              bharathxxd@gmail.com
             </Typography>
             ), we may collect your email address or any other contact
             information you provide.
@@ -208,8 +208,8 @@ const PrivacyPolicyPage = () => {
           <Typography type="paragraph">
             If you have any questions or concerns about this Privacy Policy or
             our privacy practices, please contact us at{" "}
-            <Typography email="contact@bharathbandi.me" type="email">
-              contact@bharathbandi.me
+            <Typography email="bharathxxd@gmail.com" type="email">
+              bharathxxd@gmail.com
             </Typography>
             .
           </Typography>
