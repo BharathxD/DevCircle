@@ -105,7 +105,7 @@ const TopLoader = dynamic(() => import("@/components/ui/top-loader"));
 const RootLayout = ({
   children,
   userModal,
-}: PropsWithChildren & Props): ReactNode => {
+}: Readonly<PropsWithChildren> & Props): ReactNode => {
   return (
     <html lang="en" className={cn("antialiased", montserrat.className)}>
       <GoogleAnalytics
